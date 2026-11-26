@@ -6,8 +6,9 @@
   Each screen is a function in js/views/ that returns an element.
 */
 
-import { state, loadState } from './state.js';
-import { loadContent, applyCustom } from './content.js';
+import { state, loadState, refreshContent, hooks } from './state.js';
+import { syncSoon, onSyncChange } from './sync.js';
+import { loadContent } from './content.js';
 import { requestPersistence } from './db.js';
 import { h, icon, ICONS } from './ui.js';
 import { todayView } from './views/today.js';
@@ -65,7 +66,7 @@ async function start() {
   try {
     const [content] = await Promise.all([loadContent(), loadState()]);
     state.content = content;
-    applyCustom(content, state.custom);
+    refreshContent();
   } catch (e) {
     app.replaceChildren(h('div', { class: 'card' },
       h('h2', {}, 'The word lists did not load'),
@@ -76,6 +77,12 @@ async function start() {
   window.addEventListener('hashchange', render);
   render();
   requestPersistence();
+  // Sync with the backend: now, after each session, and whenever the phone is back online.
+  hooks.afterSession = () => syncSoon();
+  window.addEventListener('online', () => syncSoon(500));
+  // Only the You screen shows sync status live; other screens pick up new content on the next visit.
+  onSyncChange(() => { if ((location.hash.slice(1) || 'today').split('/')[0] === 'you') render(); });
+  syncSoon(1500);
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline support unavailable */ });
   }

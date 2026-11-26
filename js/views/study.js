@@ -18,6 +18,7 @@ import { AGAIN, GOOD, EASY } from '../srs.js';
 import { checkAnswer, pointsFor } from '../check.js';
 import { speak, canSpeak } from '../speech.js';
 import { startDrill } from './drill.js';
+import { aiNote } from './report.js';
 
 let session = null;
 
@@ -90,7 +91,8 @@ function draw(root) {
   const view = item.mode === 'intro' ? introCard(word, item, next)
     : item.mode === 'produce' ? produceCard(word, item, next)
     : choiceCard(word, item, next, item.mode === 'choose-es' ? 'es' : 'en');
-  root.replaceChildren(header(), ...view);
+  const note = word.aiMade ? aiNote('word', word, null, next) : null;
+  root.replaceChildren(...[header(), ...view, note].filter(Boolean));
   root.querySelector('input')?.focus();
 }
 
@@ -169,9 +171,9 @@ function choiceCard(word, item, next, answerIn) {
     session.answered += 1;
     if (right) session.right += 1; else retry(item);
     speak(word.es);
-    result.replaceChildren(
+    result.replaceChildren(...[
       right ? null : h('div', { class: 'feedback bad' }, icon(ICONS.close, 20), h('div', {}, h('span', { class: 'es' }, word.es), ' = ', word.en, h('div', { class: 'small' }, 'It will come back soon.'))),
-      word.ex ? h('p', { class: 'small', style: { marginTop: '14px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null);
+      word.ex ? h('p', { class: 'small', style: { marginTop: '14px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null].filter(Boolean));
     actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next'));
   };
 
@@ -221,7 +223,7 @@ function produceCard(word, item, next) {
     session.answered += 1;
     if (g !== AGAIN) session.right += 1;
     speak(word.es);
-    result.replaceChildren(box, word.ex ? h('p', { class: 'small', style: { marginTop: '12px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null);
+    result.replaceChildren(...[box, word.ex ? h('p', { class: 'small', style: { marginTop: '12px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null].filter(Boolean));
     actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next word'));
   };
 

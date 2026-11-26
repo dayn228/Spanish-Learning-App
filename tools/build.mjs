@@ -18,6 +18,7 @@ import { conjugate } from '../js/verbs.js';
 import { normalise } from '../js/check.js';
 import { exerciseId } from '../js/grammar.js';
 import { deckIndex, lookup, textWords } from '../js/reading.js';
+import { checkWord, checkExercise, checkText } from '../js/validate.js';
 
 const root = new URL('..', import.meta.url).pathname;
 const problems = [];
@@ -36,11 +37,7 @@ for (const f of topicFiles) {
   try { file = JSON.parse(readFileSync(join(root, 'data', f), 'utf8')); } catch (e) { problems.push(`${f}: not valid JSON (${e.message})`); continue; }
   for (const key of ['id', 'name', 'kind', 'words']) if (!file[key]) problems.push(`${f}: missing "${key}"`);
   if (!['core', 'pack'].includes(file.kind)) problems.push(`${f}: kind must be "core" or "pack"`);
-  file.words.forEach((w, i) => {
-    if (!Array.isArray(w) || w.length < 2) problems.push(`${f} word ${i + 1}: needs at least [spanish, english]`);
-    else if (!w[0].trim() || !w[1].trim()) problems.push(`${f} word ${i + 1}: empty Spanish or English`);
-    else if (w[2] && !w[3]) problems.push(`${f} "${w[0]}": example has no translation`);
-  });
+  file.words.forEach((w, i) => { for (const msg of checkWord(w)) problems.push(`${f} word ${i + 1}: ${msg}`); });
   for (const word of parseTopic(file)) {
     if (allIds.has(word.id)) problems.push(`${f}: duplicate word "${word.es}"`);
     allIds.add(word.id);
@@ -51,7 +48,6 @@ for (const f of topicFiles) {
 topics.sort((a, b) => (order.indexOf(a.id) + 1 || 99) - (order.indexOf(b.id) + 1 || 99));
 
 // ---- 1b. Check grammar units ----
-const TYPES = ['gap', 'choice', 'transform', 'error', 'translate', 'reorder', 'match', 'table'];
 const unitFiles = readdirSync(join(root, 'data/grammar')).filter((f) => /^u\d+\.json$/.test(f)).sort();
 let exerciseCount = 0;
 for (const f of unitFiles) {
@@ -61,17 +57,7 @@ for (const f of unitFiles) {
   const ids = new Set();
   (u.exercises || []).forEach((ex, i) => {
     const where = `grammar/${f} exercise ${i + 1} (${ex.type})`;
-    if (!TYPES.includes(ex.type)) return problems.push(`${where}: unknown type`);
-    if (!ex.tags || !ex.tags.length) problems.push(`${where}: needs at least one tag`);
-    if (['gap', 'transform', 'error', 'translate', 'reorder'].includes(ex.type) && !ex.a) problems.push(`${where}: missing answer "a"`);
-    if (ex.type === 'gap' && !String(ex.q).includes('___')) problems.push(`${where}: gap sentence needs ___`);
-    if (ex.type === 'choice' && !(Number.isInteger(ex.a) && ex.options && ex.a >= 0 && ex.a < ex.options.length)) problems.push(`${where}: answer index out of range`);
-    if (ex.type === 'reorder') {
-      const sorted = (s) => normalise(s).split(' ').sort().join(' ');
-      if (sorted(ex.words.join(' ')) !== sorted(ex.a)) problems.push(`${where}: words don't make the answer`);
-    }
-    if (ex.type === 'match' && !(ex.pairs && ex.pairs.length >= 3)) problems.push(`${where}: needs at least 3 pairs`);
-    if (ex.type === 'table' && !conjugate(ex.verb)) problems.push(`${where}: verb "${ex.verb}" can't be conjugated`);
+    for (const msg of checkExercise(ex)) problems.push(`${where}: ${msg}`);
     const id = exerciseId(u.id, ex);
     if (ids.has(id)) problems.push(`${where}: duplicate exercise`);
     ids.add(id);
@@ -88,11 +74,7 @@ const textFiles = readdirSync(join(root, 'data/reading')).filter((f) => /^t\d+\.
 for (const f of textFiles) {
   let t;
   try { t = JSON.parse(readFileSync(join(root, 'data/reading', f), 'utf8')); } catch (e) { problems.push(`reading/${f}: not valid JSON (${e.message})`); continue; }
-  for (const key of ['id', 'title', 'level', 'paragraphs', 'questions']) if (!t[key]) problems.push(`reading/${f}: missing "${key}"`);
-  t.paragraphs.forEach((p, i) => p.forEach((s, j) => { if (!Array.isArray(s) || !s[0] || !s[1]) problems.push(`reading/${f} paragraph ${i + 1} sentence ${j + 1}: needs [spanish, english]`); }));
-  t.questions.forEach((q, i) => { if (!(Number.isInteger(q.a) && q.a >= 0 && q.a < q.options.length)) problems.push(`reading/${f} question ${i + 1}: answer index out of range`); });
-  const missing = textWords(t).filter((w) => !lookup(w, t, common, idxAll));
-  if (missing.length) problems.push(`reading/${f}: no meaning for: ${missing.join(', ')}`);
+  for (const msg of checkText(t, (x) => textWords(x).filter((w) => !lookup(w, x, common, idxAll)))) problems.push(`reading/${f}: ${msg}`);
 }
 
 if (problems.length) {

@@ -281,9 +281,9 @@ export function exerciseView(ex, { onResult, onNext }) {
         const d = wordDiff(input.value, ex.say);
         const pts = d.points >= 0.99 ? 1 : d.points;
         finish(pts >= 1 ? 1 : pts, pts >= 1 ? 'right' : 'partial', null, { why: null });
-        result.firstChild.querySelector('div').append(
+        result.firstChild.querySelector('div').append(...[
           h('div', { class: 'dictation-marks', lang: 'es' }, d.marks.map((m) => h('span', { class: m.ok ? 'ok' : 'miss' }, m.word + ' '))),
-          pts < 1 ? h('div', { class: 'small' }, `${Math.round(pts * 100)}% of the words. Missed words are underlined.`) : null);
+          pts < 1 ? h('div', { class: 'small' }, `${Math.round(pts * 100)}% of the words. Missed words are underlined.`) : null].filter(Boolean));
       };
       enterToCheck(input, check);
       root.append(play, h('div', { style: { marginTop: '18px' } }, el), result);

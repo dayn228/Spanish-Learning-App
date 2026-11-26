@@ -8,7 +8,7 @@ import { review, markKnown } from './srs.js';
 import { recordSession, newStreak } from './streak.js';
 import { dayKey } from './dates.js';
 import { newGrammarProgress } from './grammar.js';
-import { applyCustom, slug } from './content.js';
+import { rebuild, slug, emptyExtra } from './content.js';
 
 export const state = {
   content: null,              // { topics, words, byId }
@@ -19,7 +19,14 @@ export const state = {
   grammar: newGrammarProgress(), // unit scores, weak forms, verb trainer stats
   custom: [],                 // words added while reading: { es, en, ex, exEn }
   reading: {},                // text id → { done, right, total, at }
+  extra: emptyExtra(),        // AI-made words, exercises and texts from the backend
+  sync: { lastSeq: 0, pending: {}, reports: [] },   // backend status (see sync.js)
 };
+
+/** Rebuild the live content after words, AI content or reports change. */
+export function refreshContent() {
+  if (state.content) rebuild(state.content, state.custom, state.extra);
+}
 
 const BACKUP_VERSION = 1;
 
@@ -31,7 +38,12 @@ export async function loadState() {
   state.grammar = { ...newGrammarProgress(), ...(await db.get('grammar', {})) };
   state.custom = await db.get('custom', []);
   state.reading = await db.get('reading', {});
+  state.extra = { ...emptyExtra(), ...(await db.get('extra', {})) };
+  state.sync = { lastSeq: 0, pending: {}, reports: [], ...(await db.get('sync', {})) };
 }
+
+export function saveExtra() { db.set('extra', state.extra); }
+export function saveSync() { db.set('sync', state.sync); }
 
 export function answer(wordId, grade) {
   state.cards[wordId] = review(state.cards[wordId], grade);
@@ -56,10 +68,14 @@ export function saveGrammar(countAnswer = true) {
   db.set('grammar', state.grammar);
 }
 
+/** Things other modules want to run after a session (sync registers here, to avoid an import loop). */
+export const hooks = { afterSession: null };
+
 /** Call once when a session ends (any length). */
 export function finishSession() {
   state.streak = recordSession(state.streak, dayKey());
   db.set('streak', state.streak);
+  if (hooks.afterSession) hooks.afterSession();
 }
 
 export function saveSettings(patch) {
@@ -75,7 +91,7 @@ export function addWordToLearn({ es, en, ex, exEn, wordId }) {
   if (!id) {
     if (!state.custom.some((c) => c.es.toLowerCase() === es.toLowerCase())) state.custom.push({ es, en, ex, exEn });
     db.set('custom', state.custom);
-    applyCustom(state.content, state.custom);
+    refreshContent();
     id = `mine:${slug(es)}`;
   }
   const next = (state.settings.next || []).filter((x) => x !== id);
@@ -117,7 +133,7 @@ export async function importBackup(text) {
   state.grammar = { ...newGrammarProgress(), ...(data.grammar || {}) };
   state.custom = data.custom || [];
   state.reading = data.reading || {};
-  if (state.content) applyCustom(state.content, state.custom);
+  refreshContent();
   await Promise.all([
     db.set('cards', state.cards), db.set('streak', state.streak),
     db.set('settings', state.settings), db.set('log', state.log), db.set('grammar', state.grammar),

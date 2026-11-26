@@ -12,6 +12,7 @@ import { h, icon, ICONS, toast } from '../ui.js';
 import { tokenize, lookup, deckIndex } from '../reading.js';
 import { stage } from '../srs.js';
 import { speak, speakSequence, stopSpeaking } from '../speech.js';
+import { aiNote } from './report.js';
 
 let showTranslation = false;
 let stopReading = null;
@@ -125,7 +126,7 @@ export function textView(id) {
     });
   }
 
-  root.append(
+  root.append(...[
     h('a', { href: '#read', class: 'btn btn-ghost', style: { marginLeft: '-8px' }, onclick: () => { stopSpeaking(); stopReading = null; } }, icon(ICONS.back, 18), 'Read'),
     h('div', { class: 'small muted', style: { marginTop: '4px' } }, `${text.level} · ${text.en}`),
     h('h1', { lang: 'es', style: { marginTop: '2px' } }, text.title),
@@ -135,10 +136,12 @@ export function textView(id) {
     h('div', { class: 'legend tiny muted' },
       h('span', {}, h('span', { class: 'w learning' }, 'learning')), h('span', {}, h('span', { class: 'w new' }, 'new')), h('span', {}, 'plain = known or everyday')),
     body,
+    text.source && /^https:\/\//.test(text.source.url || '') ? h('p', { class: 'small muted' }, `From ${text.source.name || 'the original article'}. `, h('a', { href: text.source.url, target: '_blank', rel: 'noopener' }, 'Read the original')) : null,
     text.practice ? h('p', { class: 'tiny muted' }, 'Written for practice; not a real news report.') : null,
+    text.aiMade ? aiNote('text', text, null, () => { location.hash = '#read'; }) : null,
     questions(text),
     sheet,
-  );
+  ].filter(Boolean));
   return root;
 }
 

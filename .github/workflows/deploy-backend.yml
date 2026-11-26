@@ -1,10 +1,11 @@
 # Uploads backend/src to the Apps Script project with clasp (same setup as
 # Fram-Automation). Runs when backend/ changes on main, or by hand.
 #
-# Needs, before it can run (phase 4):
+# Needs (see docs/SETUP-BACKEND.md):
 #   - backend/.clasp.json with the real scriptId
 #   - repository secret CLASPRC_JSON (contents of ~/.clasprc.json after `clasp login`)
-# Until then the job skips itself.
+#   - optional secret DEPLOYMENT_ID: the web app deployment to update, so changes go live
+# Until the first two exist the job skips itself.
 
 name: Deploy backend
 
@@ -48,6 +49,12 @@ jobs:
         env:
           CLASPRC: ${{ secrets.CLASPRC_JSON }}
         working-directory: backend
+          DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}
         run: |
           printf '%s' "$CLASPRC" > ~/.clasprc.json
           clasp push --force
+          if [ -n "$DEPLOYMENT_ID" ]; then
+            clasp deploy -i "$DEPLOYMENT_ID" -d "GitHub ${GITHUB_SHA::7}"
+          else
+            echo "No DEPLOYMENT_ID secret: code uploaded, but publish a new version by hand (Deploy → Manage deployments)."
+          fi

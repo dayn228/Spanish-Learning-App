@@ -19,6 +19,7 @@ import { exerciseView } from '../exercise.js';
 import { recordAnswer, finishSet, finishTestOut, finishReview, pickExercises, pickTestOut, recordVerb, pickVerbItems, unitStatus, pickMistakes } from '../grammar.js';
 import { VERBS } from '../verbs.js';
 import { buildListening } from '../listening.js';
+import { aiNote } from './report.js';
 
 let drill = null;
 
@@ -100,7 +101,9 @@ function draw(root) {
     },
     onNext: () => { drill.pos += 1; draw(root); window.scrollTo(0, 0); },
   });
-  root.replaceChildren(top, h('div', { style: { marginTop: '18px' } }, view));
+  const unitId = item.unitId || (drill.unit && drill.unit.id);
+  const note = item.ex.aiMade ? aiNote('exercise', item.ex, unitId, () => { drill.pos += 1; draw(root); }) : null;
+  root.replaceChildren(...[top, h('div', { style: { marginTop: '18px' } }, view), note].filter(Boolean));
   root.querySelector('input:not([readonly])')?.focus();
 }
 

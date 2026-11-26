@@ -2,7 +2,7 @@
 
 A personal, offline-first Spanish (Castilian) learning app for iPhone. It is a plain web app (HTML, CSS, JavaScript, no framework) that installs to the home screen and works without internet.
 
-The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). Done so far: **phase 1** (foundation and words), **phase 2** (grammar A1 and the verb trainer) and **phase 3** (listening and graded reading).
+The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). Done so far: **phase 1** (foundation and words), **phase 2** (grammar A1 and the verb trainer), **phase 3** (listening and graded reading) and **phase 4** (Drive backup, AI content, real news).
 
 ## Use it on your iPhone
 
@@ -36,6 +36,15 @@ Updates: when a new version is published, it downloads the next time you open th
 - **Listening (Practice tab):** "which word did you hear?" from your words, dictation of example sentences checked word by word (accents ignored, missed words underlined), and sound pairs like pero / perro. Play and Slower buttons on every item.
 - **Sessions:** 30 and 60-minute sessions now run words → grammar → listening (6 or 10 items). Today also suggests a text to read.
 
+## What phase 4 adds
+
+- **Backend (`backend/`)**: a Google Apps Script web app in your own account. It keeps your backups in a Drive folder, and holds your Gemini key so it never reaches the app. Setup: [docs/SETUP-BACKEND.md](docs/SETUP-BACKEND.md).
+- **Automatic backup** to Drive when the phone is online (after studying, at most every 2 hours otherwise); 14 daily copies kept. **Restore from Drive** on the You screen.
+- **Refill engine (`js/refill.js`)**: when a grammar unit you are working on has fewer than 15 fresh exercises, a focus topic fewer than 20 new words, or you have fewer than 3 unread texts, the app queues a request. Each night the backend asks Gemini, has a second Gemini pass review the result, and stores what passes. The app checks every item again (`js/validate.js`) before adding it.
+- **Real news**: the nightly job takes new articles from Spanish news feeds (Cinco Días, El Confidencial, El País by default), keeps the original sentences, and adds translations, a glossary and questions. Texts link to the original. Kept private in your Drive and on your phone.
+- **Construction texts**: while construction is a focus topic, Gemini writes new graded practice texts about work at a window installation company.
+- **Report a problem**: every AI-made word, exercise and text shows "Made by AI · Report a problem". Reporting removes it at once and logs it in Drive.
+
 ## Adding reading texts
 
 Texts live in `data/reading/tNN.json`: paragraphs of `[spanish, english]` sentences, comprehension questions, and a glossary of word forms → `[dictionary form, meaning here, note?]`. Everyday words are shared in `data/reading/common.json`; words already in the word lists are found automatically. `npm run build` refuses a text that has a word with no meaning.
@@ -61,13 +70,17 @@ js/grammar.js       grammar mastery, weak forms, verb trainer picking
 js/exercise.js      renders and checks every exercise type
 js/listening.js     builds listening sets from your words
 js/reading.js       splits texts into words and looks them up
+js/refill.js        decides when to ask for more content
+js/sync.js          talks to the backend: requests, new content, backup
+js/validate.js      checks words, exercises and texts (build and AI content)
 js/state.js, db.js  progress saved on the phone (IndexedDB), backup
 data/core/, data/packs/   word lists (JSON)
 data/grammar/       grammar units (JSON)
 data/reading/       reading texts and the shared everyday dictionary
 tools/build.mjs     checks word lists, writes the offline file list
 tests/              unit tests for the logic
-backend/            Apps Script (phase 4)
+backend/            Apps Script backend: backup, refill queue, Gemini, nightly jobs
+docs/               setup guide for the backend
 ```
 
 ## Adding or editing words

@@ -275,3 +275,13 @@ p { margin: 0; }
 .sheet-sentence { margin-top: 18px; padding-top: 14px; border-top: 0.5px solid var(--line); font-family: var(--serif); font-size: 17px; line-height: 1.5; }
 .sheet-sentence.big { border-top: 0; padding-top: 4px; margin-top: 6px; font-size: 22px; }
 .option.small-option { min-height: 50px; font-size: 18px; }
+
+/* Forms and status (You → Google Drive and AI) */
+.field-label { display: block; font-size: 14px; color: var(--muted); margin: 14px 0 6px; }
+.text-field { width: 100%; min-height: 48px; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--white); padding: 0 14px; font-size: 16px; outline: none; }
+.text-field:focus { border: 1.5px solid var(--slate); }
+.status-list { margin-top: 10px; }
+.status-list > div { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 0.5px solid var(--line); font-size: 15px; }
+.ai-note { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.ai-note .link { background: none; border: 0; padding: 0; color: var(--ink-2); text-decoration: underline; font-size: 13px; }
+.report-box { margin-top: 10px; padding: 12px; border-radius: 16px; background: var(--panel); }
