@@ -1,0 +1,33 @@
+{
+  "id": "home",
+  "name": "Home and city",
+  "kind": "core",
+  "level": "A1",
+  "words": [
+    ["la casa", "house / home", "Estoy en casa.", "I'm at home.", "n"],
+    ["el piso", "flat / floor (storey)", "Vivo en un piso en el centro.", "I live in a flat in the centre.", "n"],
+    ["la habitación", "room / bedroom", "La habitación es pequeña.", "The room is small.", "n"],
+    ["la cocina", "kitchen", "Cocino en la cocina.", "I cook in the kitchen.", "n"],
+    ["el baño", "bathroom / toilet", "¿Dónde está el baño?", "Where is the bathroom?", "n"],
+    ["el salón", "living room", "Vemos la tele en el salón.", "We watch TV in the living room.", "n"],
+    ["la puerta", "door", "Cierra la puerta, por favor.", "Close the door, please.", "n"],
+    ["la ventana", "window", "Abre la ventana.", "Open the window.", "n"],
+    ["la llave", "key", "¿Tienes la llave?", "Do you have the key?", "n"],
+    ["la cama", "bed", "Me voy a la cama.", "I'm going to bed.", "n"],
+    ["la silla", "chair", "Siéntate en esta silla.", "Sit on this chair.", "n"],
+    ["el alquiler", "rent", "El alquiler es muy caro.", "The rent is very expensive.", "n"],
+    ["la ciudad", "city", "Madrid es una ciudad grande.", "Madrid is a big city.", "n"],
+    ["el pueblo", "village / small town", "Mis abuelos viven en un pueblo.", "My grandparents live in a village.", "n"],
+    ["la calle", "street", "Vivo en esta calle.", "I live on this street.", "n"],
+    ["la plaza", "square", "Quedamos en la plaza.", "Let's meet in the square.", "n"],
+    ["el barrio", "neighbourhood", "Es un barrio tranquilo.", "It's a quiet neighbourhood.", "n"],
+    ["la tienda", "shop", "La tienda cierra a las nueve.", "The shop closes at nine.", "n"],
+    ["el supermercado", "supermarket", "Voy al supermercado.", "I'm going to the supermarket.", "n"],
+    ["el banco", "bank / bench", "El banco abre a las ocho y media.", "The bank opens at half past eight.", "n"],
+    ["el hospital", "hospital", "El hospital está cerca.", "The hospital is nearby.", "n"],
+    ["el ayuntamiento", "town hall / city council", "Pido la licencia en el ayuntamiento.", "I apply for the permit at the town hall.", "n"],
+    ["el edificio", "building", "Es un edificio de diez plantas.", "It's a ten-storey building.", "n"],
+    ["la planta", "floor (storey) / plant", "La oficina está en la tercera planta.", "The office is on the third floor.", "n"],
+    ["el ascensor", "lift", "El ascensor no funciona.", "The lift isn't working.", "n"]
+  ]
+}

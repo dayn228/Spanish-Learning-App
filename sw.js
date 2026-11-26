@@ -1,0 +1,93 @@
+/*
+  Service worker: saves every app file on the phone so the app works offline.
+
+  How updates work: `npm run build` rewrites VERSION and FILES below.
+  When this file changes, the phone downloads the new version the next time
+  the app opens online, and uses it from the launch after that.
+*/
+
+const VERSION = '501f1ae9d6';
+const FILES = [
+  "./",
+  "./css/app.css",
+  "./css/tokens.css",
+  "./data/core/basics.json",
+  "./data/core/connectors.json",
+  "./data/core/describing.json",
+  "./data/core/food.json",
+  "./data/core/health.json",
+  "./data/core/home.json",
+  "./data/core/people.json",
+  "./data/core/shopping.json",
+  "./data/core/time.json",
+  "./data/core/travel.json",
+  "./data/core/verbs.json",
+  "./data/core/work.json",
+  "./data/index.json",
+  "./data/packs/construction.json",
+  "./data/packs/economics.json",
+  "./data/packs/finance.json",
+  "./data/packs/news.json",
+  "./data/packs/politics.json",
+  "./fonts/newsreader-latin-400-italic.woff2",
+  "./fonts/newsreader-latin-400-normal.woff2",
+  "./fonts/newsreader-latin-500-normal.woff2",
+  "./icons/apple-touch-icon.png",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./index.html",
+  "./js/check.js",
+  "./js/content.js",
+  "./js/dates.js",
+  "./js/db.js",
+  "./js/main.js",
+  "./js/session.js",
+  "./js/speech.js",
+  "./js/srs.js",
+  "./js/state.js",
+  "./js/streak.js",
+  "./js/ui.js",
+  "./js/views/practice.js",
+  "./js/views/study.js",
+  "./js/views/today.js",
+  "./js/views/topic.js",
+  "./js/views/topics.js",
+  "./js/views/you.js",
+  "./manifest.webmanifest"
+];
+
+const CACHE = 'mi-espanol-' + VERSION;
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  // Delete caches from older versions.
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
+  // Cache first: answer from the phone, fall back to the network,
+  // and for page loads fall back to the cached app page.
+  event.respondWith(
+    caches.match(req, { ignoreSearch: true }).then((hit) => {
+      if (hit) return hit;
+      return fetch(req).then((res) => {
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then((cache) => cache.put(req, copy));
+        }
+        return res;
+      }).catch(() => (req.mode === 'navigate' ? caches.match('./index.html') : Response.error()));
+    })
+  );
+});

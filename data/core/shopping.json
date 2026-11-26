@@ -1,0 +1,28 @@
+{
+  "id": "shopping",
+  "name": "Shopping and money",
+  "kind": "core",
+  "level": "A1",
+  "words": [
+    ["¿cuánto cuesta?", "how much does it cost?", "¿Cuánto cuesta esta camisa?", "How much is this shirt?", "phr"],
+    ["el precio", "price", "El precio incluye el IVA.", "The price includes VAT.", "n"],
+    ["el dinero", "money", "No tengo dinero en efectivo.", "I don't have any cash.", "n"],
+    ["el euro", "euro", "Son veinte euros.", "That's twenty euros.", "n"],
+    ["la tarjeta", "card", "¿Puedo pagar con tarjeta?", "Can I pay by card?", "n"],
+    ["en efectivo", "in cash", "Prefiero pagar en efectivo.", "I prefer to pay in cash.", "phr"],
+    ["el cambio", "change / exchange", "Quédese con el cambio.", "Keep the change.", "n"],
+    ["el recibo", "receipt", "¿Me da el recibo, por favor?", "Can I have the receipt, please?", "n"],
+    ["la oferta", "special offer / supply", "Hoy hay una oferta de fruta.", "There's a fruit offer today.", "n"],
+    ["el descuento", "discount", "Nos hacen un descuento del diez por ciento.", "They give us a ten percent discount.", "n"],
+    ["la talla", "size (clothes)", "¿Tiene una talla más grande?", "Do you have a bigger size?", "n"],
+    ["la ropa", "clothes", "Compro ropa de trabajo.", "I'm buying work clothes.", "n"],
+    ["los zapatos", "shoes", "Necesito zapatos nuevos.", "I need new shoes.", "n"],
+    ["la bolsa", "bag / stock exchange", "¿Necesita una bolsa?", "Do you need a bag?", "n"],
+    ["probarse", "to try on", "¿Me puedo probar esta chaqueta?", "Can I try on this jacket?", "v"],
+    ["vender", "to sell", "Venden herramientas aquí.", "They sell tools here.", "v"],
+    ["costar", "to cost", "Esto cuesta demasiado.", "This costs too much.", "v"],
+    ["gastar", "to spend (money)", "Gasto mucho en comida.", "I spend a lot on food.", "v"],
+    ["ahorrar", "to save (money)", "Quiero ahorrar para un coche.", "I want to save for a car.", "v"],
+    ["la caja", "checkout / box / till", "Pague en la caja, por favor.", "Please pay at the checkout.", "n"]
+  ]
+}

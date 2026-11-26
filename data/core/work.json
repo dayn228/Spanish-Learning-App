@@ -1,0 +1,33 @@
+{
+  "id": "work",
+  "name": "Work and office",
+  "kind": "core",
+  "level": "A1",
+  "words": [
+    ["el trabajo", "work / job", "Tengo mucho trabajo hoy.", "I have a lot of work today.", "n"],
+    ["la empresa", "company", "La empresa tiene cincuenta empleados.", "The company has fifty employees.", "n"],
+    ["la oficina", "office", "Estoy en la oficina hasta las cinco.", "I'm in the office until five.", "n"],
+    ["el jefe", "boss", "El jefe está de vacaciones.", "The boss is on holiday.", "n"],
+    ["el empleado", "employee", "Es un empleado muy bueno.", "He's a very good employee.", "n"],
+    ["el cliente", "client / customer", "El cliente quiere un cambio.", "The client wants a change.", "n"],
+    ["la reunión", "meeting", "Tenemos una reunión a las diez.", "We have a meeting at ten.", "n"],
+    ["el correo", "email / post", "Te mando un correo.", "I'll send you an email.", "n"],
+    ["el móvil", "mobile phone (Spain)", "Te llamo al móvil.", "I'll call you on your mobile.", "n"],
+    ["el ordenador", "computer (Spain)", "Mi ordenador es muy lento.", "My computer is very slow.", "n"],
+    ["el proyecto", "project", "El proyecto termina en marzo.", "The project ends in March.", "n"],
+    ["el problema", "problem (masculine)", "No hay ningún problema.", "There's no problem at all.", "n"],
+    ["la pregunta", "question", "Tengo una pregunta.", "I have a question.", "n"],
+    ["la respuesta", "answer", "Espero tu respuesta.", "I'm waiting for your answer.", "n"],
+    ["el contrato", "contract", "Firmamos el contrato mañana.", "We sign the contract tomorrow.", "n"],
+    ["el sueldo", "salary", "El sueldo se paga a fin de mes.", "The salary is paid at the end of the month.", "n"],
+    ["el horario", "schedule / working hours", "Mi horario es de ocho a cinco.", "My hours are eight to five.", "n"],
+    ["las vacaciones", "holiday", "Me voy de vacaciones en agosto.", "I'm going on holiday in August.", "n"],
+    ["ocupado", "busy", "Ahora estoy ocupado.", "I'm busy right now.", "adj"],
+    ["terminar", "to finish", "Terminamos el informe hoy.", "We finish the report today.", "v"],
+    ["enviar", "to send", "Envío los documentos por correo.", "I'm sending the documents by email.", "v"],
+    ["el documento", "document", "Necesito este documento firmado.", "I need this document signed.", "n"],
+    ["ayudar", "to help", "¿Te puedo ayudar?", "Can I help you?", "v"],
+    ["la ayuda", "help", "Gracias por la ayuda.", "Thanks for the help.", "n"],
+    ["urgente", "urgent", "Es un pedido urgente.", "It's an urgent order.", "adj"]
+  ]
+}

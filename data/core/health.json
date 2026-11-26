@@ -1,0 +1,28 @@
+{
+  "id": "health",
+  "name": "Health and body",
+  "kind": "core",
+  "level": "A1",
+  "words": [
+    ["el médico", "doctor", "Tengo cita con el médico.", "I have a doctor's appointment.", "n"],
+    ["la farmacia", "chemist's / pharmacy", "La farmacia está abierta hasta las diez.", "The chemist's is open until ten.", "n"],
+    ["enfermo", "ill / sick", "Estoy enfermo, hoy no voy.", "I'm ill, I'm not going today.", "adj"],
+    ["me duele", "it hurts (me)", "Me duele la cabeza.", "I have a headache.", "phr"],
+    ["la cabeza", "head", "Ponte el casco en la cabeza.", "Put the helmet on your head.", "n"],
+    ["la mano", "hand (feminine)", "Lávate las manos.", "Wash your hands.", "n"],
+    ["el brazo", "arm", "Me he hecho daño en el brazo.", "I've hurt my arm.", "n"],
+    ["la pierna", "leg", "Me duele la pierna.", "My leg hurts.", "n"],
+    ["la espalda", "back", "Tengo dolor de espalda.", "I have back pain.", "n"],
+    ["el ojo", "eye", "Usa gafas para proteger los ojos.", "Wear glasses to protect your eyes.", "n"],
+    ["el dedo", "finger / toe", "Me he cortado el dedo.", "I've cut my finger.", "n"],
+    ["el dolor", "pain", "Tengo un dolor fuerte.", "I have a strong pain.", "n"],
+    ["la cita", "appointment / date", "Pido cita para el lunes.", "I'm asking for an appointment on Monday.", "n"],
+    ["la receta", "prescription / recipe", "Necesito una receta para esto.", "I need a prescription for this.", "n"],
+    ["las urgencias", "A&E / emergency department", "Lo llevamos a urgencias.", "We take him to A&E.", "n"],
+    ["el accidente", "accident", "Ha habido un accidente en la obra.", "There's been an accident on site.", "n"],
+    ["el seguro", "insurance", "¿Tienes seguro médico?", "Do you have health insurance?", "n"],
+    ["descansar", "to rest", "Necesitas descansar.", "You need to rest.", "v"],
+    ["la baja", "sick leave", "Está de baja esta semana.", "He's on sick leave this week.", "n"],
+    ["¡cuidado!", "careful! / watch out!", "¡Cuidado con el escalón!", "Watch out for the step!", "phr"]
+  ]
+}

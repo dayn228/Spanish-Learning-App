@@ -1,0 +1,33 @@
+{
+  "id": "travel",
+  "name": "Travel and directions",
+  "kind": "core",
+  "level": "A1",
+  "words": [
+    ["¿dónde está…?", "where is…?", "¿Dónde está la estación?", "Where is the station?", "phr"],
+    ["a la derecha", "on the right", "El hotel está a la derecha.", "The hotel is on the right.", "phr"],
+    ["a la izquierda", "on the left", "Gira a la izquierda.", "Turn left.", "phr"],
+    ["todo recto", "straight ahead", "Sigue todo recto.", "Keep going straight ahead.", "phr"],
+    ["cerca", "near / close", "Está muy cerca de aquí.", "It's very close to here.", "adv"],
+    ["lejos", "far", "El aeropuerto está lejos.", "The airport is far away.", "adv"],
+    ["el coche", "car", "Voy en coche al trabajo.", "I go to work by car.", "n"],
+    ["el autobús", "bus", "El autobús pasa cada diez minutos.", "The bus comes every ten minutes.", "n"],
+    ["el tren", "train", "El tren sale a las seis.", "The train leaves at six.", "n"],
+    ["el metro", "underground / metro", "Cojo el metro todos los días.", "I take the metro every day.", "n"],
+    ["el avión", "plane", "El avión llega con retraso.", "The plane is arriving late.", "n"],
+    ["el aeropuerto", "airport", "Te recojo en el aeropuerto.", "I'll pick you up at the airport.", "n"],
+    ["la estación", "station", "La estación de tren está en el centro.", "The train station is in the centre.", "n"],
+    ["el billete", "ticket (Spain)", "Un billete de ida y vuelta.", "A return ticket.", "n"],
+    ["el viaje", "trip / journey", "¡Buen viaje!", "Have a good trip!", "n"],
+    ["viajar", "to travel", "Me gusta viajar.", "I like travelling.", "v"],
+    ["el hotel", "hotel", "El hotel tiene piscina.", "The hotel has a pool.", "n"],
+    ["la reserva", "booking / reservation", "Tengo una reserva a nombre de Daniel.", "I have a booking under the name Daniel.", "n"],
+    ["la maleta", "suitcase", "Mi maleta es azul.", "My suitcase is blue.", "n"],
+    ["el pasaporte", "passport", "Necesitas el pasaporte.", "You need your passport.", "n"],
+    ["coger", "to take / to catch (Spain)", "Cojo el autobús a las ocho.", "I catch the bus at eight.", "v"],
+    ["la salida", "exit / departure", "La salida está al fondo.", "The exit is at the back.", "n"],
+    ["la entrada", "entrance / ticket (show)", "La entrada es por aquí.", "The entrance is this way.", "n"],
+    ["el mapa", "map", "Míralo en el mapa.", "Look at it on the map.", "n"],
+    ["el país", "country", "España es un país muy diverso.", "Spain is a very diverse country.", "n"]
+  ]
+}

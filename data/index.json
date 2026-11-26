@@ -1,0 +1,21 @@
+{
+  "topics": [
+    "core/basics.json",
+    "core/verbs.json",
+    "core/connectors.json",
+    "core/people.json",
+    "core/time.json",
+    "core/food.json",
+    "core/home.json",
+    "core/travel.json",
+    "core/work.json",
+    "core/describing.json",
+    "core/shopping.json",
+    "core/health.json",
+    "packs/construction.json",
+    "packs/finance.json",
+    "packs/economics.json",
+    "packs/politics.json",
+    "packs/news.json"
+  ]
+}
