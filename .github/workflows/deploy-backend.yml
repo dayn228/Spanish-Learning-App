@@ -12,7 +12,7 @@ name: Deploy backend
 on:
   push:
     branches: [main]
-    paths: ['backend/**']
+    paths: ['backend/**', '.github/workflows/deploy-backend.yml']
   workflow_dispatch:
 
 permissions:
@@ -48,8 +48,8 @@ jobs:
         name: Upload to Apps Script
         env:
           CLASPRC: ${{ secrets.CLASPRC_JSON }}
-        working-directory: backend
           DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}
+        working-directory: backend
         run: |
           printf '%s' "$CLASPRC" > ~/.clasprc.json
           clasp push --force
