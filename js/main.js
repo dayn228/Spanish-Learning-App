@@ -2,7 +2,7 @@
   App start and navigation.
 
   Screens are chosen by the part of the address after '#':
-    #today  #topics  #topic/<id>  #study  #practice  #you
+    #today  #topics  #topic/<id>  #study  #practice  #grammar/<id>  #drill  #you
   Each screen is a function in js/views/ that returns an element.
 */
 
@@ -16,6 +16,8 @@ import { topicView } from './views/topic.js';
 import { studyView } from './views/study.js';
 import { practiceView } from './views/practice.js';
 import { youView } from './views/you.js';
+import { drillView } from './views/drill.js';
+import { unitView } from './views/unit.js';
 
 const app = document.getElementById('app');
 const nav = document.getElementById('nav');
@@ -38,6 +40,8 @@ export function render() {
     case 'topic': view = topicView(decodeURIComponent(arg || '')); tab = 'topics'; break;
     case 'study': view = studyView(); fullScreen = true; break;
     case 'practice': view = practiceView(); break;
+    case 'grammar': view = unitView(decodeURIComponent(arg || '')); tab = 'practice'; break;
+    case 'drill': view = drillView(); fullScreen = true; break;
     case 'you': view = youView(); break;
     default: view = todayView(); tab = 'today';
   }

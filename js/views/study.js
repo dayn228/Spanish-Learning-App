@@ -17,11 +17,13 @@ import { h, icon, ICONS, toast, plural } from '../ui.js';
 import { AGAIN, HARD, GOOD, EASY, previewInterval } from '../srs.js';
 import { checkAnswer } from '../check.js';
 import { speak, canSpeak } from '../speech.js';
+import { startDrill } from './drill.js';
 
 let session = null;
 
 /** Start a session from a plan { reviews, fresh, label, returnTo, mode? } and open the study screen. */
 export function startSession(plan) {
+  if (!plan.reviews.length && !plan.fresh.length && plan.then) { startDrill(plan.then); return; }
   const queue = [];
   for (const id of plan.reviews) {
     const c = state.cards[id];
@@ -38,7 +40,7 @@ export function startSession(plan) {
   }
   session = {
     queue: mixed, pos: 0, answered: 0, right: 0, learned: 0, retries: {},
-    label: plan.label || 'Session', returnTo: plan.returnTo || '#today', startedAt: Date.now(),
+    label: plan.label || 'Session', returnTo: plan.returnTo || '#today', startedAt: Date.now(), then: plan.then || null,
   };
   location.hash = '#study';
 }
@@ -226,6 +228,10 @@ function drawDone(root) {
       [session.learned && plural(session.learned, 'new word', 'new words'), `${pct}% right`].filter(Boolean).join(' · ')),
     h('p', { class: 'small muted', style: { marginTop: '6px' } },
       state.streak.current ? `Streak: ${plural(state.streak.current, 'day', 'days')}` : ''),
-    h('div', { style: { marginTop: '32px' } },
-      h('button', { class: 'btn btn-primary btn-block', onclick: exit }, 'Done'))));
+    session.then
+      ? h('div', { style: { marginTop: '32px' } },
+          h('button', { class: 'btn btn-primary btn-block', onclick: () => { const t = session.then; session = null; startDrill(t); } }, session.then.label || 'Continue to grammar'),
+          h('button', { class: 'btn btn-ghost', style: { width: '100%', marginTop: '8px' }, onclick: exit }, 'Finish here'))
+      : h('div', { style: { marginTop: '32px' } },
+          h('button', { class: 'btn btn-primary btn-block', onclick: exit }, 'Done'))));
 }

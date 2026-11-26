@@ -7,6 +7,20 @@ import { displayStreak } from '../streak.js';
 import { dayKey, addDays } from '../dates.js';
 import { stage } from '../srs.js';
 import { startSession } from './study.js';
+import { recommendedUnit, unitsDueForReview } from '../grammar.js';
+
+const GRAMMAR_PER_MINUTES = { 5: 0, 15: 4, 30: 6, 60: 10 };
+
+/** The grammar part of a timed session: a due review first, else the next unit. */
+function grammarPart(minutes) {
+  const n = GRAMMAR_PER_MINUTES[minutes] || 0;
+  const units = state.content.units || [];
+  if (!n || !units.length) return null;
+  const review = unitsDueForReview(units, state.grammar)[0];
+  if (review) return { kind: 'review', unitId: review.id, count: 5, returnTo: '#today', label: `Grammar review: ${review.title}`, unit: review };
+  const u = recommendedUnit(units, state.grammar);
+  return u ? { kind: 'practice', unitId: u.id, count: n, returnTo: '#today', label: `Grammar: ${u.title} (${n})`, unit: u } : null;
+}
 
 const MINUTES = [5, 15, 30, 60];
 
@@ -25,10 +39,12 @@ export function todayView() {
   const doneToday = state.streak.lastDay === today;
   const streakNow = displayStreak(state.streak, today);
 
-  const summary = plan.reviews.length || plan.fresh.length
-    ? [plan.reviews.length && plural(plan.reviews.length, 'word to review', 'words to review'),
-       plan.fresh.length && plural(plan.fresh.length, 'new word', 'new words')].filter(Boolean).join(' and ') + '.'
-    : 'Nothing due. Pick a topic to learn new words.';
+  const gram = grammarPart(minutes);
+  const parts = [plan.reviews.length && plural(plan.reviews.length, 'word to review', 'words to review'),
+    plan.fresh.length && plural(plan.fresh.length, 'new word', 'new words'),
+    gram && (gram.kind === 'review' ? `a review of ${gram.unit.title}` : `${gram.count} exercises on ${gram.unit.title.split(':')[0]}`)].filter(Boolean);
+  const summary = parts.length ? parts.join(', ').replace(/, ([^,]*)$/, ' and $1') + '.' : 'Nothing due. Pick a topic to learn new words.';
+  const hasWork = plan.reviews.length || plan.fresh.length || gram;
 
   const root = h('div', {},
     h('h1', {}, greeting()),
@@ -42,9 +58,9 @@ export function todayView() {
 
     h('button', {
       class: 'btn btn-primary btn-block', style: { marginTop: '14px' },
-      disabled: !(plan.reviews.length || plan.fresh.length),
-      onclick: () => startSession({ ...plan, label: `${minutes}-minute session` }),
-    }, plan.reviews.length ? 'Start review' : 'Start learning'),
+      disabled: !hasWork,
+      onclick: () => startSession({ ...plan, label: `${minutes}-minute session`, then: gram }),
+    }, plan.reviews.length ? 'Start review' : plan.fresh.length ? 'Start learning' : 'Start grammar'),
   );
 
   // Continue a focus topic that isn't finished yet.

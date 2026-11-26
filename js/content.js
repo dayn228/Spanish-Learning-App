@@ -46,5 +46,10 @@ export async function loadContent(base = 'data/') {
     topics.push({ id: file.id, name: file.name, kind: file.kind, level: file.level, blurb: file.blurb || '', count: list.length });
     words.push(...list);
   }
-  return { topics, words, byId: new Map(words.map((w) => [w.id, w])) };
+  let units = [];
+  try {
+    const gIndex = await (await fetch(base + 'grammar/index.json')).json();
+    units = await Promise.all(gIndex.units.map((name) => fetch(base + 'grammar/' + name).then((r) => r.json())));
+  } catch { /* grammar not available: words still work */ }
+  return { topics, words, byId: new Map(words.map((w) => [w.id, w])), units };
 }

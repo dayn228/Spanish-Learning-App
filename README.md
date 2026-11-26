@@ -2,7 +2,7 @@
 
 A personal, offline-first Spanish (Castilian) learning app for iPhone. It is a plain web app (HTML, CSS, JavaScript, no framework) that installs to the home screen and works without internet.
 
-The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). This is **phase 1: foundation and words**.
+The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). Done so far: **phase 1** (foundation and words) and **phase 2** (grammar A1 and the verb trainer).
 
 ## Use it on your iPhone
 
@@ -21,6 +21,18 @@ Updates: when a new version is published, it downloads the next time you open th
 - **Topics:** 12 core topics and 5 focus packs (construction and windows, finance, economics, politics, news language): 523 words with example sentences.
 - **Backup:** You → Save backup (to Files or Google Drive) and Restore from file. Automatic Drive backup comes in phase 4.
 
+## What phase 2 adds
+
+- **Grammar units 1–8 (A1):** pronouns and ser/estar, gender and plurals, regular present, key irregulars, questions and negation, ir a + infinitive, gustar, reflexives. Each has an explanation (tap examples to hear them) and 23–30 exercises.
+- **Exercise types:** fill the gap, choose, transform, find the mistake, translate, put words in order, match, and full conjugation tables. An accent bar (á é í ó ú ñ ü ¿ ¡) sits under every answer field.
+- **Mastery follows accuracy:** each set adds 100 × accuracy² × (set size / 10) to the unit score, so a perfect set masters a unit and mistakes mean more sets. Missed forms (by tag) come back more often; exercises right twice in a row retire. "I know this: test me" masters a unit at 90%. Mastered units return for short reviews at growing gaps (7, 18, 45 days…). See `js/grammar.js`.
+- **Verb trainer:** about 60 verbs in the present tense, weighted to the forms you miss; forms right four times in a row retire. Conjugation rules and irregulars in `js/verbs.js`.
+- **Sessions include grammar:** 15, 30 and 60-minute sessions end with 4, 6 or 10 exercises from your next unit, or a review if one is due.
+
+## Adding grammar exercises
+
+Units live in `data/grammar/uNN.json`. Exercise shapes are described at the top of `js/exercise.js`; every exercise needs at least one tag (the form it practises). `npm run build` checks every exercise (answer index in range, reorder words make the answer, table verbs can be conjugated, no duplicates).
+
 ## Project layout
 
 ```
@@ -28,13 +40,17 @@ index.html, manifest.webmanifest, sw.js   app page, install info, offline cache
 css/tokens.css      colours, fonts, sizes (the design system)
 css/app.css         layout and components
 js/main.js          start-up and navigation between screens
-js/views/           one file per screen (today, topics, topic, study, practice, you)
+js/views/           one file per screen (today, topics, topic, study, practice, unit, drill, you)
 js/srs.js           spaced repetition
 js/streak.js        streak and freezes
 js/session.js       builds a session from your minutes and focus topics
 js/check.js         checks typed answers
+js/verbs.js         conjugation (regular, stem changes, irregulars)
+js/grammar.js       grammar mastery, weak forms, verb trainer picking
+js/exercise.js      renders and checks every exercise type
 js/state.js, db.js  progress saved on the phone (IndexedDB), backup
 data/core/, data/packs/   word lists (JSON)
+data/grammar/       grammar units (JSON)
 tools/build.mjs     checks word lists, writes the offline file list
 tests/              unit tests for the logic
 backend/            Apps Script (phase 4)

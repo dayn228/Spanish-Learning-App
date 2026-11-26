@@ -14,6 +14,9 @@ import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { parseTopic } from '../js/content.js';
+import { conjugate } from '../js/verbs.js';
+import { normalise } from '../js/check.js';
+import { exerciseId } from '../js/grammar.js';
 
 const root = new URL('..', import.meta.url).pathname;
 const problems = [];
@@ -46,13 +49,43 @@ for (const f of topicFiles) {
 }
 topics.sort((a, b) => (order.indexOf(a.id) + 1 || 99) - (order.indexOf(b.id) + 1 || 99));
 
+// ---- 1b. Check grammar units ----
+const TYPES = ['gap', 'choice', 'transform', 'error', 'translate', 'reorder', 'match', 'table'];
+const unitFiles = readdirSync(join(root, 'data/grammar')).filter((f) => /^u\d+\.json$/.test(f)).sort();
+let exerciseCount = 0;
+for (const f of unitFiles) {
+  let u;
+  try { u = JSON.parse(readFileSync(join(root, 'data/grammar', f), 'utf8')); } catch (e) { problems.push(`grammar/${f}: not valid JSON (${e.message})`); continue; }
+  for (const key of ['id', 'n', 'title', 'explain', 'exercises']) if (u[key] === undefined) problems.push(`grammar/${f}: missing "${key}"`);
+  const ids = new Set();
+  (u.exercises || []).forEach((ex, i) => {
+    const where = `grammar/${f} exercise ${i + 1} (${ex.type})`;
+    if (!TYPES.includes(ex.type)) return problems.push(`${where}: unknown type`);
+    if (!ex.tags || !ex.tags.length) problems.push(`${where}: needs at least one tag`);
+    if (['gap', 'transform', 'error', 'translate', 'reorder'].includes(ex.type) && !ex.a) problems.push(`${where}: missing answer "a"`);
+    if (ex.type === 'gap' && !String(ex.q).includes('___')) problems.push(`${where}: gap sentence needs ___`);
+    if (ex.type === 'choice' && !(Number.isInteger(ex.a) && ex.options && ex.a >= 0 && ex.a < ex.options.length)) problems.push(`${where}: answer index out of range`);
+    if (ex.type === 'reorder') {
+      const sorted = (s) => normalise(s).split(' ').sort().join(' ');
+      if (sorted(ex.words.join(' ')) !== sorted(ex.a)) problems.push(`${where}: words don't make the answer`);
+    }
+    if (ex.type === 'match' && !(ex.pairs && ex.pairs.length >= 3)) problems.push(`${where}: needs at least 3 pairs`);
+    if (ex.type === 'table' && !conjugate(ex.verb)) problems.push(`${where}: verb "${ex.verb}" can't be conjugated`);
+    const id = exerciseId(u.id, ex);
+    if (ids.has(id)) problems.push(`${where}: duplicate exercise`);
+    ids.add(id);
+  });
+  exerciseCount += (u.exercises || []).length;
+}
+
 if (problems.length) {
-  console.error('Word list problems:\n  ' + problems.join('\n  '));
+  console.error('Content problems:\n  ' + problems.join('\n  '));
   process.exit(1);
 }
 
 // ---- 2. data/index.json ----
 writeFileSync(join(root, 'data/index.json'), JSON.stringify({ topics: topics.map((t) => t.file) }, null, 2) + '\n');
+writeFileSync(join(root, 'data/grammar/index.json'), JSON.stringify({ units: unitFiles }, null, 2) + '\n');
 
 // ---- 3. Offline file list + version in sw.js ----
 const include = ['index.html', 'manifest.webmanifest', 'css', 'js', 'fonts', 'icons', 'data'];
@@ -74,4 +107,4 @@ sw = sw.replace(/const VERSION = .*;/, `const VERSION = '${version}';`);
 sw = sw.replace(/const FILES = [\s\S]*?\];/, `const FILES = ${JSON.stringify(['./', ...files.map((f) => './' + f)], null, 2)};`);
 writeFileSync(swPath, sw);
 
-console.log(`OK: ${topics.length} topics, ${wordCount} words, ${files.length} offline files, version ${version}`);
+console.log(`OK: ${topics.length} topics, ${wordCount} words, ${unitFiles.length} grammar units, ${exerciseCount} exercises, ${files.length} offline files, version ${version}`);

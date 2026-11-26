@@ -7,6 +7,7 @@ import * as db from './db.js';
 import { review, markKnown } from './srs.js';
 import { recordSession, newStreak } from './streak.js';
 import { dayKey } from './dates.js';
+import { newGrammarProgress } from './grammar.js';
 
 export const state = {
   content: null,              // { topics, words, byId }
@@ -14,6 +15,7 @@ export const state = {
   streak: newStreak(),
   settings: { focus: ['construction'], minutes: 15 },
   log: {},                    // day key → answers that day
+  grammar: newGrammarProgress(), // unit scores, weak forms, verb trainer stats
 };
 
 const BACKUP_VERSION = 1;
@@ -23,6 +25,7 @@ export async function loadState() {
   state.streak = await db.get('streak', newStreak());
   state.settings = { ...state.settings, ...(await db.get('settings', {})) };
   state.log = await db.get('log', {});
+  state.grammar = { ...newGrammarProgress(), ...(await db.get('grammar', {})) };
 }
 
 export function answer(wordId, grade) {
@@ -36,6 +39,16 @@ export function answer(wordId, grade) {
 export function knowIt(wordId) {
   state.cards[wordId] = markKnown(state.cards[wordId]);
   db.set('cards', state.cards);
+}
+
+/** Save grammar progress and count the answer for today's activity. */
+export function saveGrammar(countAnswer = true) {
+  if (countAnswer) {
+    const today = dayKey();
+    state.log[today] = (state.log[today] || 0) + 1;
+    db.set('log', state.log);
+  }
+  db.set('grammar', state.grammar);
 }
 
 /** Call once when a session ends (any length). */
@@ -60,6 +73,7 @@ export function exportBackup() {
     streak: state.streak,
     settings: state.settings,
     log: state.log,
+    grammar: state.grammar,
   });
 }
 
@@ -72,8 +86,9 @@ export async function importBackup(text) {
   state.streak = data.streak || newStreak();
   state.settings = { ...state.settings, ...(data.settings || {}) };
   state.log = data.log || {};
+  state.grammar = { ...newGrammarProgress(), ...(data.grammar || {}) };
   await Promise.all([
     db.set('cards', state.cards), db.set('streak', state.streak),
-    db.set('settings', state.settings), db.set('log', state.log),
+    db.set('settings', state.settings), db.set('log', state.log), db.set('grammar', state.grammar),
   ]);
 }

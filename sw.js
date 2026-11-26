@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = '501f1ae9d6';
+const VERSION = '159cff9364';
 const FILES = [
   "./",
   "./css/app.css",
@@ -23,6 +23,15 @@ const FILES = [
   "./data/core/travel.json",
   "./data/core/verbs.json",
   "./data/core/work.json",
+  "./data/grammar/index.json",
+  "./data/grammar/u01.json",
+  "./data/grammar/u02.json",
+  "./data/grammar/u03.json",
+  "./data/grammar/u04.json",
+  "./data/grammar/u05.json",
+  "./data/grammar/u06.json",
+  "./data/grammar/u07.json",
+  "./data/grammar/u08.json",
   "./data/index.json",
   "./data/packs/construction.json",
   "./data/packs/economics.json",
@@ -40,6 +49,8 @@ const FILES = [
   "./js/content.js",
   "./js/dates.js",
   "./js/db.js",
+  "./js/exercise.js",
+  "./js/grammar.js",
   "./js/main.js",
   "./js/session.js",
   "./js/speech.js",
@@ -47,11 +58,14 @@ const FILES = [
   "./js/state.js",
   "./js/streak.js",
   "./js/ui.js",
+  "./js/verbs.js",
+  "./js/views/drill.js",
   "./js/views/practice.js",
   "./js/views/study.js",
   "./js/views/today.js",
   "./js/views/topic.js",
   "./js/views/topics.js",
+  "./js/views/unit.js",
   "./js/views/you.js",
   "./manifest.webmanifest"
 ];
