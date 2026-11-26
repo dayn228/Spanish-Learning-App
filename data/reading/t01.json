@@ -1,0 +1,207 @@
+{
+ "id": "t01",
+ "title": "Un día en la obra",
+ "en": "A day on site",
+ "level": "A1",
+ "topic": "construction",
+ "paragraphs": [
+  [
+   [
+    "Me llamo Pablo y soy instalador de ventanas.",
+    "My name is Pablo and I'm a window fitter."
+   ],
+   [
+    "Trabajo en una empresa pequeña de Valencia.",
+    "I work in a small company in Valencia."
+   ],
+   [
+    "Normalmente me levanto a las seis y media.",
+    "I usually get up at half past six."
+   ],
+   [
+    "Desayuno un café con leche y un bocadillo.",
+    "I have a white coffee and a sandwich for breakfast."
+   ],
+   [
+    "A las siete y media estoy en la obra.",
+    "At half past seven I'm on site."
+   ]
+  ],
+  [
+   [
+    "Hoy instalamos ocho ventanas en un piso antiguo.",
+    "Today we're installing eight windows in an old flat."
+   ],
+   [
+    "Primero medimos los huecos.",
+    "First we measure the openings."
+   ],
+   [
+    "Después quitamos las ventanas viejas.",
+    "Then we take out the old windows."
+   ],
+   [
+    "Es un trabajo duro, pero me gusta.",
+    "It's hard work, but I like it."
+   ]
+  ],
+  [
+   [
+    "A las dos comemos el menú del día en un bar cerca de la obra.",
+    "At two we have the set lunch in a bar near the site."
+   ],
+   [
+    "Por la tarde llega el cliente.",
+    "In the afternoon the client arrives."
+   ],
+   [
+    "Está muy contento con las ventanas nuevas.",
+    "He's very happy with the new windows."
+   ],
+   [
+    "A las seis vuelvo a casa.",
+    "At six I go back home."
+   ],
+   [
+    "Estoy cansado, pero contento.",
+    "I'm tired, but happy."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Qué es Pablo?",
+   "options": [
+    "instalador de ventanas",
+    "cliente",
+    "camarero"
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cuántas ventanas instalan hoy?",
+   "options": [
+    "seis",
+    "ocho",
+    "dos"
+   ],
+   "a": 1
+  },
+  {
+   "q": "¿Dónde comen?",
+   "options": [
+    "en casa",
+    "en la obra",
+    "en un bar"
+   ],
+   "a": 2
+  },
+  {
+   "q": "¿Cómo está el cliente?",
+   "options": [
+    "cansado",
+    "contento",
+    "enfadado"
+   ],
+   "a": 1
+  }
+ ],
+ "glossary": {
+  "llamo": [
+   "llamarse",
+   "me llamo = my name is"
+  ],
+  "pablo": [
+   "Pablo",
+   "Pablo (name)"
+  ],
+  "ventanas": [
+   "la ventana",
+   "windows"
+  ],
+  "pequeña": [
+   "pequeño",
+   "small"
+  ],
+  "valencia": [
+   "Valencia",
+   "Valencia (city in Spain)"
+  ],
+  "normalmente": [
+   "normalmente",
+   "usually, normally"
+  ],
+  "levanto": [
+   "levantarse",
+   "me levanto = I get up"
+  ],
+  "media": [
+   "media",
+   "half (y media = half past)"
+  ],
+  "instalamos": [
+   "instalar",
+   "we install"
+  ],
+  "antiguo": [
+   "antiguo",
+   "old"
+  ],
+  "medimos": [
+   "medir",
+   "we measure"
+  ],
+  "huecos": [
+   "el hueco",
+   "openings (in the wall)"
+  ],
+  "quitamos": [
+   "quitar",
+   "we take out, we remove"
+  ],
+  "viejas": [
+   "viejo",
+   "old"
+  ],
+  "duro": [
+   "duro",
+   "hard, tough"
+  ],
+  "gusta": [
+   "gustar",
+   "me gusta = I like it"
+  ],
+  "comemos": [
+   "comer",
+   "we eat, we have lunch"
+  ],
+  "menú": [
+   "el menú",
+   "menu (menú del día = set lunch)"
+  ],
+  "bar": [
+   "el bar",
+   "bar, café"
+  ],
+  "llega": [
+   "llegar",
+   "arrives"
+  ],
+  "nuevas": [
+   "nuevo",
+   "new"
+  ],
+  "vuelvo": [
+   "volver",
+   "I go back, I return"
+  ],
+  "trabajo": [
+   "trabajar / el trabajo",
+   "I work (verb) · work, job (noun)"
+  ],
+  "desayuno": [
+   "desayunar",
+   "I have breakfast"
+  ]
+ }
+}

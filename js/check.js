@@ -50,3 +50,32 @@ export function pointsFor(result, { strictArticles = false } = {}) {
   if (result === 'article') return strictArticles ? 0.5 : 1;
   return 0;
 }
+
+/*
+  Dictation: compare word by word, ignoring case, punctuation and accents.
+  Returns { points, marks } where marks lists the expected words with ok=true/false,
+  so the screen can show which words were missed.
+*/
+export function wordDiff(input, expected) {
+  // Fully lenient here: accents and ñ/n are ignored (listening is about hearing the words).
+  const words = (s) => normalise(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(' ').filter(Boolean);
+  const shown = String(expected).replace(/[¿¡]/g, '').split(/\s+/).filter(Boolean);
+  const exp = words(expected);
+  const got = words(input);
+  // Longest common subsequence of words.
+  const L = Array.from({ length: exp.length + 1 }, () => new Array(got.length + 1).fill(0));
+  for (let i = exp.length - 1; i >= 0; i--)
+    for (let j = got.length - 1; j >= 0; j--)
+      L[i][j] = exp[i] === got[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const ok = new Array(exp.length).fill(false);
+  for (let i = 0, j = 0; i < exp.length && j < got.length;) {
+    if (exp[i] === got[j]) { ok[i] = true; i++; j++; }
+    else if (L[i + 1][j] >= L[i][j + 1]) i++;
+    else j++;
+  }
+  const matched = ok.filter(Boolean).length;
+  const extra = Math.max(0, got.length - matched);
+  const points = exp.length ? Math.max(0, (matched - extra * 0.5) / exp.length) : 0;
+  const marks = (shown.length === exp.length ? shown : exp).map((w, i) => ({ word: w, ok: ok[i] }));
+  return { points: Math.round(points * 100) / 100, marks };
+}

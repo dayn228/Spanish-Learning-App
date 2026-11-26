@@ -1,0 +1,162 @@
+{
+ "id": "t03",
+ "title": "El pedido llega tarde",
+ "en": "The order is late",
+ "level": "A2",
+ "topic": "construction",
+ "paragraphs": [
+  [
+   [
+    "Estimada señora García:",
+    "Dear Mrs García,"
+   ]
+  ],
+  [
+   [
+    "Le escribo por su pedido de ventanas de aluminio.",
+    "I'm writing to you about your order of aluminium windows."
+   ],
+   [
+    "Lo siento mucho, pero hay un retraso.",
+    "I'm very sorry, but there is a delay."
+   ],
+   [
+    "El proveedor no tiene el cristal que necesitamos, y el plazo de entrega es ahora de tres semanas más.",
+    "The supplier doesn't have the glass we need, and the lead time is now three weeks longer."
+   ]
+  ],
+  [
+   [
+    "Vamos a instalar las ventanas el lunes 15 de diciembre, si le parece bien.",
+    "We are going to install the windows on Monday 15 December, if that's all right with you."
+   ],
+   [
+    "El precio no cambia y la garantía es la misma.",
+    "The price doesn't change and the warranty is the same."
+   ]
+  ],
+  [
+   [
+    "Si tiene alguna pregunta, puede llamarme al móvil.",
+    "If you have any questions, you can call me on my mobile."
+   ]
+  ],
+  [
+   [
+    "Un saludo,",
+    "Kind regards,"
+   ],
+   [
+    "Pablo Martín, jefe de obra",
+    "Pablo Martín, site manager"
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Qué problema hay?",
+   "options": [
+    "El pedido llega tarde.",
+    "El precio sube.",
+    "La clienta no está en casa."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué hay un retraso?",
+   "options": [
+    "Falta el cristal.",
+    "Falta el instalador.",
+    "Falta el dinero."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cambia el precio?",
+   "options": [
+    "Sí, sube.",
+    "Sí, baja.",
+    "No, es el mismo."
+   ],
+   "a": 2
+  }
+ ],
+ "glossary": {
+  "estimada": [
+   "estimado",
+   "dear (formal letters)"
+  ],
+  "garcía": [
+   "García",
+   "García (surname)"
+  ],
+  "escribo": [
+   "escribir",
+   "I write, I'm writing"
+  ],
+  "ventanas": [
+   "la ventana",
+   "windows"
+  ],
+  "aluminio": [
+   "el aluminio",
+   "aluminium"
+  ],
+  "siento": [
+   "sentir",
+   "lo siento = I'm sorry"
+  ],
+  "necesitamos": [
+   "necesitar",
+   "we need"
+  ],
+  "plazo": [
+   "el plazo",
+   "period, deadline"
+  ],
+  "entrega": [
+   "la entrega",
+   "delivery (plazo de entrega = lead time)"
+  ],
+  "semanas": [
+   "la semana",
+   "weeks"
+  ],
+  "diciembre": [
+   "diciembre",
+   "December"
+  ],
+  "parece": [
+   "parecer",
+   "si le parece bien = if that's all right with you"
+  ],
+  "cambia": [
+   "cambiar",
+   "changes"
+  ],
+  "misma": [
+   "mismo",
+   "same"
+  ],
+  "alguna": [
+   "alguno",
+   "some, any"
+  ],
+  "llamarme": [
+   "llamar + me",
+   "to call me"
+  ],
+  "saludo": [
+   "el saludo",
+   "greeting (un saludo = kind regards)"
+  ],
+  "pablo": [
+   "Pablo",
+   "Pablo (name)"
+  ],
+  "martín": [
+   "Martín",
+   "Martín (surname)"
+  ]
+ }
+}

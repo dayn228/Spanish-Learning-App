@@ -58,6 +58,13 @@ export function practiceView() {
         h('a', { class: 'btn btn-secondary', href: `#grammar/${next.id}` }, s.sets ? 'Explanation' : 'Read it first'))));
   }
 
+  const L = state.grammar.listening;
+  root.append(h('div', { class: 'card' },
+    h('h2', {}, 'Listening'),
+    h('p', { class: 'small muted', style: { marginTop: '6px' } }, 'Hear a word and pick it, or write down a sentence. Uses the words you have learned.'
+      + (L && L.r + L.w ? ` So far ${Math.round((L.r / (L.r + L.w)) * 100)}% right.` : '')),
+    h('button', { class: 'btn btn-primary', style: { marginTop: '14px' }, onclick: () => startDrill({ kind: 'listening', returnTo: '#practice' }) }, 'Start listening')));
+
   root.append(h('div', { class: 'card' },
     h('h2', {}, 'Verb trainer'),
     h('p', { class: 'small muted', style: { marginTop: '6px' } }, 'Ten verb forms in the present tense. Forms you miss come back more; forms you know retire.'),

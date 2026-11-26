@@ -11,6 +11,8 @@
     match      instr, pairs[[left, right]]     pair them up
     table      verb                            all six present forms
     conj       verb, person, tense             one verb form (verb trainer)
+    hear       say, options[], a               listen, then pick what you heard
+    dictation  say, en?                        listen, then type the sentence
 
   `a` may list alternatives separated by " / ".
   Points: 1 right, 0 wrong. A slip in accents or articles still counts as right,
@@ -19,9 +21,9 @@
 */
 
 import { h, icon, ICONS } from './ui.js';
-import { checkAnswer, normalise, pointsFor } from './check.js';
+import { checkAnswer, normalise, pointsFor, wordDiff } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
-import { speak } from './speech.js';
+import { speak, hasSpanishVoice } from './speech.js';
 
 const INSTR = {
   gap: 'Fill the gap', choice: 'Choose the right option', transform: '', error: 'Find and correct the mistake',
@@ -251,6 +253,45 @@ export function exerciseView(ex, { onResult, onNext }) {
       break;
     }
 
+    case 'hear': {
+      const play = playButtons(ex.say);
+      const opts = h('div', { class: 'options' });
+      const order = shuffle(ex.options.map((_, i) => i));
+      const buttons = {};
+      order.forEach((i) => opts.append(buttons[i] = h('button', {
+        class: 'option', lang: 'es', onclick: () => {
+          if (done) return;
+          Object.values(buttons).forEach((b) => { b.disabled = true; });
+          buttons[ex.a].classList.add('right');
+          if (i !== ex.a) buttons[i].classList.add('wrong');
+          finish(i === ex.a ? 1 : 0, i === ex.a ? 'right' : 'wrong', ex.options[ex.a]);
+        },
+      }, ex.options[i])));
+      root.append(play, opts, result);
+      speak(ex.say);
+      break;
+    }
+
+    case 'dictation': {
+      const play = playButtons(ex.say);
+      const { input, el } = textInput('answer', 'What you heard');
+      const check = () => {
+        if (!input.value.trim()) { input.focus(); return; }
+        input.readOnly = true;
+        const d = wordDiff(input.value, ex.say);
+        const pts = d.points >= 0.99 ? 1 : d.points;
+        finish(pts >= 1 ? 1 : pts, pts >= 1 ? 'right' : 'partial', null, { why: null });
+        result.firstChild.querySelector('div').append(
+          h('div', { class: 'dictation-marks', lang: 'es' }, d.marks.map((m) => h('span', { class: m.ok ? 'ok' : 'miss' }, m.word + ' '))),
+          pts < 1 ? h('div', { class: 'small' }, `${Math.round(pts * 100)}% of the words. Missed words are underlined.`) : null);
+      };
+      enterToCheck(input, check);
+      root.append(play, h('div', { style: { marginTop: '18px' } }, el), result);
+      actions.append(checkBtn(check));
+      speak(ex.say);
+      break;
+    }
+
     default:
       root.append(h('p', {}, `Unknown exercise type: ${ex.type}`));
       actions.append(h('button', { class: 'btn btn-primary btn-block', onclick: () => { onResult(0); onNext(); } }, 'Skip'));
@@ -258,6 +299,17 @@ export function exerciseView(ex, { onResult, onNext }) {
 
   root.append(actions);
   return root;
+}
+
+/** Play and Slower buttons for listening exercises. */
+function playButtons(text) {
+  const noVoice = !hasSpanishVoice();
+  return h('div', {},
+    h('div', { class: 'row', style: { marginTop: '18px' } },
+      h('button', { class: 'btn btn-primary', onclick: () => speak(text, 0.9) }, icon(ICONS.speaker, 20), 'Play'),
+      h('button', { class: 'btn btn-soft', onclick: () => speak(text, 0.6) }, 'Slower')),
+    noVoice ? h('p', { class: 'tiny muted', style: { marginTop: '8px' } },
+      'No Spanish voice found. On iPhone: Settings → Accessibility → Spoken Content → Voices → Spanish (Spain).') : null);
 }
 
 function formsTable(verb, forms) {

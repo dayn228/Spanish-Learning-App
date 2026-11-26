@@ -17,6 +17,7 @@ import { parseTopic } from '../js/content.js';
 import { conjugate } from '../js/verbs.js';
 import { normalise } from '../js/check.js';
 import { exerciseId } from '../js/grammar.js';
+import { deckIndex, lookup, textWords } from '../js/reading.js';
 
 const root = new URL('..', import.meta.url).pathname;
 const problems = [];
@@ -78,6 +79,22 @@ for (const f of unitFiles) {
   exerciseCount += (u.exercises || []).length;
 }
 
+// ---- 1c. Check reading texts: every word needs a meaning ----
+const allWords = [];
+for (const t of topics) allWords.push(...parseTopic(JSON.parse(readFileSync(join(root, 'data', t.file), 'utf8'))));
+const idxAll = deckIndex(allWords);
+const common = JSON.parse(readFileSync(join(root, 'data/reading/common.json'), 'utf8')).words;
+const textFiles = readdirSync(join(root, 'data/reading')).filter((f) => /^t\d+\.json$/.test(f)).sort();
+for (const f of textFiles) {
+  let t;
+  try { t = JSON.parse(readFileSync(join(root, 'data/reading', f), 'utf8')); } catch (e) { problems.push(`reading/${f}: not valid JSON (${e.message})`); continue; }
+  for (const key of ['id', 'title', 'level', 'paragraphs', 'questions']) if (!t[key]) problems.push(`reading/${f}: missing "${key}"`);
+  t.paragraphs.forEach((p, i) => p.forEach((s, j) => { if (!Array.isArray(s) || !s[0] || !s[1]) problems.push(`reading/${f} paragraph ${i + 1} sentence ${j + 1}: needs [spanish, english]`); }));
+  t.questions.forEach((q, i) => { if (!(Number.isInteger(q.a) && q.a >= 0 && q.a < q.options.length)) problems.push(`reading/${f} question ${i + 1}: answer index out of range`); });
+  const missing = textWords(t).filter((w) => !lookup(w, t, common, idxAll));
+  if (missing.length) problems.push(`reading/${f}: no meaning for: ${missing.join(', ')}`);
+}
+
 if (problems.length) {
   console.error('Content problems:\n  ' + problems.join('\n  '));
   process.exit(1);
@@ -86,6 +103,7 @@ if (problems.length) {
 // ---- 2. data/index.json ----
 writeFileSync(join(root, 'data/index.json'), JSON.stringify({ topics: topics.map((t) => t.file) }, null, 2) + '\n');
 writeFileSync(join(root, 'data/grammar/index.json'), JSON.stringify({ units: unitFiles }, null, 2) + '\n');
+writeFileSync(join(root, 'data/reading/index.json'), JSON.stringify({ texts: textFiles }, null, 2) + '\n');
 
 // ---- 3. Offline file list + version in sw.js ----
 const include = ['index.html', 'manifest.webmanifest', 'css', 'js', 'fonts', 'icons', 'data'];
@@ -107,4 +125,4 @@ sw = sw.replace(/const VERSION = .*;/, `const VERSION = '${version}';`);
 sw = sw.replace(/const FILES = [\s\S]*?\];/, `const FILES = ${JSON.stringify(['./', ...files.map((f) => './' + f)], null, 2)};`);
 writeFileSync(swPath, sw);
 
-console.log(`OK: ${topics.length} topics, ${wordCount} words, ${unitFiles.length} grammar units, ${exerciseCount} exercises, ${files.length} offline files, version ${version}`);
+console.log(`OK: ${topics.length} topics, ${wordCount} words, ${unitFiles.length} grammar units, ${exerciseCount} exercises, ${textFiles.length} texts, ${files.length} offline files, version ${version}`);

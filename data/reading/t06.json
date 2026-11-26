@@ -1,0 +1,158 @@
+{
+ "id": "t06",
+ "title": "Elecciones en mi pueblo",
+ "en": "Elections in my town",
+ "level": "A1",
+ "topic": "politics",
+ "paragraphs": [
+  [
+   [
+    "El domingo hay elecciones municipales en mi pueblo.",
+    "On Sunday there are local elections in my town."
+   ],
+   [
+    "Hay tres partidos y cada partido tiene un candidato a alcalde.",
+    "There are three parties and each party has a candidate for mayor."
+   ]
+  ],
+  [
+   [
+    "Los candidatos hablan de los problemas del pueblo: el tráfico, el precio de la vivienda y el trabajo para los jóvenes.",
+    "The candidates talk about the town's problems: traffic, the price of housing and work for young people."
+   ],
+   [
+    "Uno quiere construir un parque nuevo.",
+    "One wants to build a new park."
+   ],
+   [
+    "Otro quiere bajar los impuestos.",
+    "Another wants to cut taxes."
+   ]
+  ],
+  [
+   [
+    "Mi vecina dice que no va a votar porque todos los políticos son iguales.",
+    "My neighbour says she isn't going to vote because all politicians are the same."
+   ],
+   [
+    "Yo no estoy de acuerdo.",
+    "I don't agree."
+   ],
+   [
+    "Creo que votar es importante.",
+    "I think voting is important."
+   ],
+   [
+    "El domingo por la mañana voy a votar con mi novia.",
+    "On Sunday morning I'm going to vote with my girlfriend."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Cuándo son las elecciones?",
+   "options": [
+    "el sábado",
+    "el domingo",
+    "el lunes"
+   ],
+   "a": 1
+  },
+  {
+   "q": "¿Cuántos partidos hay?",
+   "options": [
+    "dos",
+    "tres",
+    "cuatro"
+   ],
+   "a": 1
+  },
+  {
+   "q": "¿Qué piensa la vecina?",
+   "options": [
+    "Que votar es importante.",
+    "Que todos los políticos son iguales.",
+    "Que el parque es bonito."
+   ],
+   "a": 1
+  }
+ ],
+ "glossary": {
+  "municipales": [
+   "municipal",
+   "local, municipal"
+  ],
+  "partidos": [
+   "el partido",
+   "(political) parties"
+  ],
+  "candidato": [
+   "el candidato",
+   "candidate"
+  ],
+  "alcalde": [
+   "el alcalde",
+   "mayor"
+  ],
+  "candidatos": [
+   "el candidato",
+   "candidates"
+  ],
+  "hablan": [
+   "hablar",
+   "talk, speak"
+  ],
+  "problemas": [
+   "el problema",
+   "problems"
+  ],
+  "tráfico": [
+   "el tráfico",
+   "traffic"
+  ],
+  "jóvenes": [
+   "el joven",
+   "young people"
+  ],
+  "construir": [
+   "construir",
+   "to build"
+  ],
+  "parque": [
+   "el parque",
+   "park"
+  ],
+  "bajar": [
+   "bajar",
+   "to lower, to cut"
+  ],
+  "vecina": [
+   "la vecina",
+   "neighbour (woman)"
+  ],
+  "dice": [
+   "decir",
+   "says"
+  ],
+  "políticos": [
+   "el político",
+   "politicians"
+  ],
+  "iguales": [
+   "igual",
+   "the same, equal"
+  ],
+  "creo": [
+   "creer",
+   "I think, I believe"
+  ],
+  "acuerdo": [
+   "el acuerdo",
+   "estar de acuerdo = to agree"
+  ],
+  "mañana": [
+   "la mañana",
+   "morning (por la mañana = in the morning)"
+  ]
+ }
+}

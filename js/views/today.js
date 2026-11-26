@@ -8,8 +8,10 @@ import { dayKey, addDays } from '../dates.js';
 import { stage } from '../srs.js';
 import { startSession } from './study.js';
 import { recommendedUnit, unitsDueForReview } from '../grammar.js';
+import { deckIndex, knownShare } from '../reading.js';
 
 const GRAMMAR_PER_MINUTES = { 5: 0, 15: 4, 30: 6, 60: 10 };
+const LISTENING_PER_MINUTES = { 5: 0, 15: 0, 30: 6, 60: 10 };
 
 /** The grammar part of a timed session: a due review first, else the next unit. */
 function grammarPart(minutes) {
@@ -34,21 +36,27 @@ function greeting() {
 export function todayView() {
   const { words, topics } = state.content;
   const minutes = state.settings.minutes || 15;
-  const plan = buildSession(words, state.cards, { minutes, focus: state.settings.focus });
+  const plan = buildSession(words, state.cards, { minutes, focus: state.settings.focus, priority: state.settings.next || [] });
   const today = dayKey();
   const doneToday = state.streak.lastDay === today;
   const streakNow = displayStreak(state.streak, today);
 
   const gram = grammarPart(minutes);
+  const nListen = LISTENING_PER_MINUTES[minutes] || 0;
+  const listen = nListen ? { kind: 'listening', count: nListen, returnTo: '#today', label: `Listening (${nListen})` } : null;
+  // Chain: words → grammar → listening.
+  const follow = gram ? { ...gram, then: listen } : listen;
   const parts = [plan.reviews.length && plural(plan.reviews.length, 'word to review', 'words to review'),
     plan.fresh.length && plural(plan.fresh.length, 'new word', 'new words'),
-    gram && (gram.kind === 'review' ? `a review of ${gram.unit.title}` : `${gram.count} exercises on ${gram.unit.title.split(':')[0]}`)].filter(Boolean);
+    gram && (gram.kind === 'review' ? `a review of ${gram.unit.title}` : `${gram.count} exercises on ${gram.unit.title.split(':')[0]}`),
+    listen && `${listen.count} listening exercises`].filter(Boolean);
   const summary = parts.length ? parts.join(', ').replace(/, ([^,]*)$/, ' and $1') + '.' : 'Nothing due. Pick a topic to learn new words.';
-  const hasWork = plan.reviews.length || plan.fresh.length || gram;
+  const hasWork = plan.reviews.length || plan.fresh.length || follow;
 
   const root = h('div', {},
     h('h1', {}, greeting()),
-    h('p', { class: 'lead' }, doneToday ? 'Today counts. Anything more is a bonus.' : summary),
+    h('p', { class: 'lead' }, summary),
+    doneToday ? h('p', { class: 'small muted', style: { marginTop: '4px' } }, 'Today already counts for your streak. Anything more is a bonus.') : null,
 
     h('div', { class: 'chips seg', style: { marginTop: '20px' }, role: 'group', 'aria-label': 'Session length' },
       MINUTES.map((m) => h('button', {
@@ -59,8 +67,8 @@ export function todayView() {
     h('button', {
       class: 'btn btn-primary btn-block', style: { marginTop: '14px' },
       disabled: !hasWork,
-      onclick: () => startSession({ ...plan, label: `${minutes}-minute session`, then: gram }),
-    }, plan.reviews.length ? 'Start review' : plan.fresh.length ? 'Start learning' : 'Start grammar'),
+      onclick: () => startSession({ ...plan, label: `${minutes}-minute session`, then: follow }),
+    }, plan.reviews.length ? 'Start review' : plan.fresh.length ? 'Start learning' : gram ? 'Start grammar' : 'Start listening'),
   );
 
   // Continue a focus topic that isn't finished yet.
@@ -83,6 +91,22 @@ export function todayView() {
   }
 
   root.append(weekPanel(today, streakNow));
+
+  // Today's reading: the unread text with the most words you already know.
+  const texts = state.content.texts || [];
+  if (texts.length) {
+    const idx = deckIndex(words);
+    const pick = texts.filter((t) => !state.reading[t.id]?.done)
+      .map((t) => ({ t, share: knownShare(t, state.content.common, idx, state.cards) }))
+      .sort((a, b) => b.share - a.share)[0];
+    if (pick) {
+      root.append(h('a', { class: 'card text-card', href: `#text/${pick.t.id}`, style: { marginTop: '12px' } },
+        h('div', { class: 'small muted' }, "Today's reading"),
+        h('div', { class: 'row between', style: { marginTop: '4px', alignItems: 'baseline' } },
+          h('h2', { lang: 'es' }, pick.t.title), h('span', { class: 'level-pill' }, pick.t.level)),
+        h('p', { class: 'small muted', style: { marginTop: '6px' } }, `${pick.t.en} · ${Math.round(pick.share * 100)}% of its words known`)));
+    }
+  }
   return root;
 }
 

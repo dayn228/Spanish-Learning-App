@@ -1,0 +1,186 @@
+{
+ "id": "t02",
+ "title": "Una llamada del cliente",
+ "en": "A call from a client",
+ "level": "A1",
+ "topic": "construction",
+ "paragraphs": [
+  [
+   [
+    "—Buenos días, ¿es la empresa de ventanas?",
+    "—Good morning, is this the window company?"
+   ],
+   [
+    "—Sí, buenos días. Soy Laura. ¿En qué puedo ayudarle?",
+    "—Yes, good morning. I'm Laura. How can I help you?"
+   ],
+   [
+    "—Me llamo Antonio Ruiz. Ustedes van a instalar mis ventanas el jueves, ¿verdad?",
+    "—My name is Antonio Ruiz. You're going to install my windows on Thursday, right?"
+   ],
+   [
+    "—Un momento, por favor… Sí, el jueves a las ocho.",
+    "—One moment, please… Yes, on Thursday at eight."
+   ]
+  ],
+  [
+   [
+    "—Pues tengo un problema. El jueves no puedo estar en casa.",
+    "—Well, I have a problem. I can't be at home on Thursday."
+   ],
+   [
+    "—¿Es posible cambiar el día?",
+    "—Is it possible to change the day?"
+   ],
+   [
+    "—Claro. ¿Le va bien el lunes?",
+    "—Of course. Does Monday suit you?"
+   ],
+   [
+    "—El lunes sí. Perfecto.",
+    "—Monday, yes. Perfect."
+   ]
+  ],
+  [
+   [
+    "—Muy bien. Entonces el lunes a las ocho.",
+    "—Very good. Monday at eight, then."
+   ],
+   [
+    "Le envío un correo con la nueva fecha.",
+    "I'll send you an email with the new date."
+   ],
+   [
+    "—Muchas gracias. Hasta luego.",
+    "—Thank you very much. See you."
+   ],
+   [
+    "—De nada. Adiós.",
+    "—You're welcome. Goodbye."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Quién llama?",
+   "options": [
+    "Laura",
+    "Antonio Ruiz",
+    "el instalador"
+   ],
+   "a": 1
+  },
+  {
+   "q": "¿Por qué llama?",
+   "options": [
+    "Quiere cambiar el día.",
+    "Quiere más ventanas.",
+    "No le gustan las ventanas."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué día van a instalar las ventanas ahora?",
+   "options": [
+    "el jueves",
+    "el lunes",
+    "el viernes"
+   ],
+   "a": 1
+  }
+ ],
+ "glossary": {
+  "buenos": [
+   "bueno",
+   "good (buenos días = good morning)"
+  ],
+  "días": [
+   "el día",
+   "days (buenos días = good morning)"
+  ],
+  "ventanas": [
+   "la ventana",
+   "windows"
+  ],
+  "laura": [
+   "Laura",
+   "Laura (name)"
+  ],
+  "ayudarle": [
+   "ayudar + le",
+   "to help you"
+  ],
+  "llamo": [
+   "llamarse",
+   "me llamo = my name is"
+  ],
+  "antonio": [
+   "Antonio",
+   "Antonio (name)"
+  ],
+  "ruiz": [
+   "Ruiz",
+   "Ruiz (surname)"
+  ],
+  "verdad": [
+   "la verdad",
+   "truth (¿verdad? = right?)"
+  ],
+  "momento": [
+   "el momento",
+   "moment"
+  ],
+  "favor": [
+   "el favor",
+   "favour (por favor = please)"
+  ],
+  "pues": [
+   "pues",
+   "well, then"
+  ],
+  "posible": [
+   "posible",
+   "possible"
+  ],
+  "cambiar": [
+   "cambiar",
+   "to change"
+  ],
+  "perfecto": [
+   "perfecto",
+   "perfect"
+  ],
+  "entonces": [
+   "entonces",
+   "then, so"
+  ],
+  "envío": [
+   "enviar",
+   "I send"
+  ],
+  "nueva": [
+   "nuevo",
+   "new"
+  ],
+  "fecha": [
+   "la fecha",
+   "date"
+  ],
+  "nada": [
+   "nada",
+   "nothing (de nada = you're welcome)"
+  ],
+  "va": [
+   "ir",
+   "¿le va bien? = does it suit you?"
+  ],
+  "hasta": [
+   "hasta",
+   "until (hasta luego = see you later)"
+  ],
+  "luego": [
+   "luego",
+   "later (hasta luego = see you later)"
+  ]
+ }
+}

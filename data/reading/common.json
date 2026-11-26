@@ -1,0 +1,393 @@
+{
+ "about": "Everyday words shared by all texts: surface form → [dictionary form, meaning].",
+ "words": {
+  "el": [
+   "el",
+   "the (masc.)"
+  ],
+  "la": [
+   "la",
+   "the (fem.) / it, her"
+  ],
+  "los": [
+   "los",
+   "the (masc. pl.)"
+  ],
+  "las": [
+   "las",
+   "the (fem. pl.)"
+  ],
+  "un": [
+   "un",
+   "a, an (masc.)"
+  ],
+  "una": [
+   "una",
+   "a, an (fem.)"
+  ],
+  "unos": [
+   "unos",
+   "some, a few"
+  ],
+  "unas": [
+   "unas",
+   "some, a few"
+  ],
+  "lo": [
+   "lo",
+   "it / the … thing"
+  ],
+  "de": [
+   "de",
+   "of, from"
+  ],
+  "del": [
+   "del",
+   "of the (de + el)"
+  ],
+  "a": [
+   "a",
+   "to, at"
+  ],
+  "al": [
+   "al",
+   "to the (a + el)"
+  ],
+  "en": [
+   "en",
+   "in, on, at"
+  ],
+  "con": [
+   "con",
+   "with"
+  ],
+  "sin": [
+   "sin",
+   "without"
+  ],
+  "por": [
+   "por",
+   "for, by, through, because of"
+  ],
+  "para": [
+   "para",
+   "for, in order to"
+  ],
+  "y": [
+   "y",
+   "and"
+  ],
+  "o": [
+   "o",
+   "or"
+  ],
+  "pero": [
+   "pero",
+   "but"
+  ],
+  "que": [
+   "que",
+   "that, which, than"
+  ],
+  "si": [
+   "si",
+   "if"
+  ],
+  "no": [
+   "no",
+   "no, not"
+  ],
+  "sí": [
+   "sí",
+   "yes"
+  ],
+  "muy": [
+   "muy",
+   "very"
+  ],
+  "más": [
+   "más",
+   "more"
+  ],
+  "menos": [
+   "menos",
+   "less"
+  ],
+  "también": [
+   "también",
+   "also, too"
+  ],
+  "todo": [
+   "todo",
+   "all, everything"
+  ],
+  "todos": [
+   "todo",
+   "all, everyone"
+  ],
+  "mi": [
+   "mi",
+   "my"
+  ],
+  "mis": [
+   "mi",
+   "my (plural)"
+  ],
+  "tu": [
+   "tu",
+   "your"
+  ],
+  "su": [
+   "su",
+   "his, her, its, your (formal), their"
+  ],
+  "sus": [
+   "su",
+   "his, her, their (plural)"
+  ],
+  "me": [
+   "me",
+   "me, (to) me, myself"
+  ],
+  "te": [
+   "te",
+   "you, (to) you"
+  ],
+  "se": [
+   "se",
+   "himself, herself, itself, themselves (reflexive)"
+  ],
+  "le": [
+   "le",
+   "(to) him, her, you (formal)"
+  ],
+  "les": [
+   "les",
+   "(to) them, you (pl.)"
+  ],
+  "nos": [
+   "nos",
+   "us, (to) us"
+  ],
+  "yo": [
+   "yo",
+   "I"
+  ],
+  "él": [
+   "él",
+   "he"
+  ],
+  "ella": [
+   "ella",
+   "she"
+  ],
+  "nosotros": [
+   "nosotros",
+   "we"
+  ],
+  "ellos": [
+   "ellos",
+   "they"
+  ],
+  "usted": [
+   "usted",
+   "you (formal)"
+  ],
+  "ustedes": [
+   "ustedes",
+   "you (plural, formal)"
+  ],
+  "es": [
+   "ser",
+   "is (ser)"
+  ],
+  "son": [
+   "ser",
+   "are (ser)"
+  ],
+  "soy": [
+   "ser",
+   "I am (ser)"
+  ],
+  "está": [
+   "estar",
+   "is (estar)"
+  ],
+  "están": [
+   "estar",
+   "are (estar)"
+  ],
+  "estoy": [
+   "estar",
+   "I am (estar)"
+  ],
+  "hay": [
+   "haber",
+   "there is, there are"
+  ],
+  "va": [
+   "ir",
+   "goes, is going"
+  ],
+  "van": [
+   "ir",
+   "go, are going"
+  ],
+  "voy": [
+   "ir",
+   "I go, I'm going"
+  ],
+  "vamos": [
+   "ir",
+   "we go, we're going / let's go"
+  ],
+  "tiene": [
+   "tener",
+   "has"
+  ],
+  "tienen": [
+   "tener",
+   "have"
+  ],
+  "tengo": [
+   "tener",
+   "I have"
+  ],
+  "puede": [
+   "poder",
+   "can"
+  ],
+  "pueden": [
+   "poder",
+   "can (they)"
+  ],
+  "puedo": [
+   "poder",
+   "I can"
+  ],
+  "quiere": [
+   "querer",
+   "wants"
+  ],
+  "este": [
+   "este",
+   "this (masc.)"
+  ],
+  "esta": [
+   "este",
+   "this (fem.)"
+  ],
+  "estos": [
+   "este",
+   "these"
+  ],
+  "esto": [
+   "esto",
+   "this (thing)"
+  ],
+  "cada": [
+   "cada",
+   "each, every"
+  ],
+  "otro": [
+   "otro",
+   "another, other"
+  ],
+  "mucho": [
+   "mucho",
+   "a lot, much"
+  ],
+  "muchos": [
+   "mucho",
+   "many"
+  ],
+  "muchas": [
+   "mucho",
+   "many"
+  ],
+  "hoy": [
+   "hoy",
+   "today"
+  ],
+  "ahora": [
+   "ahora",
+   "now"
+  ],
+  "después": [
+   "después",
+   "afterwards, later"
+  ],
+  "cuando": [
+   "cuando",
+   "when"
+  ],
+  "como": [
+   "como",
+   "like, as"
+  ],
+  "qué": [
+   "qué",
+   "what"
+  ],
+  "cómo": [
+   "cómo",
+   "how"
+  ],
+  "dónde": [
+   "dónde",
+   "where"
+  ],
+  "ya": [
+   "ya",
+   "already"
+  ],
+  "bien": [
+   "bien",
+   "well, fine"
+  ],
+  "aquí": [
+   "aquí",
+   "here"
+  ],
+  "uno": [
+   "uno",
+   "one"
+  ],
+  "dos": [
+   "dos",
+   "two"
+  ],
+  "tres": [
+   "tres",
+   "three"
+  ],
+  "cuatro": [
+   "cuatro",
+   "four"
+  ],
+  "seis": [
+   "seis",
+   "six"
+  ],
+  "siete": [
+   "siete",
+   "seven"
+  ],
+  "ocho": [
+   "ocho",
+   "eight"
+  ],
+  "porque": [
+   "porque",
+   "because"
+  ],
+  "año": [
+   "año",
+   "year"
+  ],
+  "día": [
+   "día",
+   "day"
+  ]
+ }
+}

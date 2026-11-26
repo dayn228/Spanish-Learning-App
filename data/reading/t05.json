@@ -1,0 +1,171 @@
+{
+ "id": "t05",
+ "title": "La economía crece, pero la vivienda es cara",
+ "en": "The economy grows, but housing is expensive",
+ "level": "A2",
+ "topic": "economics",
+ "practice": true,
+ "paragraphs": [
+  [
+   [
+    "La economía española crece más que la media europea.",
+    "The Spanish economy is growing faster than the European average."
+   ],
+   [
+    "El turismo y las exportaciones ayudan mucho.",
+    "Tourism and exports help a lot."
+   ],
+   [
+    "También baja el paro: hay más personas con empleo que hace un año.",
+    "Unemployment is also falling: there are more people in work than a year ago."
+   ]
+  ],
+  [
+   [
+    "Pero no todo es positivo.",
+    "But not everything is positive."
+   ],
+   [
+    "Los precios de la vivienda suben mucho, sobre todo en Madrid y Barcelona.",
+    "House prices are rising a lot, especially in Madrid and Barcelona."
+   ],
+   [
+    "Muchos jóvenes no pueden pagar un alquiler.",
+    "Many young people can't afford rent."
+   ]
+  ],
+  [
+   [
+    "El Gobierno quiere construir más vivienda pública.",
+    "The government wants to build more public housing."
+   ],
+   [
+    "La oposición dice que el plan no es suficiente y que hay que bajar los impuestos.",
+    "The opposition says the plan is not enough and that taxes must be cut."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Qué ayuda a la economía?",
+   "options": [
+    "el turismo y las exportaciones",
+    "los impuestos altos",
+    "el paro"
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué problema hay?",
+   "options": [
+    "La vivienda es cara.",
+    "El paro sube.",
+    "No hay turistas."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué quiere la oposición?",
+   "options": [
+    "más vivienda pública",
+    "bajar los impuestos",
+    "subir los alquileres"
+   ],
+   "a": 1
+  }
+ ],
+ "glossary": {
+  "española": [
+   "español",
+   "Spanish"
+  ],
+  "crece": [
+   "crecer",
+   "grows"
+  ],
+  "media": [
+   "la media",
+   "average"
+  ],
+  "europea": [
+   "europeo",
+   "European"
+  ],
+  "turismo": [
+   "el turismo",
+   "tourism"
+  ],
+  "exportaciones": [
+   "la exportación",
+   "exports"
+  ],
+  "ayudan": [
+   "ayudar",
+   "help"
+  ],
+  "personas": [
+   "la persona",
+   "people"
+  ],
+  "hace": [
+   "hacer",
+   "hace un año = a year ago"
+  ],
+  "positivo": [
+   "positivo",
+   "positive"
+  ],
+  "suben": [
+   "subir",
+   "rise, go up"
+  ],
+  "madrid": [
+   "Madrid",
+   "Madrid"
+  ],
+  "barcelona": [
+   "Barcelona",
+   "Barcelona"
+  ],
+  "jóvenes": [
+   "el joven",
+   "young people"
+  ],
+  "construir": [
+   "construir",
+   "to build"
+  ],
+  "pública": [
+   "público",
+   "public"
+  ],
+  "dice": [
+   "decir",
+   "says"
+  ],
+  "plan": [
+   "el plan",
+   "plan"
+  ],
+  "suficiente": [
+   "suficiente",
+   "enough, sufficient"
+  ],
+  "bajar": [
+   "bajar",
+   "to lower, to cut"
+  ],
+  "baja": [
+   "bajar",
+   "falls, goes down"
+  ],
+  "sobre": [
+   "sobre",
+   "sobre todo = especially"
+  ],
+  "hay": [
+   "haber",
+   "there is / are · hay que = you have to, it is necessary to"
+  ]
+ }
+}

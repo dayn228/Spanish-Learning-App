@@ -51,5 +51,22 @@ export async function loadContent(base = 'data/') {
     const gIndex = await (await fetch(base + 'grammar/index.json')).json();
     units = await Promise.all(gIndex.units.map((name) => fetch(base + 'grammar/' + name).then((r) => r.json())));
   } catch { /* grammar not available: words still work */ }
-  return { topics, words, byId: new Map(words.map((w) => [w.id, w])), units };
+  let texts = [], common = {};
+  try {
+    const rIndex = await (await fetch(base + 'reading/index.json')).json();
+    common = (await (await fetch(base + 'reading/common.json')).json()).words;
+    texts = await Promise.all(rIndex.texts.map((name) => fetch(base + 'reading/' + name).then((r) => r.json())));
+  } catch { /* reading not available */ }
+  return { topics, words, byId: new Map(words.map((w) => [w.id, w])), units, texts, common };
+}
+
+/** Add the learner's own words (from reading) as the "My words" topic. */
+export function applyCustom(content, custom) {
+  content.words = content.words.filter((w) => w.topic !== 'mine');
+  content.topics = content.topics.filter((t) => t.id !== 'mine');
+  if (!custom.length) return;
+  const list = parseTopic({ id: 'mine', level: 'A1', words: custom.map((c) => [c.es, c.en, c.ex || '', c.exEn || '', c.pos || '']) });
+  content.topics.push({ id: 'mine', name: 'My words', kind: 'mine', level: 'A1', blurb: 'Words you added while reading.', count: list.length });
+  content.words.push(...list);
+  content.byId = new Map(content.words.map((w) => [w.id, w]));
 }

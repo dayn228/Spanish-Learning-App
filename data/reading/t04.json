@@ -1,0 +1,185 @@
+{
+ "id": "t04",
+ "title": "El banco central sube los tipos",
+ "en": "The central bank raises rates",
+ "level": "A2",
+ "topic": "finance",
+ "practice": true,
+ "paragraphs": [
+  [
+   [
+    "El Banco Central Europeo sube los tipos de interés.",
+    "The European Central Bank raises interest rates."
+   ],
+   [
+    "Según el banco, la inflación en la zona euro todavía es alta.",
+    "According to the bank, inflation in the eurozone is still high."
+   ]
+  ],
+  [
+   [
+    "Para las familias, esta subida significa hipotecas más caras.",
+    "For families, this rise means more expensive mortgages."
+   ],
+   [
+    "Muchas personas en España tienen una hipoteca variable y van a pagar más cada mes.",
+    "Many people in Spain have a variable-rate mortgage and are going to pay more each month."
+   ]
+  ],
+  [
+   [
+    "Para los ahorradores, la noticia es buena: los bancos van a pagar más por los depósitos.",
+    "For savers, the news is good: banks are going to pay more on deposits."
+   ]
+  ],
+  [
+   [
+    "Los expertos creen que los tipos van a estar altos durante unos meses.",
+    "Experts think rates are going to stay high for a few months."
+   ],
+   [
+    "Sin embargo, si la inflación baja, los tipos pueden bajar el año que viene.",
+    "However, if inflation falls, rates may come down next year."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Qué hace el banco central?",
+   "options": [
+    "Sube los tipos.",
+    "Baja los tipos.",
+    "Cierra los bancos."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué?",
+   "options": [
+    "Porque la inflación es alta.",
+    "Porque hay mucho paro.",
+    "Porque las hipotecas son baratas."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Para quién es una buena noticia?",
+   "options": [
+    "para las familias con hipoteca",
+    "para los ahorradores",
+    "para nadie"
+   ],
+   "a": 1
+  }
+ ],
+ "glossary": {
+  "central": [
+   "central",
+   "central"
+  ],
+  "europeo": [
+   "europeo",
+   "European"
+  ],
+  "sube": [
+   "subir",
+   "raises, goes up"
+  ],
+  "tipos": [
+   "el tipo",
+   "rates (tipos de interés = interest rates)"
+  ],
+  "interés": [
+   "el interés",
+   "interest"
+  ],
+  "zona": [
+   "la zona",
+   "zone, area (zona euro = eurozone)"
+  ],
+  "alta": [
+   "alto",
+   "high"
+  ],
+  "familias": [
+   "la familia",
+   "families"
+  ],
+  "significa": [
+   "significar",
+   "means"
+  ],
+  "hipotecas": [
+   "la hipoteca",
+   "mortgages"
+  ],
+  "caras": [
+   "caro",
+   "expensive"
+  ],
+  "personas": [
+   "la persona",
+   "people"
+  ],
+  "españa": [
+   "España",
+   "Spain"
+  ],
+  "variable": [
+   "variable",
+   "variable (rate)"
+  ],
+  "ahorradores": [
+   "el ahorrador",
+   "savers"
+  ],
+  "buena": [
+   "bueno",
+   "good"
+  ],
+  "bancos": [
+   "el banco",
+   "banks"
+  ],
+  "depósitos": [
+   "el depósito",
+   "deposits"
+  ],
+  "expertos": [
+   "el experto",
+   "experts"
+  ],
+  "creen": [
+   "creer",
+   "believe, think"
+  ],
+  "altos": [
+   "alto",
+   "high"
+  ],
+  "durante": [
+   "durante",
+   "for, during"
+  ],
+  "meses": [
+   "el mes",
+   "months"
+  ],
+  "embargo": [
+   "sin embargo",
+   "sin embargo = however"
+  ],
+  "bajar": [
+   "bajar",
+   "to go down, to fall"
+  ],
+  "viene": [
+   "venir",
+   "el año que viene = next year"
+  ],
+  "baja": [
+   "bajar",
+   "falls, goes down"
+  ]
+ }
+}

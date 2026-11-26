@@ -7,6 +7,10 @@
     review    5 exercises from a mastered unit
     verbs     10 verb forms from the verb trainer
     mistakes  up to 10 exercises you last got wrong, from any unit
+    listening which-word-did-you-hear, dictation and sound pairs from your words
+
+  A drill can carry `then`: the next drill, offered on the done screen
+  (timed sessions chain words → grammar → listening).
 */
 
 import { state, saveGrammar, finishSession } from '../state.js';
@@ -14,6 +18,7 @@ import { h, icon, ICONS } from '../ui.js';
 import { exerciseView } from '../exercise.js';
 import { recordAnswer, finishSet, finishTestOut, finishReview, pickExercises, pickTestOut, recordVerb, pickVerbItems, unitStatus, pickMistakes } from '../grammar.js';
 import { VERBS } from '../verbs.js';
+import { buildListening } from '../listening.js';
 
 let drill = null;
 
@@ -33,6 +38,8 @@ export function startDrill(spec) {
   if (spec.kind === 'verbs') {
     items = pickVerbItems(state.grammar, Object.keys(VERBS), UNLOCKED_TENSES, spec.count || 10)
       .map((v) => ({ ex: { type: 'conj', verb: v.inf, person: v.person, tense: v.tense }, key: v.key }));
+  } else if (spec.kind === 'listening') {
+    items = buildListening(state.content.words, state.cards, spec.count || 10).map((ex) => ({ ex }));
   } else if (spec.kind === 'mistakes') {
     items = pickMistakes(state.grammar, state.content.units, spec.count || 10).map((m) => ({ ex: m.ex, unitId: m.unitId }));
   } else if (spec.kind === 'testout') {
@@ -53,6 +60,7 @@ export function drillView() {
 
 function title() {
   if (drill.kind === 'verbs') return 'Verb trainer';
+  if (drill.kind === 'listening') return 'Listening';
   if (drill.kind === 'mistakes') {
     const u = state.content.units.find((x) => x.id === drill.items[drill.pos]?.unitId);
     return u ? `Your mistakes · ${u.n}. ${u.title}` : 'Your mistakes';
@@ -83,6 +91,10 @@ function draw(root) {
     onResult: (points) => {
       drill.points.push(points);
       if (drill.kind === 'verbs') recordVerb(state.grammar, item.key, points);
+      else if (drill.kind === 'listening') {
+        const L = state.grammar.listening || (state.grammar.listening = { r: 0, w: 0, missed: {} });
+        if (points >= 1) L.r += 1; else { L.w += 1; if (item.ex.wordId) L.missed[item.ex.wordId] = (L.missed[item.ex.wordId] || 0) + 1; }
+      }
       else recordAnswer(state.grammar, item.unitId || drill.unit.id, item.ex, points);
       saveGrammar();
     },
@@ -133,6 +145,10 @@ function drawDone(root) {
     score !== null ? h('div', { style: { marginTop: '20px', textAlign: 'left' } },
       h('div', { class: 'row between small' }, h('span', {}, `${drill.unit.n}. ${drill.unit.title}`), h('span', { class: 'muted' }, `${score} / 100`)),
       h('div', { class: 'bar', style: { marginTop: '8px' } }, h('i', { style: { width: `${score}%` } }))) : null,
-    h('div', { style: { marginTop: '32px' } },
-      h('button', { class: 'btn btn-primary btn-block', onclick: exit }, 'Done'))));
+    drill.then
+      ? h('div', { style: { marginTop: '32px' } },
+          h('button', { class: 'btn btn-primary btn-block', onclick: () => { const t = drill.then; drill = null; startDrill(t); } }, drill.then.label || 'Continue'),
+          h('button', { class: 'btn btn-ghost', style: { width: '100%', marginTop: '8px' }, onclick: exit }, 'Finish here'))
+      : h('div', { style: { marginTop: '32px' } },
+          h('button', { class: 'btn btn-primary btn-block', onclick: exit }, 'Done'))));
 }

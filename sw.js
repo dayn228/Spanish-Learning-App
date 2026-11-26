@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = '132a5b9e31';
+const VERSION = '851716f192';
 const FILES = [
   "./",
   "./css/app.css",
@@ -38,6 +38,14 @@ const FILES = [
   "./data/packs/finance.json",
   "./data/packs/news.json",
   "./data/packs/politics.json",
+  "./data/reading/common.json",
+  "./data/reading/index.json",
+  "./data/reading/t01.json",
+  "./data/reading/t02.json",
+  "./data/reading/t03.json",
+  "./data/reading/t04.json",
+  "./data/reading/t05.json",
+  "./data/reading/t06.json",
   "./fonts/newsreader-latin-400-italic.woff2",
   "./fonts/newsreader-latin-400-normal.woff2",
   "./fonts/newsreader-latin-500-normal.woff2",
@@ -51,7 +59,9 @@ const FILES = [
   "./js/db.js",
   "./js/exercise.js",
   "./js/grammar.js",
+  "./js/listening.js",
   "./js/main.js",
+  "./js/reading.js",
   "./js/session.js",
   "./js/speech.js",
   "./js/srs.js",
@@ -61,7 +71,9 @@ const FILES = [
   "./js/verbs.js",
   "./js/views/drill.js",
   "./js/views/practice.js",
+  "./js/views/read.js",
   "./js/views/study.js",
+  "./js/views/text.js",
   "./js/views/today.js",
   "./js/views/topic.js",
   "./js/views/topics.js",

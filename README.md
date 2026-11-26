@@ -2,7 +2,7 @@
 
 A personal, offline-first Spanish (Castilian) learning app for iPhone. It is a plain web app (HTML, CSS, JavaScript, no framework) that installs to the home screen and works without internet.
 
-The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). Done so far: **phase 1** (foundation and words) and **phase 2** (grammar A1 and the verb trainer).
+The full plan: [Mi Español: app plan](https://claude.ai/artifact/GbNyyqNK4AuS6qK3TrG1Wz). Done so far: **phase 1** (foundation and words), **phase 2** (grammar A1 and the verb trainer) and **phase 3** (listening and graded reading).
 
 ## Use it on your iPhone
 
@@ -29,6 +29,17 @@ Updates: when a new version is published, it downloads the next time you open th
 - **Verb trainer:** about 60 verbs in the present tense, weighted to the forms you miss; forms right four times in a row retire. Conjugation rules and irregulars in `js/verbs.js`.
 - **Sessions include grammar:** 15, 30 and 60-minute sessions end with 4, 6 or 10 exercises from your next unit, or a review if one is due.
 
+## What phase 3 adds
+
+- **Read tab:** six graded texts (A1–A2) on construction, finance, economics and politics. Tap any word for its meaning in that sentence and its dictionary form; press and hold a sentence for its translation; "Translation" shows the English under each paragraph; "Listen" reads the text aloud sentence by sentence. Words you are learning are underlined, new words dotted. Comprehension questions at the end count towards your streak.
+- **My words:** "Add to my words" saves a word from a text (with the sentence as its example) into a My words topic, and "Learn this word next" moves a listed word to the front; either comes first in your next session.
+- **Listening (Practice tab):** "which word did you hear?" from your words, dictation of example sentences checked word by word (accents ignored, missed words underlined), and sound pairs like pero / perro. Play and Slower buttons on every item.
+- **Sessions:** 30 and 60-minute sessions now run words → grammar → listening (6 or 10 items). Today also suggests a text to read.
+
+## Adding reading texts
+
+Texts live in `data/reading/tNN.json`: paragraphs of `[spanish, english]` sentences, comprehension questions, and a glossary of word forms → `[dictionary form, meaning here, note?]`. Everyday words are shared in `data/reading/common.json`; words already in the word lists are found automatically. `npm run build` refuses a text that has a word with no meaning.
+
 ## Adding grammar exercises
 
 Units live in `data/grammar/uNN.json`. Exercise shapes are described at the top of `js/exercise.js`; every exercise needs at least one tag (the form it practises). `npm run build` checks every exercise (answer index in range, reorder words make the answer, table verbs can be conjugated, no duplicates).
@@ -40,7 +51,7 @@ index.html, manifest.webmanifest, sw.js   app page, install info, offline cache
 css/tokens.css      colours, fonts, sizes (the design system)
 css/app.css         layout and components
 js/main.js          start-up and navigation between screens
-js/views/           one file per screen (today, topics, topic, study, practice, unit, drill, you)
+js/views/           one file per screen (today, topics, topic, study, practice, unit, drill, read, text, you)
 js/srs.js           spaced repetition
 js/streak.js        streak and freezes
 js/session.js       builds a session from your minutes and focus topics
@@ -48,9 +59,12 @@ js/check.js         checks typed answers
 js/verbs.js         conjugation (regular, stem changes, irregulars)
 js/grammar.js       grammar mastery, weak forms, verb trainer picking
 js/exercise.js      renders and checks every exercise type
+js/listening.js     builds listening sets from your words
+js/reading.js       splits texts into words and looks them up
 js/state.js, db.js  progress saved on the phone (IndexedDB), backup
 data/core/, data/packs/   word lists (JSON)
 data/grammar/       grammar units (JSON)
+data/reading/       reading texts and the shared everyday dictionary
 tools/build.mjs     checks word lists, writes the offline file list
 tests/              unit tests for the logic
 backend/            Apps Script (phase 4)

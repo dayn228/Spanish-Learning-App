@@ -145,3 +145,21 @@ test('lenient points: accents and articles count as right', async () => {
   assert.equal(pointsFor(checkAnswer('cuenta', 'la cuenta'), { strictArticles: true }), 0.5);
   assert.equal(pointsFor(checkAnswer('pan', 'la cuenta')), 0);
 });
+
+test('dictation compares word by word', async () => {
+  const { wordDiff } = await import('../js/check.js');
+  assert.equal(wordDiff('mañana vamos a la obra', 'Mañana vamos a la obra.').points, 1);
+  assert.equal(wordDiff('manana vamos a la obra', 'Mañana vamos a la obra.').points, 1, 'accents ignored');
+  const d = wordDiff('mañana a la obra', 'Mañana vamos a la obra.');
+  assert.equal(d.points, 0.8);
+  assert.deepEqual(d.marks.map((m) => m.ok), [true, false, true, true, true]);
+  assert.equal(d.marks[4].word, 'obra.');
+  assert.ok(wordDiff('mañana vamos vamos a la obra', 'Mañana vamos a la obra.').points < 1, 'extra words cost a little');
+  assert.equal(wordDiff('', 'hola').points, 0);
+});
+
+test('words added while reading are taught first', () => {
+  const picked = pickNew(words, 3, ['construction'], ['food:w7']);
+  assert.equal(picked[0].id, 'food:w7');
+  assert.equal(picked.length, 3);
+});

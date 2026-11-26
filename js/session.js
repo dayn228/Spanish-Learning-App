@@ -24,7 +24,7 @@ export const NEW_PER_MINUTES = { 5: 0, 15: 6, 30: 10, 60: 15 };
  * @returns {{ reviews: string[], fresh: string[] }}  word ids
  */
 export function buildSession(words, cards, opts) {
-  const { minutes = 15, focus = [], topic = null, now = Date.now() } = opts;
+  const { minutes = 15, focus = [], topic = null, now = Date.now(), priority = [] } = opts;
   const pool = topic ? words.filter((w) => w.topic === topic) : words;
   const budget = minutes * 60;
 
@@ -42,13 +42,19 @@ export function buildSession(words, cards, opts) {
   if (due.length > maxReviews * 1.5 && !topic) newCount = 0;
 
   const unseen = pool.filter((w) => stage(cards[w.id]) === 'new');
-  const fresh = pickNew(unseen, newCount, topic ? [] : focus);
+  const fresh = pickNew(unseen, newCount, topic ? [] : focus, priority);
   return { reviews, fresh: fresh.map((w) => w.id) };
 }
 
 /** ~70% from focus topics, the rest from everything else; frequency order inside each. */
-export function pickNew(unseen, count, focus) {
+export function pickNew(unseen, count, focus, priority = []) {
   if (count <= 0) return [];
+  // Words you asked for (added while reading) come first, oldest request first.
+  const asked = priority.map((id) => unseen.find((w) => w.id === id)).filter(Boolean).slice(0, count);
+  if (asked.length) {
+    const rest = unseen.filter((w) => !asked.includes(w));
+    return [...asked, ...pickNew(rest, count - asked.length, focus)];
+  }
   const byRank = (a, b) => a.rank - b.rank;
   if (!focus.length) return [...unseen].sort(byRank).slice(0, count);
   const inFocus = unseen.filter((w) => focus.includes(w.topic)).sort(byRank);
