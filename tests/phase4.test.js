@@ -62,3 +62,15 @@ test('level estimate follows mastered units', () => {
   g.units.u01 = { mastered: true }; g.units.u02 = { mastered: true };
   assert.equal(estimateLevel(units, g), 'A2');
 });
+
+test('backups never contain the backend token, and restoring keeps this phone\'s connection', async () => {
+  const { state, exportBackup, importBackup } = await import('../js/state.js');
+  state.settings = { focus: ['construction'], minutes: 15, backend: { url: 'https://x/exec', token: 'secret123' } };
+  const text = exportBackup();
+  assert.ok(!text.includes('secret123'));
+  assert.ok(!text.includes('https://x/exec'));
+  const evil = JSON.parse(text);
+  evil.settings.backend = { url: 'https://attacker/exec', token: 't' };
+  await importBackup(JSON.stringify(evil));
+  assert.equal(state.settings.backend.url, 'https://x/exec');
+});

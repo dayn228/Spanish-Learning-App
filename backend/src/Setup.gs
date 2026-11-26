@@ -36,3 +36,14 @@ function showStatus() {
     lastRun: readJson(rootFolder(), 'status.json', {}),
   }, null, 2));
 }
+
+/**
+ * Make a new APP_TOKEN, e.g. if the old one may have been seen by someone.
+ * The old token stops working at once; paste the new one into the app
+ * (You → Google Drive and AI → Disconnect, then Connect with the new token).
+ */
+function rotateToken() {
+  var token = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '').slice(0, 8);
+  PropertiesService.getScriptProperties().setProperty('APP_TOKEN', token);
+  console.log('New APP_TOKEN (paste into the app): ' + token);
+}

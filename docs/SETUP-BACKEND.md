@@ -54,6 +54,14 @@ On your iPhone: **You → Google Drive and AI** → paste the URL and the token 
 
 Use **Get new content now** to test Gemini without waiting for the night. It takes a few minutes.
 
+## Security
+
+- **Why "Anyone"**: an installed iPhone web app can't send your Google sign-in with its requests, so access limited to signed-in users would block the app. Instead every request must carry the token; without it, the backend refuses everything.
+- **What the token protects**: your learning progress and the AI request queue in the Mi Español folder. The backend runs only its fixed list of actions on that folder; it can't be made to read other Drive files, run other code or reveal the Gemini key.
+- **Keep the token private**: it is stored only in the app on your phone, and is never written into backups.
+- **If it may have leaked**: run `rotateToken` in the editor, then in the app Disconnect and Connect with the new token. The old token stops working at once.
+- **Work account**: the files live in your framsystems.es account, so Workspace administrators can reach them like anything else there. For full separation, set the backend up in a personal Google account instead.
+
 ## If something goes wrong
 
 - **"Wrong or missing token"**: the token was not copied completely; run `showStatus` in the editor to see the setup.

@@ -36,14 +36,16 @@ function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-function doGet(e) {
-  // Health check in a browser: …/exec?token=…
-  var ok = e && e.parameter && e.parameter.token === prop('APP_TOKEN', null);
-  return json(ok ? { ok: true, app: 'mi-espanol', version: VERSION, ai: !!prop('GEMINI_API_KEY', null) } : { ok: false, error: 'Wrong or missing token.' });
+function doGet() {
+  // Opening the URL in a browser only shows that the backend is up; nothing else without the token.
+  return json({ ok: true, app: 'mi-espanol' });
 }
+
+var MAX_BODY = 5 * 1024 * 1024;   // backups are far smaller; refuse anything bigger
 
 function doPost(e) {
   var body;
+  if (!e || !e.postData || e.postData.contents.length > MAX_BODY) return json({ ok: false, error: 'Request too large.' });
   try { body = JSON.parse(e.postData.contents); } catch (err) { return json({ ok: false, error: 'Request is not JSON.' }); }
   if (!body || body.token !== prop('APP_TOKEN', null)) return json({ ok: false, error: 'Wrong or missing token.' });
   try {

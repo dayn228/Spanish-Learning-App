@@ -80,8 +80,10 @@ test('verb trainer leans on missed forms and varies verbs', () => {
   const p = newGrammarProgress();
   for (let i = 0; i < 5; i++) recordVerb(p, 'tener|present|0', 0);
   const counts = {};
-  for (let k = 0; k < 200; k++) {
-    for (const it of pickVerbItems(p, ['ser', 'tener', 'hablar', 'comer'], ['present'], 4)) counts[it.key] = (counts[it.key] || 0) + 1;
+  let seed = 42;
+  const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };   // fixed seed: same result every run
+  for (let k = 0; k < 400; k++) {
+    for (const it of pickVerbItems(p, ['ser', 'tener', 'hablar', 'comer'], ['present'], 4, rng)) counts[it.key] = (counts[it.key] || 0) + 1;
   }
   assert.ok(counts['tener|present|0'] > counts['tener|present|1'] * 1.5);
   const one = pickVerbItems(p, ['ser', 'tener', 'hablar', 'comer'], ['present'], 4);

@@ -113,12 +113,18 @@ export function exportBackup() {
     exportedAt: new Date().toISOString(),
     cards: state.cards,
     streak: state.streak,
-    settings: state.settings,
+    settings: withoutSecrets(state.settings),
     log: state.log,
     grammar: state.grammar,
     custom: state.custom,
     reading: state.reading,
   });
+}
+
+/** The backend URL and token never go into backups, so a shared backup file can't leak them. */
+function withoutSecrets(settings) {
+  const { backend, ...rest } = settings;
+  return rest;
 }
 
 /** Replaces all progress with the backup. Throws a readable error if the file is wrong. */
@@ -128,7 +134,8 @@ export async function importBackup(text) {
   if (data.app !== 'mi-espanol' || typeof data.cards !== 'object') throw new Error('This file is not a Mi Español backup.');
   state.cards = data.cards || {};
   state.streak = data.streak || newStreak();
-  state.settings = { ...state.settings, ...(data.settings || {}) };
+  // Keep this phone's own backend connection; never take one from a file.
+  state.settings = { ...state.settings, ...withoutSecrets(data.settings || {}), backend: state.settings.backend };
   state.log = data.log || {};
   state.grammar = { ...newGrammarProgress(), ...(data.grammar || {}) };
   state.custom = data.custom || [];
