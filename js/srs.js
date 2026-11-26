@@ -7,7 +7,9 @@
     ease      how fast the interval grows (starts at 2.5, rises when you find a
               word easy, falls when you miss it)
     due       timestamp when it is next due
-    lapses    how many times you have forgotten it
+    lapses    how many times you have forgotten a word you already knew
+    wrong     every wrong answer, including while still learning it
+    lastWrong when you last got it wrong
     seen      total answers
 
   Grades:
@@ -32,7 +34,7 @@ const RELEARN_MS = 10 * 60 * 1000;   // a missed word returns in 10 minutes
 const KNOWN_DAYS = 21;               // "I know this" / counts as known
 
 export function newState() {
-  return { reps: 0, interval: 0, ease: 2.5, due: 0, lapses: 0, seen: 0 };
+  return { reps: 0, interval: 0, ease: 2.5, due: 0, lapses: 0, seen: 0, wrong: 0, lastWrong: 0 };
 }
 
 /** Returns the new state after an answer. Does not change the input. */
@@ -42,6 +44,8 @@ export function review(state, grade, now = Date.now()) {
 
   if (grade === AGAIN) {
     if (s.reps > 0) s.lapses += 1;
+    s.wrong = (s.wrong || 0) + 1;
+    s.lastWrong = now;
     s.reps = 0;
     s.ease = Math.max(MIN_EASE, s.ease - 0.2);
     s.interval = 0;

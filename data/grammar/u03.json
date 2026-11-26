@@ -14,7 +14,7 @@
     {"ex": ["Trabajo en una empresa de ventanas.", "I work in a window company."]},
     {"ex": ["Los lunes llamamos a los proveedores.", "On Mondays we call the suppliers."]},
     {"ex": ["Mañana instalamos las puertas.", "Tomorrow we're installing the doors."]},
-    {"tip": "The accent in *habláis, coméis, vivís* is part of the spelling. Without it the answer counts only half."}
+    {"tip": "The accent in *habláis, coméis, vivís* is part of the spelling. A missing accent still counts as right here, but you'll see a reminder."}
   ],
   "exercises": [
     {"type": "table", "verb": "trabajar", "tags": ["ar"]},

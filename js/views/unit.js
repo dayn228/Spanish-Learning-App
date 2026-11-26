@@ -3,7 +3,7 @@
 import { state } from '../state.js';
 import { h, icon, ICONS } from '../ui.js';
 import { rich } from '../exercise.js';
-import { unitStatus } from '../grammar.js';
+import { unitStatus, pickMistakes } from '../grammar.js';
 import { startDrill } from './drill.js';
 import { speak } from '../speech.js';
 
@@ -32,6 +32,10 @@ export function unitView(id) {
         ? h('button', { class: 'btn btn-primary', onclick: () => startDrill({ kind: 'review', unitId: id }) }, 'Review (5)')
         : h('button', { class: 'btn btn-primary', onclick: () => startDrill({ kind: 'practice', unitId: id }) }, s.mastered ? 'Practise again' : 'Practise (10)'),
       s.mastered ? null : h('button', { class: 'btn btn-secondary', onclick: () => startDrill({ kind: 'testout', unitId: id }) }, 'I know this: test me')),
+    (() => {
+      const n = pickMistakes(state.grammar, [unit], Infinity).length;
+      return n ? h('p', { class: 'small', style: { marginTop: '12px' } }, `${n} ${n === 1 ? 'exercise' : 'exercises'} here you got wrong last time. Your next set includes them.`) : null;
+    })(),
     h('p', { class: 'tiny muted', style: { marginTop: '10px' } },
       'Mastery grows with accuracy: a perfect set completes the unit, mistakes bring more practice on those forms. The test needs 90%.'),
 

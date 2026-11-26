@@ -37,12 +37,13 @@ export function exerciseId(unitId, ex) {
 }
 
 /** Record one answer. */
-export function recordAnswer(progress, unitId, ex, points) {
+export function recordAnswer(progress, unitId, ex, points, now = Date.now()) {
   const up = unitProgress(progress, unitId);
   const id = exerciseId(unitId, ex);
-  const s = up.seen[id] || (up.seen[id] = { n: 0, streak: 0 });
+  const s = up.seen[id] || (up.seen[id] = { n: 0, streak: 0, wrong: 0 });
   s.n += 1;
   s.streak = points >= 1 ? s.streak + 1 : 0;
+  if (points < 1) { s.wrong = (s.wrong || 0) + 1; s.lastWrong = now; }
   for (const tag of ex.tags || []) {
     const f = up.forms[tag] || (up.forms[tag] = { r: 0, w: 0 });
     if (points >= 1) f.r += 1; else f.w += 1;
@@ -145,6 +146,27 @@ export function pickTestOut(unit, n = 12, rng = Math.random) {
   return out;
 }
 
+/**
+  Exercises whose last answer was wrong (not yet put right), newest mistakes first.
+  Returns [{ unitId, ex }].
+*/
+export function pickMistakes(progress, units, n = 10) {
+  const out = [];
+  for (const u of units) {
+    const up = progress.units[u.id];
+    if (!up) continue;
+    for (const ex of u.exercises) {
+      const s = up.seen[exerciseId(u.id, ex)];
+      if (s && s.streak === 0 && (s.wrong || 0) > 0) out.push({ unitId: u.id, ex, t: s.lastWrong || 0 });
+    }
+  }
+  return out.sort((a, b) => b.t - a.t).slice(0, n);
+}
+
+export function countMistakes(progress, units) {
+  return pickMistakes(progress, units, Infinity).length;
+}
+
 /** The unit to work on next: the first one not mastered. */
 export function recommendedUnit(units, progress) {
   return units.find((u) => !unitStatus(progress, u.id).mastered) || null;
@@ -159,7 +181,7 @@ export function unitsDueForReview(units, progress, now = Date.now()) {
 /** key: "verb|tense|person" */
 export function recordVerb(progress, key, points) {
   const v = progress.verbs[key] || (progress.verbs[key] = { r: 0, w: 0, streak: 0 });
-  if (points >= 1) { v.r += 1; v.streak += 1; } else { v.w += 1; v.streak = 0; }
+  if (points >= 1) { v.r += 1; v.streak += 1; } else { v.w += 1; v.streak = 0; v.lastWrong = Date.now(); }
 }
 
 /**

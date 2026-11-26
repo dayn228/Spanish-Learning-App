@@ -6,12 +6,13 @@
     testout   12 exercises covering every form; 90% masters the unit
     review    5 exercises from a mastered unit
     verbs     10 verb forms from the verb trainer
+    mistakes  up to 10 exercises you last got wrong, from any unit
 */
 
 import { state, saveGrammar, finishSession } from '../state.js';
 import { h, icon, ICONS } from '../ui.js';
 import { exerciseView } from '../exercise.js';
-import { recordAnswer, finishSet, finishTestOut, finishReview, pickExercises, pickTestOut, recordVerb, pickVerbItems, unitStatus } from '../grammar.js';
+import { recordAnswer, finishSet, finishTestOut, finishReview, pickExercises, pickTestOut, recordVerb, pickVerbItems, unitStatus, pickMistakes } from '../grammar.js';
 import { VERBS } from '../verbs.js';
 
 let drill = null;
@@ -32,6 +33,8 @@ export function startDrill(spec) {
   if (spec.kind === 'verbs') {
     items = pickVerbItems(state.grammar, Object.keys(VERBS), UNLOCKED_TENSES, spec.count || 10)
       .map((v) => ({ ex: { type: 'conj', verb: v.inf, person: v.person, tense: v.tense }, key: v.key }));
+  } else if (spec.kind === 'mistakes') {
+    items = pickMistakes(state.grammar, state.content.units, spec.count || 10).map((m) => ({ ex: m.ex, unitId: m.unitId }));
   } else if (spec.kind === 'testout') {
     items = pickTestOut(unit, spec.count || 12).map((ex) => ({ ex }));
   } else {
@@ -50,6 +53,10 @@ export function drillView() {
 
 function title() {
   if (drill.kind === 'verbs') return 'Verb trainer';
+  if (drill.kind === 'mistakes') {
+    const u = state.content.units.find((x) => x.id === drill.items[drill.pos]?.unitId);
+    return u ? `Your mistakes · ${u.n}. ${u.title}` : 'Your mistakes';
+  }
   const u = drill.unit;
   return `${u.n}. ${u.title}` + (drill.kind === 'testout' ? ' · test' : drill.kind === 'review' ? ' · review' : '');
 }
@@ -76,7 +83,7 @@ function draw(root) {
     onResult: (points) => {
       drill.points.push(points);
       if (drill.kind === 'verbs') recordVerb(state.grammar, item.key, points);
-      else recordAnswer(state.grammar, drill.unit.id, item.ex, points);
+      else recordAnswer(state.grammar, item.unitId || drill.unit.id, item.ex, points);
       saveGrammar();
     },
     onNext: () => { drill.pos += 1; draw(root); window.scrollTo(0, 0); },
@@ -104,6 +111,10 @@ function drawDone(root) {
       const r = finishReview(state.grammar, drill.unit.id, pts);
       headline = r.stillMastered ? 'Review passed.' : 'This unit needs more practice.';
       detail = r.stillMastered ? 'The next review is further away.' : 'It is back on your practice list.';
+    } else if (drill.kind === 'mistakes') {
+      const fixed = pts.filter((x) => x >= 1).length;
+      headline = fixed === pts.length ? 'All put right.' : `${fixed} of ${pts.length} put right.`;
+      detail = fixed === pts.length ? '' : 'The rest stay on your mistakes list.';
     } else {
       headline = accuracy >= 0.9 ? 'Excellent.' : accuracy >= 0.7 ? 'Good work.' : 'The forms you missed come back more often.';
     }

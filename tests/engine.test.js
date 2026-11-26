@@ -130,3 +130,18 @@ test('slugs are stable ids', () => {
   assert.equal(slug('¿Cómo estás?'), 'q-como-estas');
   assert.notEqual(slug('¿cuándo?'), slug('cuando'));
 });
+
+test('every wrong answer is counted, also on new words', async () => {
+  const s = review(newState(), AGAIN, T0);
+  assert.equal(s.wrong, 1);
+  assert.equal(s.lapses, 0, 'a lapse needs a word you already knew');
+  assert.equal(s.lastWrong, T0);
+});
+
+test('lenient points: accents and articles count as right', async () => {
+  const { pointsFor } = await import('../js/check.js');
+  assert.equal(pointsFor(checkAnswer('el menu', 'el menú')), 1);
+  assert.equal(pointsFor(checkAnswer('cuenta', 'la cuenta')), 1);
+  assert.equal(pointsFor(checkAnswer('cuenta', 'la cuenta'), { strictArticles: true }), 0.5);
+  assert.equal(pointsFor(checkAnswer('pan', 'la cuenta')), 0);
+});

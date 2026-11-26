@@ -3,32 +3,41 @@
 
   Card modes:
     intro      a new word: Spanish, English, example. "Got it" or "I already know this".
-    recognize  Spanish shown; tap to reveal English; rate Again / Good / Easy.
-    produce    English shown; type the Spanish; checked automatically.
+    choose-en  Spanish shown; pick the English from four options.
+    choose-es  English shown; pick the Spanish from four options (once a word is familiar).
+    produce    English shown; type the Spanish (for words you know well, and typing practice).
 
-  A new word gets an intro, then a recognize check three cards later.
+  A new word gets an intro, then a choose-en check three cards later.
   A missed word comes back three cards later (at most twice per session).
-  Words with two or more correct reviews are sometimes asked as "produce",
-  which is harder and tests real recall.
+  Grading is automatic: right → Good (Easy if quick on a well-known word), wrong → Again.
 */
 
 import { state, answer, knowIt, finishSession } from '../state.js';
 import { h, icon, ICONS, toast, plural } from '../ui.js';
-import { AGAIN, HARD, GOOD, EASY, previewInterval } from '../srs.js';
-import { checkAnswer } from '../check.js';
+import { AGAIN, GOOD, EASY } from '../srs.js';
+import { checkAnswer, pointsFor } from '../check.js';
 import { speak, canSpeak } from '../speech.js';
 import { startDrill } from './drill.js';
 
 let session = null;
+
+// Enter moves on after an answer (laptop keyboards).
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' || !session || e.target.tagName === 'INPUT') return;
+  const next = document.querySelector('#app .next-btn');
+  if (next) { e.preventDefault(); next.click(); }
+});
 
 /** Start a session from a plan { reviews, fresh, label, returnTo, mode? } and open the study screen. */
 export function startSession(plan) {
   if (!plan.reviews.length && !plan.fresh.length && plan.then) { startDrill(plan.then); return; }
   const queue = [];
   for (const id of plan.reviews) {
-    const c = state.cards[id];
-    const produce = plan.mode === 'produce' || (c && c.reps >= 2 && Math.random() < 0.5);
-    queue.push({ id, mode: produce ? 'produce' : 'recognize' });
+    const c = state.cards[id] || {};
+    let mode = 'choose-en';
+    if (plan.mode === 'produce' || (c.reps >= 3 && Math.random() < 0.35)) mode = 'produce';
+    else if (c.reps >= 1 && Math.random() < 0.5) mode = 'choose-es';
+    queue.push({ id, mode });
   }
   // Spread new words between reviews: intro now, check a few cards later.
   const fresh = plan.fresh.map((id) => ({ id, mode: 'intro' }));
@@ -80,7 +89,7 @@ function draw(root) {
   const next = () => { session.pos += 1; draw(root); };
   const view = item.mode === 'intro' ? introCard(word, item, next)
     : item.mode === 'produce' ? produceCard(word, item, next)
-    : recognizeCard(word, item, next);
+    : choiceCard(word, item, next, item.mode === 'choose-es' ? 'es' : 'en');
   root.replaceChildren(header(), ...view);
   root.querySelector('input')?.focus();
 }
@@ -108,41 +117,75 @@ function introCard(word, item, next) {
     h('div', { class: 'study-tools' }, speakButton(word.es),
       h('button', { class: 'btn btn-ghost', onclick: () => { knowIt(word.id); session.answered += 1; session.right += 1; toast('Marked as known'); next(); } }, 'I already know this')),
     h('div', { class: 'study-actions' },
-      h('button', { class: 'btn btn-primary btn-block', onclick: () => { session.learned += 1; insertLater({ id: word.id, mode: 'recognize' }); next(); } }, 'Got it')),
+      h('button', { class: 'btn btn-primary btn-block', onclick: () => { session.learned += 1; insertLater({ id: word.id, mode: 'choose-en' }); next(); } }, 'Got it')),
   ];
 }
 
-/* ---------- recognize ---------- */
-function recognizeCard(word, item, next) {
-  const card = state.cards[word.id];
-  let revealed = false;
-  const answerBox = h('div', { style: { display: 'contents' } }, h('div', { class: 'small muted' }, 'Tap to see the English'));
-  const actions = h('div', { class: 'study-actions' });
+/* ---------- multiple choice ---------- */
 
-  const grade = (g) => {
+/** Three wrong options: same topic and part of speech first, then anything similar. */
+function distractors(word, field) {
+  const all = state.content.words;
+  const norm = (x) => x.toLowerCase().replace(/[¿?¡!.]/g, '').trim();
+  const taken = new Set([norm(word[field])]);
+  const pick = (list) => {
+    const out = [];
+    for (const w of list.map((x) => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map((p) => p[1])) {
+      if (out.length >= 3) break;
+      const v = norm(w[field]);
+      if (w.id === word.id || taken.has(v)) continue;
+      taken.add(v);
+      out.push(w[field]);
+    }
+    return out;
+  };
+  let out = pick(all.filter((w) => w.topic === word.topic && w.pos === word.pos));
+  if (out.length < 3) out = out.concat(pick(all.filter((w) => w.topic === word.topic)).slice(0, 3 - out.length));
+  if (out.length < 3) out = out.concat(pick(all.filter((w) => w.pos === word.pos)).slice(0, 3 - out.length));
+  return out;
+}
+
+function choiceCard(word, item, next, answerIn) {
+  const card = state.cards[word.id];
+  const prompt = answerIn === 'en' ? word.es : word.en;
+  const correct = answerIn === 'en' ? word.en : word.es;
+  const options = [correct, ...distractors(word, answerIn)].map((x) => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map((p) => p[1]);
+  const shownAt = Date.now();
+  const result = h('div', {});
+  const actions = h('div', { class: 'study-actions' });
+  const buttons = [];
+  let done = false;
+  if (answerIn === 'en') speak(word.es);
+
+  const choose = (i) => {
+    if (done) return;
+    done = true;
+    const right = options[i] === correct;
+    buttons.forEach((b, j) => { b.disabled = true; if (options[j] === correct) b.classList.add('right'); });
+    if (!right && i >= 0) buttons[i].classList.add('wrong');
+    const quick = Date.now() - shownAt < 2500 && card && card.reps >= 2;
+    const g = right ? (quick ? EASY : GOOD) : AGAIN;
     answer(word.id, g);
     session.answered += 1;
-    if (g !== AGAIN) session.right += 1;
-    else retry(item);
-    next();
-  };
-
-  const reveal = () => {
-    if (revealed) return;
-    revealed = true;
+    if (right) session.right += 1; else retry(item);
     speak(word.es);
-    answerBox.replaceChildren(h('div', { class: 'rule' }), h('div', { class: 'answer' }, word.en), example(word));
-    const btn = (g, label, main) => h('button', { class: 'grade' + (main ? ' main' : ''), onclick: () => grade(g) },
-      h('b', {}, label), h('small', {}, previewInterval(card, g)));
-    actions.replaceChildren(h('div', { class: 'grades' }, btn(AGAIN, 'Again'), btn(GOOD, 'Good', true), btn(EASY, 'Easy')));
+    result.replaceChildren(
+      right ? null : h('div', { class: 'feedback bad' }, icon(ICONS.close, 20), h('div', {}, h('span', { class: 'es' }, word.es), ' = ', word.en, h('div', { class: 'small' }, 'It will come back soon.'))),
+      word.ex ? h('p', { class: 'small', style: { marginTop: '14px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null);
+    actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next'));
   };
 
-  actions.append(h('button', { class: 'btn btn-primary btn-block', onclick: reveal }, 'Show answer'));
+  const list = h('div', { class: 'options' }, options.map((o, i) => (buttons[i] = h('button', {
+    class: 'option' + (answerIn === 'en' ? ' en' : ''), lang: answerIn, onclick: () => choose(i),
+  }, o))));
+  actions.append(h('button', { class: 'btn btn-ghost', style: { width: '100%' }, onclick: () => choose(-1) }, "I don't know"));
+
   return [
-    h('button', { class: 'flashcard', onclick: reveal, 'aria-label': 'Show the answer' },
-      h('div', { class: 'big', lang: 'es' }, word.es), answerBox),
-    h('div', { class: 'study-tools' }, speakButton(word.es), h('span')),
-    actions,
+    h('div', { class: 'flashcard compact' },
+      h('div', { class: 'kind' }, answerIn === 'en' ? 'What does it mean?' : 'How do you say it in Spanish?'),
+      h('div', { class: answerIn === 'en' ? 'big' : 'big en-big', lang: answerIn === 'en' ? 'es' : 'en' }, prompt)),
+    h('div', { class: 'study-tools' }, answerIn === 'en' ? speakButton(word.es) : h('span'), h('span')),
+    list, result, actions,
   ];
 }
 
@@ -165,11 +208,10 @@ function produceCard(word, item, next) {
     if (r === 'right') {
       g = fast ? EASY : GOOD;
       box = h('div', { class: 'feedback good' }, icon(ICONS.check, 20), h('div', {}, h('b', {}, 'Correct. '), h('span', { class: 'es' }, word.es)));
-    } else if (r === 'accent' || r === 'article') {
-      g = HARD;
-      box = h('div', { class: 'feedback close' }, h('div', {},
-        h('b', {}, r === 'accent' ? 'Almost: check the accents. ' : 'Almost: check the article. '),
-        'It is ', h('span', { class: 'es' }, word.es), '.'));
+    } else if (pointsFor(r) >= 1) {
+      g = GOOD;
+      box = h('div', { class: 'feedback good' }, icon(ICONS.check, 20), h('div', {},
+        h('b', {}, 'Correct. '), r === 'accent' ? 'Mind the accent: ' : 'Mind the article: ', h('span', { class: 'es' }, word.es)));
     } else {
       g = AGAIN;
       box = h('div', { class: 'feedback bad' }, icon(ICONS.close, 20), h('div', {}, h('b', {}, 'Not quite. '), 'It is ', h('span', { class: 'es' }, word.es), '.'));
@@ -180,7 +222,7 @@ function produceCard(word, item, next) {
     if (g !== AGAIN) session.right += 1;
     speak(word.es);
     result.replaceChildren(box, word.ex ? h('p', { class: 'small', style: { marginTop: '12px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null);
-    actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block', onclick: next }, 'Next word'));
+    actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next word'));
   };
 
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); check(); } });
@@ -196,7 +238,7 @@ function produceCard(word, item, next) {
     retry(item);
     speak(word.es);
     result.replaceChildren(h('div', { class: 'feedback bad' }, h('div', {}, 'It is ', h('span', { class: 'es' }, word.es), '. It will come back soon.')));
-    actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block', onclick: next }, 'Next word'));
+    actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next word'));
   }
 
   return [
@@ -212,7 +254,7 @@ function retry(item) {
   const n = session.retries[item.id] || 0;
   if (n >= 2) return;
   session.retries[item.id] = n + 1;
-  insertLater({ id: item.id, mode: 'recognize' });
+  insertLater({ id: item.id, mode: 'choose-en' });
 }
 
 /* ---------- done ---------- */

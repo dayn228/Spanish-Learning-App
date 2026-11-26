@@ -87,3 +87,16 @@ test('verb trainer leans on missed forms and varies verbs', () => {
   const one = pickVerbItems(p, ['ser', 'tener', 'hablar', 'comer'], ['present'], 4);
   assert.equal(new Set(one.map((i) => i.inf)).size, 4);
 });
+
+test('mistakes are listed until put right', async () => {
+  const { pickMistakes } = await import('../js/grammar.js');
+  const p = newGrammarProgress();
+  recordAnswer(p, 'u01', unit.exercises[0], 0, 100);
+  recordAnswer(p, 'u01', unit.exercises[1], 0, 200);
+  recordAnswer(p, 'u01', unit.exercises[2], 1, 300);
+  let m = pickMistakes(p, [unit]);
+  assert.deepEqual(m.map((x) => x.ex.q), ['q1', 'q0'], 'newest first');
+  recordAnswer(p, 'u01', unit.exercises[1], 1, 400);
+  m = pickMistakes(p, [unit]);
+  assert.deepEqual(m.map((x) => x.ex.q), ['q0']);
+});

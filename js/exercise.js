@@ -13,12 +13,13 @@
     conj       verb, person, tense             one verb form (verb trainer)
 
   `a` may list alternatives separated by " / ".
-  Points: 1 right, 0.5 almost (accents or article), 0 wrong.
+  Points: 1 right, 0 wrong. A slip in accents or articles still counts as right,
+  with a note; exercises tagged article-* treat a wrong article as half right.
   Tables and matches score a share (4 of 6 right = 0.67).
 */
 
 import { h, icon, ICONS } from './ui.js';
-import { checkAnswer, normalise } from './check.js';
+import { checkAnswer, normalise, pointsFor } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
 import { speak } from './speech.js';
 
@@ -47,9 +48,10 @@ function insertAt(input, text) {
   input.setSelectionRange(s + text.length, s + text.length);
 }
 
-function grade(input, answer) {
+function grade(input, answer, ex = {}) {
   const r = checkAnswer(input, answer);
-  return { points: r === 'right' ? 1 : r === 'wrong' ? 0 : 0.5, kind: r };
+  const strictArticles = (ex.tags || []).some((t) => t.startsWith('article'));
+  return { points: pointsFor(r, { strictArticles }), kind: r };
 }
 
 function firstAnswer(a) { return String(a).split(' / ')[0]; }
@@ -64,11 +66,13 @@ export function rich(text) {
 
 function feedback(points, kind, correct, extra) {
   const cls = points >= 1 ? 'good' : points > 0 ? 'close' : 'bad';
-  const title = points >= 1 ? 'Correct.' : kind === 'accent' ? 'Almost: check the accents.' : kind === 'article' ? 'Almost: check the article.' : points > 0 ? 'Partly right.' : 'Not quite.';
+  const title = points >= 1 ? 'Correct.' : kind === 'article' ? 'Almost: check the article.' : points > 0 ? 'Partly right.' : 'Not quite.';
+  const slip = points >= 1 && (kind === 'accent' || kind === 'article');
   return h('div', { class: `feedback ${cls}` },
     points >= 1 ? icon(ICONS.check, 20) : points === 0 ? icon(ICONS.close, 20) : null,
     h('div', {},
       h('b', {}, title),
+      slip && correct ? h('div', { class: 'small' }, kind === 'accent' ? 'Mind the accent: ' : 'Mind the article: ', h('span', { class: 'es' }, correct)) : null,
       points < 1 && correct ? h('div', {}, 'Answer: ', h('span', { class: 'es' }, correct)) : null,
       extra.why ? h('div', { class: 'small', style: { marginTop: '4px' } }, rich(extra.why)) : null,
       extra.en ? h('div', { class: 'small muted', style: { marginTop: '4px' } }, extra.en) : null));
@@ -138,7 +142,7 @@ export function exerciseView(ex, { onResult, onNext }) {
       const check = () => {
         if (!input.value.trim()) { input.focus(); return; }
         input.readOnly = true;
-        const g = grade(input.value, ex.a);
+        const g = grade(input.value, ex.a, ex);
         const full = ex.type === 'gap' ? ex.q.replace('___', firstAnswer(ex.a)) : firstAnswer(ex.a);
         finish(g.points, g.kind, full);
       };
@@ -158,7 +162,7 @@ export function exerciseView(ex, { onResult, onNext }) {
       const check = () => {
         if (!input.value.trim()) { input.focus(); return; }
         input.readOnly = true;
-        const g = grade(input.value, forms[ex.person]);
+        const g = grade(input.value, forms[ex.person], ex);
         finish(g.points, g.kind, forms[ex.person], { table: forms });
         if (g.points < 1) result.append(formsTable(ex.verb, forms));
       };
@@ -179,11 +183,11 @@ export function exerciseView(ex, { onResult, onNext }) {
       const check = () => {
         let total = 0;
         inputs.forEach((inp, i) => {
-          const g = grade(inp.value, forms[i]);
+          const g = grade(inp.value, forms[i], ex);
           total += g.points;
           inp.readOnly = true;
-          inp.classList.add(g.points >= 1 ? 'ok' : g.points > 0 ? 'close' : 'no');
-          if (g.points < 1) inp.value = forms[i] + (inp.value.trim() ? `  ← ${inp.value.trim()}` : '');
+          inp.classList.add(g.points >= 1 ? (g.kind === 'right' ? 'ok' : 'close') : 'no');
+          if (g.points < 1 || g.kind !== 'right') inp.value = forms[i] + (g.points < 1 && inp.value.trim() ? `  ← ${inp.value.trim()}` : '');
         });
         const pts = Math.round((total / 6) * 100) / 100;
         finish(pts, pts >= 1 ? 'right' : 'partial', null, { why: pts < 1 ? 'Correct forms are filled in.' : null });

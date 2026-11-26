@@ -38,3 +38,15 @@ export function checkAnswer(input, answer) {
   if (options.some((o) => stripAccents(bare(o)) === stripAccents(bare(got)) && bare(o) !== o)) return 'article';
   return 'wrong';
 }
+
+/*
+  Points for a checked answer. Lenient by default:
+  a wrong or missing accent, or a wrong or missing article, still counts as
+  right (1 point). The learner just sees a note. Exercises that practise
+  articles themselves pass strictArticles, and then an article slip is half.
+*/
+export function pointsFor(result, { strictArticles = false } = {}) {
+  if (result === 'right' || result === 'accent') return 1;
+  if (result === 'article') return strictArticles ? 0.5 : 1;
+  return 0;
+}

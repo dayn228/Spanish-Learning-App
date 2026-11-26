@@ -242,3 +242,8 @@ p { margin: 0; }
 .gtable thead th { font-weight: 600; font-size: 14px; color: var(--muted); }
 .gtable td.es { font-family: var(--serif); font-size: 17px; font-weight: 500; }
 .gtable td.en, .gtable td.lbl { color: var(--muted); font-size: 15px; }
+
+/* Multiple-choice flashcards */
+.flashcard.compact { min-height: 190px; }
+.flashcard .big.en-big { font-family: var(--sans); font-weight: 500; font-size: clamp(26px, 8vw, 34px); }
+.option.en { font-family: var(--sans); font-weight: 400; font-size: 18px; }
