@@ -52,8 +52,8 @@ function block(b) {
     h('span', { class: 'es', lang: 'es' }, b.ex[0]), h('span', { class: 'muted small' }, b.ex[1]));
   if (b.table) {
     const rows = b.head ? b.table.slice(1) : b.table;
-    return h('div', { class: 'table-wrap' }, h('table', { class: 'gtable' },
-      b.head ? h('thead', {}, h('tr', {}, b.table[0].map((c) => h('th', {}, c)))) : null,
+    return h('div', { class: 'table-wrap', tabindex: '0', role: 'region', 'aria-label': 'Table' }, h('table', { class: 'gtable' },
+      b.head ? h('thead', {}, h('tr', {}, b.table[0].map((c) => h('th', { scope: 'col' }, c || h('span', { class: 'sr-only' }, 'Person'))))) : null,
       h('tbody', {}, rows.map((r) => h('tr', {}, r.map((c, i) => h('td', { class: b.head ? (i === 0 ? 'lbl' : 'es') : (i === 0 ? 'es' : 'en') }, rich(c))))))));
   }
   return null;

@@ -83,6 +83,7 @@ test('content.add turns a pasted pack into batches for one learner or everyone',
   assert.deepEqual(JSON.parse(JSON.stringify(r.added)), { exercises: 2, words: 1, texts: 1 });
   const got = b.post({ token: 'secret', action: 'content.since', after: 0 }).batches;
   assert.equal(got.find((x) => x.kind === 'words').meta.topicId, 'series');
+  assert.deepEqual([...got.find((x) => x.kind === 'exercises').items[0].tags], ['x'], 'pack tags are kept');
   assert.equal(got[0].meta.user, 'owner');
   const all = b.post({ token: 'secret', action: 'content.add', forEveryone: true, pack: { format: 'mi-espanol-content-1', texts: pack.texts } });
   assert.equal(all.batches, 1);

@@ -309,7 +309,7 @@ function photoCard() {
   if (!photo) {
     body.push(h('button', { class: 'btn btn-ghost', onclick: () => file.click() }, 'Choose a photo'));
   } else {
-    const veil = h('input', { type: 'range', min: '0.35', max: '0.9', step: '0.05', value: String(photo.veil ?? 0.72), 'aria-label': 'How much the photo shows' });
+    const veil = h('input', { type: 'range', min: '0.5', max: '0.9', step: '0.05', value: String(photo.veil ?? 0.72), 'aria-label': 'How much the photo shows' });
     veil.addEventListener('input', () => savePhoto({ ...loadPhoto(), veil: Number(veil.value) }));
     const match = h('input', { type: 'checkbox', class: 'switch', checked: photo.matchAccent !== false, disabled: !photo.accent });
     match.addEventListener('change', () => savePhoto({ ...loadPhoto(), matchAccent: match.checked }));

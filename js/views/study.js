@@ -67,7 +67,7 @@ export function studyView() {
 }
 
 function exit() {
-  if (session.answered > 0 && !session.finished) finishSession();
+  if (session.answered > 0 && !session.finished) finishSession(session.startedAt);
   const back = session.returnTo;
   session = null;
   location.hash = back;
@@ -266,7 +266,7 @@ function retry(item) {
 
 /* ---------- done ---------- */
 function drawDone(root) {
-  if (session.answered > 0 && !session.finished) { finishSession(); session.finished = true; }
+  if (session.answered > 0 && !session.finished) { finishSession(session.startedAt); session.finished = true; }
   const mins = Math.max(1, Math.round((Date.now() - session.startedAt) / 60000));
   const pct = session.answered ? Math.round((session.right / session.answered) * 100) : 0;
   root.replaceChildren(h('div', { class: 'done' },

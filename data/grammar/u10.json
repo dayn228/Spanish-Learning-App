@@ -363,9 +363,9 @@
   },
   {
    "type": "error",
-   "q": "Ellos vendieron la casa y compraron la nueva el año que viene.",
-   "a": "Ellos vendieron la casa y compraron la nueva el año pasado.",
-   "why": "The indefinido needs a past time: el año pasado.",
+   "q": "Ayer vendieron la casa y mañana compraron la nueva.",
+   "a": "Ayer vendieron la casa y compraron la nueva. / Ayer vendieron la casa y ayer compraron la nueva. / Ayer vendieron la casa y también compraron la nueva.",
+   "why": "The indefinido needs a past time; «mañana» is in the future.",
    "tags": [
     "use"
    ]

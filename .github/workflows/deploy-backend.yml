@@ -1,5 +1,5 @@
-# Uploads backend/src to the Apps Script project with clasp (same setup as
-# Fram-Automation). Runs when backend/ changes on main, or by hand.
+# Uploads backend/src to the Apps Script project with clasp.
+# Runs when backend/ changes on main, or by hand.
 #
 # Needs (see docs/SETUP-BACKEND.md):
 #   - backend/.clasp.json with the real scriptId

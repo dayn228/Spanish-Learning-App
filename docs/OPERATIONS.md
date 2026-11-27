@@ -18,7 +18,7 @@ You → Backup file ("App version …", the first 7 characters of `VERSION` in `
 
 | GitHub secret | What |
 |---|---|
-| `CLASPRC_JSON` | contents of `~/.clasprc.json` after `npx @google/clasp login` (same as Fram-Automation) |
+| `CLASPRC_JSON` | contents of `~/.clasprc.json` after `npx @google/clasp login`. Best made with a login used only for this project (ideally a personal Google account), so this public repo's workflow never holds a token for a work account. If deploys fail with `invalid_grant`, the login expired: log in again and replace the secret. |
 | `DEPLOYMENT_ID` | Apps Script → Deploy → Manage deployments → the web app's Deployment ID (`AKfy…`). Without it, publish by hand. |
 
 Publishing by hand: Apps Script editor → **Deploy → Manage deployments → pencil →
@@ -38,7 +38,9 @@ version is live.
 | `FOLDER_ID` | `setup()` | the "Mi Español" Drive folder |
 | `GEMINI_API_KEY` | you | key from aistudio.google.com (free tier) |
 | `GEMINI_MODEL` | optional | default `gemini-3.6-flash` |
-| `MAX_CALLS_PER_NIGHT` | optional | default 30 |
+| `MAX_CALLS_PER_NIGHT` | optional | Gemini calls per run, default 30 |
+| `MAX_CALLS_PER_DAY` | optional | Gemini calls per day across all runs, default 60 |
+| `CALLS_<date>`, `MANUAL_RUN_<user>` | backend | today's call count (old ones cleaned weekly); last "Get new content now" per learner (once an hour) |
 | `NEWS_FEEDS` | optional | JSON `[{ topic, url }]` RSS feeds, replaces the defaults |
 | `LAST_SEQ` | backend | last content batch number |
 
@@ -64,6 +66,14 @@ Never put any of these in the repo.
    progress from Drive automatically.
 3. Topics: choose focus topics (they steer AI exercises and texts). You → Appearance.
 
+## Safety limits (backend)
+
+- Gemini: per run and per day budgets (above); manual runs once an hour per learner.
+- Sizes: backups up to 2 MB, reports up to 20 KB, up to 30 requests of 20 KB per sync, request body up to 5 MB.
+- Content batches are written under the script lock, file first, then `LAST_SEQ`.
+- News and inbox texts pass the same Gemini review as AI texts; articles are fenced as data in prompts.
+- Inbox texts belong to the owner; start a file name with `share-` to give it to both learners.
+
 ## Backups
 
 - Automatic on every sync (after a session, at app open, when back online), at most
@@ -80,13 +90,14 @@ Never put any of these in the repo.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| "Wrong or missing token" | token pasted incompletely (should be 32 for owner, 40 for others) | copy again from the Execution log |
+| "Wrong or missing token" | token pasted incompletely (32 characters for the owner's first token, 40 after `rotateToken` and for other learners) | copy again from the Execution log |
 | Partner token rejected, names missing | backend code pushed but no new version published | publish a new version; add `DEPLOYMENT_ID` |
 | Progress gone after re-adding the app | iOS wiped storage; old app overwrote the newest backup | restore yesterday's daily copy; guard now prevents this |
 | Restore says "not a backup" | old app version did not unwrap `{ savedAt, data }` | update the app (check the version code) |
 | A fix doesn't show on the phone | phone still runs the cached version | swipe the app away, reopen online; check the version code |
 | Deploy backend workflow fails | broken YAML or missing `CLASPRC_JSON` | check the run log; the job skips itself if not set up |
-| No AI content | no `GEMINI_API_KEY`, call budget used, or unknown model name | `showStatus()` in the editor; set `GEMINI_MODEL` to a current Flash model |
+| No AI content | no `GEMINI_API_KEY`, call budget used (per run or per day), or unknown model name |
+| "Already requested in the last hour" | "Get new content now" is limited to once an hour per learner | wait, or run `testNightly()` in the editor | `showStatus()` in the editor; set `GEMINI_MODEL` to a current Flash model |
 | AI item looks wrong | – | "Report a problem" on it; it disappears and is logged in `reports.json` |
 | Moving Drive files with the Drive connector fails | the connector can't move files it did not create | move them by hand in Drive |
 
@@ -99,4 +110,5 @@ Useful editor functions: `showStatus()` (folder link, model, key set, queue leng
   only learning content is sent, never progress or names.
 - Apps Script: 6-minute run limit (jobs stop at 5), daily quotas far above this use.
 - The web app is "Anyone" with a token check, because home-screen apps can't send Google
-  sign-in. Workspace admins of framsystems.es can technically see the Drive files.
+  sign-in. If the backend runs in a work (Workspace) account, that organisation's admins can
+  technically see the Drive files; a personal Google account keeps them fully separate.

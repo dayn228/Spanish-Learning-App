@@ -8,16 +8,16 @@ When it is done, the app backs up your progress to Drive by itself, and every ni
 
 1. Go to [script.google.com](https://script.google.com) → **New project**. Name it **Mi Español backend**.
 2. Open **Project Settings** (gear icon) and copy the **Script ID**.
-3. Put the Script ID in `backend/.clasp.json` (`scriptId`) and push. GitHub uploads the code from then on, the same way as Fram-Automation. (Already done: the current script ID is in the file.)
+3. Put the Script ID in `backend/.clasp.json` (`scriptId`) and push. GitHub uploads the code from then on. (Already done: the current script ID is in the file.)
 
 ## 2. Let GitHub upload the code
 
 In this repository: **Settings → Secrets and variables → Actions → New repository secret**
 
 - Name: `CLASPRC_JSON`
-- Value: the same value as the `CLASPRC_JSON` secret in Fram-Automation (same Google account). If you no longer have it, run `npx @google/clasp login` on a computer and paste the contents of `~/.clasprc.json`.
+- Value: run `npx @google/clasp login` on a computer (ideally with a Google account used only for this app) and paste the contents of `~/.clasprc.json`.
 
-The Apps Script API must be on at [script.google.com/home/usersettings](https://script.google.com/home/usersettings). It already is if Fram-Automation deploys.
+The Apps Script API must be on at [script.google.com/home/usersettings](https://script.google.com/home/usersettings).
 
 Then in **Actions → Deploy backend → Run workflow**. When it finishes, the project in the editor shows the files `Main`, `Store`, `Gemini`, `Jobs`, `Setup` and `Pure`.
 
@@ -78,7 +78,7 @@ Articles you download with your own subscription are for your own study; keep th
 - **What the token protects**: your learning progress and the AI request queue in the Mi Español folder. The backend runs only its fixed list of actions on that folder; it can't be made to read other Drive files, run other code or reveal the Gemini key.
 - **Keep the token private**: it is stored only in the app on your phone, and is never written into backups.
 - **If it may have leaked**: run `rotateToken` in the editor, then in the app Disconnect and Connect with the new token. The old token stops working at once.
-- **Work account**: the files live in your framsystems.es account, so Workspace administrators can reach them like anything else there. For full separation, set the backend up in a personal Google account instead.
+- **Work account**: if the backend runs in a work (Workspace) account, its administrators can reach the files like anything else there. For full separation, set the backend up in a personal Google account instead.
 
 ## If something goes wrong
 

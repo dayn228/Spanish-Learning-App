@@ -180,8 +180,10 @@ function cleanExercises(list, allowedTags) {
   return (list || []).filter(function (ex) {
     if (!ex || EXERCISE_TYPES_AI.indexOf(ex.type) < 0) return false;
     if (!Array.isArray(ex.tags) || !ex.tags.length) return false;
-    ex.tags = ex.tags.filter(function (t) { return allowed[t]; });
-    if (!ex.tags.length && allowedTags && allowedTags.length) ex.tags = [allowedTags[0]];
+    if (allowedTags) {   // null: keep the tags as given (content packs)
+      ex.tags = ex.tags.filter(function (t) { return allowed[t]; });
+      if (!ex.tags.length && allowedTags.length) ex.tags = [allowedTags[0]];
+    }
     if (ex.type === 'gap' && (String(ex.q).match(/___/g) || []).length !== 1) return false;
     if (ex.type === 'choice' && !(Array.isArray(ex.options) && ex.a >= 0 && ex.a < ex.options.length)) return false;
     return true;

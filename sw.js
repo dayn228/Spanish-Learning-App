@@ -2,11 +2,12 @@
   Service worker: saves every app file on the phone so the app works offline.
 
   How updates work: `npm run build` rewrites VERSION and FILES below.
-  When this file changes, the phone downloads the new version the next time
-  the app opens online, and uses it from the launch after that.
+  When this file changes, the phone downloads the new version the next time the app
+  comes to the foreground online; js/main.js then reloads once to use it, but waits
+  until a running session or drill has ended.
 */
 
-const VERSION = '27f39226f1';
+const VERSION = 'd2aead52f6';
 const FILES = [
   "./",
   "./css/app.css",

@@ -378,7 +378,7 @@
   {
    "type": "translate",
    "q": "When I was a child, I lived in Ukraine.",
-   "a": "Cuando era niño, vivía en Ucrania / Cuando era pequeño, vivía en Ucrania",
+   "a": "Cuando era niño, vivía en Ucrania / Cuando era niña, vivía en Ucrania / Cuando era pequeño, vivía en Ucrania / Cuando era pequeña, vivía en Ucrania",
    "tags": [
     "description"
    ]
@@ -411,7 +411,7 @@
     "más",
     "baratos"
    ],
-   "a": "antes los pisos eran mucho más baratos",
+   "a": "antes los pisos eran mucho más baratos / los pisos antes eran mucho más baratos / los pisos eran mucho más baratos antes",
    "en": "Flats used to be much cheaper.",
    "tags": [
     "description"

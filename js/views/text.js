@@ -171,8 +171,9 @@ function questions(text) {
 
   function finish() {
     const right = answers.filter(Boolean).length;
+    const firstTime = !(state.reading[text.id] && state.reading[text.id].done);
     saveReading(text.id, { done: true, right, total: answers.length });
-    saveGrammar(true);   // counts towards today's activity
+    saveGrammar(firstTime);   // counts towards today's activity, once per text
     finishSession();
     result.replaceChildren(h('div', { class: `feedback ${right === answers.length ? 'good' : 'close'}` },
       h('div', {}, h('b', {}, `${right} of ${answers.length} right.`),

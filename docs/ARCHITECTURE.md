@@ -99,7 +99,15 @@ Cache-first for every file in `FILES` (written by `npm run build`, with `VERSION
 hash of the content). A new version installs with `skipWaiting` and `clients.claim`;
 `main.js` reloads the page once on `controllerchange` and checks for updates whenever
 the app comes back to the foreground (iPhone home-screen apps resume, not relaunch).
-The You screen shows the version (first 7 characters of `VERSION`).
+The reload waits while a session or drill is open (`#study`, `#drill`) and happens when the
+learner leaves it. The You screen shows the version (first 7 characters of `VERSION`).
+
+### Sync order (`syncNow` in `js/sync.js`)
+ping (once) → **backup first** → refill requests and reports → content pages until caught up
+(30 a page, up to 20 pages). Each step fails on its own; a broken batch is skipped. Calls time
+out after 30 s (6 min for `nightly.run`), and errors are written as advice ("check the URL ends
+in /exec"). If IndexedDB can't save, `db.js` announces `storage-problem` and every screen shows
+a banner.
 
 ### Learning logic in one paragraph each
 
@@ -111,10 +119,14 @@ The You screen shows the version (first 7 characters of `VERSION`).
   mastered); below 50% nothing is added. Tags of missed exercises are weighted ×6 in the
   next set. An exercise right twice in a row retires. "Test me" masters at 90%.
   Mastered units come back at 7 → 18 → 45 days.
-- **Leniency:** accent slips and article slips count as right with a note; exercises
-  tagged `article*` give 0.5 for a wrong article. Exceptions (`gradeAnswer` in `check.js`):
-  verb forms in the trainer and tables give 0.5 for an accent slip (hablo ≠ habló), and
-  typing an `error` exercise's faulty sentence back unchanged is wrong.
+- **Leniency** (`checkAnswer` / `gradeAnswer` in `check.js`): harmless accent slips (dificil,
+  arbol) and article slips count as right with a note. Accent slips that change the word give
+  0.5 (`accent-key`): words in `ACCENT_PAIRS` (él, tú, sí, más, está…) and forms ending in an
+  accented é/ó (llegó, trabajé), except a few nouns (café, bebé). Verb trainer and tables:
+  any accent slip is 0.5. Exercises tagged `article*` give 0.5 for a wrong article. In
+  translate/transform a leading subject pronoun is optional (Yo estoy cansado). Typing an
+  `error` exercise's faulty sentence back unchanged is wrong. Reorder `a` may list several
+  orders. In typing practice an article or meaning-changing accent slip is graded Hard.
 - **Verb trainer:** present always; preterite unlocks after a set in `u10`, imperfect
   after `u12` (`TENSE_UNITS` in `views/drill.js`).
 - **Level estimate** (`refill.js`): A1 until all A1 units are mastered, then A2, B1, B2.
@@ -155,7 +167,11 @@ Access is by token, not Google sign-in, because a home-screen app cannot send Go
 - Display names: `DEFAULT_NAMES` in `Main.gs` (`owner` → Big Daddy, `partner` → Wifey),
   overridden by the `NAMES` property (`setName('partner', '…')`).
 - Content batches carry `meta.user`; the app skips exercise and text batches made for the
-  other learner (inbox texts, `user: 'inbox'`, go to everyone).
+  other learner. Inbox texts are the owner's (`user: 'owner'`); files named `share-…` go to
+  everyone (`user: 'inbox'`).
+- When a different learner connects on a phone (`sync.lastUser` changes), the phone forgets
+  the previous learner's sync position and AI content, and loads the new learner's progress
+  from Drive (or asks before starting fresh).
 
 ### Drive layout (folder "Mi Español", id in `FOLDER_ID`)
 ```

@@ -80,8 +80,8 @@
     "However, its ending divided fans, and in 2021 the main character came back in a new series, Dexter: New Blood."
    ],
    [
-    "Para aprender español, Dexter es una buena opción: tiene mucho vocabulario de policía, de investigación y de la vida diaria en Miami, donde se oye mucho español.",
-    "For learning Spanish, Dexter is a good choice: it has lots of vocabulary about the police, investigation and daily life in Miami, where you hear a lot of Spanish."
+    "Para practicar español, puedes verla doblada al castellano: tiene mucho vocabulario de policía, de investigación y de la vida diaria.",
+    "To practise Spanish, you can watch it dubbed into Castilian Spanish: it has lots of vocabulary about the police, investigation and daily life."
    ]
   ]
  ],
@@ -317,6 +317,26 @@
   "vocabulario": [
    "el vocabulario",
    "vocabulary"
+  ],
+  "practicar": [
+   "practicar",
+   "to practise"
+  ],
+  "puedes": [
+   "poder",
+   "you can"
+  ],
+  "verla": [
+   "ver",
+   "to watch it"
+  ],
+  "doblada": [
+   "doblado",
+   "dubbed"
+  ],
+  "castellano": [
+   "el castellano",
+   "Castilian Spanish"
   ]
  }
 }

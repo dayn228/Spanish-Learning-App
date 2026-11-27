@@ -9,6 +9,7 @@
 | 3. Listening and reading | which-word, dictation, minimal pairs; graded texts with tap-to-translate, sentence and full translations, questions, "My words" |
 | 4. Backend | Apps Script + Drive backups, refill engine, nightly Gemini content with review, real news texts, report a problem |
 | Extras | themes (Ivory, Daylight, Blush, Charcoal, Midnight, Sparkle) with fades; background photo with accent colour; two learners with display names; Drive inbox for own articles; reset-proof backups and restore by day |
+| Review 2026-11-27 | external review (docs/reviews/REVIEW-2026-11-27.md): 35 findings; all critical and high fixed, most medium and low fixed (see the commits after it) |
 | Content round 1 | preterite and imperfect in the verb engine; units 9–14 (pronouns, indefinido ×2, imperfecto, contrast, por/para); texts t07–t12 up to B2; 180 B1 work words; 7 lifestyle topics |
 
 ## Next

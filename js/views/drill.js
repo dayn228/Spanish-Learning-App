@@ -52,7 +52,7 @@ export function startDrill(spec) {
   } else {
     items = pickExercises(state.grammar, unit, spec.count || (spec.kind === 'review' ? 5 : 10)).map((ex) => ({ ex }));
   }
-  drill = { ...spec, unit, items, pos: 0, points: [], startScore: unit ? unitStatus(state.grammar, unit.id).score : 0 };
+  drill = { ...spec, unit, items, pos: 0, points: [], startedAt: Date.now(), startScore: unit ? unitStatus(state.grammar, unit.id).score : 0 };
   location.hash = '#drill';
 }
 
@@ -76,7 +76,7 @@ function title() {
 
 function exit() {
   const back = drill.returnTo || (drill.unit ? `#grammar/${drill.unit.id}` : '#practice');
-  if (drill.points.length && !drill.finished) finishSession();
+  if (drill.points.length && !drill.finished) finishSession(drill.startedAt);
   drill = null;
   location.hash = back;
 }
@@ -138,7 +138,7 @@ function drawDone(root) {
       headline = accuracy >= 0.9 ? 'Excellent.' : accuracy >= 0.7 ? 'Good work.' : 'The forms you missed come back more often.';
     }
     saveGrammar(false);
-    finishSession();
+    finishSession(drill.startedAt);
     drill.summary = { headline, detail };
   }
   ({ headline, detail } = drill.summary);

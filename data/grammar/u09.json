@@ -1,55 +1,400 @@
 {
-  "id": "u09", "n": 9, "level": "A2",
-  "title": "Object pronouns: lo, la, le, se lo",
-  "summary": "Replace things and people: lo compro, le escribo, se lo envío.",
-  "explain": [
-    {"h": "Direct object: what or who receives the action"},
-    {"p": "Instead of repeating a noun, use **lo, la, los, las**. They agree with the noun they replace and go **before** the conjugated verb."},
-    {"table": [["el presupuesto", "lo"], ["la factura", "la"], ["los planos", "los"], ["las ventanas", "las"]]},
-    {"ex": ["¿Tienes el presupuesto? — Sí, lo tengo.", "Do you have the quote? — Yes, I have it."]},
-    {"ex": ["Las ventanas llegan hoy. Las instalamos mañana.", "The windows arrive today. We install them tomorrow."]},
-    {"h": "Indirect object: to whom, for whom"},
-    {"p": "**le** (to him, her, you formal) and **les** (to them, to you all). Spanish often keeps both the pronoun and the person: *Le escribo **al cliente**.*"},
-    {"ex": ["Le mando el contrato al arquitecto.", "I'm sending the contract to the architect."]},
-    {"p": "Me, te, nos, os work for both kinds: *Me llama* (he calls me), *Me da el plano* (he gives me the plan)."},
-    {"h": "Two pronouns together"},
-    {"p": "Indirect comes first, then direct: *me lo, te la, nos los*. But **le** and **les** become **se** before lo/la/los/las."},
-    {"ex": ["Le doy la factura. → Se la doy.", "I give him the invoice. → I give it to him."]},
-    {"tip": "Never say *le lo*. It is always *se lo*."},
-    {"h": "Where the pronoun goes"},
-    {"p": "Before a conjugated verb, or attached to an infinitive or gerund: *Lo voy a revisar = Voy a revisarlo*. With an affirmative command it must be attached: *Revísalo.*"},
-    {"p": "In Spain you will often hear **le** for a male person as direct object (*le veo* for *lo veo*). This **leísmo** is accepted for people; for things always use *lo*."}
-  ],
-  "exercises": [
-    {"type": "gap", "q": "¿Has firmado el contrato? — Sí, ___ he firmado esta mañana.", "a": "lo", "en": "Have you signed the contract? — Yes, I signed it this morning.", "tags": ["direct"]},
-    {"type": "gap", "q": "Las facturas están en la mesa. ¿___ puedes revisar?", "a": "las", "en": "The invoices are on the table. Can you check them?", "tags": ["direct"]},
-    {"type": "gap", "q": "Necesito la llave del almacén. ¿Quién ___ tiene?", "a": "la", "en": "I need the warehouse key. Who has it?", "tags": ["direct"]},
-    {"type": "gap", "q": "Los perfiles llegaron rotos, así que ___ devolvimos al proveedor.", "a": "los", "en": "The profiles arrived broken, so we sent them back to the supplier.", "tags": ["direct"]},
-    {"type": "gap", "q": "___ he enviado un correo al cliente, pero no contesta.", "a": "le", "en": "I've sent the client an email, but he isn't answering.", "tags": ["indirect"]},
-    {"type": "gap", "q": "A los vecinos ___ molesta el ruido de la obra.", "a": "les", "en": "The building noise bothers the neighbours.", "tags": ["indirect"]},
-    {"type": "gap", "q": "¿Me das el metro? — Sí, ahora te ___ doy.", "a": "lo", "en": "Can you give me the tape measure? — Yes, I'll give it to you now.", "tags": ["double"]},
-    {"type": "gap", "q": "¿Le has dado la factura a Marta? — Sí, ya ___ la he dado.", "a": "se", "en": "Have you given Marta the invoice? — Yes, I've already given it to her.", "tags": ["se-lo"]},
-    {"type": "gap", "q": "Los planos nuevos, ¿___ los mandas tú a los instaladores?", "a": "se", "en": "The new plans — will you send them to the installers?", "tags": ["se-lo"]},
-    {"type": "gap", "q": "Este presupuesto está mal. Tengo que revisar___ otra vez.", "a": "lo", "en": "This quote is wrong. I have to check it again.", "tags": ["position"]},
-    {"type": "gap", "q": "La ventana del baño está abierta. Ciérra___, por favor.", "a": "la", "en": "The bathroom window is open. Close it, please.", "tags": ["position", "command"]},
-    {"type": "choice", "q": "¿Dónde están las gafas de seguridad? — No ___ encuentro.", "options": ["las", "los", "les"], "a": 0, "why": "las gafas is feminine plural → las.", "tags": ["direct"]},
-    {"type": "choice", "q": "___ explico el problema al jefe de obra.", "options": ["Lo", "Le", "La"], "a": 1, "why": "To whom? to the site manager → indirect → le.", "tags": ["indirect"]},
-    {"type": "choice", "q": "Le doy las llaves. → ___ doy.", "options": ["Le las", "Se las", "Las le"], "a": 1, "why": "le + las → se las.", "tags": ["se-lo"]},
-    {"type": "choice", "q": "Voy a llamar a Pedro. → ___", "options": ["Voy a llamarlo.", "Voy lo a llamar.", "Voy a lo llamar."], "a": 0, "why": "The pronoun goes before 'voy' or on the end of the infinitive, never in between.", "tags": ["position"]},
-    {"type": "choice", "q": "¿Nos enviáis el informe? — Sí, ___ enviamos hoy.", "options": ["os lo", "lo os", "se lo"], "a": 0, "why": "Indirect (os) first, then direct (lo).", "tags": ["double"]},
-    {"type": "choice", "q": "¿Pagaste la cuota a la comunidad? — Sí, ___ pagué ayer.", "options": ["se la", "le la", "la le"], "a": 0, "tags": ["se-lo"]},
-    {"type": "error", "q": "Le lo mando mañana.", "a": "Se lo mando mañana.", "why": "le + lo → se lo.", "tags": ["se-lo"]},
-    {"type": "error", "q": "¿Las ventanas? Yo instalo las mañana.", "a": "¿Las ventanas? Yo las instalo mañana.", "why": "The pronoun goes before the conjugated verb.", "tags": ["position"]},
-    {"type": "error", "q": "El informe lo estoy lo escribiendo.", "a": "El informe lo estoy escribiendo.", "why": "Use the pronoun once: before estoy or on the gerund (escribiéndolo).", "tags": ["position"]},
-    {"type": "error", "q": "A mi jefa la gusta el proyecto.", "a": "A mi jefa le gusta el proyecto.", "why": "Gustar takes an indirect object: le.", "tags": ["indirect"]},
-    {"type": "transform", "instr": "Replace «el presupuesto» with a pronoun.", "q": "Envío el presupuesto hoy.", "a": "Lo envío hoy.", "tags": ["direct"]},
-    {"type": "transform", "instr": "Replace both objects with pronouns.", "q": "Doy los planos al encargado.", "a": "Se los doy.", "tags": ["se-lo"]},
-    {"type": "transform", "instr": "Move the pronoun onto the infinitive.", "q": "Lo tenemos que terminar hoy.", "a": "Tenemos que terminarlo hoy.", "tags": ["position"]},
-    {"type": "transform", "instr": "Make it a command (tú) with the pronoun attached.", "q": "Tienes que firmar el documento.", "a": "Fírmalo.", "tags": ["command"]},
-    {"type": "translate", "q": "I'll send it to you tomorrow (the quote, to you = tú).", "a": "Te lo envío mañana / Te lo mando mañana", "tags": ["double"]},
-    {"type": "translate", "q": "We gave it to them (the key).", "a": "Se la dimos", "tags": ["se-lo"]},
-    {"type": "translate", "q": "I can't find them (the screws: los tornillos).", "a": "No los encuentro", "tags": ["direct"]},
-    {"type": "reorder", "words": ["se", "lo", "explico", "mañana", "al", "cliente"], "a": "se lo explico mañana al cliente", "en": "I'll explain it to the client tomorrow.", "tags": ["se-lo"]},
-    {"type": "reorder", "words": ["no", "te", "lo", "puedo", "confirmar", "todavía"], "a": "no te lo puedo confirmar todavía", "en": "I can't confirm it to you yet.", "tags": ["double", "position"]}
-  ]
+ "id": "u09",
+ "n": 9,
+ "level": "A2",
+ "title": "Object pronouns: lo, la, le, se lo",
+ "summary": "Replace things and people: lo compro, le escribo, se lo envío.",
+ "explain": [
+  {
+   "h": "Direct object: what or who receives the action"
+  },
+  {
+   "p": "Instead of repeating a noun, use **lo, la, los, las**. They agree with the noun they replace and go **before** the conjugated verb."
+  },
+  {
+   "table": [
+    [
+     "el presupuesto",
+     "lo"
+    ],
+    [
+     "la factura",
+     "la"
+    ],
+    [
+     "los planos",
+     "los"
+    ],
+    [
+     "las ventanas",
+     "las"
+    ]
+   ]
+  },
+  {
+   "ex": [
+    "¿Tienes el presupuesto? — Sí, lo tengo.",
+    "Do you have the quote? — Yes, I have it."
+   ]
+  },
+  {
+   "ex": [
+    "Las ventanas llegan hoy. Las instalamos mañana.",
+    "The windows arrive today. We install them tomorrow."
+   ]
+  },
+  {
+   "h": "Indirect object: to whom, for whom"
+  },
+  {
+   "p": "**le** (to him, her, you formal) and **les** (to them, to you all). Spanish often keeps both the pronoun and the person: *Le escribo **al cliente**.*"
+  },
+  {
+   "ex": [
+    "Le mando el contrato al arquitecto.",
+    "I'm sending the contract to the architect."
+   ]
+  },
+  {
+   "p": "Me, te, nos, os work for both kinds: *Me llama* (he calls me), *Me da el plano* (he gives me the plan)."
+  },
+  {
+   "h": "Two pronouns together"
+  },
+  {
+   "p": "Indirect comes first, then direct: *me lo, te la, nos los*. But **le** and **les** become **se** before lo/la/los/las."
+  },
+  {
+   "ex": [
+    "Le doy la factura. → Se la doy.",
+    "I give him the invoice. → I give it to him."
+   ]
+  },
+  {
+   "tip": "Never say *le lo*. It is always *se lo*."
+  },
+  {
+   "h": "Where the pronoun goes"
+  },
+  {
+   "p": "Before a conjugated verb, or attached to an infinitive or gerund: *Lo voy a revisar = Voy a revisarlo*. With an affirmative command it must be attached: *Revísalo.*"
+  },
+  {
+   "p": "In Spain you will often hear **le** for a male person as direct object (*le veo* for *lo veo*). This **leísmo** is accepted for people; for things always use *lo*."
+  }
+ ],
+ "exercises": [
+  {
+   "type": "gap",
+   "q": "¿Has firmado el contrato? — Sí, ___ he firmado esta mañana.",
+   "a": "lo",
+   "en": "Have you signed the contract? — Yes, I signed it this morning.",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Las facturas están en la mesa. ¿___ puedes revisar?",
+   "a": "las",
+   "en": "The invoices are on the table. Can you check them?",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Necesito la llave del almacén. ¿Quién ___ tiene?",
+   "a": "la",
+   "en": "I need the warehouse key. Who has it?",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Los perfiles llegaron rotos, así que ___ devolvimos al proveedor.",
+   "a": "los",
+   "en": "The profiles arrived broken, so we sent them back to the supplier.",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "___ he enviado un correo al cliente, pero no contesta.",
+   "a": "le",
+   "en": "I've sent the client an email, but he isn't answering.",
+   "tags": [
+    "indirect"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "A los vecinos ___ molesta el ruido de la obra.",
+   "a": "les",
+   "en": "The building noise bothers the neighbours.",
+   "tags": [
+    "indirect"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Me das el metro? — Sí, ahora te ___ doy.",
+   "a": "lo",
+   "en": "Can you give me the tape measure? — Yes, I'll give it to you now.",
+   "tags": [
+    "double"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Le has dado la factura a Marta? — Sí, ya ___ la he dado.",
+   "a": "se",
+   "en": "Have you given Marta the invoice? — Yes, I've already given it to her.",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Los planos nuevos, ¿___ los mandas tú a los instaladores?",
+   "a": "se",
+   "en": "The new plans — will you send them to the installers?",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Este presupuesto está mal. Tengo que revisar___ otra vez.",
+   "a": "lo",
+   "en": "This quote is wrong. I have to check it again.",
+   "tags": [
+    "position"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "La ventana del baño está abierta. Ciérra___, por favor.",
+   "a": "la",
+   "en": "The bathroom window is open. Close it, please.",
+   "tags": [
+    "position",
+    "command"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "¿Dónde están las gafas de seguridad? — No ___ encuentro.",
+   "options": [
+    "las",
+    "los",
+    "les"
+   ],
+   "a": 0,
+   "why": "las gafas is feminine plural → las.",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "___ explico el problema al jefe de obra.",
+   "options": [
+    "Lo",
+    "Le",
+    "La"
+   ],
+   "a": 1,
+   "why": "To whom? to the site manager → indirect → le.",
+   "tags": [
+    "indirect"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Le doy las llaves. → ___ doy.",
+   "options": [
+    "Le las",
+    "Se las",
+    "Las le"
+   ],
+   "a": 1,
+   "why": "le + las → se las.",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Voy a llamar a Pedro. → ___",
+   "options": [
+    "Voy a llamarlo.",
+    "Voy lo a llamar.",
+    "Voy a lo llamar."
+   ],
+   "a": 0,
+   "why": "The pronoun goes before 'voy' or on the end of the infinitive, never in between.",
+   "tags": [
+    "position"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "¿Nos enviáis el informe? — Sí, ___ enviamos hoy.",
+   "options": [
+    "os lo",
+    "lo os",
+    "se lo"
+   ],
+   "a": 0,
+   "why": "Indirect (os) first, then direct (lo).",
+   "tags": [
+    "double"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "¿Pagaste la cuota a la comunidad? — Sí, ___ pagué ayer.",
+   "options": [
+    "se la",
+    "le la",
+    "la le"
+   ],
+   "a": 0,
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Le lo mando mañana.",
+   "a": "Se lo mando mañana.",
+   "why": "le + lo → se lo.",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "¿Las ventanas? Yo instalo las mañana.",
+   "a": "¿Las ventanas? Yo las instalo mañana.",
+   "why": "The pronoun goes before the conjugated verb.",
+   "tags": [
+    "position"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "El informe lo estoy lo escribiendo.",
+   "a": "El informe lo estoy escribiendo.",
+   "why": "Use the pronoun once: before estoy or on the gerund (escribiéndolo).",
+   "tags": [
+    "position"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "A mi jefa la gusta el proyecto.",
+   "a": "A mi jefa le gusta el proyecto.",
+   "why": "Gustar takes an indirect object: le.",
+   "tags": [
+    "indirect"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Replace «el presupuesto» with a pronoun.",
+   "q": "Envío el presupuesto hoy.",
+   "a": "Lo envío hoy.",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Replace both objects with pronouns.",
+   "q": "Doy los planos al encargado.",
+   "a": "Se los doy.",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Move the pronoun onto the infinitive.",
+   "q": "Lo tenemos que terminar hoy.",
+   "a": "Tenemos que terminarlo hoy.",
+   "tags": [
+    "position"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Make it a command (tú) with the pronoun attached.",
+   "q": "Tienes que firmar el documento.",
+   "a": "Fírmalo.",
+   "tags": [
+    "command"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "I'll send it to you tomorrow (the quote, to you = tú).",
+   "a": "Te lo envío mañana / Te lo mando mañana",
+   "tags": [
+    "double"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "We gave it to them (the key).",
+   "a": "Se la dimos",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "I can't find them (the screws: los tornillos).",
+   "a": "No los encuentro",
+   "tags": [
+    "direct"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "se",
+    "lo",
+    "explico",
+    "mañana",
+    "al",
+    "cliente"
+   ],
+   "a": "se lo explico mañana al cliente / mañana se lo explico al cliente / se lo explico al cliente mañana",
+   "en": "I'll explain it to the client tomorrow.",
+   "tags": [
+    "se-lo"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "no",
+    "te",
+    "lo",
+    "puedo",
+    "confirmar",
+    "todavía"
+   ],
+   "a": "no te lo puedo confirmar todavía / todavía no te lo puedo confirmar",
+   "en": "I can't confirm it to you yet.",
+   "tags": [
+    "double",
+    "position"
+   ]
+  }
+ ]
 }

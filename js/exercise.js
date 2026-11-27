@@ -56,7 +56,7 @@ function grade(input, answer, ex = {}) {
   return gradeAnswer(input, answer, ex);
 }
 
-function firstAnswer(a) { return String(a).split(' / ')[0]; }
+function firstAnswer(a) { return String(a).split(/\s*\/\s*/)[0]; }   // same splitting as check.js alternatives()
 
 /** Inline text with **bold** and *italic* (used for Spanish). Built as nodes, never HTML. */
 export function rich(text) {
@@ -223,7 +223,7 @@ export function exerciseView(ex, { onResult, onNext }) {
         if (placed.length < ex.words.length) return;
         // `a` may list other correct orders: "Mañana voy a la obra / Voy a la obra mañana".
         const g = reorderRight(placed.map((p) => p.w), ex.a) ? 1 : 0;
-        finish(g, g ? 'right' : 'wrong', String(ex.a).split(' / ')[0]);
+        finish(g, g ? 'right' : 'wrong', firstAnswer(ex.a));
         draw();
       };
       root.append(line, bank, result);

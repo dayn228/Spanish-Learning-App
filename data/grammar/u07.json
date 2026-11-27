@@ -1,46 +1,343 @@
 {
-  "id": "u07",
-  "n": 7,
-  "level": "A1",
-  "title": "gustar and similar verbs",
-  "summary": "\"I like\" works the other way round in Spanish.",
-  "explain": [
-    {"h": "Backwards from English"},
-    {"p": "*Me gusta el café* literally means \"coffee pleases me\". The thing you like is the subject, so the verb agrees with **the thing**, not with you."},
-    {"table": [["me gusta(n)", "I like"], ["te gusta(n)", "you like"], ["le gusta(n)", "he / she likes, you (usted) like"], ["nos gusta(n)", "we like"], ["os gusta(n)", "you all like"], ["les gusta(n)", "they / you all (ustedes) like"]]},
-    {"p": "**gusta** + one thing or a verb · **gustan** + several things."},
-    {"ex": ["Me gusta el trabajo.", "I like the job."]},
-    {"ex": ["Me gustan las ventanas grandes.", "I like big windows."]},
-    {"ex": ["Nos gusta viajar.", "We like travelling."]},
-    {"p": "To name the person, add **a + person**: *A mi novia le gusta el jazz.* For emphasis: *A mí me gusta, ¿y a ti?*"},
-    {"h": "Same pattern"},
-    {"p": "**encantar** (to love), **interesar** (to interest), **doler** (to hurt: *me duele la cabeza, me duelen los pies*), **parecer** (to seem: *me parece caro*), **importar** (to matter)."},
-    {"tip": "Don't add *yo*: say *Me gusta*, never *Yo gusto*."}
-  ],
-  "exercises": [
-    {"type": "choice", "q": "Me ___ el café.", "options": ["gusta", "gustan"], "a": 0, "why": "One thing → gusta.", "tags": ["gusta-gustan"]},
-    {"type": "choice", "q": "Me ___ los coches rápidos.", "options": ["gusta", "gustan"], "a": 1, "why": "Several things → gustan.", "tags": ["gusta-gustan"]},
-    {"type": "choice", "q": "Nos ___ trabajar en equipo.", "options": ["gusta", "gustan"], "a": 0, "why": "A verb → gusta.", "tags": ["gusta-verb"]},
-    {"type": "choice", "q": "A mi madre ___ gusta leer.", "options": ["le", "la", "se"], "a": 0, "tags": ["pronoun"]},
-    {"type": "choice", "q": "¿A vosotros ___ gusta el fútbol?", "options": ["os", "les", "nos"], "a": 0, "tags": ["pronoun"]},
-    {"type": "choice", "q": "A los clientes no ___ gustan los retrasos.", "options": ["le", "les"], "a": 1, "tags": ["pronoun"]},
-    {"type": "choice", "q": "Me ___ la espalda.", "options": ["duele", "duelen"], "a": 0, "tags": ["doler"]},
-    {"type": "choice", "q": "Me ___ los pies.", "options": ["duele", "duelen"], "a": 1, "tags": ["doler"]},
-    {"type": "gap", "q": "___ gusta la música española. (I)", "hint": "pronoun", "a": "me", "en": "I like Spanish music.", "tags": ["pronoun"]},
-    {"type": "gap", "q": "¿___ gusta tu trabajo? (tú)", "hint": "pronoun", "a": "te", "en": "Do you like your job?", "tags": ["pronoun"]},
-    {"type": "gap", "q": "A nosotros ___ encanta Barcelona.", "hint": "pronoun", "a": "nos", "en": "We love Barcelona.", "tags": ["pronoun"]},
-    {"type": "gap", "q": "Me ___ las noticias de economía.", "hint": "interesar", "a": "interesan", "en": "Economic news interests me.", "tags": ["gusta-gustan", "similar"]},
-    {"type": "gap", "q": "Este presupuesto me ___ caro.", "hint": "parecer", "a": "parece", "en": "This quote seems expensive to me.", "tags": ["similar"]},
-    {"type": "gap", "q": "A mi novia le ___ los gatos.", "hint": "encantar", "a": "encantan", "en": "My girlfriend loves cats.", "tags": ["gusta-gustan", "similar"]},
-    {"type": "error", "q": "Yo gusto el chocolate.", "a": "Me gusta el chocolate.", "why": "The thing liked is the subject.", "tags": ["structure"]},
-    {"type": "error", "q": "Me gusta las ventanas de aluminio.", "a": "Me gustan las ventanas de aluminio.", "why": "Several things → gustan.", "tags": ["gusta-gustan"]},
-    {"type": "error", "q": "A Pedro les gusta viajar.", "a": "A Pedro le gusta viajar.", "why": "One person → le.", "tags": ["pronoun"]},
-    {"type": "transform", "instr": "Change to nosotros.", "q": "Me gusta cocinar.", "a": "Nos gusta cocinar.", "tags": ["pronoun"]},
-    {"type": "transform", "instr": "Make it plural: las casas.", "q": "Me gusta la casa.", "a": "Me gustan las casas.", "tags": ["gusta-gustan"]},
-    {"type": "translate", "q": "I like my job.", "a": "Me gusta mi trabajo", "tags": ["structure"]},
-    {"type": "translate", "q": "We love travelling.", "a": "Nos encanta viajar", "tags": ["similar", "gusta-verb"]},
-    {"type": "translate", "q": "My head hurts.", "a": "Me duele la cabeza", "tags": ["doler"]},
-    {"type": "reorder", "words": ["A", "mí", "me", "interesa", "la", "política"], "a": "A mí me interesa la política", "en": "Politics interests me.", "tags": ["similar"]},
-    {"type": "reorder", "words": ["¿Os", "gustan", "las", "nuevas", "ventanas?"], "a": "¿Os gustan las nuevas ventanas?", "en": "Do you (all) like the new windows?", "tags": ["gusta-gustan", "pronoun"]}
-  ]
+ "id": "u07",
+ "n": 7,
+ "level": "A1",
+ "title": "gustar and similar verbs",
+ "summary": "\"I like\" works the other way round in Spanish.",
+ "explain": [
+  {
+   "h": "Backwards from English"
+  },
+  {
+   "p": "*Me gusta el café* literally means \"coffee pleases me\". The thing you like is the subject, so the verb agrees with **the thing**, not with you."
+  },
+  {
+   "table": [
+    [
+     "me gusta(n)",
+     "I like"
+    ],
+    [
+     "te gusta(n)",
+     "you like"
+    ],
+    [
+     "le gusta(n)",
+     "he / she likes, you (usted) like"
+    ],
+    [
+     "nos gusta(n)",
+     "we like"
+    ],
+    [
+     "os gusta(n)",
+     "you all like"
+    ],
+    [
+     "les gusta(n)",
+     "they / you all (ustedes) like"
+    ]
+   ]
+  },
+  {
+   "p": "**gusta** + one thing or a verb · **gustan** + several things."
+  },
+  {
+   "ex": [
+    "Me gusta el trabajo.",
+    "I like the job."
+   ]
+  },
+  {
+   "ex": [
+    "Me gustan las ventanas grandes.",
+    "I like big windows."
+   ]
+  },
+  {
+   "ex": [
+    "Nos gusta viajar.",
+    "We like travelling."
+   ]
+  },
+  {
+   "p": "To name the person, add **a + person**: *A mi novia le gusta el jazz.* For emphasis: *A mí me gusta, ¿y a ti?*"
+  },
+  {
+   "h": "Same pattern"
+  },
+  {
+   "p": "**encantar** (to love), **interesar** (to interest), **doler** (to hurt: *me duele la cabeza, me duelen los pies*), **parecer** (to seem: *me parece caro*), **importar** (to matter)."
+  },
+  {
+   "tip": "Don't add *yo*: say *Me gusta*, never *Yo gusto*."
+  }
+ ],
+ "exercises": [
+  {
+   "type": "choice",
+   "q": "Me ___ el café.",
+   "options": [
+    "gusta",
+    "gustan"
+   ],
+   "a": 0,
+   "why": "One thing → gusta.",
+   "tags": [
+    "gusta-gustan"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Me ___ los coches rápidos.",
+   "options": [
+    "gusta",
+    "gustan"
+   ],
+   "a": 1,
+   "why": "Several things → gustan.",
+   "tags": [
+    "gusta-gustan"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Nos ___ trabajar en equipo.",
+   "options": [
+    "gusta",
+    "gustan"
+   ],
+   "a": 0,
+   "why": "A verb → gusta.",
+   "tags": [
+    "gusta-verb"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "A mi madre ___ gusta leer.",
+   "options": [
+    "le",
+    "la",
+    "se"
+   ],
+   "a": 0,
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "¿A vosotros ___ gusta el fútbol?",
+   "options": [
+    "os",
+    "les",
+    "nos"
+   ],
+   "a": 0,
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "A los clientes no ___ gustan los retrasos.",
+   "options": [
+    "le",
+    "les"
+   ],
+   "a": 1,
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Me ___ la espalda.",
+   "options": [
+    "duele",
+    "duelen"
+   ],
+   "a": 0,
+   "tags": [
+    "doler"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Me ___ los pies.",
+   "options": [
+    "duele",
+    "duelen"
+   ],
+   "a": 1,
+   "tags": [
+    "doler"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "___ gusta la música española. (I)",
+   "hint": "pronoun",
+   "a": "me",
+   "en": "I like Spanish music.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿___ gusta tu trabajo? (tú)",
+   "hint": "pronoun",
+   "a": "te",
+   "en": "Do you like your job?",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "A nosotros ___ encanta Barcelona.",
+   "hint": "pronoun",
+   "a": "nos",
+   "en": "We love Barcelona.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Me ___ las noticias de economía.",
+   "hint": "interesar",
+   "a": "interesan",
+   "en": "Economic news interests me.",
+   "tags": [
+    "gusta-gustan",
+    "similar"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Este presupuesto me ___ caro.",
+   "hint": "parecer",
+   "a": "parece",
+   "en": "This quote seems expensive to me.",
+   "tags": [
+    "similar"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "A mi novia le ___ los gatos.",
+   "hint": "encantar",
+   "a": "encantan",
+   "en": "My girlfriend loves cats.",
+   "tags": [
+    "gusta-gustan",
+    "similar"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Yo gusto el chocolate.",
+   "a": "Me gusta el chocolate.",
+   "why": "The thing liked is the subject.",
+   "tags": [
+    "structure"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Me gusta las ventanas de aluminio.",
+   "a": "Me gustan las ventanas de aluminio.",
+   "why": "Several things → gustan.",
+   "tags": [
+    "gusta-gustan"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "A Pedro les gusta viajar.",
+   "a": "A Pedro le gusta viajar.",
+   "why": "One person → le.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Change to nosotros.",
+   "q": "Me gusta cocinar.",
+   "a": "Nos gusta cocinar.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Make it plural: las casas.",
+   "q": "Me gusta la casa.",
+   "a": "Me gustan las casas.",
+   "tags": [
+    "gusta-gustan"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "I like my job.",
+   "a": "Me gusta mi trabajo",
+   "tags": [
+    "structure"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "We love travelling.",
+   "a": "Nos encanta viajar",
+   "tags": [
+    "similar",
+    "gusta-verb"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "My head hurts.",
+   "a": "Me duele la cabeza",
+   "tags": [
+    "doler"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "A",
+    "mí",
+    "me",
+    "interesa",
+    "la",
+    "política"
+   ],
+   "a": "A mí me interesa la política / La política me interesa a mí",
+   "en": "Politics interests me.",
+   "tags": [
+    "similar"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "¿Os",
+    "gustan",
+    "las",
+    "nuevas",
+    "ventanas?"
+   ],
+   "a": "¿Os gustan las nuevas ventanas?",
+   "en": "Do you (all) like the new windows?",
+   "tags": [
+    "gusta-gustan",
+    "pronoun"
+   ]
+  }
+ ]
 }

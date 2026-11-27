@@ -1,45 +1,321 @@
 {
-  "id": "u08",
-  "n": 8,
-  "level": "A1",
-  "title": "Reflexive verbs",
-  "summary": "Daily routine: me levanto, me ducho, me acuesto.",
-  "explain": [
-    {"h": "Verbs that come with a pronoun"},
-    {"p": "Reflexive verbs end in **-se** in the dictionary: *levantarse* (to get up). The action goes back to the person doing it. Conjugate the verb as usual and put the matching pronoun **before** it."},
-    {"table": [["yo", "me levanto"], ["tú", "te levantas"], ["él / ella / usted", "se levanta"], ["nosotros", "nos levantamos"], ["vosotros", "os levantáis"], ["ellos / ustedes", "se levantan"]]},
-    {"ex": ["Me levanto a las seis.", "I get up at six."]},
-    {"ex": ["¿A qué hora te acuestas?", "What time do you go to bed?"]},
-    {"p": "Common ones: **levantarse** (get up), **despertarse** (wake up, e→ie), **ducharse** (shower), **vestirse** (get dressed, e→i), **acostarse** (go to bed, o→ue), **llamarse** (be called), **quedarse** (stay), **sentarse** (sit down, e→ie), **irse** (leave)."},
-    {"h": "With an infinitive"},
-    {"p": "With *ir a*, *querer*, *poder*… the pronoun can go before the first verb **or** on the end of the infinitive. Both are correct:"},
-    {"ex": ["Me voy a duchar. = Voy a ducharme.", "I'm going to have a shower."]},
-    {"tip": "Negative: *no* comes before the pronoun: *No me acuerdo.* (I don't remember.)"}
-  ],
-  "exercises": [
-    {"type": "table", "verb": "levantarse", "tags": ["forms"]},
-    {"type": "table", "verb": "ducharse", "tags": ["forms"]},
-    {"type": "gap", "q": "Yo ___ levanto a las seis.", "hint": "pronoun", "a": "me", "en": "I get up at six.", "tags": ["pronoun"]},
-    {"type": "gap", "q": "¿A qué hora ___ acuestas?", "hint": "pronoun", "a": "te", "en": "What time do you go to bed?", "tags": ["pronoun"]},
-    {"type": "gap", "q": "Mi jefe ___ llama Carlos.", "hint": "pronoun", "a": "se", "en": "My boss is called Carlos.", "tags": ["pronoun"]},
-    {"type": "gap", "q": "Nosotros ___ quedamos en casa.", "hint": "pronoun", "a": "nos", "en": "We're staying at home.", "tags": ["pronoun"]},
-    {"type": "gap", "q": "¿Vosotros ___ ducháis por la mañana?", "hint": "pronoun", "a": "os", "en": "Do you (all) shower in the morning?", "tags": ["pronoun"]},
-    {"type": "gap", "q": "Yo me ___ a las siete.", "hint": "despertarse", "a": "despierto", "en": "I wake up at seven.", "tags": ["stem-change"]},
-    {"type": "gap", "q": "Ellos se ___ tarde.", "hint": "acostarse", "a": "acuestan", "en": "They go to bed late.", "tags": ["stem-change"]},
-    {"type": "gap", "q": "Me ___ rápido por la mañana.", "hint": "vestirse", "a": "visto", "en": "I get dressed quickly in the morning.", "tags": ["stem-change"]},
-    {"type": "gap", "q": "¿Cómo te ___?", "hint": "llamarse", "a": "llamas", "en": "What's your name?", "tags": ["forms"]},
-    {"type": "choice", "q": "Voy a ___ ahora.", "options": ["ducharme", "ducharse", "me ducho"], "a": 0, "why": "Pronoun on the infinitive matches the person: yo → ducharme.", "tags": ["infinitive"]},
-    {"type": "choice", "q": "Nosotros ___ a las ocho.", "options": ["se levantan", "nos levantamos", "nos levantan"], "a": 1, "tags": ["pronoun", "forms"]},
-    {"type": "choice", "q": "No ___ acuerdo.", "options": ["me", "yo"], "a": 0, "why": "No + pronoun + verb.", "tags": ["negative"]},
-    {"type": "error", "q": "Yo levanto a las seis.", "a": "Yo me levanto a las seis.", "why": "Reflexive verbs need the pronoun.", "tags": ["pronoun"]},
-    {"type": "error", "q": "Nosotros se quedamos aquí.", "a": "Nosotros nos quedamos aquí.", "why": "nosotros → nos.", "tags": ["pronoun"]},
-    {"type": "error", "q": "Me no acuerdo.", "a": "No me acuerdo.", "why": "No goes before the pronoun.", "tags": ["negative"]},
-    {"type": "transform", "instr": "Change to nosotros.", "q": "Me levanto temprano.", "a": "Nos levantamos temprano.", "tags": ["pronoun", "forms"]},
-    {"type": "transform", "instr": "Say it another way (pronoun on the infinitive).", "q": "Me voy a sentar aquí.", "a": "Voy a sentarme aquí.", "tags": ["infinitive"]},
-    {"type": "translate", "q": "I get up at seven.", "a": "Me levanto a las siete", "tags": ["forms"]},
-    {"type": "translate", "q": "My name is Daniel.", "a": "Me llamo Daniel", "tags": ["forms"]},
-    {"type": "translate", "q": "We are going to stay at home.", "a": "Vamos a quedarnos en casa / Nos vamos a quedar en casa", "tags": ["infinitive"]},
-    {"type": "reorder", "words": ["Normalmente", "me", "acuesto", "a", "las", "once"], "a": "Normalmente me acuesto a las once", "en": "I usually go to bed at eleven.", "tags": ["stem-change"]},
-    {"type": "reorder", "words": ["¿A", "qué", "hora", "os", "vais?"], "a": "¿A qué hora os vais?", "en": "What time are you (all) leaving?", "tags": ["pronoun"]}
-  ]
+ "id": "u08",
+ "n": 8,
+ "level": "A1",
+ "title": "Reflexive verbs",
+ "summary": "Daily routine: me levanto, me ducho, me acuesto.",
+ "explain": [
+  {
+   "h": "Verbs that come with a pronoun"
+  },
+  {
+   "p": "Reflexive verbs end in **-se** in the dictionary: *levantarse* (to get up). The action goes back to the person doing it. Conjugate the verb as usual and put the matching pronoun **before** it."
+  },
+  {
+   "table": [
+    [
+     "yo",
+     "me levanto"
+    ],
+    [
+     "tú",
+     "te levantas"
+    ],
+    [
+     "él / ella / usted",
+     "se levanta"
+    ],
+    [
+     "nosotros",
+     "nos levantamos"
+    ],
+    [
+     "vosotros",
+     "os levantáis"
+    ],
+    [
+     "ellos / ustedes",
+     "se levantan"
+    ]
+   ]
+  },
+  {
+   "ex": [
+    "Me levanto a las seis.",
+    "I get up at six."
+   ]
+  },
+  {
+   "ex": [
+    "¿A qué hora te acuestas?",
+    "What time do you go to bed?"
+   ]
+  },
+  {
+   "p": "Common ones: **levantarse** (get up), **despertarse** (wake up, e→ie), **ducharse** (shower), **vestirse** (get dressed, e→i), **acostarse** (go to bed, o→ue), **llamarse** (be called), **quedarse** (stay), **sentarse** (sit down, e→ie), **irse** (leave)."
+  },
+  {
+   "h": "With an infinitive"
+  },
+  {
+   "p": "With *ir a*, *querer*, *poder*… the pronoun can go before the first verb **or** on the end of the infinitive. Both are correct:"
+  },
+  {
+   "ex": [
+    "Me voy a duchar. = Voy a ducharme.",
+    "I'm going to have a shower."
+   ]
+  },
+  {
+   "tip": "Negative: *no* comes before the pronoun: *No me acuerdo.* (I don't remember.)"
+  }
+ ],
+ "exercises": [
+  {
+   "type": "table",
+   "verb": "levantarse",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "table",
+   "verb": "ducharse",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Yo ___ levanto a las seis.",
+   "hint": "pronoun",
+   "a": "me",
+   "en": "I get up at six.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿A qué hora ___ acuestas?",
+   "hint": "pronoun",
+   "a": "te",
+   "en": "What time do you go to bed?",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Mi jefe ___ llama Carlos.",
+   "hint": "pronoun",
+   "a": "se",
+   "en": "My boss is called Carlos.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Nosotros ___ quedamos en casa.",
+   "hint": "pronoun",
+   "a": "nos",
+   "en": "We're staying at home.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Vosotros ___ ducháis por la mañana?",
+   "hint": "pronoun",
+   "a": "os",
+   "en": "Do you (all) shower in the morning?",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Yo me ___ a las siete.",
+   "hint": "despertarse",
+   "a": "despierto",
+   "en": "I wake up at seven.",
+   "tags": [
+    "stem-change"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Ellos se ___ tarde.",
+   "hint": "acostarse",
+   "a": "acuestan",
+   "en": "They go to bed late.",
+   "tags": [
+    "stem-change"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Me ___ rápido por la mañana.",
+   "hint": "vestirse",
+   "a": "visto",
+   "en": "I get dressed quickly in the morning.",
+   "tags": [
+    "stem-change"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Cómo te ___?",
+   "hint": "llamarse",
+   "a": "llamas",
+   "en": "What's your name?",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Voy a ___ ahora.",
+   "options": [
+    "ducharme",
+    "ducharse",
+    "me ducho"
+   ],
+   "a": 0,
+   "why": "Pronoun on the infinitive matches the person: yo → ducharme.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Nosotros ___ a las ocho.",
+   "options": [
+    "se levantan",
+    "nos levantamos",
+    "nos levantan"
+   ],
+   "a": 1,
+   "tags": [
+    "pronoun",
+    "forms"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "No ___ acuerdo.",
+   "options": [
+    "me",
+    "yo"
+   ],
+   "a": 0,
+   "why": "No + pronoun + verb.",
+   "tags": [
+    "negative"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Yo levanto a las seis.",
+   "a": "Yo me levanto a las seis.",
+   "why": "Reflexive verbs need the pronoun.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Nosotros se quedamos aquí.",
+   "a": "Nosotros nos quedamos aquí.",
+   "why": "nosotros → nos.",
+   "tags": [
+    "pronoun"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Me no acuerdo.",
+   "a": "No me acuerdo.",
+   "why": "No goes before the pronoun.",
+   "tags": [
+    "negative"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Change to nosotros.",
+   "q": "Me levanto temprano.",
+   "a": "Nos levantamos temprano.",
+   "tags": [
+    "pronoun",
+    "forms"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Say it another way (pronoun on the infinitive).",
+   "q": "Me voy a sentar aquí.",
+   "a": "Voy a sentarme aquí.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "I get up at seven.",
+   "a": "Me levanto a las siete",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "My name is Daniel.",
+   "a": "Me llamo Daniel",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "We are going to stay at home.",
+   "a": "Vamos a quedarnos en casa / Nos vamos a quedar en casa",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "Normalmente",
+    "me",
+    "acuesto",
+    "a",
+    "las",
+    "once"
+   ],
+   "a": "Normalmente me acuesto a las once / Me acuesto normalmente a las once / Me acuesto a las once normalmente",
+   "en": "I usually go to bed at eleven.",
+   "tags": [
+    "stem-change"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "¿A",
+    "qué",
+    "hora",
+    "os",
+    "vais?"
+   ],
+   "a": "¿A qué hora os vais?",
+   "en": "What time are you (all) leaving?",
+   "tags": [
+    "pronoun"
+   ]
+  }
+ ]
 }

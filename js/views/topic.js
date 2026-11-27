@@ -51,8 +51,9 @@ export function topicView(id) {
       const s = stage(state.cards[w.id]);
       return h('button', {
         class: 'list-row', style: { width: '100%', background: 'none', border: 0, borderBottom: '0.5px solid var(--line)', textAlign: 'left', color: 'inherit' },
-        onclick: () => speak(w.es), 'aria-label': `${w.es}, ${w.en}. Tap to hear it.`,
+        onclick: () => speak(w.es),
       },
+        h('span', { class: 'sr-only' }, 'Hear: '),
         h('span', { class: 'es' }, w.es),
         h('span', { class: 'right' },
           h('span', { class: 'en' }, w.en),

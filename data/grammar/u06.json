@@ -1,44 +1,339 @@
 {
-  "id": "u06",
-  "n": 6,
-  "level": "A1",
-  "title": "ir a + infinitive",
-  "summary": "Talking about plans: \"I'm going to…\".",
-  "explain": [
-    {"h": "The easy future"},
-    {"p": "**ir** (present) + **a** + **infinitive** = going to do something. Only *ir* changes; the second verb stays in the infinitive."},
-    {"table": [["yo", "voy a trabajar"], ["tú", "vas a trabajar"], ["él / ella / usted", "va a trabajar"], ["nosotros", "vamos a trabajar"], ["vosotros", "vais a trabajar"], ["ellos / ustedes", "van a trabajar"]]},
-    {"ex": ["Mañana voy a llamar al proveedor.", "Tomorrow I'm going to call the supplier."]},
-    {"ex": ["¿Qué vas a hacer el fin de semana?", "What are you going to do at the weekend?"]},
-    {"ex": ["El Gobierno va a subir los impuestos.", "The government is going to raise taxes."]},
-    {"p": "Negative: **no** before *ir*: *No vamos a terminar hoy.*"},
-    {"h": "Useful time words"},
-    {"p": "*mañana* (tomorrow), *pasado mañana* (the day after tomorrow), *esta tarde* (this afternoon), *la semana que viene* (next week), *el mes que viene* (next month), *el año que viene* (next year)."},
-    {"tip": "Don't forget the **a**: *voy a comer*, never *voy comer*. And *ir a + el* contracts to **al**: *Voy al banco.*"}
-  ],
-  "exercises": [
-    {"type": "gap", "q": "Yo ___ llamar al cliente.", "hint": "ir a", "a": "voy a", "en": "I'm going to call the client.", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "¿Tú ___ venir a la reunión?", "hint": "ir a", "a": "vas a", "en": "Are you going to come to the meeting?", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "Nosotros ___ instalar las ventanas mañana.", "hint": "ir a", "a": "vamos a", "en": "We're going to install the windows tomorrow.", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "Ellos ___ comprar un piso.", "hint": "ir a", "a": "van a", "en": "They're going to buy a flat.", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "¿Vosotros ___ cenar fuera?", "hint": "ir a", "a": "vais a", "en": "Are you (all) going to eat out?", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "El banco central ___ bajar los tipos.", "hint": "ir a", "a": "va a", "en": "The central bank is going to cut rates.", "tags": ["ir-a-forms"]},
-    {"type": "gap", "q": "Voy a ___ el presupuesto esta tarde.", "hint": "enviar", "a": "enviar", "en": "I'm going to send the quote this afternoon.", "tags": ["infinitive"]},
-    {"type": "choice", "q": "Mañana ___ trabajar en casa.", "options": ["voy a", "voy", "voy de"], "a": 0, "tags": ["missing-a"]},
-    {"type": "choice", "q": "Vamos a ___ a las ocho.", "options": ["empezamos", "empezar"], "a": 1, "why": "After ir a → infinitive.", "tags": ["infinitive"]},
-    {"type": "choice", "q": "El lunes vamos ___ obra.", "options": ["a la", "al"], "a": 0, "why": "Obra is feminine → a la.", "tags": ["al"]},
-    {"type": "choice", "q": "Voy ___ banco.", "options": ["a el", "al"], "a": 1, "why": "a + el → al.", "tags": ["al"]},
-    {"type": "transform", "instr": "Say it with ir a + infinitive.", "q": "Trabajo mañana.", "a": "Voy a trabajar mañana.", "tags": ["ir-a-forms", "infinitive"]},
-    {"type": "transform", "instr": "Say it with ir a + infinitive.", "q": "Terminamos el proyecto.", "a": "Vamos a terminar el proyecto.", "tags": ["ir-a-forms", "infinitive"]},
-    {"type": "transform", "instr": "Make it negative.", "q": "Voy a ir a la fiesta.", "a": "No voy a ir a la fiesta.", "tags": ["negative"]},
-    {"type": "error", "q": "Voy comprar pan.", "a": "Voy a comprar pan.", "why": "You need the a.", "tags": ["missing-a"]},
-    {"type": "error", "q": "Vamos a trabajamos el sábado.", "a": "Vamos a trabajar el sábado.", "why": "After ir a, the infinitive.", "tags": ["infinitive"]},
-    {"type": "error", "q": "El cliente va a viene mañana.", "a": "El cliente va a venir mañana.", "tags": ["infinitive"]},
-    {"type": "translate", "q": "I'm going to study Spanish.", "a": "Voy a estudiar español", "tags": ["ir-a-forms"]},
-    {"type": "translate", "q": "What are you going to do? (tú)", "a": "¿Qué vas a hacer?", "tags": ["ir-a-forms"]},
-    {"type": "translate", "q": "We are not going to finish today.", "a": "No vamos a terminar hoy", "tags": ["negative"]},
-    {"type": "reorder", "words": ["La", "semana", "que", "viene", "vamos", "a", "medir", "la", "casa"], "a": "La semana que viene vamos a medir la casa", "en": "Next week we're going to survey the house.", "tags": ["ir-a-forms"]},
-    {"type": "reorder", "words": ["¿Vas", "a", "llamar", "al", "proveedor?"], "a": "¿Vas a llamar al proveedor?", "en": "Are you going to call the supplier?", "tags": ["al"]},
-    {"type": "match", "instr": "Match the time words.", "pairs": [["mañana", "tomorrow"], ["pasado mañana", "the day after tomorrow"], ["esta tarde", "this afternoon"], ["la semana que viene", "next week"], ["el año que viene", "next year"]], "tags": ["time-words"]}
-  ]
+ "id": "u06",
+ "n": 6,
+ "level": "A1",
+ "title": "ir a + infinitive",
+ "summary": "Talking about plans: \"I'm going to…\".",
+ "explain": [
+  {
+   "h": "The easy future"
+  },
+  {
+   "p": "**ir** (present) + **a** + **infinitive** = going to do something. Only *ir* changes; the second verb stays in the infinitive."
+  },
+  {
+   "table": [
+    [
+     "yo",
+     "voy a trabajar"
+    ],
+    [
+     "tú",
+     "vas a trabajar"
+    ],
+    [
+     "él / ella / usted",
+     "va a trabajar"
+    ],
+    [
+     "nosotros",
+     "vamos a trabajar"
+    ],
+    [
+     "vosotros",
+     "vais a trabajar"
+    ],
+    [
+     "ellos / ustedes",
+     "van a trabajar"
+    ]
+   ]
+  },
+  {
+   "ex": [
+    "Mañana voy a llamar al proveedor.",
+    "Tomorrow I'm going to call the supplier."
+   ]
+  },
+  {
+   "ex": [
+    "¿Qué vas a hacer el fin de semana?",
+    "What are you going to do at the weekend?"
+   ]
+  },
+  {
+   "ex": [
+    "El Gobierno va a subir los impuestos.",
+    "The government is going to raise taxes."
+   ]
+  },
+  {
+   "p": "Negative: **no** before *ir*: *No vamos a terminar hoy.*"
+  },
+  {
+   "h": "Useful time words"
+  },
+  {
+   "p": "*mañana* (tomorrow), *pasado mañana* (the day after tomorrow), *esta tarde* (this afternoon), *la semana que viene* (next week), *el mes que viene* (next month), *el año que viene* (next year)."
+  },
+  {
+   "tip": "Don't forget the **a**: *voy a comer*, never *voy comer*. And *ir a + el* contracts to **al**: *Voy al banco.*"
+  }
+ ],
+ "exercises": [
+  {
+   "type": "gap",
+   "q": "Yo ___ llamar al cliente.",
+   "hint": "ir a",
+   "a": "voy a",
+   "en": "I'm going to call the client.",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Tú ___ venir a la reunión?",
+   "hint": "ir a",
+   "a": "vas a",
+   "en": "Are you going to come to the meeting?",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Nosotros ___ instalar las ventanas mañana.",
+   "hint": "ir a",
+   "a": "vamos a",
+   "en": "We're going to install the windows tomorrow.",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Ellos ___ comprar un piso.",
+   "hint": "ir a",
+   "a": "van a",
+   "en": "They're going to buy a flat.",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Vosotros ___ cenar fuera?",
+   "hint": "ir a",
+   "a": "vais a",
+   "en": "Are you (all) going to eat out?",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "El banco central ___ bajar los tipos.",
+   "hint": "ir a",
+   "a": "va a",
+   "en": "The central bank is going to cut rates.",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Voy a ___ el presupuesto esta tarde.",
+   "hint": "enviar",
+   "a": "enviar",
+   "en": "I'm going to send the quote this afternoon.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Mañana ___ trabajar en casa.",
+   "options": [
+    "voy a",
+    "voy",
+    "voy de"
+   ],
+   "a": 0,
+   "tags": [
+    "missing-a"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Vamos a ___ a las ocho.",
+   "options": [
+    "empezamos",
+    "empezar"
+   ],
+   "a": 1,
+   "why": "After ir a → infinitive.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "El lunes vamos ___ obra.",
+   "options": [
+    "a la",
+    "al"
+   ],
+   "a": 0,
+   "why": "Obra is feminine → a la.",
+   "tags": [
+    "al"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Voy ___ banco.",
+   "options": [
+    "a el",
+    "al"
+   ],
+   "a": 1,
+   "why": "a + el → al.",
+   "tags": [
+    "al"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Say it with ir a + infinitive.",
+   "q": "Trabajo mañana.",
+   "a": "Voy a trabajar mañana.",
+   "tags": [
+    "ir-a-forms",
+    "infinitive"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Say it with ir a + infinitive.",
+   "q": "Terminamos el proyecto.",
+   "a": "Vamos a terminar el proyecto.",
+   "tags": [
+    "ir-a-forms",
+    "infinitive"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Make it negative.",
+   "q": "Voy a ir a la fiesta.",
+   "a": "No voy a ir a la fiesta.",
+   "tags": [
+    "negative"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Voy comprar pan.",
+   "a": "Voy a comprar pan.",
+   "why": "You need the a.",
+   "tags": [
+    "missing-a"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Vamos a trabajamos el sábado.",
+   "a": "Vamos a trabajar el sábado.",
+   "why": "After ir a, the infinitive.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "El cliente va a viene mañana.",
+   "a": "El cliente va a venir mañana.",
+   "tags": [
+    "infinitive"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "I'm going to study Spanish.",
+   "a": "Voy a estudiar español",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "What are you going to do? (tú)",
+   "a": "¿Qué vas a hacer?",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "We are not going to finish today.",
+   "a": "No vamos a terminar hoy",
+   "tags": [
+    "negative"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "La",
+    "semana",
+    "que",
+    "viene",
+    "vamos",
+    "a",
+    "medir",
+    "la",
+    "casa"
+   ],
+   "a": "La semana que viene vamos a medir la casa / Vamos a medir la casa la semana que viene",
+   "en": "Next week we're going to measure the house.",
+   "tags": [
+    "ir-a-forms"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "¿Vas",
+    "a",
+    "llamar",
+    "al",
+    "proveedor?"
+   ],
+   "a": "¿Vas a llamar al proveedor?",
+   "en": "Are you going to call the supplier?",
+   "tags": [
+    "al"
+   ]
+  },
+  {
+   "type": "match",
+   "instr": "Match the time words.",
+   "pairs": [
+    [
+     "mañana",
+     "tomorrow"
+    ],
+    [
+     "pasado mañana",
+     "the day after tomorrow"
+    ],
+    [
+     "esta tarde",
+     "this afternoon"
+    ],
+    [
+     "la semana que viene",
+     "next week"
+    ],
+    [
+     "el año que viene",
+     "next year"
+    ]
+   ],
+   "tags": [
+    "time-words"
+   ]
+  }
+ ]
 }

@@ -5,7 +5,7 @@ import { h, plural } from '../ui.js';
 import { stage } from '../srs.js';
 import { unitStatus, recommendedUnit, unitsDueForReview, countMistakes } from '../grammar.js';
 import { startSession } from './study.js';
-import { startDrill } from './drill.js';
+import { startDrill, unlockedTenses } from './drill.js';
 
 export function practiceView() {
   const { units, words } = state.content;
@@ -67,7 +67,7 @@ export function practiceView() {
 
   root.append(h('div', { class: 'card' },
     h('h2', {}, 'Verb trainer'),
-    h('p', { class: 'small muted', style: { marginTop: '6px' } }, 'Ten verb forms in the present tense. Forms you miss come back more; forms you know retire.'),
+    h('p', { class: 'small muted', style: { marginTop: '6px' } }, `Ten verb forms in the ${tenseList(unlockedTenses(state.grammar))}. Forms you miss come back more; forms you know retire.`),
     h('button', { class: 'btn btn-primary', style: { marginTop: '14px' }, onclick: () => startDrill({ kind: 'verbs', returnTo: '#practice' }) }, 'Start verb trainer')));
 
   root.append(h('h2', { class: 'section-title' }, 'Grammar units'),
@@ -92,4 +92,10 @@ export function practiceView() {
       }, 'Start typing practice')));
 
   return root;
+}
+
+function tenseList(tenses) {
+  const names = { present: 'present', preterite: 'preterite', imperfect: 'imperfect' };
+  const list = tenses.map((t) => names[t] || t);
+  return (list.length > 1 ? list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1] : list[0]) + (list.length > 1 ? ' tenses' : ' tense');
 }

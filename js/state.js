@@ -72,7 +72,10 @@ export function saveGrammar(countAnswer = true) {
 export const hooks = { afterSession: null };
 
 /** Call once when a session ends (any length). */
-export function finishSession() {
+/** A session that started before midnight counts for that day too, so the streak isn't lost. */
+export function finishSession(startedAt) {
+  const startDay = startedAt ? dayKey(startedAt) : null;
+  if (startDay && startDay !== dayKey()) state.streak = recordSession(state.streak, startDay);
   state.streak = recordSession(state.streak, dayKey());
   db.set('streak', state.streak);
   if (hooks.afterSession) hooks.afterSession();

@@ -114,3 +114,8 @@ html.theme-fade, html.theme-fade body, html.theme-fade body * {
 }
 html.has-photo body::before { display: none; }
 html.has-photo .nav { backdrop-filter: blur(10px); }
+
+/* With a photo, text that sits directly on the page (headings, lead lines) gets a soft halo in the
+   page colour so it stays readable on busy pictures; cards are opaque and need none. */
+html.has-photo #app { text-shadow: 0 0 2px var(--ivory), 0 0 8px var(--ivory), 0 0 14px var(--ivory); }
+html.has-photo #app .card, html.has-photo #app .btn, html.has-photo #app input, html.has-photo #app textarea { text-shadow: none; }
