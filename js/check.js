@@ -52,6 +52,22 @@ export function pointsFor(result, { strictArticles = false } = {}) {
 }
 
 /*
+  Grade a typed answer for one exercise (pure, so it is unit-tested).
+  On top of checkAnswer/pointsFor:
+  - "error" exercises: typing the faulty sentence back unchanged is wrong, even when the
+    only mistake is an accent (¿Donde…? → ¿Dónde…?), which checkAnswer would forgive.
+  - verb forms (conj, table): the accent is often the whole point (hablo / habló,
+    trabaje / trabajé), so an accent slip is half right, not right.
+*/
+export function gradeAnswer(input, answer, ex = {}) {
+  if (ex.type === 'error' && ex.q && normalise(input) === normalise(ex.q)) return { points: 0, kind: 'wrong' };
+  const kind = checkAnswer(input, answer);
+  const strictArticles = (ex.tags || []).some((t) => String(t).startsWith('article'));
+  if (kind === 'accent' && (ex.type === 'conj' || ex.type === 'table')) return { points: 0.5, kind };
+  return { points: pointsFor(kind, { strictArticles }), kind };
+}
+
+/*
   Dictation: compare word by word, ignoring case, punctuation and accents.
   Returns { points, marks } where marks lists the expected words with ok=true/false,
   so the screen can show which words were missed.

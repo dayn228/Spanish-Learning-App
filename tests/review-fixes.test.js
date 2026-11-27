@@ -39,3 +39,21 @@ test('R1: one broken content batch does not block sync and backups for ever', as
   assert.ok(actions.includes('backup.save'), 'the backup still runs');
   delete globalThis.fetch;
 });
+
+test('R2: retyping the faulty sentence of an "error" exercise is not right, even for an accent-only mistake', async () => {
+  const { gradeAnswer } = await import('../js/check.js');
+  const ex = { type: 'error', q: '¿Donde está la furgoneta?', a: '¿Dónde está la furgoneta?', tags: ['x'] };
+  assert.equal(gradeAnswer('¿Donde está la furgoneta?', ex.a, ex).points, 0);
+  assert.equal(gradeAnswer('Nosotros trabajabamos en la misma obra.', 'Nosotros trabajábamos en la misma obra.', { type: 'error', q: 'Nosotros trabajabamos en la misma obra.' }).points, 0);
+  assert.equal(gradeAnswer('¿Dónde está la furgoneta?', ex.a, ex).points, 1);
+  // Other exercise types keep the lenient accent rule.
+  assert.equal(gradeAnswer('Donde esta', '¿Dónde está?', { type: 'translate' }).points, 1);
+});
+
+test('R2: in the verb trainer and tables an accent slip is half right (hablo is not habló)', async () => {
+  const { gradeAnswer } = await import('../js/check.js');
+  assert.deepEqual(gradeAnswer('hablo', 'habló', { type: 'conj' }), { points: 0.5, kind: 'accent' });
+  assert.deepEqual(gradeAnswer('trabaje', 'trabajé', { type: 'table' }), { points: 0.5, kind: 'accent' });
+  assert.equal(gradeAnswer('habló', 'habló', { type: 'conj' }).points, 1);
+  assert.equal(gradeAnswer('la mapa', 'el mapa', { type: 'gap', tags: ['article-gender'] }).points, 0.5);
+});

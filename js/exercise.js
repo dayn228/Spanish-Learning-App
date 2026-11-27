@@ -21,7 +21,7 @@
 */
 
 import { h, icon, ICONS } from './ui.js';
-import { checkAnswer, normalise, pointsFor, wordDiff } from './check.js';
+import { gradeAnswer, normalise, wordDiff } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
 import { speak, hasSpanishVoice } from './speech.js';
 
@@ -51,9 +51,7 @@ function insertAt(input, text) {
 }
 
 function grade(input, answer, ex = {}) {
-  const r = checkAnswer(input, answer);
-  const strictArticles = (ex.tags || []).some((t) => t.startsWith('article'));
-  return { points: pointsFor(r, { strictArticles }), kind: r };
+  return gradeAnswer(input, answer, ex);
 }
 
 function firstAnswer(a) { return String(a).split(' / ')[0]; }
