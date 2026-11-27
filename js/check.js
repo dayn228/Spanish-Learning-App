@@ -3,6 +3,7 @@
 
   Result: 'right'  exact (ignoring case, punctuation and extra spaces)
           'accent' right letters, wrong or missing accents (á é í ó ú ü ñ)
+          'accent-key' the same, but the accent changes the word (llego/llegó, el/él, esta/está)
           'article' right word, missing or wrong article (el/la/los/las/un/una)
           'wrong'
 */
@@ -12,7 +13,7 @@ const ARTICLES = /^(el|la|los|las|un|una|unos|unas|lo)\s+/;
 export function normalise(s) {
   return String(s || '')
     .toLowerCase()
-    .replace(/[¿?¡!.,;:"«»()…]/g, ' ')
+    .replace(/[¿?¡!.,;:"«»()…“”„‘’]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -27,12 +28,48 @@ export function alternatives(answer) {
   return String(answer).split('/').map(normalise).filter(Boolean);
 }
 
-export function checkAnswer(input, answer) {
+/* Words whose accent tells them apart from another word (tú/tu, más/mas, está/esta…). */
+const ACCENT_PAIRS = new Set(['el', 'tu', 'mi', 'si', 'se', 'de', 'te', 'mas', 'aun', 'que', 'como', 'donde', 'cuando', 'quien', 'cual', 'cuanto', 'cuanta', 'cuantos', 'cuantas', 'adonde', 'esta', 'estas', 'este']);
+
+/* Nouns ending in é/ó, where the accent changes nothing. */
+const NOT_VERBS = new Set(['café', 'bebé', 'josé', 'puré', 'cliché', 'dominó', 'buró', 'chalé', 'carné', 'bidé']);
+
+/**
+ * Does an accent slip change the word? True when a word that differs only in accents is in
+ * ACCENT_PAIRS, or when one of the two forms ends in an accented é or ó: that is almost
+ * always a past-tense ending (llegó/llego, trabajé/trabaje). menú, difícil, árbol stay lenient.
+ */
+export function accentChangesWord(got, want) {
+  const a = got.split(' '), b = want.split(' ');
+  if (a.length !== b.length) return true;
+  return a.some((w, i) => {
+    if (w === b[i]) return false;
+    const bare = stripAccents(w);
+    const final = (x) => /[éó]$/.test(x) && !NOT_VERBS.has(x);
+    return ACCENT_PAIRS.has(bare) || final(w) || final(b[i]);
+  });
+}
+
+/* Optional subject pronouns at the start: "Yo estoy cansado" = "Estoy cansado". */
+const SUBJECT = /^(yo|tú|él|ella|usted|nosotros|nosotras|vosotros|vosotras|ellos|ellas|ustedes)\s+/;
+
+export function checkAnswer(input, answer, { dropPronoun = false } = {}) {
   const got = normalise(input);
   if (!got) return 'wrong';
   const options = alternatives(answer);
   if (options.includes(got)) return 'right';
-  if (options.some((o) => stripAccents(o) === stripAccents(got))) return 'accent';
+  if (dropPronoun) {
+    const strip = (s) => s.replace(SUBJECT, '');
+    // Only when the rest is a full sentence (2+ words), so "él" alone isn't swallowed.
+    const g = strip(got);
+    if (g !== got && g.includes(' ') || options.some((o) => strip(o) !== o)) {
+      if (options.some((o) => strip(o) === g)) return 'right';
+      const oa = options.find((o) => stripAccents(strip(o)) === stripAccents(g));
+      if (oa) return accentChangesWord(g, strip(oa)) ? 'accent-key' : 'accent';
+    }
+  }
+  const sameButAccents = options.find((o) => stripAccents(o) === stripAccents(got));
+  if (sameButAccents) return accentChangesWord(got, sameButAccents) ? 'accent-key' : 'accent';
   const bare = (s) => s.replace(ARTICLES, '');
   if (options.some((o) => bare(o) === bare(got) && bare(o) !== o)) return 'article';
   if (options.some((o) => stripAccents(bare(o)) === stripAccents(bare(got)) && bare(o) !== o)) return 'article';
@@ -47,6 +84,7 @@ export function checkAnswer(input, answer) {
 */
 export function pointsFor(result, { strictArticles = false } = {}) {
   if (result === 'right' || result === 'accent') return 1;
+  if (result === 'accent-key') return 0.5;
   if (result === 'article') return strictArticles ? 0.5 : 1;
   return 0;
 }
@@ -61,9 +99,9 @@ export function pointsFor(result, { strictArticles = false } = {}) {
 */
 export function gradeAnswer(input, answer, ex = {}) {
   if (ex.type === 'error' && ex.q && normalise(input) === normalise(ex.q)) return { points: 0, kind: 'wrong' };
-  const kind = checkAnswer(input, answer);
+  const kind = checkAnswer(input, answer, { dropPronoun: ex.type === 'translate' || ex.type === 'transform' });
   const strictArticles = (ex.tags || []).some((t) => String(t).startsWith('article'));
-  if (kind === 'accent' && (ex.type === 'conj' || ex.type === 'table')) return { points: 0.5, kind };
+  if (kind === 'accent' && (ex.type === 'conj' || ex.type === 'table')) return { points: 0.5, kind: 'accent-key' };
   return { points: pointsFor(kind, { strictArticles }), kind };
 }
 

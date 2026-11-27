@@ -14,8 +14,8 @@
 
 import { state, answer, knowIt, finishSession } from '../state.js';
 import { h, icon, ICONS, toast, plural } from '../ui.js';
-import { AGAIN, GOOD, EASY } from '../srs.js';
-import { checkAnswer, pointsFor } from '../check.js';
+import { AGAIN, HARD, GOOD, EASY } from '../srs.js';
+import { checkAnswer } from '../check.js';
 import { speak, canSpeak } from '../speech.js';
 import { startDrill } from './drill.js';
 import { aiNote } from './report.js';
@@ -210,10 +210,15 @@ function produceCard(word, item, next) {
     if (r === 'right') {
       g = fast ? EASY : GOOD;
       box = h('div', { class: 'feedback good' }, icon(ICONS.check, 20), h('div', {}, h('b', {}, 'Correct. '), h('span', { class: 'es' }, word.es)));
-    } else if (pointsFor(r) >= 1) {
+    } else if (r === 'accent') {
       g = GOOD;
       box = h('div', { class: 'feedback good' }, icon(ICONS.check, 20), h('div', {},
-        h('b', {}, 'Correct. '), r === 'accent' ? 'Mind the accent: ' : 'Mind the article: ', h('span', { class: 'es' }, word.es)));
+        h('b', {}, 'Correct. '), 'Mind the accent: ', h('span', { class: 'es' }, word.es)));
+    } else if (r === 'article' || r === 'accent-key') {
+      // The article carries the gender, and some accents change the word: close, but not yet known.
+      g = HARD;
+      box = h('div', { class: 'feedback close' }, h('div', {},
+        h('b', {}, r === 'article' ? 'Almost: check the article. ' : 'Almost: the accent changes the word. '), h('span', { class: 'es' }, word.es)));
     } else {
       g = AGAIN;
       box = h('div', { class: 'feedback bad' }, icon(ICONS.close, 20), h('div', {}, h('b', {}, 'Not quite. '), 'It is ', h('span', { class: 'es' }, word.es), '.'));
@@ -221,7 +226,7 @@ function produceCard(word, item, next) {
     }
     answer(word.id, g);
     session.answered += 1;
-    if (g !== AGAIN) session.right += 1;
+    if (g !== AGAIN && g !== HARD) session.right += 1;
     speak(word.es);
     result.replaceChildren(...[box, word.ex ? h('p', { class: 'small', style: { marginTop: '12px' } }, word.ex, h('span', { class: 'muted', style: { display: 'block' } }, word.exEn)) : null].filter(Boolean));
     actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: next }, 'Next word'));

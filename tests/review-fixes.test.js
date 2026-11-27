@@ -47,13 +47,13 @@ test('R2: retyping the faulty sentence of an "error" exercise is not right, even
   assert.equal(gradeAnswer('Nosotros trabajabamos en la misma obra.', 'Nosotros trabajábamos en la misma obra.', { type: 'error', q: 'Nosotros trabajabamos en la misma obra.' }).points, 0);
   assert.equal(gradeAnswer('¿Dónde está la furgoneta?', ex.a, ex).points, 1);
   // Other exercise types keep the lenient accent rule.
-  assert.equal(gradeAnswer('Donde esta', '¿Dónde está?', { type: 'translate' }).points, 1);
+  assert.equal(gradeAnswer('Es dificil', 'Es difícil', { type: 'translate' }).points, 1);
 });
 
 test('R2: in the verb trainer and tables an accent slip is half right (hablo is not habló)', async () => {
   const { gradeAnswer } = await import('../js/check.js');
-  assert.deepEqual(gradeAnswer('hablo', 'habló', { type: 'conj' }), { points: 0.5, kind: 'accent' });
-  assert.deepEqual(gradeAnswer('trabaje', 'trabajé', { type: 'table' }), { points: 0.5, kind: 'accent' });
+  assert.deepEqual(gradeAnswer('hablo', 'habló', { type: 'conj' }), { points: 0.5, kind: 'accent-key' });
+  assert.deepEqual(gradeAnswer('trabaje', 'trabajé', { type: 'table' }), { points: 0.5, kind: 'accent-key' });
   assert.equal(gradeAnswer('habló', 'habló', { type: 'conj' }).points, 1);
   assert.equal(gradeAnswer('la mapa', 'el mapa', { type: 'gap', tags: ['article-gender'] }).points, 0.5);
 });
@@ -76,4 +76,32 @@ test('R4: reorder exercises can list other correct orders, and validation checks
   assert.equal(reorderRight(['se', 'lo', 'explico', 'al', 'cliente', 'mañana'], ex.a), true);
   assert.equal(reorderRight(['lo', 'se', 'explico', 'al', 'cliente', 'mañana'], ex.a), false);
   assert.deepEqual(checkExercise({ ...ex, a: ex.a + ' / se lo explico mañana' }), ["words don't make the answer"]);
+});
+
+test('F04: an accent that changes the word is half right; harmless ones stay right', async () => {
+  const { checkAnswer, pointsFor, gradeAnswer } = await import('../js/check.js');
+  assert.equal(checkAnswer('llego', 'llegó'), 'accent-key');
+  assert.equal(checkAnswer('pague', 'pagué'), 'accent-key');
+  assert.equal(checkAnswer('el lo sabe', 'él lo sabe'), 'accent-key');
+  assert.equal(checkAnswer('esta en casa', 'está en casa'), 'accent-key');
+  assert.equal(checkAnswer('dificil', 'difícil'), 'accent');
+  assert.equal(checkAnswer('arbol', 'árbol'), 'accent');
+  assert.equal(pointsFor('accent-key'), 0.5);
+  assert.equal(gradeAnswer('llego', 'llegó', { type: 'gap' }).points, 0.5);
+});
+
+test('F10: optional subject pronouns in translations and rewrites', async () => {
+  const { gradeAnswer, checkAnswer } = await import('../js/check.js');
+  assert.equal(gradeAnswer('Yo estoy cansado', 'Estoy cansado / Estoy cansada', { type: 'translate' }).points, 1);
+  assert.equal(gradeAnswer('Ellos decidieron cambiar de proveedor.', 'Decidieron cambiar de proveedor.', { type: 'transform' }).points, 1);
+  assert.equal(gradeAnswer('Nosotros somos de Bulgaria', 'Somos de Bulgaria', { type: 'translate' }).points, 1);
+  // Articles are not pronouns: "El gobierno…" must not lose its article.
+  assert.equal(gradeAnswer('Gobierno redujo el déficit', 'El gobierno redujo el déficit', { type: 'translate' }).kind, 'article');
+  // Gaps don't drop pronouns.
+  assert.equal(checkAnswer('yo trabajo', 'trabajo'), 'wrong');
+});
+
+test('F33: smart quotes typed on an iPhone are ignored', async () => {
+  const { checkAnswer } = await import('../js/check.js');
+  assert.equal(checkAnswer('“Hola”', '"Hola"'), 'right');
 });

@@ -67,7 +67,7 @@ export function rich(text) {
 
 function feedback(points, kind, correct, extra) {
   const cls = points >= 1 ? 'good' : points > 0 ? 'close' : 'bad';
-  const title = points >= 1 ? 'Correct.' : kind === 'article' ? 'Almost: check the article.' : points > 0 ? 'Partly right.' : 'Not quite.';
+  const title = points >= 1 ? 'Correct.' : kind === 'article' ? 'Almost: check the article.' : kind === 'accent-key' ? 'Almost: the accent changes the word.' : points > 0 ? 'Partly right.' : 'Not quite.';
   const slip = points >= 1 && (kind === 'accent' || kind === 'article');
   return h('div', { class: `feedback ${cls}` },
     points >= 1 ? icon(ICONS.check, 20) : points === 0 ? icon(ICONS.close, 20) : null,
