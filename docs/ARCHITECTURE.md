@@ -112,7 +112,9 @@ The You screen shows the version (first 7 characters of `VERSION`).
   next set. An exercise right twice in a row retires. "Test me" masters at 90%.
   Mastered units come back at 7 → 18 → 45 days.
 - **Leniency:** accent slips and article slips count as right with a note; exercises
-  tagged `article*` give 0.5 for a wrong article.
+  tagged `article*` give 0.5 for a wrong article. Exceptions (`gradeAnswer` in `check.js`):
+  verb forms in the trainer and tables give 0.5 for an accent slip (hablo ≠ habló), and
+  typing an `error` exercise's faulty sentence back unchanged is wrong.
 - **Verb trainer:** present always; preterite unlocks after a set in `u10`, imperfect
   after `u12` (`TENSE_UNITS` in `views/drill.js`).
 - **Level estimate** (`refill.js`): A1 until all A1 units are mastered, then A2, B1, B2.

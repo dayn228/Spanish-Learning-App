@@ -85,8 +85,9 @@ use a small, consistent set per unit (about 4–8).
 | `match` | `pairs[[es, en]…]` (≥ 3), `instr?` | pairs them up |
 | `table` | `verb`, `tense?` (`present`, `preterite`, `imperfect`) | fills in all six forms |
 
-- `a` can list alternatives: `"Te lo envío mañana / Te lo mando mañana"`.
-- Accent and article slips count as right (with a note). Tag an exercise `article…`
+- `a` can list alternatives: `"Te lo envío mañana / Te lo mando mañana"`. This works for
+  `reorder` too (other correct word orders; each must use exactly the given `words`).
+- Accent and article slips count as right (with a note), except in verb tables (half right). Tag an exercise `article…`
   when the article is the point; then a wrong article is half right.
 - `table` verbs must be conjugable by `js/verbs.js` (the build checks).
 - Aim for 25–35 exercises per unit, mixing types, with at least a third in sentences

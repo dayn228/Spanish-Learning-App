@@ -16,7 +16,8 @@
 
   `a` may list alternatives separated by " / ".
   Points: 1 right, 0 wrong. A slip in accents or articles still counts as right,
-  with a note; exercises tagged article-* treat a wrong article as half right.
+  with a note; exercises tagged article-* treat a wrong article as half right,
+  verb forms (conj, table) treat an accent slip as half right (see gradeAnswer).
   Tables and matches score a share (4 of 6 right = 0.67).
 */
 

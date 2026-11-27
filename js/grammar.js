@@ -13,7 +13,7 @@
   Mastered units come back for short reviews; the gap between reviews grows
   each time you pass (7 → 18 → 45 days…).
 
-  Answer points: 1 right, 0.5 almost (accent or article), 0 wrong.
+  Answer points: 1 right, 0.5 almost (see gradeAnswer in check.js), 0 wrong.
 */
 
 import { DAY_MS } from './dates.js';
