@@ -17,12 +17,12 @@
     "packs/economics.json",
     "packs/politics.json",
     "packs/news.json",
-    "packs/beauty.json",
-    "packs/books.json",
-    "packs/fashion.json",
     "packs/music.json",
-    "packs/selfcare.json",
+    "packs/fashion.json",
+    "packs/beauty.json",
     "packs/sport.json",
-    "packs/trips.json"
+    "packs/selfcare.json",
+    "packs/trips.json",
+    "packs/books.json"
   ]
 }

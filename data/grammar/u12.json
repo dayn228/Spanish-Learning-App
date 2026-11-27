@@ -1,52 +1,421 @@
 {
-  "id": "u12", "n": 12, "level": "A2",
-  "title": "The past: pretérito imperfecto",
-  "summary": "How things were and what used to happen: antes trabajaba, había menos paro.",
-  "explain": [
-    {"h": "When to use it"},
-    {"p": "The **imperfecto** describes the past without marking start or end: what things were like, what used to happen, what was going on."},
-    {"p": "Typical signals: *antes, de pequeño, siempre, normalmente, todos los días, a menudo, cuando era joven, en aquella época*."},
-    {"ex": ["Antes la vivienda era más barata.", "Housing used to be cheaper."]},
-    {"ex": ["Todos los días cogía el tren de las siete.", "Every day I used to catch the seven o'clock train."]},
-    {"h": "Endings: easy and regular"},
-    {"table": [["", "-ar: trabajar", "-er/-ir: tener, vivir"], ["yo", "trabajaba", "tenía, vivía"], ["tú", "trabajabas", "tenías, vivías"], ["él / ella / usted", "trabajaba", "tenía, vivía"], ["nosotros", "trabajábamos", "teníamos, vivíamos"], ["vosotros", "trabajabais", "teníais, vivíais"], ["ellos / ustedes", "trabajaban", "tenían, vivían"]]},
-    {"tip": "Yo and él are the same: *yo trabajaba, él trabajaba*. Add the subject if it's unclear."},
-    {"h": "Only three irregulars"},
-    {"table": [["ser", "era, eras, era, éramos, erais, eran"], ["ir", "iba, ibas, iba, íbamos, ibais, iban"], ["ver", "veía, veías, veía, veíamos, veíais, veían"]]},
-    {"p": "**Había** = there was / there were (description): *Había mucha gente.* Always singular."},
-    {"h": "Age, time and background"},
-    {"p": "Age and clock time in the past are always imperfecto: *Tenía veinte años. Eran las tres.*"}
-  ],
-  "exercises": [
-    {"type": "table", "verb": "trabajar", "tense": "imperfect", "tags": ["forms"]},
-    {"type": "table", "verb": "ser", "tense": "imperfect", "tags": ["irregular"]},
-    {"type": "table", "verb": "ir", "tense": "imperfect", "tags": ["irregular"]},
-    {"type": "gap", "q": "Antes ___ (yo) en una empresa de reformas.", "hint": "trabajar", "a": "trabajaba", "en": "I used to work for a renovation company.", "tags": ["forms", "habit"]},
-    {"type": "gap", "q": "En los años noventa la peseta ___ la moneda de España.", "hint": "ser", "a": "era", "en": "In the nineties the peseta was Spain's currency.", "tags": ["irregular", "description"]},
-    {"type": "gap", "q": "De pequeños ___ (nosotros) a la playa todos los veranos.", "hint": "ir", "a": "íbamos", "en": "As children we went to the beach every summer.", "tags": ["irregular", "habit"]},
-    {"type": "gap", "q": "Mi abuelo ___ las noticias todas las noches.", "hint": "ver", "a": "veía", "en": "My grandfather watched the news every night.", "tags": ["irregular", "habit"]},
-    {"type": "gap", "q": "En 2012 ___ mucho paro en España.", "hint": "haber", "a": "había", "en": "In 2012 there was a lot of unemployment in Spain.", "tags": ["habia"]},
-    {"type": "gap", "q": "Cuando empecé en la empresa, ___ veintitrés años.", "hint": "tener, yo", "a": "tenía", "en": "When I started at the company, I was twenty-three.", "tags": ["age-time"]},
-    {"type": "gap", "q": "___ las once de la noche y todavía estábamos en la oficina.", "hint": "ser", "a": "Eran", "en": "It was eleven at night and we were still in the office.", "tags": ["age-time"]},
-    {"type": "gap", "q": "Antes los bancos ___ hipotecas casi sin condiciones.", "hint": "dar", "a": "daban", "en": "The banks used to give mortgages with almost no conditions.", "tags": ["forms", "habit"]},
-    {"type": "gap", "q": "¿Dónde ___ (vosotros) antes de mudaros a Alicante?", "hint": "vivir", "a": "vivíais", "en": "Where did you live before moving to Alicante?", "tags": ["forms"]},
-    {"type": "gap", "q": "La oficina ___ pequeña y no tenía ventanas.", "hint": "ser", "a": "era", "en": "The office was small and had no windows.", "tags": ["description"]},
-    {"type": "gap", "q": "Los obreros ___ cansados después de doce horas.", "hint": "estar", "a": "estaban", "en": "The workers were tired after twelve hours.", "tags": ["description"]},
-    {"type": "gap", "q": "Normalmente ___ (nosotros) a las dos y volvíamos a las cuatro.", "hint": "comer", "a": "comíamos", "en": "We usually had lunch at two and came back at four.", "tags": ["habit"]},
-    {"type": "choice", "q": "Antes la gente ___ más en efectivo.", "options": ["pagaba", "pagó", "paga"], "a": 0, "why": "antes → habit → imperfecto.", "tags": ["habit"]},
-    {"type": "choice", "q": "___ mucha gente en la manifestación.", "options": ["Había", "Habían", "Hubieron"], "a": 0, "why": "Había is always singular.", "tags": ["habia"]},
-    {"type": "choice", "q": "Cuando ___ niño, quería ser arquitecto.", "options": ["era", "fui", "iba"], "a": 0, "why": "Life stage → description → era.", "tags": ["irregular", "description"]},
-    {"type": "choice", "q": "Nosotros ___ al gimnasio tres veces por semana.", "options": ["íbamos", "ibamos", "fuimos"], "a": 0, "why": "Habit → imperfecto; íbamos carries an accent.", "tags": ["irregular"]},
-    {"type": "choice", "q": "En aquella época el alquiler ___ unos 400 euros.", "options": ["costaba", "costó", "cuesta"], "a": 0, "tags": ["description"]},
-    {"type": "error", "q": "Antes yo iva a la oficina en moto.", "a": "Antes yo iba a la oficina en moto.", "why": "ir → iba (with b).", "tags": ["irregular"]},
-    {"type": "error", "q": "Habían muchos coches en la calle.", "a": "Había muchos coches en la calle.", "why": "Había, even with plural nouns.", "tags": ["habia"]},
-    {"type": "error", "q": "Cuando tuve quince años, vivía en Kiev.", "a": "Cuando tenía quince años, vivía en Kiev.", "why": "Age in the past → imperfecto.", "tags": ["age-time"]},
-    {"type": "error", "q": "Nosotros trabajabamos en la misma obra.", "a": "Nosotros trabajábamos en la misma obra.", "why": "Nosotros -ar has an accent: trabajábamos.", "tags": ["forms"]},
-    {"type": "transform", "instr": "Start with «Antes…» and use the imperfecto.", "q": "Ahora trabajo desde casa.", "a": "Antes trabajaba desde casa.", "tags": ["habit"]},
-    {"type": "transform", "instr": "Put it in the imperfecto.", "q": "Hay mucha demanda de vivienda.", "a": "Había mucha demanda de vivienda.", "tags": ["habia"]},
-    {"type": "translate", "q": "When I was a child, I lived in Ukraine.", "a": "Cuando era niño, vivía en Ucrania / Cuando era pequeño, vivía en Ucrania", "tags": ["description"]},
-    {"type": "translate", "q": "We used to go to the office by bus.", "a": "Íbamos a la oficina en autobús", "tags": ["irregular", "habit"]},
-    {"type": "translate", "q": "It was three o'clock.", "a": "Eran las tres", "tags": ["age-time"]},
-    {"type": "reorder", "words": ["antes", "los", "pisos", "eran", "mucho", "más", "baratos"], "a": "antes los pisos eran mucho más baratos", "en": "Flats used to be much cheaper.", "tags": ["description"]}
-  ]
+ "id": "u12",
+ "n": 12,
+ "level": "A2",
+ "title": "The past: pretérito imperfecto",
+ "summary": "How things were and what used to happen: antes trabajaba, había menos paro.",
+ "explain": [
+  {
+   "h": "When to use it"
+  },
+  {
+   "p": "The **imperfecto** describes the past without marking start or end: what things were like, what used to happen, what was going on."
+  },
+  {
+   "p": "Typical signals: *antes, de pequeño, siempre, normalmente, todos los días, a menudo, cuando era joven, en aquella época*."
+  },
+  {
+   "ex": [
+    "Antes la vivienda era más barata.",
+    "Housing used to be cheaper."
+   ]
+  },
+  {
+   "ex": [
+    "Todos los días cogía el tren de las siete.",
+    "Every day I used to catch the seven o'clock train."
+   ]
+  },
+  {
+   "h": "Endings: easy and regular"
+  },
+  {
+   "table": [
+    [
+     "",
+     "-ar: trabajar",
+     "-er/-ir: tener, vivir"
+    ],
+    [
+     "yo",
+     "trabajaba",
+     "tenía, vivía"
+    ],
+    [
+     "tú",
+     "trabajabas",
+     "tenías, vivías"
+    ],
+    [
+     "él / ella / usted",
+     "trabajaba",
+     "tenía, vivía"
+    ],
+    [
+     "nosotros",
+     "trabajábamos",
+     "teníamos, vivíamos"
+    ],
+    [
+     "vosotros",
+     "trabajabais",
+     "teníais, vivíais"
+    ],
+    [
+     "ellos / ustedes",
+     "trabajaban",
+     "tenían, vivían"
+    ]
+   ],
+   "head": true
+  },
+  {
+   "tip": "Yo and él are the same: *yo trabajaba, él trabajaba*. Add the subject if it's unclear."
+  },
+  {
+   "h": "Only three irregulars"
+  },
+  {
+   "table": [
+    [
+     "ser",
+     "era, eras, era, éramos, erais, eran"
+    ],
+    [
+     "ir",
+     "iba, ibas, iba, íbamos, ibais, iban"
+    ],
+    [
+     "ver",
+     "veía, veías, veía, veíamos, veíais, veían"
+    ]
+   ]
+  },
+  {
+   "p": "**Había** = there was / there were (description): *Había mucha gente.* Always singular."
+  },
+  {
+   "h": "Age, time and background"
+  },
+  {
+   "p": "Age and clock time in the past are always imperfecto: *Tenía veinte años. Eran las tres.*"
+  }
+ ],
+ "exercises": [
+  {
+   "type": "table",
+   "verb": "trabajar",
+   "tense": "imperfect",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "table",
+   "verb": "ser",
+   "tense": "imperfect",
+   "tags": [
+    "irregular"
+   ]
+  },
+  {
+   "type": "table",
+   "verb": "ir",
+   "tense": "imperfect",
+   "tags": [
+    "irregular"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Antes ___ (yo) en una empresa de reformas.",
+   "hint": "trabajar",
+   "a": "trabajaba",
+   "en": "I used to work for a renovation company.",
+   "tags": [
+    "forms",
+    "habit"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "En los años noventa la peseta ___ la moneda de España.",
+   "hint": "ser",
+   "a": "era",
+   "en": "In the nineties the peseta was Spain's currency.",
+   "tags": [
+    "irregular",
+    "description"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "De pequeños ___ (nosotros) a la playa todos los veranos.",
+   "hint": "ir",
+   "a": "íbamos",
+   "en": "As children we went to the beach every summer.",
+   "tags": [
+    "irregular",
+    "habit"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Mi abuelo ___ las noticias todas las noches.",
+   "hint": "ver",
+   "a": "veía",
+   "en": "My grandfather watched the news every night.",
+   "tags": [
+    "irregular",
+    "habit"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "En 2012 ___ mucho paro en España.",
+   "hint": "haber",
+   "a": "había",
+   "en": "In 2012 there was a lot of unemployment in Spain.",
+   "tags": [
+    "habia"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Cuando empecé en la empresa, ___ veintitrés años.",
+   "hint": "tener, yo",
+   "a": "tenía",
+   "en": "When I started at the company, I was twenty-three.",
+   "tags": [
+    "age-time"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "___ las once de la noche y todavía estábamos en la oficina.",
+   "hint": "ser",
+   "a": "Eran",
+   "en": "It was eleven at night and we were still in the office.",
+   "tags": [
+    "age-time"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Antes los bancos ___ hipotecas casi sin condiciones.",
+   "hint": "dar",
+   "a": "daban",
+   "en": "The banks used to give mortgages with almost no conditions.",
+   "tags": [
+    "forms",
+    "habit"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "¿Dónde ___ (vosotros) antes de mudaros a Alicante?",
+   "hint": "vivir",
+   "a": "vivíais",
+   "en": "Where did you live before moving to Alicante?",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "La oficina ___ pequeña y no tenía ventanas.",
+   "hint": "ser",
+   "a": "era",
+   "en": "The office was small and had no windows.",
+   "tags": [
+    "description"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Los obreros ___ cansados después de doce horas.",
+   "hint": "estar",
+   "a": "estaban",
+   "en": "The workers were tired after twelve hours.",
+   "tags": [
+    "description"
+   ]
+  },
+  {
+   "type": "gap",
+   "q": "Normalmente ___ (nosotros) a las dos y volvíamos a las cuatro.",
+   "hint": "comer",
+   "a": "comíamos",
+   "en": "We usually had lunch at two and came back at four.",
+   "tags": [
+    "habit"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Antes la gente ___ más en efectivo.",
+   "options": [
+    "pagaba",
+    "pagó",
+    "paga"
+   ],
+   "a": 0,
+   "why": "antes → habit → imperfecto.",
+   "tags": [
+    "habit"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "___ mucha gente en la manifestación.",
+   "options": [
+    "Había",
+    "Habían",
+    "Hubieron"
+   ],
+   "a": 0,
+   "why": "Había is always singular.",
+   "tags": [
+    "habia"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Cuando ___ niño, quería ser arquitecto.",
+   "options": [
+    "era",
+    "fui",
+    "iba"
+   ],
+   "a": 0,
+   "why": "Life stage → description → era.",
+   "tags": [
+    "irregular",
+    "description"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "Nosotros ___ al gimnasio tres veces por semana.",
+   "options": [
+    "íbamos",
+    "ibamos",
+    "fuimos"
+   ],
+   "a": 0,
+   "why": "Habit → imperfecto; íbamos carries an accent.",
+   "tags": [
+    "irregular"
+   ]
+  },
+  {
+   "type": "choice",
+   "q": "En aquella época el alquiler ___ unos 400 euros.",
+   "options": [
+    "costaba",
+    "costó",
+    "cuesta"
+   ],
+   "a": 0,
+   "tags": [
+    "description"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Antes yo iva a la oficina en moto.",
+   "a": "Antes yo iba a la oficina en moto.",
+   "why": "ir → iba (with b).",
+   "tags": [
+    "irregular"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Habían muchos coches en la calle.",
+   "a": "Había muchos coches en la calle.",
+   "why": "Había, even with plural nouns.",
+   "tags": [
+    "habia"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Cuando tuve quince años, vivía en Kiev.",
+   "a": "Cuando tenía quince años, vivía en Kiev.",
+   "why": "Age in the past → imperfecto.",
+   "tags": [
+    "age-time"
+   ]
+  },
+  {
+   "type": "error",
+   "q": "Nosotros trabajabamos en la misma obra.",
+   "a": "Nosotros trabajábamos en la misma obra.",
+   "why": "Nosotros -ar has an accent: trabajábamos.",
+   "tags": [
+    "forms"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Start with «Antes…» and use the imperfecto.",
+   "q": "Ahora trabajo desde casa.",
+   "a": "Antes trabajaba desde casa.",
+   "tags": [
+    "habit"
+   ]
+  },
+  {
+   "type": "transform",
+   "instr": "Put it in the imperfecto.",
+   "q": "Hay mucha demanda de vivienda.",
+   "a": "Había mucha demanda de vivienda.",
+   "tags": [
+    "habia"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "When I was a child, I lived in Ukraine.",
+   "a": "Cuando era niño, vivía en Ucrania / Cuando era pequeño, vivía en Ucrania",
+   "tags": [
+    "description"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "We used to go to the office by bus.",
+   "a": "Íbamos a la oficina en autobús",
+   "tags": [
+    "irregular",
+    "habit"
+   ]
+  },
+  {
+   "type": "translate",
+   "q": "It was three o'clock.",
+   "a": "Eran las tres",
+   "tags": [
+    "age-time"
+   ]
+  },
+  {
+   "type": "reorder",
+   "words": [
+    "antes",
+    "los",
+    "pisos",
+    "eran",
+    "mucho",
+    "más",
+    "baratos"
+   ],
+   "a": "antes los pisos eran mucho más baratos",
+   "en": "Flats used to be much cheaper.",
+   "tags": [
+    "description"
+   ]
+  }
+ ]
 }

@@ -8,7 +8,7 @@ When it is done, the app backs up your progress to Drive by itself, and every ni
 
 1. Go to [script.google.com](https://script.google.com) → **New project**. Name it **Mi Español backend**.
 2. Open **Project Settings** (gear icon) and copy the **Script ID**.
-3. Send me the Script ID. I put it in `backend/.clasp.json`, and GitHub uploads the code from then on, the same way as Fram-Automation.
+3. Put the Script ID in `backend/.clasp.json` (`scriptId`) and push. GitHub uploads the code from then on, the same way as Fram-Automation. (Already done: the current script ID is in the file.)
 
 ## 2. Let GitHub upload the code
 

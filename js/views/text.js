@@ -151,6 +151,8 @@ function questions(text) {
   const done = state.reading[text.id]?.done;
   text.questions.forEach((q, qi) => {
     const opts = h('div', { class: 'options' });
+    // Shown in random order: texts are free to list the right answer first.
+    const order = q.options.map((_, i) => i).sort(() => Math.random() - 0.5);
     const btns = q.options.map((o, oi) => h('button', {
       class: 'option small-option', lang: 'es', onclick: () => {
         if (answers[qi] !== null) return;
@@ -160,7 +162,7 @@ function questions(text) {
         if (answers.every((a) => a !== null)) finish();
       },
     }, o));
-    opts.append(...btns);
+    opts.append(...order.map((i) => btns[i]));
     box.append(h('p', { class: 'es', lang: 'es', style: { marginTop: '18px', fontSize: '19px' } }, `${qi + 1}. ${q.q}`), opts);
   });
   const result = h('div', {});
