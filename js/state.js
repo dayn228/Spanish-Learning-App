@@ -130,10 +130,15 @@ function withoutSecrets(settings) {
 /** Replaces all progress with the backup. Throws a readable error if the file is wrong. */
 export async function importBackup(text) {
   let data;
-  try { data = JSON.parse(String(text).replace(/^\uFEFF/, '')); } catch { throw new Error('This file is not a Mi Español backup.'); }
+  const raw = String(text).replace(/^\uFEFF/, '').trim();
+  try { data = JSON.parse(raw); } catch {
+    throw new Error(`This file is not a Mi Español backup: it is not JSON (starts with "${raw.slice(0, 40)}").`);
+  }
   // Drive backups wrap the progress: { savedAt, data: { app: 'mi-espanol', … } }.
   if (data && data.app !== 'mi-espanol' && data.data && data.data.app === 'mi-espanol') data = data.data;
-  if (data.app !== 'mi-espanol' || typeof data.cards !== 'object') throw new Error('This file is not a Mi Español backup.');
+  if (!data || data.app !== 'mi-espanol' || typeof data.cards !== 'object') {
+    throw new Error(`This file is not a Mi Español backup (it has: ${Object.keys(data || {}).slice(0, 6).join(', ') || 'nothing'}).`);
+  }
   state.cards = data.cards || {};
   state.streak = data.streak || newStreak();
   // Keep this phone's own backend connection; never take one from a file.

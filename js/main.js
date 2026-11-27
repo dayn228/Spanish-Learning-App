@@ -89,7 +89,18 @@ async function start() {
   onSyncChange(() => { if ((location.hash.slice(1) || 'today').split('/')[0] === 'you') render(); });
   syncSoon(1500);
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-    navigator.serviceWorker.register('sw.js').catch(() => { /* offline support unavailable */ });
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.register('sw.js').then((reg) => {
+      // iPhone home-screen apps are resumed, not relaunched: look for updates whenever the app comes back.
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
+    }).catch(() => { /* offline support unavailable */ });
+    // A new version has taken over: reload once so its code is used right away (not on the next launch).
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!hadController || sessionStorage.getItem('mi-espanol-reloaded')) return;
+      sessionStorage.setItem('mi-espanol-reloaded', '1');
+      location.reload();
+    });
+    window.addEventListener('pageshow', () => setTimeout(() => sessionStorage.removeItem('mi-espanol-reloaded'), 5000));
   }
 }
 

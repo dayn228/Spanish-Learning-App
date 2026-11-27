@@ -69,17 +69,23 @@ function stat(n, label) {
 }
 
 function backupCard() {
+  const status = h('p', { class: 'small', role: 'status', style: { marginTop: '10px' } });
+  const version = h('p', { class: 'tiny muted', style: { marginTop: '10px' } });
+  // The app version is the name of the offline cache (see sw.js); handy when checking an update arrived.
+  caches?.keys?.().then((keys) => { const k = keys.find((x) => x.startsWith('mi-espanol-')); if (k) version.textContent = `App version ${k.slice(11, 18)}`; }).catch(() => {});
   const fileInput = h('input', {
     type: 'file', accept: '.json,application/json,text/plain', style: { display: 'none' },
     onchange: async (e) => {
       const file = e.target.files[0];
+      e.target.value = '';           // so picking the same file again still works
       if (!file) return;
+      status.textContent = `Reading ${file.name}…`;
       try {
         await importBackup(await file.text());
         toast('Backup restored');
         import('../main.js').then((m) => m.render());
       } catch (err) {
-        toast(err.message);
+        status.textContent = err.message;   // stays on screen, unlike a toast
       }
     },
   });
@@ -105,7 +111,7 @@ function backupCard() {
     h('div', { class: 'row', style: { marginTop: '14px', flexWrap: 'wrap' } },
       h('button', { class: 'btn btn-primary', onclick: exportIt }, 'Save backup'),
       h('button', { class: 'btn btn-secondary', onclick: () => fileInput.click() }, 'Restore from file')),
-    fileInput);
+    fileInput, status, version);
 }
 
 /* ---------- Google Drive and AI ---------- */
