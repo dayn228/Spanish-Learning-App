@@ -8,6 +8,7 @@
 
 import { state, loadState, refreshContent, hooks } from './state.js';
 import { syncSoon, onSyncChange } from './sync.js';
+import { applyTheme, watchSystemTheme } from './theme.js';
 import { loadContent } from './content.js';
 import { requestPersistence } from './db.js';
 import { h, icon, ICONS } from './ui.js';
@@ -66,6 +67,8 @@ async function start() {
   try {
     const [content] = await Promise.all([loadContent(), loadState()]);
     state.content = content;
+    applyTheme(state.settings.theme);
+    watchSystemTheme(() => state.settings.theme);
     refreshContent();
   } catch (e) {
     app.replaceChildren(h('div', { class: 'card' },

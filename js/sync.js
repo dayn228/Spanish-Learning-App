@@ -55,6 +55,9 @@ export async function syncNow({ forceBackup = false } = {}) {
     const s = state.sync;
     const report = { sent: 0, added: 0, backedUp: false };
     try {
+      // 0. Who am I on the backend (you, or someone added with addUser)?
+      if (!s.user) s.user = (await call('ping')).user || 'owner';
+
       // 1. Requests and reports.
       const { content } = state;
       const level = estimateLevel(content.units, state.grammar);
@@ -127,6 +130,9 @@ export function mergeBatch(batch) {
   } else if (batch.kind === 'words') {
     const topicId = batch.meta && batch.meta.topicId;
     if (!topicId) return 0;
+    // Words for a topic only you or the other learner has: only the person who asked gets them.
+    const known = state.content.base.topics.some((t) => t.id === topicId);
+    if (!known && batch.meta.user && state.sync.user && batch.meta.user !== state.sync.user) return 0;
     if (batch.meta.topicName) extra.topicNames[topicId] = batch.meta.topicName;
     const list = extra.words[topicId] || (extra.words[topicId] = []);
     for (const w of batch.items || []) {

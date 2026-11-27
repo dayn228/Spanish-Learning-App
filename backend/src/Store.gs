@@ -1,6 +1,8 @@
 /**
  * Storage in your Google Drive, folder "Mi Español":
  *   backups/latest.json, backups/backup-YYYY-MM-DD.json (last 14 days kept)
+ *   backups-<name>/…               the same for each extra user (addUser)
+ *   inbox/                         drop articles here; the nightly job turns them into texts
  *   content/batch-000001.json …    AI content, in order (the app asks for "since n")
  *   queue.json                     refill requests waiting for the nightly job
  *   seen-news.json                 article links already used
@@ -37,9 +39,13 @@ function writeJson(folder, name, obj) {
 
 /* ---------- Backups ---------- */
 
-function saveBackup(data) {
+function backupFolder(user) {
+  return subFolder(!user || user === 'owner' ? 'backups' : 'backups-' + user);
+}
+
+function saveBackup(data, user) {
   if (!data || data.app !== 'mi-espanol') throw new Error('Not a Mi Español backup.');
-  var folder = subFolder('backups');
+  var folder = backupFolder(user);
   var savedAt = new Date().toISOString();
   var payload = { savedAt: savedAt, data: data };
   writeJson(folder, 'latest.json', payload);
@@ -52,20 +58,20 @@ function saveBackup(data) {
   return savedAt;
 }
 
-function loadBackup() {
-  var b = readJson(subFolder('backups'), 'latest.json', null);
+function loadBackup(user) {
+  var b = readJson(backupFolder(user), 'latest.json', null);
   return b ? { data: b.data, savedAt: b.savedAt } : { data: null, savedAt: null };
 }
 
-function listBackups() {
-  var out = [], it = subFolder('backups').getFiles();
+function listBackups(user) {
+  var out = [], it = backupFolder(user).getFiles();
   while (it.hasNext()) { var f = it.next(); out.push({ name: f.getName(), savedAt: f.getLastUpdated().toISOString() }); }
   return out.sort(function (a, b) { return a.name < b.name ? 1 : -1; });
 }
 
 /* ---------- Refill queue ---------- */
 
-function addToQueue(requests) {
+function addToQueue(requests, user) {
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   try {
     var queue = readJson(rootFolder(), 'queue.json', []);
@@ -73,7 +79,7 @@ function addToQueue(requests) {
     var added = 0;
     requests.forEach(function (r) {
       if (!r || !r.key || !r.kind || keys[r.key]) return;
-      r.added = new Date().toISOString(); r.tries = 0;
+      r.added = new Date().toISOString(); r.tries = 0; r.user = user || 'owner';
       queue.push(r); keys[r.key] = true; added++;
     });
     writeJson(rootFolder(), 'queue.json', queue.slice(-50));

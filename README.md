@@ -45,6 +45,12 @@ Updates: when a new version is published, it downloads the next time you open th
 - **Construction texts**: while construction is a focus topic, Gemini writes new graded practice texts about work at a window installation company.
 - **Report a problem**: every AI-made word, exercise and text shows "Made by AI · Report a problem". Reporting removes it at once and logs it in Drive.
 
+## Themes and more learners
+
+- **Themes** (You → Appearance): Auto, Ivory, Daylight, Charcoal, Midnight and Swiftie. Colours are swapped as tokens in `css/themes.css`; every theme passes WCAG AA text contrast.
+- **More learners**: each has their own token (`addUser` in the backend) and own backups; AI content and texts are shared. See the setup guide.
+- **Inbox**: articles dropped into the Drive inbox become long, private reading texts overnight.
+
 ## Adding reading texts
 
 Texts live in `data/reading/tNN.json`: paragraphs of `[spanish, english]` sentences, comprehension questions, and a glossary of word forms → `[dictionary form, meaning here, note?]`. Everyday words are shared in `data/reading/common.json`; words already in the word lists are found automatically. `npm run build` refuses a text that has a word with no meaning.

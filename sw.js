@@ -6,10 +6,11 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = '25d94aa020';
+const VERSION = 'd4285931b3';
 const FILES = [
   "./",
   "./css/app.css",
+  "./css/themes.css",
   "./css/tokens.css",
   "./data/core/basics.json",
   "./data/core/connectors.json",
@@ -69,6 +70,7 @@ const FILES = [
   "./js/state.js",
   "./js/streak.js",
   "./js/sync.js",
+  "./js/theme.js",
   "./js/ui.js",
   "./js/validate.js",
   "./js/verbs.js",

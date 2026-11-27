@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import vm from 'node:vm';
 
-function makeBackend(geminiReplies, fetchPages = {}) {
+function makeBackend(geminiReplies, fetchPages = {}, docs = {}) {
   const props = new Map();
   const files = new Map();   // "folderId/name" → text
   let folderSeq = 0;
@@ -18,7 +18,9 @@ function makeBackend(geminiReplies, fetchPages = {}) {
     createFile: (n, text) => { files.set(id + '/' + n, text); return file(id, n); },
   });
   const file = (fid, n) => ({
-    getName: () => n, setContent: (t) => files.set(fid + '/' + n, t), setTrashed: () => files.delete(fid + '/' + n),
+    getName: () => n, getId: () => fid + '/' + n, getMimeType: () => (n.endsWith('.gdoc') ? 'application/vnd.google-apps.document' : 'application/json'),
+    setDescription() {}, moveTo: (dest) => { const t = files.get(fid + '/' + n); files.delete(fid + '/' + n); files.set(dest.getId() + '/' + n, t); },
+    setContent: (t) => files.set(fid + '/' + n, t), setTrashed: () => files.delete(fid + '/' + n),
     getBlob: () => ({ getDataAsString: () => files.get(fid + '/' + n) }), getLastUpdated: () => new Date(0),
   });
   const iter = (list) => { let i = 0; return { hasNext: () => i < list.length, next: () => list[i++] }; };
@@ -29,7 +31,9 @@ function makeBackend(geminiReplies, fetchPages = {}) {
     DriveApp: { getFolderById: (id) => folder(id), createFolder: () => { folderSeq++; return folder('root' + folderSeq); } },
     LockService: { getScriptLock: () => ({ waitLock() {}, tryLock: () => true, releaseLock() {} }) },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: (t) => ({ setMimeType: () => ({ text: t }) }) },
-    Utilities: { getUuid: () => 'aaaa-bbbb' },
+    Utilities: { getUuid: () => 'aaaa-bbbb-' + Math.random().toString(16).slice(2) },
+    MimeType: { GOOGLE_DOCS: 'application/vnd.google-apps.document', PDF: 'application/pdf' },
+    DocumentApp: { openById: (id) => ({ getBody: () => ({ getText: () => docs[id] || '' }) }) },
     UrlFetchApp: {
       fetch: (url, opts) => {
         calls.push(url);
@@ -113,4 +117,37 @@ test('news: feed → article → prepared text', () => {
   assert.equal(run.made, 1, run.log.join(' | '));
   const c = b.post({ token: 'secret', action: 'content.since', after: 0 });
   assert.equal(c.batches[0].items[0].source.url, 'https://elpais.com/a1');
+});
+
+test('extra users: own token, own backups, cannot read the owner\'s', () => {
+  const b = makeBackend([]);
+  b.ctx.addUser('Ana María');
+  const users = JSON.parse(b.props.get('USERS'));
+  const anaToken = Object.keys(users).find((t) => users[t] === 'anamara');
+  assert.ok(anaToken, 'name cleaned to anamara');
+  assert.equal(b.post({ token: anaToken, action: 'ping' }).user, 'anamara');
+  b.post({ token: 'secret', action: 'backup.save', data: { app: 'mi-espanol', who: 'owner' } });
+  b.post({ token: anaToken, action: 'backup.save', data: { app: 'mi-espanol', who: 'ana' } });
+  assert.equal(b.post({ token: 'secret', action: 'backup.load' }).data.who, 'owner');
+  assert.equal(b.post({ token: anaToken, action: 'backup.load' }).data.who, 'ana');
+  b.ctx.removeUser('anamara');
+  assert.equal(b.post({ token: anaToken, action: 'ping' }).ok, false);
+});
+
+test('inbox: a Google Doc becomes a long reading text and is moved to processed', () => {
+  const article = 'El Gobierno presentó ayer los presupuestos generales del Estado para el próximo año en el Congreso.\n\n' +
+    'La ministra de Hacienda explicó que el gasto público crecerá un tres por ciento, sobre todo en vivienda y sanidad.\n\n' +
+    'La oposición criticó el plan y anunció que presentará una enmienda a la totalidad la semana que viene.';
+  const prepared = { title: 'Los presupuestos', en: 'The budget', level: 'B1', topic: 'politics', paragraphs: [[['El Gobierno presentó ayer los presupuestos.', 'The government presented the budget yesterday.']]], glossary: {}, questions: [{ q: '¿Qué presentó?', options: ['los presupuestos', 'una ley'], a: 0 }] };
+  const docs = {};
+  const b = makeBackend([prepared], {}, docs);
+  const inbox = b.ctx.subFolder('inbox');
+  inbox.createFile('Presupuestos 2027.gdoc', '');
+  docs[inbox.getId() + '/Presupuestos 2027.gdoc'] = article;
+  const run = b.post({ token: 'secret', action: 'nightly.run' });
+  assert.equal(run.made, 1, run.log.join(' | '));
+  const c = b.post({ token: 'secret', action: 'content.since', after: 0 });
+  assert.equal(c.batches[0].items[0].topic, 'politics');
+  assert.equal(c.batches[0].items[0].source.title, 'Presupuestos 2027');
+  assert.equal(b.post({ token: 'secret', action: 'nightly.run' }).made, 0, 'moved to processed, not done twice');
 });

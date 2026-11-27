@@ -15,6 +15,17 @@
   <link rel="preload" href="fonts/newsreader-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <script>
+    // Apply the saved theme before anything draws (no white flash at night). Full logic: js/theme.js.
+    (function () {
+      try {
+        var id = localStorage.getItem('mi-espanol-theme') || 'auto';
+        if (id === 'auto') id = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'charcoal' : 'ivory';
+        if (id !== 'ivory') document.documentElement.dataset.theme = id;
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <main id="app" aria-live="polite"></main>

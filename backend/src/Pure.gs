@@ -194,3 +194,24 @@ function cleanWords(list, existing) {
     return true;
   });
 }
+
+/** A long text from your own inbox: keep it real, keep it long, mark the level honestly. */
+function inboxPrompt(article) {
+  return [
+    'You prepare a real Spanish text, supplied by the learner for private study, for reading in a study app.',
+    HOUSE_RULES,
+    'Keep the Spanish sentences EXACTLY as written (you may drop captions, bylines and boilerplate, never rewrite sentences). Keep up to 30 sentences in natural paragraphs.',
+    'Translate each sentence into English. Add a glossary entry for EVERY distinct word form you keep (lower case keys, meaning in this context).',
+    'Add 4 comprehension questions in Spanish with 3 options each. Estimate the level honestly (A2, B1, B2 or C1).',
+    'Also give "topic": one of construction, finance, economics, politics, news, life.',
+    'Format: ' + TEXT_FORMAT.replace('"level":"A1|A2|B1"', '"level":"A2|B1|B2|C1","topic":"…"'),
+    'Title: ' + (article.title || '(choose a short title from the text)'),
+    'Text:\n' + article.paragraphs.join('\n\n')
+  ].join('\n');
+}
+
+/** Plain text (from a .txt file or a converted doc) → paragraphs. */
+function textToParagraphs(text) {
+  return String(text || '').replace(/\r/g, '').split(/\n\s*\n|\n(?=[A-ZÁÉÍÓÚÑ«"¿¡—])/).map(function (p) { return p.replace(/\s+/g, ' ').trim(); })
+    .filter(function (p) { return p.length >= 60 && !/cookies|suscr[ií]b|newsletter|todos los derechos|©/i.test(p); });
+}

@@ -1,0 +1,74 @@
+/*
+  Themes. Each one only swaps the colour tokens from tokens.css, so every
+  screen follows automatically. Chosen in You → Appearance (js/theme.js).
+
+  Token roles:
+    --ivory  page background        --white   cards
+    --panel  soft panels            --active  selected tab
+    --oat    empty progress         --slate   main text and primary buttons
+    --ink-2  strong secondary text  --muted   secondary text
+    --faint  small text on primary buttons
+    --clay   the one accent (progress, highlights)
+    --dot-new, --scrim              reader underline, sheet backdrop
+*/
+
+:root { --dot-new: #B0AEA5; --scrim: rgba(20, 20, 19, 0.18); }
+
+/* Daylight: brighter and crisper, cool neutral with a blue accent. */
+[data-theme="daylight"] {
+  --ivory: #F7F7F5; --white: #FFFFFF; --panel: #EDEEEB; --active: #E2E4E0; --oat: #D8DBD5;
+  --slate: #15171A; --ink-2: #33373D; --muted: #575C63; --faint: #B9BEC6;
+  --clay: #2F6FDE;
+  --line: rgba(21, 23, 26, 0.13); --line-strong: rgba(21, 23, 26, 0.28);
+  --dot-new: #A3A8AF;
+}
+
+/* Charcoal: warm dark, the same family as Ivory at night. */
+[data-theme="charcoal"] {
+  --ivory: #1C1B1A; --white: #272624; --panel: #302F2C; --active: #3A3936; --oat: #4A4945;
+  --slate: #F0EEE6; --ink-2: #DEDCD1; --muted: #ABA99F; --faint: #5E5D59;
+  --clay: #E3916F;
+  --good: #A9CC8C; --good-ink: #C5E0AE; --good-bg: #26311E;
+  --bad: #F0897F; --bad-ink: #F7B3AC; --bad-bg: #3A201D;
+  --line: rgba(240, 238, 230, 0.13); --line-strong: rgba(240, 238, 230, 0.28);
+  --dot-new: #77756D; --scrim: rgba(0, 0, 0, 0.45);
+}
+
+/* Midnight: deep blue with an amber accent. */
+[data-theme="midnight"] {
+  --ivory: #0E1525; --white: #172037; --panel: #1E2944; --active: #283553; --oat: #34425F;
+  --slate: #EDF1F9; --ink-2: #D2D9E8; --muted: #9DA9C4; --faint: #47536F;
+  --clay: #F2B65A;
+  --good: #8FD0A0; --good-ink: #B7E5C3; --good-bg: #16302A;
+  --bad: #F28B8B; --bad-ink: #F8B4B4; --bad-bg: #3A1D27;
+  --line: rgba(237, 241, 249, 0.12); --line-strong: rgba(237, 241, 249, 0.26);
+  --dot-new: #66728F; --scrim: rgba(0, 0, 0, 0.5);
+}
+
+/* Swiftie: lavender night, pink accent, a little sparkle. */
+[data-theme="swiftie"] {
+  --ivory: #1B1530; --white: #261E40; --panel: #30264F; --active: #3B2F5E; --oat: #4A3C70;
+  --slate: #F7F0FF; --ink-2: #E5D9F7; --muted: #BBA9DB; --faint: #5E4F86;
+  --clay: #F29CCB;
+  --good: #9FD9B8; --good-ink: #C3EBD3; --good-bg: #1E3330;
+  --bad: #F59AA8; --bad-ink: #FAC0C9; --bad-bg: #3D1E33;
+  --line: rgba(247, 240, 255, 0.13); --line-strong: rgba(247, 240, 255, 0.28);
+  --dot-new: #7A6AA3; --scrim: rgba(10, 5, 25, 0.5);
+}
+[data-theme="swiftie"] body {
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 225, 245, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 72% 9%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 88% 42%, rgba(242, 156, 203, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 33% 64%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 58% 86%, rgba(255, 214, 150, 0.45), transparent 60%),
+    radial-gradient(1px 1px at 6% 92%, rgba(255, 255, 255, 0.35), transparent 60%);
+  background-size: 260px 260px;
+  background-attachment: fixed;
+}
+[data-theme="swiftie"] .nav { background: rgba(27, 21, 48, 0.92); backdrop-filter: blur(8px); }
+
+/* Dark themes: a little softer shadows and switch knobs. */
+[data-theme="charcoal"] .switch::after, [data-theme="midnight"] .switch::after, [data-theme="swiftie"] .switch::after { background: var(--slate); }
+[data-theme="charcoal"] .switch:checked::after, [data-theme="midnight"] .switch:checked::after, [data-theme="swiftie"] .switch:checked::after { background: var(--ivory); }

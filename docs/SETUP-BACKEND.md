@@ -54,6 +54,24 @@ On your iPhone: **You → Google Drive and AI** → paste the URL and the token 
 
 Use **Get new content now** to test Gemini without waiting for the night. It takes a few minutes.
 
+## Adding another learner
+
+Each learner has their own token and their own backups; AI-made content and reading texts are shared.
+
+1. In the Apps Script editor, open `Setup`, find `function addPartner() { addUser('partner'); }` and change `partner` to their name if you like.
+2. Choose **addPartner** in the toolbar and press **Run**. The log shows their token.
+3. On their iPhone: open the app link in Safari, **Share → Add to Home Screen**, then **You → Google Drive and AI**: the same web app URL, their token.
+
+Their progress stays on their phone and in `backups-<name>` in the Drive folder. `removeUser('name')` takes their access away (their backups stay).
+
+## Your own articles (the inbox)
+
+Drop articles into **Mi Español → inbox** in Drive (from the iPhone: Files app → Google Drive → Mi Español → inbox, or Share → Save to Files from Safari). Google Docs, .txt and .html files work as they are; PDF and Word files are converted with the Drive API, which setup enables.
+
+Each night up to 2 of them become long reading texts (up to about 650 words, the original sentences kept) with translations, a glossary for every word and comprehension questions, then move to **inbox/processed**. They stay private: only your backend and your app see them.
+
+Articles you download with your own subscription are for your own study; keep them in your Drive, not in the public GitHub repository.
+
 ## Security
 
 - **Why "Anyone"**: an installed iPhone web app can't send your Google sign-in with its requests, so access limited to signed-in users would block the app. Instead every request must carry the token; without it, the backend refuses everything.

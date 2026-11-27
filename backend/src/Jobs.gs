@@ -7,6 +7,9 @@
  *   words     → 30 new words for a topic, reviewed, saved as a batch
  *   text      → a graded practice text (e.g. construction), reviewed
  *   news      → 1–2 real articles from the news feeds, prepared for reading
+ * Then it prepares up to 2 articles you dropped into the Drive "inbox" folder
+ * (Google Docs, .txt, .html or PDF) as long reading texts, and moves them
+ * to inbox/processed.
  * A request that fails 3 times is dropped. Hitting the free-tier limit stops
  * the run; the rest waits for the next night.
  */
@@ -47,6 +50,10 @@ function nightly() {
       }
     }
     writeJson(rootFolder(), 'queue.json', remaining);
+    if (Date.now() - started < TIME_LIMIT_MS - 60000) {
+      try { var n = jobInbox(2); if (n) { made += n; log.push('inbox: ' + n + ' texts'); } }
+      catch (err) { log.push(err instanceof QuotaError ? err.message : 'inbox: ' + err.message); }
+    }
   } finally {
     var status = { lastRun: new Date().toISOString(), seconds: Math.round((Date.now() - started) / 1000), made: made, calls: geminiCalls, log: log };
     writeJson(rootFolder(), 'status.json', status);
@@ -70,7 +77,7 @@ function jobExercises(req) {
   var items = cleanExercises(r.exercises, req.tags);
   items = reviewItems('grammar exercises for unit "' + req.unitTitle + '"', items);
   if (!items.length) throw new Error('No exercises passed review.');
-  saveBatch('exercises', { unitId: req.unitId }, items);
+  saveBatch('exercises', { unitId: req.unitId, user: req.user }, items);
   return items.length;
 }
 
@@ -79,7 +86,7 @@ function jobWords(req) {
   var items = cleanWords(r.words, req.existing);
   items = reviewItems('vocabulary for topic "' + req.topicName + '"', items);
   if (!items.length) throw new Error('No words passed review.');
-  saveBatch('words', { topicId: req.topicId, topicName: req.topicName }, items);
+  saveBatch('words', { topicId: req.topicId, topicName: req.topicName, user: req.user }, items);
   return items.length;
 }
 
@@ -88,7 +95,7 @@ function jobText(req) {
   var verdict = callGemini(textReviewPrompt(t), { temperature: 0 });
   if (!verdict.ok) throw new Error('Text rejected in review: ' + (verdict.problems || []).join('; '));
   t.topic = req.topic; t.practice = true;
-  saveBatch('texts', { topic: req.topic }, [t]);
+  saveBatch('texts', { topic: req.topic, user: req.user }, [t]);
   return 1;
 }
 
@@ -135,4 +142,42 @@ function jobNews(req) {
 function hostName(url) {
   var m = /^https?:\/\/(?:www\.)?([^/]+)/.exec(url || '');
   return m ? m[1] : '';
+}
+
+/* ---------- Your own articles (Drive inbox) ---------- */
+
+function jobInbox(max) {
+  var inbox = subFolder('inbox');
+  var done = inbox.getFoldersByName('processed').hasNext() ? inbox.getFoldersByName('processed').next() : inbox.createFolder('processed');
+  var it = inbox.getFiles(), made = 0;
+  while (it.hasNext() && made < max) {
+    var file = it.next();
+    var text = fileText(file);
+    var paragraphs = textToParagraphs(text);
+    if (/html/.test(file.getMimeType())) paragraphs = extractParagraphs(text, 40);
+    if (paragraphs.length < 2) { file.setDescription('Mi Español: no readable text found (try a Google Doc or .txt).'); file.moveTo(done); continue; }
+    paragraphs = trimToWords(paragraphs, 650);
+    var title = file.getName().replace(/\.(txt|html?|pdf|docx?|gdoc)$/i, '');
+    var t = callGemini(inboxPrompt({ title: title, paragraphs: paragraphs }), { temperature: 0.2 });
+    t.topic = t.topic || 'news';
+    t.source = { name: 'Your inbox', title: title };
+    saveBatch('texts', { topic: t.topic, user: 'inbox' }, [t]);
+    file.moveTo(done);
+    made++;
+  }
+  return made;
+}
+
+/** Text of a Google Doc, a text/HTML file, or a PDF (converted with the Drive API). */
+function fileText(file) {
+  var type = file.getMimeType();
+  if (type === MimeType.GOOGLE_DOCS) return DocumentApp.openById(file.getId()).getBody().getText();
+  if (/^text\//.test(type) || /html/.test(type)) return file.getBlob().getDataAsString('UTF-8');
+  if (type === MimeType.PDF || /word|officedocument/.test(type)) {
+    if (typeof Drive === 'undefined') throw new Error('PDF and Word files need the Drive service (Services → Drive API). Or save the article as a Google Doc or .txt.');
+    var copy = Drive.Files.create({ name: 'tmp-' + file.getName(), mimeType: MimeType.GOOGLE_DOCS }, file.getBlob());
+    try { return DocumentApp.openById(copy.id).getBody().getText(); }
+    finally { DriveApp.getFileById(copy.id).setTrashed(true); }
+  }
+  return '';
 }

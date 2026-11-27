@@ -3,7 +3,9 @@
  *
  * The app sends POST requests (Content-Type text/plain, so the browser does
  * not need a CORS preflight) with a JSON body: { token, action, ... }.
- * Every request must carry APP_TOKEN (made by setup()).
+ * Every request must carry a user's token: APP_TOKEN (you, made by setup())
+ * or one made by addUser('name') for someone else. Each user has their own
+ * backups; AI content and reading texts are shared.
  *
  * Actions:
  *   ping            → { ok, version, ai }            check the connection
@@ -22,9 +24,10 @@
  *   MAX_CALLS_PER_NIGHT   optional, default 30
  *   NEWS_FEEDS            optional JSON: [{"topic":"economics","url":"https://…"}]
  *   APP_TOKEN, FOLDER_ID  set by setup()
+ *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 4;
+var VERSION = 5;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {
@@ -47,22 +50,32 @@ function doPost(e) {
   var body;
   if (!e || !e.postData || e.postData.contents.length > MAX_BODY) return json({ ok: false, error: 'Request too large.' });
   try { body = JSON.parse(e.postData.contents); } catch (err) { return json({ ok: false, error: 'Request is not JSON.' }); }
-  if (!body || body.token !== prop('APP_TOKEN', null)) return json({ ok: false, error: 'Wrong or missing token.' });
+  var user = body && userForToken(body.token);
+  if (!user) return json({ ok: false, error: 'Wrong or missing token.' });
   try {
-    return json(route(body));
+    return json(route(body, user));
   } catch (err) {
     console.error(err);
     return json({ ok: false, error: String(err && err.message || err) });
   }
 }
 
-function route(body) {
+/** 'owner' for APP_TOKEN, the name for a token made by addUser(), else null. */
+function userForToken(token) {
+  if (!token || typeof token !== 'string') return null;
+  if (token === prop('APP_TOKEN', null)) return 'owner';
+  var users = {};
+  try { users = JSON.parse(prop('USERS', '{}')); } catch (e) { /* no extra users */ }
+  return Object.prototype.hasOwnProperty.call(users, token) ? users[token] : null;
+}
+
+function route(body, user) {
   switch (body.action) {
-    case 'ping': return { ok: true, version: VERSION, ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
-    case 'backup.save': return { ok: true, savedAt: saveBackup(body.data) };
-    case 'backup.load': return Object.assign({ ok: true }, loadBackup());
-    case 'backup.list': return { ok: true, backups: listBackups() };
-    case 'queue.add': return { ok: true, queued: addToQueue(body.requests || []) };
+    case 'ping': return { ok: true, version: VERSION, user: user, ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
+    case 'backup.save': return { ok: true, savedAt: saveBackup(body.data, user) };
+    case 'backup.load': return Object.assign({ ok: true }, loadBackup(user));
+    case 'backup.list': return { ok: true, backups: listBackups(user) };
+    case 'queue.add': return { ok: true, queued: addToQueue(body.requests || [], user) };
     case 'content.since': return Object.assign({ ok: true }, batchesSince(Number(body.after) || 0, 10));
     case 'report': addReport(body.item, body.reason); return { ok: true };
     case 'status': return Object.assign({ ok: true }, readJson(rootFolder(), 'status.json', {}), { queue: readJson(rootFolder(), 'queue.json', []).length });
