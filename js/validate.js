@@ -39,7 +39,8 @@ export function checkExercise(ex) {
     if (!Array.isArray(ex.words) || ex.words.length < 3) p.push('needs at least 3 words');
     else if (str(ex.a)) {
       const sorted = (s) => normalise(s).split(' ').sort().join(' ');
-      if (sorted(ex.words.join(' ')) !== sorted(ex.a)) p.push("words don't make the answer");
+      // Every listed order must use exactly the given words.
+      if (String(ex.a).split('/').some((alt) => sorted(ex.words.join(' ')) !== sorted(alt))) p.push("words don't make the answer");
     }
   }
   if (ex.type === 'match' && !(Array.isArray(ex.pairs) && ex.pairs.length >= 3 && ex.pairs.every((x) => Array.isArray(x) && str(x[0]) && str(x[1])))) p.push('needs at least 3 pairs');

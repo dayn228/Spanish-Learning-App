@@ -73,6 +73,11 @@ export function matchFits(pairs, leftIndex, rightIndex) {
   return normalise(pairs[leftIndex][1]) === normalise(pairs[rightIndex][1]);
 }
 
+/** Reorder exercises: the placed words are right if they make any of the listed answers ("a / b"). */
+export function reorderRight(placedWords, answer) {
+  return alternatives(answer).includes(normalise(placedWords.join(' ')));
+}
+
 /*
   Dictation: compare word by word, ignoring case, punctuation and accents.
   Returns { points, marks } where marks lists the expected words with ok=true/false,

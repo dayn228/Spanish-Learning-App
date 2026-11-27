@@ -66,3 +66,14 @@ test('R3: match exercises accept either of two identical answers (u02: agua = el
   assert.equal(matchFits(pairs, 0, 1), false);  // agua → la
   assert.equal(matchFits(pairs, 1, 1), true);
 });
+
+test('R4: reorder exercises can list other correct orders, and validation checks each one', async () => {
+  const { reorderRight } = await import('../js/check.js');
+  const { checkExercise } = await import('../js/validate.js');
+  const ex = { type: 'reorder', words: ['se', 'lo', 'explico', 'mañana', 'al', 'cliente'], a: 'se lo explico mañana al cliente / se lo explico al cliente mañana / mañana se lo explico al cliente', tags: ['x'] };
+  assert.deepEqual(checkExercise(ex), []);
+  assert.equal(reorderRight(['Mañana', 'se', 'lo', 'explico', 'al', 'cliente'], ex.a), true);
+  assert.equal(reorderRight(['se', 'lo', 'explico', 'al', 'cliente', 'mañana'], ex.a), true);
+  assert.equal(reorderRight(['lo', 'se', 'explico', 'al', 'cliente', 'mañana'], ex.a), false);
+  assert.deepEqual(checkExercise({ ...ex, a: ex.a + ' / se lo explico mañana' }), ["words don't make the answer"]);
+});

@@ -21,7 +21,7 @@
 */
 
 import { h, icon, ICONS } from './ui.js';
-import { gradeAnswer, matchFits, normalise, wordDiff } from './check.js';
+import { gradeAnswer, matchFits, reorderRight, wordDiff } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
 import { speak, hasSpanishVoice } from './speech.js';
 
@@ -199,7 +199,6 @@ export function exerciseView(ex, { onResult, onNext }) {
     }
 
     case 'reorder': {
-      const target = normalise(ex.a);
       const pool = shuffle(ex.words.map((w, i) => ({ w, i })));
       const line = h('div', { class: 'reorder-line', 'aria-label': 'Your sentence' });
       const bank = h('div', { class: 'reorder-bank' });
@@ -212,9 +211,9 @@ export function exerciseView(ex, { onResult, onNext }) {
       draw();
       const check = () => {
         if (placed.length < ex.words.length) return;
-        const got = normalise(placed.map((p) => p.w).join(' '));
-        const g = got === target ? 1 : 0;
-        finish(g, g ? 'right' : 'wrong', ex.a);
+        // `a` may list other correct orders: "Mañana voy a la obra / Voy a la obra mañana".
+        const g = reorderRight(placed.map((p) => p.w), ex.a) ? 1 : 0;
+        finish(g, g ? 'right' : 'wrong', String(ex.a).split(' / ')[0]);
         draw();
       };
       root.append(line, bank, result);
