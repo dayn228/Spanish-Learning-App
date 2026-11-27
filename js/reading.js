@@ -36,7 +36,7 @@ export function lookup(token, text, common, idx) {
   const entry = g || c;
   // Link to a deck word through the dictionary form, or the word itself.
   const base = entry ? entry[0] : t;
-  const deck = idx.get(base.toLowerCase().replace(ARTICLE, '')) || idx.get(t);
+  const deck = idx.get(base.toLowerCase().replace(ARTICLE, '')) || idx.get(t) || (!entry && singular(t, idx));
   if (entry) return { base: entry[0], en: entry[1], note: entry[2] || '', wordId: deck ? deck.id : null, deckEs: deck ? deck.es : null };
   if (deck) return { base: deck.es, en: deck.en, note: '', wordId: deck.id, deckEs: deck.es };
   return null;
@@ -47,6 +47,12 @@ export function textWords(text) {
   const out = new Set();
   for (const p of text.paragraphs) for (const [es] of p) for (const t of tokenize(es)) if (t.word) out.add(t.text.toLowerCase());
   return [...out];
+}
+
+/** Plural forms find their deck word: ventanas → ventana, proveedores → proveedor. */
+function singular(t, idx) {
+  if (!t.endsWith('s')) return null;
+  return idx.get(t.slice(0, -1)) || (t.endsWith('es') ? idx.get(t.slice(0, -2)) : null) || null;
 }
 
 /** Share of the text's content words (deck-linked) that you know or are learning. */

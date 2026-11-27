@@ -388,6 +388,1266 @@
   "día": [
    "día",
    "day"
+  ],
+  "era": [
+   "ser",
+   "was (ser, imperfect)"
+  ],
+  "eran": [
+   "ser",
+   "were (ser, imperfect)"
+  ],
+  "fue": [
+   "ser / ir",
+   "was / went"
+  ],
+  "fueron": [
+   "ser / ir",
+   "were / went"
+  ],
+  "estaba": [
+   "estar",
+   "was (estar)"
+  ],
+  "estaban": [
+   "estar",
+   "were (estar)"
+  ],
+  "estuvo": [
+   "estar",
+   "was, stayed (estar)"
+  ],
+  "había": [
+   "haber",
+   "there was, there were / had (+ participle)"
+  ],
+  "hubo": [
+   "haber",
+   "there was, there were (event)"
+  ],
+  "ha": [
+   "haber",
+   "has (+ participle)"
+  ],
+  "han": [
+   "haber",
+   "have (+ participle)"
+  ],
+  "he": [
+   "haber",
+   "I have (+ participle)"
+  ],
+  "hemos": [
+   "haber",
+   "we have (+ participle)"
+  ],
+  "hace": [
+   "hacer",
+   "does, makes / ago (hace dos años)"
+  ],
+  "hacer": [
+   "hacer",
+   "to do, to make"
+  ],
+  "hizo": [
+   "hacer",
+   "did, made"
+  ],
+  "tenía": [
+   "tener",
+   "had (imperfect)"
+  ],
+  "tenían": [
+   "tener",
+   "had (they)"
+  ],
+  "tuvo": [
+   "tener",
+   "had, got"
+  ],
+  "podía": [
+   "poder",
+   "could"
+  ],
+  "podían": [
+   "poder",
+   "could (they)"
+  ],
+  "pudo": [
+   "poder",
+   "could, managed"
+  ],
+  "quería": [
+   "querer",
+   "wanted"
+  ],
+  "querían": [
+   "querer",
+   "wanted (they)"
+  ],
+  "dice": [
+   "decir",
+   "says"
+  ],
+  "dicen": [
+   "decir",
+   "say"
+  ],
+  "dijo": [
+   "decir",
+   "said"
+  ],
+  "decir": [
+   "decir",
+   "to say"
+  ],
+  "pasó": [
+   "pasar",
+   "happened / went by / moved"
+  ],
+  "pasaron": [
+   "pasar",
+   "went by / spent"
+  ],
+  "vino": [
+   "venir",
+   "came"
+  ],
+  "sigue": [
+   "seguir",
+   "continues, is still"
+  ],
+  "parece": [
+   "parecer",
+   "seems"
+  ],
+  "ser": [
+   "ser",
+   "to be"
+  ],
+  "estar": [
+   "estar",
+   "to be"
+  ],
+  "tener": [
+   "tener",
+   "to have"
+  ],
+  "poder": [
+   "poder",
+   "to be able to"
+  ],
+  "antes": [
+   "antes",
+   "before, earlier"
+  ],
+  "durante": [
+   "durante",
+   "during, for (a period)"
+  ],
+  "mientras": [
+   "mientras",
+   "while"
+  ],
+  "luego": [
+   "luego",
+   "then, later"
+  ],
+  "entonces": [
+   "entonces",
+   "then, so"
+  ],
+  "siempre": [
+   "siempre",
+   "always"
+  ],
+  "nunca": [
+   "nunca",
+   "never"
+  ],
+  "todavía": [
+   "todavía",
+   "still, yet"
+  ],
+  "pronto": [
+   "pronto",
+   "soon"
+  ],
+  "años": [
+   "año",
+   "years"
+  ],
+  "meses": [
+   "mes",
+   "months"
+  ],
+  "mes": [
+   "mes",
+   "month"
+  ],
+  "semanas": [
+   "semana",
+   "weeks"
+  ],
+  "semana": [
+   "semana",
+   "week"
+  ],
+  "horas": [
+   "hora",
+   "hours"
+  ],
+  "hora": [
+   "hora",
+   "hour"
+  ],
+  "días": [
+   "día",
+   "days"
+  ],
+  "década": [
+   "la década",
+   "decade"
+  ],
+  "décadas": [
+   "la década",
+   "decades"
+  ],
+  "tiempo": [
+   "el tiempo",
+   "time / weather"
+  ],
+  "vez": [
+   "la vez",
+   "time, occasion (una vez, cada vez)"
+  ],
+  "veces": [
+   "la vez",
+   "times"
+  ],
+  "principio": [
+   "el principio",
+   "beginning (al principio = at first)"
+  ],
+  "final": [
+   "final",
+   "final / end"
+  ],
+  "primer": [
+   "primero",
+   "first"
+  ],
+  "primera": [
+   "primero",
+   "first"
+  ],
+  "primero": [
+   "primero",
+   "first"
+  ],
+  "segundo": [
+   "segundo",
+   "second"
+  ],
+  "último": [
+   "último",
+   "last"
+  ],
+  "última": [
+   "último",
+   "last"
+  ],
+  "últimos": [
+   "último",
+   "last, latest"
+  ],
+  "invierno": [
+   "el invierno",
+   "winter"
+  ],
+  "verano": [
+   "el verano",
+   "summer"
+  ],
+  "diciembre": [
+   "diciembre",
+   "December"
+  ],
+  "enero": [
+   "enero",
+   "January"
+  ],
+  "junio": [
+   "junio",
+   "June"
+  ],
+  "octubre": [
+   "octubre",
+   "October"
+  ],
+  "marzo": [
+   "marzo",
+   "March"
+  ],
+  "casi": [
+   "casi",
+   "almost"
+  ],
+  "solo": [
+   "solo",
+   "only / alone"
+  ],
+  "sólo": [
+   "solo",
+   "only"
+  ],
+  "incluso": [
+   "incluso",
+   "even"
+  ],
+  "además": [
+   "además",
+   "also, in addition"
+  ],
+  "mitad": [
+   "la mitad",
+   "half"
+  ],
+  "parte": [
+   "la parte",
+   "part"
+  ],
+  "algo": [
+   "algo",
+   "something"
+  ],
+  "nada": [
+   "nada",
+   "nothing"
+  ],
+  "nadie": [
+   "nadie",
+   "nobody"
+  ],
+  "alguien": [
+   "alguien",
+   "somebody"
+  ],
+  "ningún": [
+   "ninguno",
+   "no, not any"
+  ],
+  "ninguna": [
+   "ninguno",
+   "no, not any"
+  ],
+  "algunos": [
+   "alguno",
+   "some"
+  ],
+  "algunas": [
+   "alguno",
+   "some"
+  ],
+  "otros": [
+   "otro",
+   "others"
+  ],
+  "otras": [
+   "otro",
+   "others"
+  ],
+  "otra": [
+   "otro",
+   "another, other"
+  ],
+  "toda": [
+   "todo",
+   "all, the whole"
+  ],
+  "todas": [
+   "todo",
+   "all"
+  ],
+  "tanto": [
+   "tanto",
+   "so much"
+  ],
+  "tan": [
+   "tan",
+   "so, as"
+  ],
+  "bastante": [
+   "bastante",
+   "quite, enough"
+  ],
+  "suficientes": [
+   "suficiente",
+   "enough"
+  ],
+  "suficiente": [
+   "suficiente",
+   "enough"
+  ],
+  "ciento": [
+   "ciento",
+   "hundred (por ciento = percent)"
+  ],
+  "cien": [
+   "cien",
+   "hundred"
+  ],
+  "mil": [
+   "mil",
+   "thousand"
+  ],
+  "millones": [
+   "el millón",
+   "millions"
+  ],
+  "millón": [
+   "el millón",
+   "million"
+  ],
+  "cinco": [
+   "cinco",
+   "five"
+  ],
+  "nueve": [
+   "nueve",
+   "nine"
+  ],
+  "diez": [
+   "diez",
+   "ten"
+  ],
+  "once": [
+   "once",
+   "eleven"
+  ],
+  "doce": [
+   "doce",
+   "twelve"
+  ],
+  "catorce": [
+   "catorce",
+   "fourteen"
+  ],
+  "quince": [
+   "quince",
+   "fifteen"
+  ],
+  "dieciocho": [
+   "dieciocho",
+   "eighteen"
+  ],
+  "veinte": [
+   "veinte",
+   "twenty"
+  ],
+  "treinta": [
+   "treinta",
+   "thirty"
+  ],
+  "cuarenta": [
+   "cuarenta",
+   "forty"
+  ],
+  "cincuenta": [
+   "cincuenta",
+   "fifty"
+  ],
+  "cuarto": [
+   "cuarto",
+   "fourth / quarter / room"
+  ],
+  "euros": [
+   "el euro",
+   "euros"
+  ],
+  "euro": [
+   "el euro",
+   "euro"
+  ],
+  "embargo": [
+   "sin embargo",
+   "(sin embargo) however"
+  ],
+  "aunque": [
+   "aunque",
+   "although, even if"
+  ],
+  "así": [
+   "así",
+   "like this, so"
+  ],
+  "según": [
+   "según",
+   "according to"
+  ],
+  "contra": [
+   "contra",
+   "against"
+  ],
+  "favor": [
+   "el favor",
+   "favour (a favor = in favour)"
+  ],
+  "hasta": [
+   "hasta",
+   "until, up to, even"
+  ],
+  "desde": [
+   "desde",
+   "since, from"
+  ],
+  "entre": [
+   "entre",
+   "between, among"
+  ],
+  "sobre": [
+   "sobre",
+   "about, on"
+  ],
+  "hacia": [
+   "hacia",
+   "towards"
+  ],
+  "tras": [
+   "tras",
+   "after"
+  ],
+  "detrás": [
+   "detrás",
+   "behind"
+  ],
+  "ante": [
+   "ante",
+   "before, faced with"
+  ],
+  "bajo": [
+   "bajo",
+   "under / low"
+  ],
+  "cual": [
+   "cual",
+   "which"
+  ],
+  "cuál": [
+   "cuál",
+   "which"
+  ],
+  "quien": [
+   "quien",
+   "who"
+  ],
+  "quién": [
+   "quién",
+   "who"
+  ],
+  "cuyo": [
+   "cuyo",
+   "whose"
+  ],
+  "donde": [
+   "donde",
+   "where"
+  ],
+  "eso": [
+   "eso",
+   "that"
+  ],
+  "ese": [
+   "ese",
+   "that"
+  ],
+  "esa": [
+   "ese",
+   "that"
+  ],
+  "esos": [
+   "ese",
+   "those"
+  ],
+  "esas": [
+   "ese",
+   "those"
+  ],
+  "estas": [
+   "este",
+   "these"
+  ],
+  "aquel": [
+   "aquel",
+   "that (over there)"
+  ],
+  "aquella": [
+   "aquel",
+   "that (over there)"
+  ],
+  "nuestro": [
+   "nuestro",
+   "our"
+  ],
+  "nuestra": [
+   "nuestro",
+   "our"
+  ],
+  "nuestros": [
+   "nuestro",
+   "our"
+  ],
+  "os": [
+   "os",
+   "you, (to) you (vosotros)"
+  ],
+  "ti": [
+   "ti",
+   "you (after a preposition)"
+  ],
+  "mí": [
+   "mí",
+   "me (after a preposition)"
+  ],
+  "tipo": [
+   "el tipo",
+   "type, kind / rate (tipo de interés)"
+  ],
+  "forma": [
+   "la forma",
+   "way, form"
+  ],
+  "manera": [
+   "la manera",
+   "way"
+  ],
+  "caso": [
+   "el caso",
+   "case"
+  ],
+  "cosa": [
+   "la cosa",
+   "thing"
+  ],
+  "cosas": [
+   "la cosa",
+   "things"
+  ],
+  "mismo": [
+   "mismo",
+   "same / itself"
+  ],
+  "misma": [
+   "mismo",
+   "same"
+  ],
+  "mismos": [
+   "mismo",
+   "same"
+  ],
+  "nuevo": [
+   "nuevo",
+   "new"
+  ],
+  "nueva": [
+   "nuevo",
+   "new"
+  ],
+  "nuevos": [
+   "nuevo",
+   "new"
+  ],
+  "nuevas": [
+   "nuevo",
+   "new"
+  ],
+  "grande": [
+   "grande",
+   "big, large"
+  ],
+  "grandes": [
+   "grande",
+   "big, great"
+  ],
+  "gran": [
+   "grande",
+   "great, big"
+  ],
+  "pequeño": [
+   "pequeño",
+   "small"
+  ],
+  "pequeña": [
+   "pequeño",
+   "small"
+  ],
+  "pequeñas": [
+   "pequeño",
+   "small"
+  ],
+  "pequeños": [
+   "pequeño",
+   "small"
+  ],
+  "alto": [
+   "alto",
+   "high, tall"
+  ],
+  "alta": [
+   "alto",
+   "high"
+  ],
+  "altos": [
+   "alto",
+   "high"
+  ],
+  "altas": [
+   "alto",
+   "high"
+  ],
+  "largo": [
+   "largo",
+   "long"
+  ],
+  "larga": [
+   "largo",
+   "long"
+  ],
+  "mejor": [
+   "mejor",
+   "better, best"
+  ],
+  "peor": [
+   "peor",
+   "worse, worst"
+  ],
+  "mayor": [
+   "mayor",
+   "bigger, older, main"
+  ],
+  "menor": [
+   "menor",
+   "smaller, younger, lower"
+  ],
+  "españa": [
+   "España",
+   "Spain"
+  ],
+  "español": [
+   "español",
+   "Spanish"
+  ],
+  "española": [
+   "español",
+   "Spanish"
+  ],
+  "europa": [
+   "Europa",
+   "Europe"
+  ],
+  "europea": [
+   "europeo",
+   "European"
+  ],
+  "europeas": [
+   "europeo",
+   "European"
+  ],
+  "europeo": [
+   "europeo",
+   "European"
+  ],
+  "europeos": [
+   "europeo",
+   "European"
+  ],
+  "estado": [
+   "el Estado / estado",
+   "the State / been"
+  ],
+  "gobierno": [
+   "el gobierno",
+   "government"
+  ],
+  "país": [
+   "el país",
+   "country"
+  ],
+  "países": [
+   "el país",
+   "countries"
+  ],
+  "deben": [
+   "deber",
+   "must, should"
+  ],
+  "debe": [
+   "deber",
+   "must, should"
+  ],
+  "cambiar": [
+   "cambiar",
+   "to change"
+  ],
+  "cambió": [
+   "cambiar",
+   "changed"
+  ],
+  "situación": [
+   "la situación",
+   "situation"
+  ],
+  "sino": [
+   "sino",
+   "but (rather)"
+  ],
+  "buscar": [
+   "buscar",
+   "to look for"
+  ],
+  "varias": [
+   "varios",
+   "several"
+  ],
+  "varios": [
+   "varios",
+   "several"
+  ],
+  "normas": [
+   "la norma",
+   "rules"
+  ],
+  "energía": [
+   "la energía",
+   "energy"
+  ],
+  "sistema": [
+   "el sistema",
+   "system"
+  ],
+  "pedir": [
+   "pedir",
+   "to ask for"
+  ],
+  "reducir": [
+   "reducir",
+   "to reduce"
+  ],
+  "firmar": [
+   "firmar",
+   "to sign"
+  ],
+  "interés": [
+   "el interés",
+   "interest"
+  ],
+  "intereses": [
+   "el interés",
+   "interests"
+  ],
+  "pandemia": [
+   "la pandemia",
+   "pandemic"
+  ],
+  "ucrania": [
+   "Ucrania",
+   "Ukraine"
+  ],
+  "bruselas": [
+   "Bruselas",
+   "Brussels"
+  ],
+  "ejemplo": [
+   "el ejemplo",
+   "example (por ejemplo = for example)"
+  ],
+  "demasiado": [
+   "demasiado",
+   "too, too much"
+  ],
+  "menudo": [
+   "a menudo",
+   "(a menudo) often"
+  ],
+  "falta": [
+   "la falta",
+   "lack (hace falta = is needed)"
+  ],
+  "normalmente": [
+   "normalmente",
+   "usually"
+  ],
+  "realidad": [
+   "la realidad",
+   "reality (en realidad = actually)"
+  ],
+  "resto": [
+   "el resto",
+   "rest"
+  ],
+  "mundo": [
+   "el mundo",
+   "world"
+  ],
+  "tema": [
+   "el tema",
+   "subject, topic"
+  ],
+  "temas": [
+   "el tema",
+   "subjects, issues"
+  ],
+  "casos": [
+   "el caso",
+   "cases"
+  ],
+  "fondo": [
+   "el fondo",
+   "fund / bottom"
+  ],
+  "fondos": [
+   "el fondo",
+   "funds"
+  ],
+  "recuperación": [
+   "la recuperación",
+   "recovery"
+  ],
+  "llegó": [
+   "llegar",
+   "arrived, reached"
+  ],
+  "subió": [
+   "subir",
+   "rose, raised"
+  ],
+  "aprobó": [
+   "aprobar",
+   "approved, passed"
+  ],
+  "hecho": [
+   "hacer",
+   "done, made"
+  ],
+  "tenido": [
+   "tener",
+   "had"
+  ],
+  "política": [
+   "la política / político",
+   "politics, policy / political"
+  ],
+  "políticas": [
+   "político",
+   "political"
+  ],
+  "políticos": [
+   "el político / político",
+   "politicians / political"
+  ],
+  "exterior": [
+   "exterior",
+   "foreign, outside"
+  ],
+  "consejo": [
+   "el consejo",
+   "council / advice"
+  ],
+  "gobiernos": [
+   "el gobierno",
+   "governments"
+  ],
+  "necesita": [
+   "necesitar",
+   "needs"
+  ],
+  "permite": [
+   "permitir",
+   "allows"
+  ],
+  "permitió": [
+   "permitir",
+   "allowed"
+  ],
+  "decide": [
+   "decidir",
+   "decides"
+  ],
+  "decisiones": [
+   "la decisión",
+   "decisions"
+  ],
+  "diferentes": [
+   "diferente",
+   "different"
+  ],
+  "directamente": [
+   "directamente",
+   "directly"
+  ],
+  "exactamente": [
+   "exactamente",
+   "exactly"
+  ],
+  "piensa": [
+   "pensar",
+   "thinks"
+  ],
+  "saben": [
+   "saber",
+   "know"
+  ],
+  "vienen": [
+   "venir",
+   "come"
+  ],
+  "da": [
+   "dar",
+   "gives"
+  ],
+  "lleva": [
+   "llevar",
+   "takes, carries"
+  ],
+  "vio": [
+   "ver",
+   "saw"
+  ],
+  "apenas": [
+   "apenas",
+   "hardly, barely"
+  ],
+  "enseguida": [
+   "enseguida",
+   "straight away"
+  ],
+  "difícilmente": [
+   "difícilmente",
+   "hardly"
+  ],
+  "veinticinco": [
+   "veinticinco",
+   "twenty-five"
+  ],
+  "veintisiete": [
+   "veintisiete",
+   "twenty-seven"
+  ],
+  "setecientos": [
+   "setecientos",
+   "seven hundred"
+  ],
+  "cero": [
+   "cero",
+   "zero"
+  ],
+  "debajo": [
+   "debajo",
+   "below, under"
+  ],
+  "palabras": [
+   "la palabra",
+   "words"
+  ],
+  "pocas": [
+   "poco",
+   "few"
+  ],
+  "pocos": [
+   "poco",
+   "few"
+  ],
+  "poco": [
+   "poco",
+   "little, not much"
+  ],
+  "principales": [
+   "principal",
+   "main"
+  ],
+  "principal": [
+   "principal",
+   "main"
+  ],
+  "resultado": [
+   "el resultado",
+   "result"
+  ],
+  "expertos": [
+   "el experto",
+   "experts"
+  ],
+  "nacionales": [
+   "nacional",
+   "national"
+  ],
+  "construir": [
+   "construir",
+   "to build"
+  ],
+  "construcción": [
+   "la construcción",
+   "construction"
+  ],
+  "evitar": [
+   "evitar",
+   "to avoid, prevent"
+  ],
+  "proponer": [
+   "proponer",
+   "to propose"
+  ],
+  "sido": [
+   "ser",
+   "been"
+  ],
+  "haber": [
+   "haber",
+   "to have (auxiliary) / there to be"
+  ],
+  "podría": [
+   "poder",
+   "could, might"
+  ],
+  "sea": [
+   "ser",
+   "(subjunctive) is, be"
+  ],
+  "pueda": [
+   "poder",
+   "(subjunctive) can"
+  ],
+  "quieren": [
+   "querer",
+   "want"
+  ],
+  "aún": [
+   "aún",
+   "still, even"
+  ],
+  "quizá": [
+   "quizá",
+   "perhaps"
+  ],
+  "cualquiera": [
+   "cualquiera",
+   "anyone, any"
+  ],
+  "quienes": [
+   "quien",
+   "those who"
+  ],
+  "madrid": [
+   "Madrid",
+   "Madrid"
+  ],
+  "barcelona": [
+   "Barcelona",
+   "Barcelona"
+  ],
+  "francia": [
+   "Francia",
+   "France"
+  ],
+  "austria": [
+   "Austria",
+   "Austria"
+  ],
+  "españoles": [
+   "el español",
+   "Spaniards"
+  ],
+  "jóvenes": [
+   "el joven",
+   "young people"
+  ],
+  "número": [
+   "el número",
+   "number"
+  ],
+  "centro": [
+   "el centro",
+   "centre"
+  ],
+  "lugar": [
+   "el lugar",
+   "place"
+  ],
+  "existe": [
+   "existir",
+   "exists"
+  ],
+  "conoce": [
+   "conocer",
+   "knows"
+  ],
+  "viven": [
+   "vivir",
+   "live"
+  ],
+  "trabajan": [
+   "trabajar",
+   "work"
+  ],
+  "buscan": [
+   "buscar",
+   "look for"
+  ],
+  "estudios": [
+   "el estudio",
+   "studies"
+  ],
+  "explicar": [
+   "explicar",
+   "to explain"
+  ],
+  "explicación": [
+   "la explicación",
+   "explanation"
+  ],
+  "debate": [
+   "el debate",
+   "debate"
+  ],
+  "efecto": [
+   "el efecto",
+   "effect"
+  ],
+  "función": [
+   "la función",
+   "function, purpose"
+  ],
+  "cumplir": [
+   "cumplir",
+   "to fulfil, comply"
+  ],
+  "comunidades": [
+   "la comunidad",
+   "communities, regions"
+  ],
+  "propietarios": [
+   "el propietario",
+   "owners, landlords"
+  ],
+  "hogares": [
+   "el hogar",
+   "households"
+  ],
+  "sencilla": [
+   "sencillo",
+   "simple"
+  ],
+  "única": [
+   "único",
+   "single, only"
+  ],
+  "sola": [
+   "solo",
+   "single, alone"
+  ],
+  "solas": [
+   "solo",
+   "alone"
   ]
  }
 }

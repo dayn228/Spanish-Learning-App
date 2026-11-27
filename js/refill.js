@@ -70,8 +70,8 @@ export function computeRequests({ units = [], grammar = { units: {} }, words = [
 
 /** The learner's rough level from mastered grammar units. */
 export function estimateLevel(units, grammar) {
-  const a2 = units.filter((u) => u.level === 'A2');
-  const a1Done = units.filter((u) => u.level === 'A1').every((u) => grammar.units[u.id] && grammar.units[u.id].mastered);
-  if (a1Done && a2.length && a2.every((u) => grammar.units[u.id] && grammar.units[u.id].mastered)) return 'B1';
-  return a1Done ? 'A2' : 'A1';
+  const done = (lvl) => units.filter((u) => u.level === lvl).every((u) => grammar.units[u.id] && grammar.units[u.id].mastered);
+  if (!done('A1')) return 'A1';
+  if (!done('A2')) return 'A2';
+  return done('B1') && units.some((u) => u.level === 'B1') ? 'B2' : 'B1';
 }

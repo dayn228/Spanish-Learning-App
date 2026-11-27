@@ -43,7 +43,8 @@ export function checkExercise(ex) {
     }
   }
   if (ex.type === 'match' && !(Array.isArray(ex.pairs) && ex.pairs.length >= 3 && ex.pairs.every((x) => Array.isArray(x) && str(x[0]) && str(x[1])))) p.push('needs at least 3 pairs');
-  if (ex.type === 'table' && !conjugate(ex.verb)) p.push(`verb "${ex.verb}" can't be conjugated`);
+  if (ex.type === 'table' && !conjugate(ex.verb, ex.tense || 'present')) p.push(`verb "${ex.verb}" can't be conjugated`);
+  if (ex.tense && !['present', 'preterite', 'imperfect'].includes(ex.tense)) p.push(`unknown tense ${ex.tense}`);
   return p;
 }
 

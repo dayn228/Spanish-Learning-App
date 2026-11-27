@@ -47,3 +47,28 @@ test('every listed verb conjugates', () => {
 test('unknown endings return null', () => {
   assert.equal(conjugate('xyz'), null);
 });
+
+test('preterite: regular, strong, stem-changing and spelling forms', () => {
+  const p = (v) => conjugate(v, 'preterite').join(' ');
+  assert.equal(p('hablar'), 'hablé hablaste habló hablamos hablasteis hablaron');
+  assert.equal(p('tener'), 'tuve tuviste tuvo tuvimos tuvisteis tuvieron');
+  assert.equal(p('decir'), 'dije dijiste dijo dijimos dijisteis dijeron');
+  assert.equal(conjugate('hacer', 'preterite')[2], 'hizo');
+  assert.equal(p('ir'), p('ser'));
+  assert.equal(conjugate('pedir', 'preterite')[5], 'pidieron');
+  assert.equal(conjugate('dormir', 'preterite')[2], 'durmió');
+  assert.equal(conjugate('leer', 'preterite')[2], 'leyó');
+  assert.equal(conjugate('construir', 'preterite')[5], 'construyeron');
+  assert.equal(conjugate('llegar', 'preterite')[0], 'llegué');
+  assert.equal(conjugate('buscar', 'preterite')[0], 'busqué');
+  assert.equal(conjugate('empezar', 'preterite')[0], 'empecé');
+});
+
+test('imperfect: regular and the three irregulars', () => {
+  assert.equal(conjugate('trabajar', 'imperfect')[3], 'trabajábamos');
+  assert.equal(conjugate('vivir', 'imperfect')[0], 'vivía');
+  assert.equal(conjugate('ser', 'imperfect').join(' '), 'era eras era éramos erais eran');
+  assert.equal(conjugate('ir', 'imperfect')[3], 'íbamos');
+  assert.equal(conjugate('ver', 'imperfect')[0], 'veía');
+  assert.equal(conjugate('levantarse', 'imperfect')[0], 'me levantaba');
+});

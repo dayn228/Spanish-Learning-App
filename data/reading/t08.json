@@ -1,0 +1,510 @@
+{
+ "id": "t08",
+ "title": "El euríbor y tu hipoteca",
+ "en": "The Euribor and your mortgage",
+ "level": "B1",
+ "topic": "finance",
+ "note": "Practice text written for the app.",
+ "paragraphs": [
+  [
+   [
+    "En España, la mayoría de las hipotecas firmadas durante los años dos mil eran de tipo variable.",
+    "In Spain, most mortgages signed during the 2000s were variable-rate."
+   ],
+   [
+    "Eso significa que la cuota mensual no es fija: cambia cada seis o doce meses según un índice llamado euríbor.",
+    "That means the monthly payment isn't fixed: it changes every six or twelve months according to an index called the Euribor."
+   ],
+   [
+    "El euríbor es, en pocas palabras, el tipo de interés al que los bancos europeos se prestan dinero entre ellos.",
+    "The Euribor is, in a few words, the interest rate at which European banks lend money to each other."
+   ]
+  ],
+  [
+   [
+    "Durante casi una década, entre 2015 y 2022, el euríbor estuvo por debajo de cero.",
+    "For almost a decade, between 2015 and 2022, the Euribor was below zero."
+   ],
+   [
+    "El Banco Central Europeo mantenía los tipos muy bajos para animar el crédito y evitar que los precios cayeran.",
+    "The European Central Bank kept rates very low to encourage lending and to stop prices from falling."
+   ],
+   [
+    "Para las familias con hipoteca variable fue una época tranquila: muchas pagaban cuotas más bajas que un alquiler.",
+    "For families with a variable mortgage it was a calm period: many paid lower instalments than a rent."
+   ],
+   [
+    "En cambio, los ahorradores apenas recibían nada por su dinero en el banco.",
+    "On the other hand, savers received almost nothing for their money in the bank."
+   ]
+  ],
+  [
+   [
+    "Todo cambió en 2022.",
+    "Everything changed in 2022."
+   ],
+   [
+    "Después de la pandemia y con la guerra en Ucrania, los precios de la energía y de los alimentos se dispararon, y la inflación llegó a superar el diez por ciento en algunos meses.",
+    "After the pandemic and with the war in Ukraine, energy and food prices shot up, and inflation went above ten percent in some months."
+   ],
+   [
+    "Para frenarla, el Banco Central Europeo subió los tipos de interés diez veces seguidas, algo que no había hecho nunca a esa velocidad.",
+    "To slow it down, the European Central Bank raised interest rates ten times in a row, something it had never done at that speed."
+   ],
+   [
+    "El euríbor pasó de estar en negativo a superar el cuatro por ciento en menos de dos años.",
+    "The Euribor went from being negative to over four percent in less than two years."
+   ]
+  ],
+  [
+   [
+    "Las consecuencias se notaron enseguida.",
+    "The consequences were felt immediately."
+   ],
+   [
+    "Una familia con una hipoteca de 150.000 euros a veinticinco años vio cómo su cuota subía unos 250 euros al mes en la revisión anual.",
+    "A family with a 150,000-euro mortgage over twenty-five years saw its payment rise by about 250 euros a month at the annual review."
+   ],
+   [
+    "Para muchos hogares, ese aumento significaba renunciar a las vacaciones, recortar gastos o buscar un segundo trabajo.",
+    "For many households, that increase meant giving up holidays, cutting spending or looking for a second job."
+   ],
+   [
+    "Los bancos, por su parte, ganaron más que nunca, porque cobraban más por los préstamos y seguían pagando poco por los depósitos.",
+    "The banks, for their part, earned more than ever, because they charged more for loans and kept paying little on deposits."
+   ]
+  ],
+  [
+   [
+    "Ante esta situación, muchos clientes intentaron cambiar su hipoteca variable por una fija o mixta.",
+    "Faced with this situation, many customers tried to switch their variable mortgage to a fixed or mixed one."
+   ],
+   [
+    "El Gobierno aprobó medidas para facilitarlo: rebajó las comisiones por cambio de tipo y permitió alargar el plazo a las familias más vulnerables.",
+    "The Government approved measures to make it easier: it cut the fees for switching rates and allowed the most vulnerable families to extend the term."
+   ],
+   [
+    "Otros prefirieron amortizar, es decir, devolver una parte del préstamo antes de tiempo para reducir la deuda pendiente.",
+    "Others preferred to make early repayments, that is, pay back part of the loan ahead of time to reduce the outstanding debt."
+   ]
+  ],
+  [
+   [
+    "Desde 2024, la inflación ha bajado y el Banco Central Europeo ha empezado a recortar los tipos poco a poco.",
+    "Since 2024, inflation has come down and the European Central Bank has started cutting rates little by little."
+   ],
+   [
+    "El euríbor ya no está en máximos, pero los expertos coinciden en que difícilmente volverá a los niveles negativos de antes.",
+    "The Euribor is no longer at its highs, but experts agree that it will hardly return to the negative levels of before."
+   ],
+   [
+    "La lección para quien piensa en comprar una vivienda es sencilla: antes de firmar, hay que calcular si podríamos pagar la cuota también en el peor escenario.",
+    "The lesson for anyone thinking of buying a home is simple: before signing, you have to work out whether you could pay the instalment in the worst scenario too."
+   ]
+  ],
+  [
+   [
+    "Un consejo habitual de los asesores financieros es que la cuota de la hipoteca no supere el treinta o treinta y cinco por ciento de los ingresos netos del hogar.",
+    "A common piece of advice from financial advisers is that the mortgage payment shouldn't exceed thirty or thirty-five percent of the household's net income."
+   ],
+   [
+    "También recomiendan comparar varias ofertas, leer con atención la letra pequeña y no fijarse solo en el tipo de interés, sino en la TAE, que incluye comisiones y seguros obligatorios.",
+    "They also recommend comparing several offers, reading the small print carefully and not looking only at the interest rate, but at the APR, which includes fees and compulsory insurance."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Qué es el euríbor?",
+   "options": [
+    "El tipo al que los bancos europeos se prestan dinero.",
+    "El impuesto sobre la vivienda.",
+    "El precio medio de un piso."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cómo estuvo el euríbor entre 2015 y 2022?",
+   "options": [
+    "Por debajo de cero.",
+    "Por encima del cuatro por ciento.",
+    "Igual que la inflación."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué subió los tipos el Banco Central Europeo?",
+   "options": [
+    "Para frenar la inflación.",
+    "Para ayudar a los ahorradores.",
+    "Porque bajaron los precios."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué hicieron los bancos durante la subida?",
+   "options": [
+    "Ganaron más que nunca.",
+    "Bajaron las cuotas.",
+    "Cerraron muchas oficinas."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué significa amortizar en el texto?",
+   "options": [
+    "Devolver una parte del préstamo antes de tiempo.",
+    "Pedir un préstamo nuevo.",
+    "Cambiar de banco."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué incluye la TAE?",
+   "options": [
+    "Comisiones y seguros obligatorios.",
+    "Solo el tipo de interés.",
+    "El precio de la vivienda."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "firmadas": [
+   "firmar",
+   "signed"
+  ],
+  "variable": [
+   "variable",
+   "variable"
+  ],
+  "significa": [
+   "significar",
+   "means"
+  ],
+  "significaba": [
+   "significar",
+   "meant"
+  ],
+  "cuota": [
+   "la cuota",
+   "instalment, payment"
+  ],
+  "cuotas": [
+   "la cuota",
+   "instalments"
+  ],
+  "mensual": [
+   "mensual",
+   "monthly"
+  ],
+  "fija": [
+   "fijo",
+   "fixed"
+  ],
+  "cambia": [
+   "cambiar",
+   "changes"
+  ],
+  "índice": [
+   "el índice",
+   "index"
+  ],
+  "llamado": [
+   "llamar",
+   "called"
+  ],
+  "euríbor": [
+   "el euríbor",
+   "Euribor (bank lending rate)"
+  ],
+  "prestan": [
+   "prestar",
+   "lend (se prestan = lend each other)"
+  ],
+  "central": [
+   "central",
+   "central"
+  ],
+  "mantenía": [
+   "mantener",
+   "kept"
+  ],
+  "tipos": [
+   "el tipo",
+   "rates"
+  ],
+  "animar": [
+   "animar",
+   "to encourage"
+  ],
+  "crédito": [
+   "el crédito",
+   "credit, lending"
+  ],
+  "evitar": [
+   "evitar",
+   "to avoid, prevent"
+  ],
+  "cayeran": [
+   "caer",
+   "(subjunctive) fell"
+  ],
+  "época": [
+   "la época",
+   "period, time"
+  ],
+  "tranquila": [
+   "tranquilo",
+   "calm"
+  ],
+  "pagaban": [
+   "pagar",
+   "paid, were paying"
+  ],
+  "ahorradores": [
+   "el ahorrador",
+   "savers"
+  ],
+  "recibían": [
+   "recibir",
+   "received"
+  ],
+  "alimentos": [
+   "el alimento",
+   "food"
+  ],
+  "dispararon": [
+   "dispararse",
+   "(se dispararon) shot up"
+  ],
+  "superar": [
+   "superar",
+   "to exceed, go above"
+  ],
+  "frenarla": [
+   "frenar",
+   "to slow it down"
+  ],
+  "seguidas": [
+   "seguido",
+   "in a row"
+  ],
+  "velocidad": [
+   "la velocidad",
+   "speed"
+  ],
+  "negativo": [
+   "negativo",
+   "negative"
+  ],
+  "negativos": [
+   "negativo",
+   "negative"
+  ],
+  "consecuencias": [
+   "la consecuencia",
+   "consequences"
+  ],
+  "notaron": [
+   "notarse",
+   "(se notaron) were felt"
+  ],
+  "subía": [
+   "subir",
+   "was rising"
+  ],
+  "revisión": [
+   "la revisión",
+   "review"
+  ],
+  "anual": [
+   "anual",
+   "annual"
+  ],
+  "hogares": [
+   "el hogar",
+   "households, homes"
+  ],
+  "hogar": [
+   "el hogar",
+   "household, home"
+  ],
+  "aumento": [
+   "el aumento",
+   "increase"
+  ],
+  "renunciar": [
+   "renunciar",
+   "to give up"
+  ],
+  "recortar": [
+   "recortar",
+   "to cut"
+  ],
+  "ganaron": [
+   "ganar",
+   "earned, won"
+  ],
+  "cobraban": [
+   "cobrar",
+   "charged"
+  ],
+  "seguían": [
+   "seguir",
+   "kept, continued"
+  ],
+  "pagando": [
+   "pagar",
+   "paying"
+  ],
+  "depósitos": [
+   "el depósito",
+   "deposits"
+  ],
+  "intentaron": [
+   "intentar",
+   "tried"
+  ],
+  "mixta": [
+   "mixto",
+   "mixed"
+  ],
+  "facilitarlo": [
+   "facilitar",
+   "to make it easier"
+  ],
+  "rebajó": [
+   "rebajar",
+   "lowered, cut"
+  ],
+  "comisiones": [
+   "la comisión",
+   "fees, commissions"
+  ],
+  "alargar": [
+   "alargar",
+   "to extend"
+  ],
+  "plazo": [
+   "el plazo",
+   "term, period"
+  ],
+  "vulnerables": [
+   "vulnerable",
+   "vulnerable"
+  ],
+  "prefirieron": [
+   "preferir",
+   "preferred"
+  ],
+  "amortizar": [
+   "amortizar",
+   "to repay (early)"
+  ],
+  "devolver": [
+   "devolver",
+   "to pay back, return"
+  ],
+  "pendiente": [
+   "pendiente",
+   "outstanding, pending"
+  ],
+  "bajado": [
+   "bajar",
+   "come down"
+  ],
+  "empezado": [
+   "empezar",
+   "started"
+  ],
+  "máximos": [
+   "el máximo",
+   "highs, maximums"
+  ],
+  "expertos": [
+   "el experto",
+   "experts"
+  ],
+  "coinciden": [
+   "coincidir",
+   "agree"
+  ],
+  "volverá": [
+   "volver",
+   "will return"
+  ],
+  "lección": [
+   "la lección",
+   "lesson"
+  ],
+  "sencilla": [
+   "sencillo",
+   "simple"
+  ],
+  "calcular": [
+   "calcular",
+   "to calculate, work out"
+  ],
+  "podríamos": [
+   "poder",
+   "we could"
+  ],
+  "escenario": [
+   "el escenario",
+   "scenario"
+  ],
+  "habitual": [
+   "habitual",
+   "common, usual"
+  ],
+  "asesores": [
+   "el asesor",
+   "advisers"
+  ],
+  "financieros": [
+   "financiero",
+   "financial"
+  ],
+  "supere": [
+   "superar",
+   "(subjunctive) exceeds"
+  ],
+  "netos": [
+   "neto",
+   "net"
+  ],
+  "recomiendan": [
+   "recomendar",
+   "recommend"
+  ],
+  "comparar": [
+   "comparar",
+   "to compare"
+  ],
+  "atención": [
+   "la atención",
+   "attention (con atención = carefully)"
+  ],
+  "letra": [
+   "la letra",
+   "letter (letra pequeña = small print)"
+  ],
+  "fijarse": [
+   "fijarse",
+   "to look at, pay attention to"
+  ],
+  "tae": [
+   "la TAE",
+   "APR (annual percentage rate)"
+  ],
+  "incluye": [
+   "incluir",
+   "includes"
+  ],
+  "obligatorios": [
+   "obligatorio",
+   "compulsory"
+  ]
+ }
+}

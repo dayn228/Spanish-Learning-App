@@ -30,14 +30,18 @@ document.addEventListener('keydown', (e) => {
   if (next) { e.preventDefault(); next.click(); }
 });
 
-export const UNLOCKED_TENSES = ['present'];
+/* A past tense joins the verb trainer once you have practised the unit that teaches it. */
+const TENSE_UNITS = { preterite: 'u10', imperfect: 'u12' };
+export function unlockedTenses(grammar) {
+  return ['present', ...Object.keys(TENSE_UNITS).filter((t) => (grammar.units[TENSE_UNITS[t]]?.sets || 0) > 0)];
+}
 
 /** Build and open a drill. spec: { kind, unitId?, count?, returnTo?, fromSession? } */
 export function startDrill(spec) {
   const unit = spec.unitId ? state.content.units.find((u) => u.id === spec.unitId) : null;
   let items;
   if (spec.kind === 'verbs') {
-    items = pickVerbItems(state.grammar, Object.keys(VERBS), UNLOCKED_TENSES, spec.count || 10)
+    items = pickVerbItems(state.grammar, Object.keys(VERBS), unlockedTenses(state.grammar), spec.count || 10)
       .map((v) => ({ ex: { type: 'conj', verb: v.inf, person: v.person, tense: v.tense }, key: v.key }));
   } else if (spec.kind === 'listening') {
     items = buildListening(state.content.words, state.cards, spec.count || 10).map((ex) => ({ ex }));

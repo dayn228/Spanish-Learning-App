@@ -9,7 +9,7 @@
     translate  q (English), a                  write it in Spanish
     reorder    words[], a, en?                 tap the words in order
     match      instr, pairs[[left, right]]     pair them up
-    table      verb                            all six present forms
+    table      verb, tense?                    all six forms (present unless tense is given)
     conj       verb, person, tense             one verb form (verb trainer)
     hear       say, options[], a               listen, then pick what you heard
     dictation  say, en?                        listen, then type the sentence
@@ -102,7 +102,8 @@ export function exerciseView(ex, { onResult, onNext }) {
     actions.replaceChildren(h('button', { class: 'btn btn-primary btn-block next-btn', onclick: onNext }, 'Next'));
   };
 
-  const instr = ex.instr || INSTR[ex.type] || '';
+  const pastLabel = { preterite: 'in the preterite (hablé)', imperfect: 'in the imperfect (hablaba)' }[ex.tense];
+  const instr = ex.instr || (ex.type === 'table' && pastLabel ? `Conjugate ${pastLabel}` : ex.type === 'conj' && pastLabel ? `Write the verb form ${pastLabel}` : INSTR[ex.type]) || '';
   if (instr) root.append(h('div', { class: 'small muted' }, instr));
 
   const checkBtn = (fn) => h('button', { class: 'btn btn-primary btn-block', onclick: fn }, 'Check answer');
@@ -159,7 +160,7 @@ export function exerciseView(ex, { onResult, onNext }) {
       const { input, el } = textInput('answer', 'Verb form');
       root.append(
         h('div', { class: 'ex-q' }, h('span', { class: 'muted' }, PERSONS[ex.person] + ' · '), h('span', { class: 'es' }, ex.verb)),
-        h('div', { class: 'small muted', style: { marginTop: '4px' } }, `${VERBS[ex.verb]?.en || ''} · present`),
+        h('div', { class: 'small muted', style: { marginTop: '4px' } }, `${VERBS[ex.verb]?.en || ''} · ${({ present: 'present', preterite: 'preterite (past)', imperfect: 'imperfect (used to / was -ing)' })[ex.tense] || 'present'}`),
         h('div', { style: { marginTop: '18px' } }, el), result);
       const check = () => {
         if (!input.value.trim()) { input.focus(); return; }
@@ -174,7 +175,7 @@ export function exerciseView(ex, { onResult, onNext }) {
     }
 
     case 'table': {
-      const forms = conjugate(ex.verb, 'present');
+      const forms = conjugate(ex.verb, ex.tense || 'present');
       const inputs = PERSONS.map((p, i) => h('input', { class: 'table-field', autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', spellcheck: 'false', lang: 'es', 'aria-label': `${ex.verb}, ${p}`, 'data-i': i }));
       const rows = h('div', { class: 'conj-table' }, PERSONS.map((p, i) => h('label', { class: 'conj-row' }, h('span', { class: 'muted small' }, p), inputs[i])));
       const bar = h('div', { class: 'accent-bar' }, ACCENTS.slice(0, 7).map((c) => h('button', {

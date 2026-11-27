@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = 'd4285931b3';
+const VERSION = '1a2ac704e1';
 const FILES = [
   "./",
   "./css/app.css",
@@ -33,6 +33,12 @@ const FILES = [
   "./data/grammar/u06.json",
   "./data/grammar/u07.json",
   "./data/grammar/u08.json",
+  "./data/grammar/u09.json",
+  "./data/grammar/u10.json",
+  "./data/grammar/u11.json",
+  "./data/grammar/u12.json",
+  "./data/grammar/u13.json",
+  "./data/grammar/u14.json",
   "./data/index.json",
   "./data/packs/construction.json",
   "./data/packs/economics.json",
@@ -47,6 +53,10 @@ const FILES = [
   "./data/reading/t04.json",
   "./data/reading/t05.json",
   "./data/reading/t06.json",
+  "./data/reading/t07.json",
+  "./data/reading/t08.json",
+  "./data/reading/t09.json",
+  "./data/reading/t10.json",
   "./fonts/newsreader-latin-400-italic.woff2",
   "./fonts/newsreader-latin-400-normal.woff2",
   "./fonts/newsreader-latin-500-normal.woff2",

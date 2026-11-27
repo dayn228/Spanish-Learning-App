@@ -1,0 +1,486 @@
+{
+ "id": "t09",
+ "title": "¿Quién decide en la Unión Europea?",
+ "en": "Who decides in the European Union?",
+ "level": "B1",
+ "topic": "politics",
+ "note": "Practice text written for the app.",
+ "paragraphs": [
+  [
+   [
+    "Muchos ciudadanos europeos tienen la sensación de que las decisiones importantes «vienen de Bruselas», pero pocos saben exactamente quién las toma.",
+    "Many European citizens have the feeling that important decisions «come from Brussels», but few know exactly who takes them."
+   ],
+   [
+    "En realidad, la Unión Europea funciona con varias instituciones que se reparten el poder y se controlan entre sí.",
+    "In reality, the European Union works with several institutions that share power and check one another."
+   ],
+   [
+    "Las tres principales son la Comisión, el Parlamento y el Consejo.",
+    "The three main ones are the Commission, the Parliament and the Council."
+   ]
+  ],
+  [
+   [
+    "La Comisión Europea es una especie de gobierno de la Unión.",
+    "The European Commission is a kind of government of the Union."
+   ],
+   [
+    "Está formada por un comisario de cada país, aunque los comisarios no representan a su Estado, sino los intereses comunes.",
+    "It is made up of one commissioner from each country, although the commissioners do not represent their State, but the common interests."
+   ],
+   [
+    "Su función más importante es proponer nuevas leyes; además, vigila que los países cumplan las normas y negocia los acuerdos comerciales con el resto del mundo.",
+    "Its most important role is to propose new laws; it also makes sure countries follow the rules and negotiates trade agreements with the rest of the world."
+   ]
+  ],
+  [
+   [
+    "El Parlamento Europeo es la única institución elegida directamente por los ciudadanos.",
+    "The European Parliament is the only institution elected directly by the citizens."
+   ],
+   [
+    "Cada cinco años, los votantes de todos los países eligen a unos setecientos veinte eurodiputados.",
+    "Every five years, voters in every country elect around seven hundred and twenty MEPs."
+   ],
+   [
+    "Los eurodiputados no se sientan por nacionalidades, sino por grupos políticos: los conservadores, los socialistas, los liberales, los verdes, y así sucesivamente.",
+    "MEPs don't sit by nationality, but by political group: the conservatives, the socialists, the liberals, the greens, and so on."
+   ],
+   [
+    "El Parlamento debate y vota las leyes, aprueba el presupuesto y puede incluso obligar a dimitir a la Comisión.",
+    "Parliament debates and votes on laws, approves the budget and can even force the Commission to resign."
+   ]
+  ],
+  [
+   [
+    "El Consejo de la Unión Europea, en cambio, reúne a los ministros de los gobiernos nacionales.",
+    "The Council of the European Union, on the other hand, brings together ministers from the national governments."
+   ],
+   [
+    "Según el tema, se reúnen los ministros de Agricultura, de Economía o de Interior.",
+    "Depending on the subject, the ministers of Agriculture, Economy or the Interior meet."
+   ],
+   [
+    "Para aprobar una ley, normalmente hace falta el acuerdo del Consejo y del Parlamento, que pueden cambiar el texto propuesto por la Comisión varias veces.",
+    "To pass a law, the agreement of the Council and the Parliament is normally needed, and they can change the text proposed by the Commission several times."
+   ],
+   [
+    "En la mayoría de los casos el Consejo vota por mayoría cualificada, pero en temas sensibles como los impuestos o la política exterior se necesita unanimidad.",
+    "In most cases the Council votes by qualified majority, but on sensitive issues such as taxes or foreign policy unanimity is needed."
+   ]
+  ],
+  [
+   [
+    "No hay que confundirlo con el Consejo Europeo, que reúne a los jefes de Estado y de Gobierno.",
+    "It mustn't be confused with the European Council, which brings together the heads of State and Government."
+   ],
+   [
+    "Este no aprueba leyes, pero marca las grandes prioridades políticas y resuelve las crisis más graves, a menudo en cumbres que terminan de madrugada.",
+    "This one doesn't pass laws, but it sets the big political priorities and resolves the most serious crises, often at summits that end in the early hours."
+   ],
+   [
+    "Fue allí, por ejemplo, donde se acordó en 2020 el gran fondo de recuperación tras la pandemia.",
+    "It was there, for example, that the big recovery fund after the pandemic was agreed in 2020."
+   ]
+  ],
+  [
+   [
+    "Las críticas a este sistema son conocidas.",
+    "The criticisms of this system are well known."
+   ],
+   [
+    "Algunos dicen que es demasiado lento y complicado, y que la regla de la unanimidad permite a un solo país bloquear decisiones que quiere la mayoría.",
+    "Some say it is too slow and complicated, and that the unanimity rule allows a single country to block decisions the majority wants."
+   ],
+   [
+    "Otros hablan de un «déficit democrático», porque la Comisión no es elegida por los votantes.",
+    "Others talk of a «democratic deficit», because the Commission is not elected by voters."
+   ],
+   [
+    "Sus defensores responden que el sistema obliga a buscar consensos entre veintisiete países muy diferentes, y que eso, aunque lleva tiempo, da estabilidad.",
+    "Its defenders reply that the system forces twenty-seven very different countries to seek consensus, and that this, although it takes time, gives stability."
+   ]
+  ],
+  [
+   [
+    "Para España, la pertenencia a la Unión ha tenido efectos enormes desde su entrada en 1986: fondos para carreteras y trenes, el mercado único y, más tarde, el euro.",
+    "For Spain, membership of the Union has had huge effects since it joined in 1986: funds for roads and trains, the single market and, later, the euro."
+   ],
+   [
+    "Entender quién decide en Bruselas ayuda a leer mejor las noticias, y también a saber a quién pedir explicaciones.",
+    "Understanding who decides in Brussels helps you read the news better, and also to know whom to hold to account."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Cuál es la función más importante de la Comisión?",
+   "options": [
+    "Proponer nuevas leyes.",
+    "Elegir a los eurodiputados.",
+    "Juzgar a los países."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué institución eligen directamente los ciudadanos?",
+   "options": [
+    "El Parlamento Europeo.",
+    "La Comisión Europea.",
+    "El Consejo Europeo."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cómo se sientan los eurodiputados?",
+   "options": [
+    "Por grupos políticos.",
+    "Por países.",
+    "Por edad."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cuándo hace falta unanimidad en el Consejo?",
+   "options": [
+    "En impuestos y política exterior.",
+    "En todas las leyes.",
+    "Nunca."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué hace el Consejo Europeo?",
+   "options": [
+    "Marca las grandes prioridades y resuelve crisis.",
+    "Aprueba el presupuesto cada año.",
+    "Propone las leyes."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué es el «déficit democrático» según el texto?",
+   "options": [
+    "Que la Comisión no es elegida por los votantes.",
+    "Que hay pocos países.",
+    "Que el Parlamento no tiene presupuesto."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "ciudadanos": [
+   "el ciudadano",
+   "citizens"
+  ],
+  "sensación": [
+   "la sensación",
+   "feeling"
+  ],
+  "toma": [
+   "tomar",
+   "takes"
+  ],
+  "unión": [
+   "la unión",
+   "union"
+  ],
+  "funciona": [
+   "funcionar",
+   "works"
+  ],
+  "instituciones": [
+   "la institución",
+   "institutions"
+  ],
+  "institución": [
+   "la institución",
+   "institution"
+  ],
+  "reparten": [
+   "repartirse",
+   "share"
+  ],
+  "controlan": [
+   "controlarse",
+   "check each other"
+  ],
+  "principales": [
+   "principal",
+   "main"
+  ],
+  "comisión": [
+   "la comisión",
+   "commission"
+  ],
+  "parlamento": [
+   "el parlamento",
+   "parliament"
+  ],
+  "especie": [
+   "la especie",
+   "kind, sort"
+  ],
+  "formada": [
+   "formar",
+   "made up, formed"
+  ],
+  "comisario": [
+   "el comisario",
+   "commissioner"
+  ],
+  "comisarios": [
+   "el comisario",
+   "commissioners"
+  ],
+  "representan": [
+   "representar",
+   "represent"
+  ],
+  "comunes": [
+   "común",
+   "common"
+  ],
+  "función": [
+   "la función",
+   "role, function"
+  ],
+  "proponer": [
+   "proponer",
+   "to propose"
+  ],
+  "vigila": [
+   "vigilar",
+   "watches over, makes sure"
+  ],
+  "cumplan": [
+   "cumplir",
+   "(subjunctive) comply with"
+  ],
+  "negocia": [
+   "negociar",
+   "negotiates"
+  ],
+  "comerciales": [
+   "comercial",
+   "trade, commercial"
+  ],
+  "única": [
+   "único",
+   "only"
+  ],
+  "único": [
+   "único",
+   "single, only"
+  ],
+  "elegida": [
+   "elegir",
+   "elected"
+  ],
+  "votantes": [
+   "el votante",
+   "voters"
+  ],
+  "eligen": [
+   "elegir",
+   "elect"
+  ],
+  "eurodiputados": [
+   "el eurodiputado",
+   "MEPs (members of the European Parliament)"
+  ],
+  "sientan": [
+   "sentarse",
+   "sit"
+  ],
+  "nacionalidades": [
+   "la nacionalidad",
+   "nationalities"
+  ],
+  "grupos": [
+   "el grupo",
+   "groups"
+  ],
+  "conservadores": [
+   "el conservador",
+   "conservatives"
+  ],
+  "socialistas": [
+   "el socialista",
+   "socialists"
+  ],
+  "liberales": [
+   "el liberal",
+   "liberals"
+  ],
+  "verdes": [
+   "el verde",
+   "greens"
+  ],
+  "sucesivamente": [
+   "sucesivamente",
+   "(y así sucesivamente) and so on"
+  ],
+  "debate": [
+   "debatir",
+   "debates"
+  ],
+  "vota": [
+   "votar",
+   "votes"
+  ],
+  "aprueba": [
+   "aprobar",
+   "approves"
+  ],
+  "obligar": [
+   "obligar",
+   "to force"
+  ],
+  "obliga": [
+   "obligar",
+   "forces"
+  ],
+  "dimitir": [
+   "dimitir",
+   "to resign"
+  ],
+  "reúne": [
+   "reunir",
+   "brings together"
+  ],
+  "reúnen": [
+   "reunirse",
+   "meet"
+  ],
+  "nacionales": [
+   "nacional",
+   "national"
+  ],
+  "agricultura": [
+   "la agricultura",
+   "agriculture"
+  ],
+  "interior": [
+   "el interior",
+   "interior, home affairs"
+  ],
+  "texto": [
+   "el texto",
+   "text"
+  ],
+  "propuesto": [
+   "proponer",
+   "proposed"
+  ],
+  "cualificada": [
+   "cualificado",
+   "qualified"
+  ],
+  "sensibles": [
+   "sensible",
+   "sensitive"
+  ],
+  "unanimidad": [
+   "la unanimidad",
+   "unanimity"
+  ],
+  "confundirlo": [
+   "confundir",
+   "to confuse it"
+  ],
+  "marca": [
+   "marcar",
+   "sets, marks"
+  ],
+  "prioridades": [
+   "la prioridad",
+   "priorities"
+  ],
+  "resuelve": [
+   "resolver",
+   "resolves"
+  ],
+  "graves": [
+   "grave",
+   "serious"
+  ],
+  "terminan": [
+   "terminar",
+   "end"
+  ],
+  "madrugada": [
+   "la madrugada",
+   "early morning hours"
+  ],
+  "acordó": [
+   "acordar",
+   "agreed"
+  ],
+  "críticas": [
+   "la crítica",
+   "criticisms"
+  ],
+  "conocidas": [
+   "conocido",
+   "well known"
+  ],
+  "complicado": [
+   "complicado",
+   "complicated"
+  ],
+  "regla": [
+   "la regla",
+   "rule"
+  ],
+  "bloquear": [
+   "bloquear",
+   "to block"
+  ],
+  "hablan": [
+   "hablar",
+   "talk"
+  ],
+  "democrático": [
+   "democrático",
+   "democratic"
+  ],
+  "defensores": [
+   "el defensor",
+   "defenders"
+  ],
+  "responden": [
+   "responder",
+   "reply"
+  ],
+  "consensos": [
+   "el consenso",
+   "consensus"
+  ],
+  "estabilidad": [
+   "la estabilidad",
+   "stability"
+  ],
+  "pertenencia": [
+   "la pertenencia",
+   "membership"
+  ],
+  "efectos": [
+   "el efecto",
+   "effects"
+  ],
+  "enormes": [
+   "enorme",
+   "huge"
+  ],
+  "carreteras": [
+   "la carretera",
+   "roads"
+  ],
+  "explicaciones": [
+   "la explicación",
+   "explanations (pedir explicaciones = hold to account)"
+  ]
+ }
+}

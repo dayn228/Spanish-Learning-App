@@ -1,5 +1,5 @@
 /*
-  Verb conjugation (present tense for now; more tenses arrive with later units).
+  Verb conjugation: present, preterite (pretérito indefinido) and imperfect.
 
   How it works:
   1. Regular endings for -ar, -er and -ir verbs.
@@ -12,13 +12,42 @@
 
 export const PERSONS = ['yo', 'tú', 'él / ella / usted', 'nosotros', 'vosotros', 'ellos / ellas / ustedes'];
 export const PERSON_SHORT = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos'];
-export const TENSES = { present: 'Present' };
+export const TENSES = { present: 'Present', preterite: 'Past (pretérito indefinido)', imperfect: 'Imperfect (pretérito imperfecto)' };
 
 const ENDINGS = {
   present: {
     ar: ['o', 'as', 'a', 'amos', 'áis', 'an'],
     er: ['o', 'es', 'e', 'emos', 'éis', 'en'],
     ir: ['o', 'es', 'e', 'imos', 'ís', 'en'],
+  },
+  preterite: {
+    ar: ['é', 'aste', 'ó', 'amos', 'asteis', 'aron'],
+    er: ['í', 'iste', 'ió', 'imos', 'isteis', 'ieron'],
+    ir: ['í', 'iste', 'ió', 'imos', 'isteis', 'ieron'],
+  },
+  imperfect: {
+    ar: ['aba', 'abas', 'aba', 'ábamos', 'abais', 'aban'],
+    er: ['ía', 'ías', 'ía', 'íamos', 'íais', 'ían'],
+    ir: ['ía', 'ías', 'ía', 'íamos', 'íais', 'ían'],
+  },
+};
+
+/* Irregular ("strong") preterite stems take these endings, with no accents. */
+const STRONG = ['e', 'iste', 'o', 'imos', 'isteis', 'ieron'];
+
+/* Past forms that follow no pattern. */
+const FULL_PAST = {
+  preterite: {
+    ser: ['fui', 'fuiste', 'fue', 'fuimos', 'fuisteis', 'fueron'],
+    ir: ['fui', 'fuiste', 'fue', 'fuimos', 'fuisteis', 'fueron'],
+    dar: ['di', 'diste', 'dio', 'dimos', 'disteis', 'dieron'],
+    ver: ['vi', 'viste', 'vio', 'vimos', 'visteis', 'vieron'],
+    estar: null, haber: null,
+  },
+  imperfect: {
+    ser: ['era', 'eras', 'era', 'éramos', 'erais', 'eran'],
+    ir: ['iba', 'ibas', 'iba', 'íbamos', 'ibais', 'iban'],
+    ver: ['veía', 'veías', 'veía', 'veíamos', 'veíais', 'veían'],
   },
 };
 
@@ -31,24 +60,24 @@ const ENDINGS = {
 */
 export const VERBS = {
   ser:       { en: 'to be (identity)', full: ['soy', 'eres', 'es', 'somos', 'sois', 'son'] },
-  estar:     { en: 'to be (place, state)', full: ['estoy', 'estás', 'está', 'estamos', 'estáis', 'están'] },
+  estar:     { en: 'to be (place, state)', full: ['estoy', 'estás', 'está', 'estamos', 'estáis', 'están'], pret: 'estuv' },
   ir:        { en: 'to go', full: ['voy', 'vas', 'va', 'vamos', 'vais', 'van'] },
-  haber:     { en: 'to have (auxiliary)', full: ['he', 'has', 'ha', 'hemos', 'habéis', 'han'] },
+  haber:     { en: 'to have (auxiliary)', full: ['he', 'has', 'ha', 'hemos', 'habéis', 'han'], pret: 'hub' },
   dar:       { en: 'to give', full: ['doy', 'das', 'da', 'damos', 'dais', 'dan'] },
   ver:       { en: 'to see', full: ['veo', 'ves', 've', 'vemos', 'veis', 'ven'] },
-  oír:       { en: 'to hear', full: ['oigo', 'oyes', 'oye', 'oímos', 'oís', 'oyen'] },
-  tener:     { en: 'to have', stem: 'ie', yo: 'tengo' },
-  venir:     { en: 'to come', stem: 'ie', yo: 'vengo' },
-  decir:     { en: 'to say', stem: 'i', yo: 'digo' },
-  hacer:     { en: 'to do, to make', yo: 'hago' },
-  poner:     { en: 'to put', yo: 'pongo' },
+  oír:       { en: 'to hear', full: ['oigo', 'oyes', 'oye', 'oímos', 'oís', 'oyen'], yPast: true },
+  tener:     { en: 'to have', stem: 'ie', yo: 'tengo', pret: 'tuv' },
+  venir:     { en: 'to come', stem: 'ie', yo: 'vengo', pret: 'vin' },
+  decir:     { en: 'to say', stem: 'i', yo: 'digo', pret: 'dij' },
+  hacer:     { en: 'to do, to make', yo: 'hago', pret: 'hic' },
+  poner:     { en: 'to put', yo: 'pongo', pret: 'pus' },
   salir:     { en: 'to go out', yo: 'salgo' },
-  traer:     { en: 'to bring', yo: 'traigo' },
-  saber:     { en: 'to know (a fact)', yo: 'sé' },
+  traer:     { en: 'to bring', yo: 'traigo', pret: 'traj' },
+  saber:     { en: 'to know (a fact)', yo: 'sé', pret: 'sup' },
   conocer:   { en: 'to know (a person, a place)', yo: 'conozco' },
-  conducir:  { en: 'to drive', yo: 'conduzco' },
-  poder:     { en: 'can, to be able to', stem: 'ue' },
-  querer:    { en: 'to want', stem: 'ie' },
+  conducir:  { en: 'to drive', yo: 'conduzco', pret: 'conduj' },
+  poder:     { en: 'can, to be able to', stem: 'ue', pret: 'pud' },
+  querer:    { en: 'to want', stem: 'ie', pret: 'quis' },
   pensar:    { en: 'to think', stem: 'ie' },
   empezar:   { en: 'to start', stem: 'ie' },
   entender:  { en: 'to understand', stem: 'ie' },
@@ -80,11 +109,11 @@ export const VERBS = {
   terminar:  { en: 'to finish' },
   comer:     { en: 'to eat' },
   beber:     { en: 'to drink' },
-  leer:      { en: 'to read' },
+  leer:      { en: 'to read', yPast: true },
   aprender:  { en: 'to learn' },
   vender:    { en: 'to sell' },
   deber:     { en: 'must, to owe' },
-  creer:     { en: 'to believe' },
+  creer:     { en: 'to believe', yPast: true },
   vivir:     { en: 'to live' },
   escribir:  { en: 'to write' },
   abrir:     { en: 'to open' },
@@ -96,7 +125,7 @@ const STRESSED = [0, 1, 2, 5];   // persons whose stem changes (not nosotros, vo
 
 /** Present forms of an infinitive, or null if unknown. Handles reflexives like "levantarse". */
 export function conjugate(infinitive, tense = 'present') {
-  const reflexive = /se$/.test(infinitive) && !VERBS[infinitive];
+  const reflexive = /se$/.test(infinitive) && !VERBS[infinitive] && !/^(ser)$/.test(infinitive);
   const base = reflexive ? infinitive.slice(0, -2) : infinitive;
   const forms = simple(base, tense);
   if (!forms) return null;
@@ -107,6 +136,8 @@ export function conjugate(infinitive, tense = 'present') {
 
 function simple(inf, tense) {
   const v = VERBS[inf] || {};
+  if (tense === 'preterite') return preterite(inf, v);
+  if (tense === 'imperfect') return imperfect(inf, v);
   if (tense !== 'present') return null;
   if (v.full) return [...v.full];
   const type = inf.slice(-2).replace('í', 'i');
@@ -124,6 +155,54 @@ function simple(inf, tense) {
   }
   if (v.yo) forms[0] = v.yo;
   return forms;
+}
+
+function preterite(inf, v) {
+  const full = FULL_PAST.preterite[inf];
+  if (full) return [...full];
+  const type = inf.slice(-2).replace('í', 'i');
+  if (!ENDINGS.preterite[type]) return null;
+  let stem = inf.slice(0, -2);
+  if (v.pret) {
+    // Strong stem: tuve, tuviste, tuvo… ; stems ending in j drop the i: dijeron, trajeron.
+    const forms = STRONG.map((e, i) => v.pret + (i === 5 && v.pret.endsWith('j') ? 'eron' : e));
+    if (inf === 'hacer') forms[2] = 'hizo';
+    return forms;
+  }
+  const forms = ENDINGS.preterite[type].map((e) => stem + e);
+  // -ir stem-changers change in él and ellos: pidió, pidieron; durmió, durmieron.
+  if (type === 'ir' && v.stem) {
+    const changed = v.stem === 'ue' ? swapLast(stem, 'o', 'u') : swapLast(stem, 'e', 'i');
+    forms[2] = changed + 'ió';
+    forms[5] = changed + 'ieron';
+  }
+  // Vowel before the ending (leer, creer, oír, construir): leyó, leyeron, leíste, leímos.
+  if (v.yPast || v.uir) {
+    forms[2] = stem + 'yó';
+    forms[5] = stem + 'yeron';
+    if (!v.uir) { forms[0] = stem + 'í'; forms[1] = stem + 'íste'; forms[3] = stem + 'ímos'; forms[4] = stem + 'ísteis'; }
+  }
+  // Spelling in the yo form: llegué, pagué, empecé, busqué, jugué.
+  if (type === 'ar') {
+    if (stem.endsWith('g')) forms[0] = stem + 'ué';
+    else if (stem.endsWith('c')) forms[0] = stem.slice(0, -1) + 'qué';
+    else if (stem.endsWith('z')) forms[0] = stem.slice(0, -1) + 'cé';
+  }
+  return forms;
+}
+
+function imperfect(inf, v) {
+  const full = FULL_PAST.imperfect[inf];
+  if (full) return [...full];
+  const type = inf.slice(-2).replace('í', 'i');
+  if (!ENDINGS.imperfect[type]) return null;
+  const stem = inf.slice(0, -2);
+  return ENDINGS.imperfect[type].map((e) => stem + e);
+}
+
+function swapLast(stem, from, to) {
+  const at = stem.lastIndexOf(from);
+  return at < 0 ? stem : stem.slice(0, at) + to + stem.slice(at + 1);
 }
 
 /** Change the last matching vowel of the stem (pensar → piens-, poder → pued-). */
