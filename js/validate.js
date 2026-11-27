@@ -52,7 +52,9 @@ export function checkText(t, lookupMissing) {
   const p = [];
   for (const key of ['id', 'title', 'level', 'paragraphs', 'questions']) if (!t || !t[key]) p.push(`missing "${key}"`);
   if (p.length) return p;
-  if (!Array.isArray(t.paragraphs) || !t.paragraphs.length) p.push('no paragraphs');
+  // Shape first: a malformed AI text must be dropped, not crash the caller (sync would retry it forever).
+  if (!Array.isArray(t.paragraphs) || !t.paragraphs.length) return ['no paragraphs'];
+  if (!Array.isArray(t.questions)) return ['questions must be a list'];
   t.paragraphs.forEach((para, i) => {
     if (!Array.isArray(para)) { p.push(`paragraph ${i + 1} is not a list`); return; }
     para.forEach((s, j) => { if (!Array.isArray(s) || !str(s[0]) || !str(s[1])) p.push(`paragraph ${i + 1} sentence ${j + 1}: needs [spanish, english]`); });

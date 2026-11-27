@@ -80,8 +80,9 @@ export async function syncNow({ forceBackup = false, overwrite = false } = {}) {
       for (let page = 0; page < 5; page++) {
         const r = await call('content.since', { after: s.lastSeq });
         for (const batch of r.batches) {
-          report.added += mergeBatch(batch);
-          s.lastSeq = Math.max(s.lastSeq, batch.seq);
+          // One broken batch must not block every later sync (and the backup below): skip it.
+          try { report.added += mergeBatch(batch); } catch (e) { console.warn('Skipped a broken content batch', batch && batch.seq, e); }
+          s.lastSeq = Math.max(s.lastSeq, Number(batch && batch.seq) || 0);
         }
         if (!r.batches.length || s.lastSeq >= r.last) break;
       }
@@ -151,6 +152,7 @@ export function mergeBatch(batch) {
     }
   } else if (batch.kind === 'texts') {
     (batch.items || []).forEach((t, i) => {
+      if (!t || typeof t !== 'object') return;
       const text = { ...t, id: `ai${batch.seq}-${i}`, aiMade: true, topic: t.topic || (batch.meta && batch.meta.topic) || 'news', glossary: lowerKeys(t.glossary), questions: t.questions || [] };
       if (checkText(text).length) return;
       extra.texts.push(text);
