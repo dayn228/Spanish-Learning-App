@@ -27,7 +27,7 @@
  *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 8;
+var VERSION = 9;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {

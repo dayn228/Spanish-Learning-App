@@ -184,3 +184,13 @@ test('inbox: a Google Doc becomes a long reading text and is moved to processed'
   assert.equal(c.batches[0].items[0].source.title, 'Presupuestos 2027');
   assert.equal(b.post({ token: 'secret', action: 'nightly.run' }).made, 0, 'moved to processed, not done twice');
 });
+
+test('review R5: two learners asking for the same pool both get queued (made for each of them)', () => {
+  const b = makeBackend([]);
+  b.props.set('USERS', JSON.stringify({ partnertoken: 'partner' }));
+  const req = { key: 'exercises:u03', kind: 'exercises', unitId: 'u03', unitTitle: 'Present', level: 'A1', n: 20, tags: ['x'] };
+  assert.equal(b.post({ token: 'secret', action: 'queue.add', requests: [req] }).queued, 1);
+  assert.equal(b.post({ token: 'partnertoken', action: 'queue.add', requests: [{ ...req }] }).queued, 1);
+  assert.equal(b.post({ token: 'partnertoken', action: 'queue.add', requests: [{ ...req }] }).queued, 0);   // still no repeats per learner
+  assert.equal(b.post({ token: 'secret', action: 'status' }).queue, 2);
+});

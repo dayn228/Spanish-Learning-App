@@ -93,12 +93,15 @@ function addToQueue(requests, user) {
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   try {
     var queue = readJson(rootFolder(), 'queue.json', []);
-    var keys = {}; queue.forEach(function (q) { keys[q.key] = true; });
+    // One request per learner and pool: exercises and texts are made for the learner who asked
+    // (the other learner's app skips them), so the owner's request must not swallow the partner's.
+    var who = user || 'owner';
+    var keys = {}; queue.forEach(function (q) { keys[(q.user || 'owner') + '|' + q.key] = true; });
     var added = 0;
     requests.forEach(function (r) {
-      if (!r || !r.key || !r.kind || keys[r.key]) return;
-      r.added = new Date().toISOString(); r.tries = 0; r.user = user || 'owner';
-      queue.push(r); keys[r.key] = true; added++;
+      if (!r || !r.key || !r.kind || keys[who + '|' + r.key]) return;
+      r.added = new Date().toISOString(); r.tries = 0; r.user = who;
+      queue.push(r); keys[who + '|' + r.key] = true; added++;
     });
     writeJson(rootFolder(), 'queue.json', queue.slice(-50));
     return added;
