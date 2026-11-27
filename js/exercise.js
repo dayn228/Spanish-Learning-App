@@ -21,7 +21,7 @@
 */
 
 import { h, icon, ICONS } from './ui.js';
-import { gradeAnswer, normalise, wordDiff } from './check.js';
+import { gradeAnswer, matchFits, normalise, wordDiff } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
 import { speak, hasSpanishVoice } from './speech.js';
 
@@ -233,7 +233,8 @@ export function exerciseView(ex, { onResult, onNext }) {
         class: 'match-item', onclick: () => {
           if (!picked || r.done) return;
           const lb = leftBtns[lefts.indexOf(picked)], rb = rightBtns[rights.indexOf(r)];
-          if (r.i === picked.i) {
+          // Compare texts, not positions: two pairs may share an answer (agua = el, mapa = el).
+          if (matchFits(ex.pairs, picked.i, r.i)) {
             r.done = picked.done = true; matched += 1;
             lb.classList.remove('sel'); lb.classList.add('paired'); rb.classList.add('paired'); lb.disabled = rb.disabled = true;
             picked = null;

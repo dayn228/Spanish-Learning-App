@@ -67,6 +67,12 @@ export function gradeAnswer(input, answer, ex = {}) {
   return { points: pointsFor(kind, { strictArticles }), kind };
 }
 
+/** Match exercises: a right-hand item fits a left one if its text is the same (two pairs may share "el"). */
+export function matchFits(pairs, leftIndex, rightIndex) {
+  if (leftIndex === rightIndex) return true;
+  return normalise(pairs[leftIndex][1]) === normalise(pairs[rightIndex][1]);
+}
+
 /*
   Dictation: compare word by word, ignoring case, punctuation and accents.
   Returns { points, marks } where marks lists the expected words with ok=true/false,

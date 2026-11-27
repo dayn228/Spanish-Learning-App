@@ -57,3 +57,12 @@ test('R2: in the verb trainer and tables an accent slip is half right (hablo is 
   assert.equal(gradeAnswer('habló', 'habló', { type: 'conj' }).points, 1);
   assert.equal(gradeAnswer('la mapa', 'el mapa', { type: 'gap', tags: ['article-gender'] }).points, 0.5);
 });
+
+test('R3: match exercises accept either of two identical answers (u02: agua = el, mapa = el)', async () => {
+  const { matchFits } = await import('../js/check.js');
+  const pairs = [['agua', 'el'], ['ciudad', 'la'], ['mapa', 'el'], ['foto', 'la'], ['sistema', 'el']];
+  assert.equal(matchFits(pairs, 0, 2), true);   // agua → the "el" button that belongs to mapa
+  assert.equal(matchFits(pairs, 0, 4), true);
+  assert.equal(matchFits(pairs, 0, 1), false);  // agua → la
+  assert.equal(matchFits(pairs, 1, 1), true);
+});
