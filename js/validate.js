@@ -6,7 +6,7 @@
   Each function returns a list of problems; an empty list means it is fine.
 */
 
-import { conjugate } from './verbs.js';
+import { conjugate, VERBS } from './verbs.js';
 import { normalise } from './check.js';
 
 export const EXERCISE_TYPES = ['gap', 'choice', 'transform', 'error', 'translate', 'reorder', 'match', 'table'];
@@ -44,7 +44,12 @@ export function checkExercise(ex) {
     }
   }
   if (ex.type === 'match' && !(Array.isArray(ex.pairs) && ex.pairs.length >= 3 && ex.pairs.every((x) => Array.isArray(x) && str(x[0]) && str(x[1])))) p.push('needs at least 3 pairs');
-  if (ex.type === 'table' && !conjugate(ex.verb, ex.tense || 'present')) p.push(`verb "${ex.verb}" can't be conjugated`);
+  // Only verbs the engine knows (VERBS, or their reflexive): unknown irregulars would get regular endings.
+  if (ex.type === 'table') {
+    const base = String(ex.verb || '').replace(/se$/, '');
+    if (!VERBS[ex.verb] && !VERBS[base]) p.push(`verb "${ex.verb}" is not in the verb list (js/verbs.js)`);
+    else if (!conjugate(ex.verb, ex.tense || 'present')) p.push(`verb "${ex.verb}" can't be conjugated`);
+  }
   if (ex.tense && !['present', 'preterite', 'imperfect'].includes(ex.tense)) p.push(`unknown tense ${ex.tense}`);
   return p;
 }

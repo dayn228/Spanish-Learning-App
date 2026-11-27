@@ -14,6 +14,7 @@
  *   backup.list     → { backups: [{ name, savedAt }] }
  *   queue.add       { requests } → { queued }         refill requests from the app
  *   content.since   { after }   → { batches, last }   new AI content (batches after seq `after`)
+ *   content.add     { pack, forEveryone? } → { batches, added }   a content pack pasted in the app
  *   report          { item, reason } → { ok }         "This looks wrong"
  *   status          → last nightly run and errors
  *   nightly.run     → runs the nightly job now (takes a few minutes)
@@ -27,7 +28,7 @@
  *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 9;
+var VERSION = 10;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {
@@ -44,6 +45,7 @@ function doGet() {
   return json({ ok: true, app: 'mi-espanol' });
 }
 
+var MAX_BACKUP = 2 * 1024 * 1024;
 var MAX_BODY = 5 * 1024 * 1024;   // backups are far smaller; refuse anything bigger
 
 function doPost(e) {
@@ -72,20 +74,38 @@ function userForToken(token) {
 function route(body, user) {
   switch (body.action) {
     case 'ping': return { ok: true, version: VERSION, user: user, name: displayName(user), ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
-    case 'backup.save': return Object.assign({ ok: true }, saveBackup(body.data, user, !!body.force));
+    case 'backup.save':
+      if (JSON.stringify(body.data || null).length > MAX_BACKUP) return { ok: false, error: 'This backup is larger than 2 MB; that should never happen. Please report it.' };
+      return Object.assign({ ok: true }, saveBackup(body.data, user, !!body.force));
     case 'content.add': {
       var parts = splitPack(body.pack, body.forEveryone ? undefined : user);
       var counts = { exercises: 0, words: 0, texts: 0 };
-      parts.forEach(function (p) { saveBatch(p.kind, p.meta, p.items); counts[p.kind] += p.items.length; });
+      var lock = LockService.getScriptLock();
+      if (!lock.tryLock(30000)) return { ok: false, error: 'The backend is busy making content. Try again in a few minutes.' };
+      try { parts.forEach(function (p) { saveBatch(p.kind, p.meta, p.items); counts[p.kind] += p.items.length; }); }
+      finally { lock.releaseLock(); }
       return { ok: true, batches: parts.length, added: counts };
     }
     case 'backup.load': return Object.assign({ ok: true }, loadBackup(user, body.name));
     case 'backup.list': return { ok: true, backups: listBackups(user) };
-    case 'queue.add': return { ok: true, queued: addToQueue(body.requests || [], user) };
+    case 'queue.add': {
+      var reqs = (Array.isArray(body.requests) ? body.requests : []).slice(0, 30)
+        .filter(function (r) { return JSON.stringify(r).length <= 20000; });
+      return { ok: true, queued: addToQueue(reqs, user) };
+    }
     case 'content.since': return Object.assign({ ok: true }, batchesSince(Number(body.after) || 0, 30));
     case 'report': addReport(body.item, body.reason); return { ok: true };
     case 'status': return Object.assign({ ok: true }, readJson(rootFolder(), 'status.json', {}), { queue: readJson(rootFolder(), 'queue.json', []).length });
-    case 'nightly.run': return Object.assign({ ok: true }, nightly());
+    case 'nightly.run': {
+      // "Get new content now": once an hour per learner, so taps (or a leaked token) can't drain the free tier.
+      var props = PropertiesService.getScriptProperties(), key = 'MANUAL_RUN_' + user;
+      var last = Number(props.getProperty(key) || 0);
+      if (Date.now() - last < 60 * 60 * 1000) {
+        return { ok: false, error: 'New content was already requested in the last hour. Try again after ' + Utilities.formatDate(new Date(last + 3600000), Session.getScriptTimeZone(), 'HH:mm') + '.' };
+      }
+      props.setProperty(key, String(Date.now()));
+      return Object.assign({ ok: true }, nightly());
+    }
     default: return { ok: false, error: 'Unknown action: ' + body.action };
   }
 }

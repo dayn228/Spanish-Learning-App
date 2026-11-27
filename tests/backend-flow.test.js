@@ -27,11 +27,12 @@ function makeBackend(geminiReplies, fetchPages = {}, docs = {}) {
   const calls = [];
   const ctx = {
     console: { log() {}, error() {} },
-    PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => (props.has(k) ? props.get(k) : null), setProperty: (k, v) => props.set(k, v) }) },
+    PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => (props.has(k) ? props.get(k) : null), setProperty: (k, v) => props.set(k, v), deleteProperty: (k) => props.delete(k), getProperties: () => Object.fromEntries(props) }) },
+    Session: { getScriptTimeZone: () => 'Europe/Madrid' },
     DriveApp: { getFolderById: (id) => folder(id), createFolder: () => { folderSeq++; return folder('root' + folderSeq); } },
     LockService: { getScriptLock: () => ({ waitLock() {}, tryLock: () => true, releaseLock() {} }) },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: (t) => ({ setMimeType: () => ({ text: t }) }) },
-    Utilities: { getUuid: () => 'aaaa-bbbb-' + Math.random().toString(16).slice(2) },
+    Utilities: { getUuid: () => 'aaaa-bbbb-' + Math.random().toString(16).slice(2), formatDate: (d, tz, f) => (f === 'HH:mm' ? d.toISOString().slice(11, 16) : d.toISOString().slice(0, 10)) },
     MimeType: { GOOGLE_DOCS: 'application/vnd.google-apps.document', PDF: 'application/pdf' },
     DocumentApp: { openById: (id) => ({ getBody: () => ({ getText: () => docs[id] || '' }) }) },
     UrlFetchApp: {
@@ -75,7 +76,7 @@ test('content.add turns a pasted pack into batches for one learner or everyone',
   const b = makeBackend([]);
   const pack = { format: 'mi-espanol-content-1',
     exercises: [{ unit: 'u10', type: 'gap', q: 'Ayer ___.', a: 'llegué', tags: ['x'] }, { unit: 'u11', type: 'gap', q: 'Él ___.', a: 'tuvo', tags: ['x'] }],
-    words: [{ topic: 'Series', name: 'TV series', words: [['la trama', 'plot']] }],
+    words: [{ topic: 'Series', name: 'TV series', words: [['la trama', 'plot', 'La trama es buena.', 'The plot is good.', 'n']] }],
     texts: [{ title: 'Hola', level: 'A2', paragraphs: [[['Hola.', 'Hello.']]] }] };
   const r = b.post({ token: 'secret', action: 'content.add', pack });
   assert.equal(r.batches, 4);
@@ -144,7 +145,7 @@ test('news: feed → article → prepared text', () => {
   const feed = '<rss><item><title>El BCE mantiene los tipos</title><link>https://elpais.com/a1</link><description>Resumen corto.</description></item></rss>';
   const article = '<p>El Banco Central Europeo ha decidido mantener los tipos de interés sin cambios en su reunión de este jueves.</p><p>La presidenta explicó que la inflación sigue bajando, aunque más despacio de lo previsto por los analistas.</p>';
   const prepared = { title: 'El BCE mantiene los tipos', en: 'The ECB holds rates', level: 'B1', paragraphs: [[['El Banco Central Europeo ha decidido mantener los tipos.', 'The ECB has decided to hold rates.']]], glossary: {}, questions: [{ q: '¿Qué hace el BCE?', options: ['Mantiene los tipos', 'Sube los tipos'], a: 0 }] };
-  const b = makeBackend([prepared], { 'https://feeds.elpais.com/mrss-s/pages/ep/site/cincodias.elpais.com/portada': feed, 'https://elpais.com/a1': article });
+  const b = makeBackend([prepared, { ok: true, problems: [] }], { 'https://feeds.elpais.com/mrss-s/pages/ep/site/cincodias.elpais.com/portada': feed, 'https://elpais.com/a1': article });
   b.post({ token: 'secret', action: 'queue.add', requests: [{ key: 'news', kind: 'news', topics: ['finance'], level: 'A2', n: 1 }] });
   const run = b.post({ token: 'secret', action: 'nightly.run' });
   assert.equal(run.made, 1, run.log.join(' | '));
@@ -173,7 +174,7 @@ test('inbox: a Google Doc becomes a long reading text and is moved to processed'
     'La oposición criticó el plan y anunció que presentará una enmienda a la totalidad la semana que viene.';
   const prepared = { title: 'Los presupuestos', en: 'The budget', level: 'B1', topic: 'politics', paragraphs: [[['El Gobierno presentó ayer los presupuestos.', 'The government presented the budget yesterday.']]], glossary: {}, questions: [{ q: '¿Qué presentó?', options: ['los presupuestos', 'una ley'], a: 0 }] };
   const docs = {};
-  const b = makeBackend([prepared], {}, docs);
+  const b = makeBackend([prepared, { ok: true, problems: [] }], {}, docs);
   const inbox = b.ctx.subFolder('inbox');
   inbox.createFile('Presupuestos 2027.gdoc', '');
   docs[inbox.getId() + '/Presupuestos 2027.gdoc'] = article;
@@ -182,7 +183,20 @@ test('inbox: a Google Doc becomes a long reading text and is moved to processed'
   const c = b.post({ token: 'secret', action: 'content.since', after: 0 });
   assert.equal(c.batches[0].items[0].topic, 'politics');
   assert.equal(c.batches[0].items[0].source.title, 'Presupuestos 2027');
-  assert.equal(b.post({ token: 'secret', action: 'nightly.run' }).made, 0, 'moved to processed, not done twice');
+  assert.equal(c.batches[0].meta.user, 'owner', 'inbox texts are private to the owner');
+  const again = b.post({ token: 'secret', action: 'nightly.run' });
+  assert.equal(again.ok, false, 'manual runs are limited to one an hour');
+  assert.match(again.error, /last hour/);
+  assert.equal(b.ctx.nightly().made, 0, 'moved to processed, not done twice');
+});
+
+test('Gemini: the daily budget holds across runs', () => {
+  const b = makeBackend([]);
+  b.ctx.PropertiesService.getScriptProperties().setProperty('GEMINI_API_KEY', 'k');
+  b.ctx.PropertiesService.getScriptProperties().setProperty('MAX_CALLS_PER_DAY', '2');
+  const key = 'CALLS_' + new Date().toISOString().slice(0, 10);
+  b.ctx.PropertiesService.getScriptProperties().setProperty(key, '2');
+  assert.throws(() => b.ctx.callGemini('hi'), (e) => /Daily Gemini budget/.test(e.message));
 });
 
 test('review R5: two learners asking for the same pool both get queued (made for each of them)', () => {

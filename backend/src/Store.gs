@@ -110,12 +110,16 @@ function addToQueue(requests, user) {
 
 /* ---------- Content batches ---------- */
 
+/*
+  Callers hold the script lock (nightly, content.add), so two writers never pick the same seq.
+  The file is written before LAST_SEQ moves, so a phone never sees a seq whose file isn't there yet.
+*/
 function saveBatch(kind, meta, items) {
   var props = PropertiesService.getScriptProperties();
   var seq = Number(props.getProperty('LAST_SEQ') || 0) + 1;
-  props.setProperty('LAST_SEQ', String(seq));
   var batch = { seq: seq, kind: kind, createdAt: new Date().toISOString(), meta: meta || {}, items: items };
   writeJson(subFolder('content'), 'batch-' + ('000000' + seq).slice(-6) + '.json', batch);
+  props.setProperty('LAST_SEQ', String(seq));
   return seq;
 }
 
@@ -133,6 +137,8 @@ function batchesSince(after, limit) {
 
 function addReport(item, reason) {
   var list = readJson(rootFolder(), 'reports.json', []);
+  var itemText = JSON.stringify(item === undefined ? null : item);
+  if (itemText.length > 20000) throw new Error('That report is too large.');
   list.push({ at: new Date().toISOString(), reason: String(reason || '').slice(0, 300), item: item });
   writeJson(rootFolder(), 'reports.json', list.slice(-300));
 }

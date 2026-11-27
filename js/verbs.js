@@ -98,6 +98,8 @@ export const VERBS = {
   construir: { en: 'to build', uir: true },
   hablar:    { en: 'to speak' },
   trabajar:  { en: 'to work' },
+  levantar:  { en: 'to lift, raise (levantarse: to get up)' },
+  duchar:    { en: 'to shower (ducharse: to have a shower)' },
   llegar:    { en: 'to arrive' },
   llevar:    { en: 'to carry, to wear' },
   llamar:    { en: 'to call' },

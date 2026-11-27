@@ -105,3 +105,10 @@ test('F33: smart quotes typed on an iPhone are ignored', async () => {
   const { checkAnswer } = await import('../js/check.js');
   assert.equal(checkAnswer('“Hola”', '"Hola"'), 'right');
 });
+
+test('F07: table exercises only use verbs the engine knows', async () => {
+  const { checkExercise } = await import('../js/validate.js');
+  assert.equal(checkExercise({ type: 'table', verb: 'tener', tense: 'preterite', tags: ['x'] }).length, 0);
+  assert.equal(checkExercise({ type: 'table', verb: 'levantarse', tags: ['x'] }).length, 0);
+  assert.match(checkExercise({ type: 'table', verb: 'andar', tense: 'preterite', tags: ['x'] })[0], /not in the verb list/);
+});

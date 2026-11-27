@@ -29,6 +29,7 @@ function nightly() {
   if (!lock.tryLock(1000)) return { skipped: 'Another run is in progress.' };
   var started = Date.now(), log = [], made = 0;
   geminiCalls = 0;
+  forgetOldCallCounters();
   try {
     var queue = readJson(rootFolder(), 'queue.json', []);
     var order = { exercises: 0, words: 1, news: 2, text: 3 };
@@ -60,6 +61,13 @@ function nightly() {
     lock.releaseLock();
   }
   return { made: made, log: log };
+}
+
+/** Drop CALLS_<date> counters older than a week. */
+function forgetOldCallCounters() {
+  var props = PropertiesService.getScriptProperties(), all = props.getProperties();
+  var cutoff = Utilities.formatDate(new Date(Date.now() - 7 * 864e5), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  Object.keys(all).forEach(function (k) { if (/^CALLS_\d{4}-\d{2}-\d{2}$/.test(k) && k.slice(6) < cutoff) props.deleteProperty(k); });
 }
 
 function runJob(req) {
@@ -130,6 +138,8 @@ function jobNews(req) {
     paragraphs = trimToWords(paragraphs, req.level === 'A1' ? 120 : 180);
 
     var t = callGemini(newsPrompt({ title: item.title, paragraphs: paragraphs }, req), { temperature: 0.2 });
+    var verdict = callGemini(textReviewPrompt(t), { temperature: 0 });
+    if (!verdict.ok) continue;          // rejected in review: try the next article
     t.topic = feed.topic;
     t.source = { name: hostName(item.link), url: item.link, title: item.title };
     saveBatch('texts', { topic: feed.topic }, [t]);
@@ -159,9 +169,12 @@ function jobInbox(max) {
     paragraphs = trimToWords(paragraphs, 650);
     var title = file.getName().replace(/\.(txt|html?|pdf|docx?|gdoc)$/i, '');
     var t = callGemini(inboxPrompt({ title: title, paragraphs: paragraphs }), { temperature: 0.2 });
+    var verdict = callGemini(textReviewPrompt(t), { temperature: 0 });
+    if (!verdict.ok) { file.setDescription('Mi Español: the prepared text failed review: ' + (verdict.problems || []).join('; ').slice(0, 400)); file.moveTo(done); continue; }
     t.topic = t.topic || 'news';
     t.source = { name: 'Your inbox', title: title };
-    saveBatch('texts', { topic: t.topic, user: 'inbox' }, [t]);
+    // Private to the owner (the inbox is in the owner's Drive). Prefix a file name with "share-" to give it to everyone.
+    saveBatch('texts', { topic: t.topic, user: /^share-/i.test(file.getName()) ? 'inbox' : 'owner' }, [t]);
     file.moveTo(done);
     made++;
   }

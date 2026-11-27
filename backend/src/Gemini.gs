@@ -1,6 +1,7 @@
 /**
  * Gemini calls. The API key stays in Script Properties and never reaches the app.
- * Each nightly run has a call budget (MAX_CALLS_PER_NIGHT) to stay inside the free tier.
+ * Two budgets keep it inside the free tier: per run (MAX_CALLS_PER_NIGHT, default 30) and per
+ * day across all runs (MAX_CALLS_PER_DAY, default 60), counted in a CALLS_<date> property.
  */
 
 var geminiCalls = 0;
@@ -12,6 +13,11 @@ function callGemini(prompt, opts) {
   var key = prop('GEMINI_API_KEY', null);
   if (!key) throw new Error('GEMINI_API_KEY is not set in Script Properties.');
   if (geminiCalls >= Number(prop('MAX_CALLS_PER_NIGHT', 30))) throw new QuotaError('Nightly call budget used up.');
+  var props = PropertiesService.getScriptProperties();
+  var dayKey = 'CALLS_' + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  var today = Number(props.getProperty(dayKey) || 0);
+  if (today >= Number(prop('MAX_CALLS_PER_DAY', 60))) throw new QuotaError('Daily Gemini budget used up; more tomorrow.');
+  props.setProperty(dayKey, String(today + 1));
   geminiCalls++;
   var model = prop('GEMINI_MODEL', DEFAULT_MODEL);
   var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent';
