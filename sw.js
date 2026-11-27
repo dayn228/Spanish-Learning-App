@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = '3186c549a4';
+const VERSION = 'f3f1b365e6';
 const FILES = [
   "./",
   "./css/app.css",
