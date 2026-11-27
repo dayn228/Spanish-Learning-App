@@ -1,0 +1,349 @@
+{
+ "id": "t12",
+ "title": "Un fin de semana en Sevilla",
+ "en": "A weekend in Seville",
+ "level": "A2",
+ "topic": "trips",
+ "note": "Practice text written for the app.",
+ "paragraphs": [
+  [
+   [
+    "El viernes por la tarde cogimos el tren a Sevilla para una escapada de fin de semana.",
+    "On Friday afternoon we took the train to Seville for a weekend getaway."
+   ],
+   [
+    "Solo llevábamos equipaje de mano: una mochila cada uno y mi neceser con el maquillaje y la crema solar.",
+    "We only had hand luggage: a backpack each and my wash bag with make-up and sunscreen."
+   ],
+   [
+    "Nos alojamos en un hotel pequeño en el casco antiguo, con una terraza en el tejado.",
+    "We stayed in a small hotel in the old town, with a rooftop terrace."
+   ]
+  ],
+  [
+   [
+    "El sábado por la mañana hicimos una visita guiada por el centro.",
+    "On Saturday morning we did a guided tour of the centre."
+   ],
+   [
+    "Vimos la catedral, subimos a la Giralda y paseamos por los jardines del Alcázar, que son preciosos.",
+    "We saw the cathedral, climbed the Giralda and walked through the gardens of the Alcázar, which are beautiful."
+   ],
+   [
+    "Hacía mucho calor, así que compramos un abanico y unas gafas de sol nuevas en una tienda pequeña.",
+    "It was very hot, so we bought a fan and some new sunglasses in a little shop."
+   ]
+  ],
+  [
+   [
+    "Por la tarde nos perdimos por las calles del barrio de Santa Cruz.",
+    "In the afternoon we got lost in the streets of the Santa Cruz quarter."
+   ],
+   [
+    "No usamos el mapa: entramos en una librería antigua, tomamos un café en una plaza con naranjos y hicimos muchas fotos.",
+    "We didn't use the map: we went into an old bookshop, had a coffee in a square with orange trees and took lots of photos."
+   ],
+   [
+    "Al atardecer cruzamos el río hasta Triana y vimos cómo el cielo se ponía naranja y rosa desde el puente.",
+    "At sunset we crossed the river to Triana and watched the sky turn orange and pink from the bridge."
+   ]
+  ],
+  [
+   [
+    "Por la noche fuimos a un espectáculo de flamenco.",
+    "In the evening we went to a flamenco show."
+   ],
+   [
+    "La bailaora llevaba un vestido rojo y unos pendientes enormes, y bailó con tanta fuerza que el público se levantó a aplaudir.",
+    "The dancer wore a red dress and huge earrings, and danced with such force that the audience stood up to applaud."
+   ],
+   [
+    "Después cenamos tapas: salmorejo, tortilla y pescado frito.",
+    "Afterwards we had tapas for dinner: salmorejo, tortilla and fried fish."
+   ]
+  ],
+  [
+   [
+    "El domingo dormimos hasta tarde, desayunamos en la terraza y compramos recuerdos para nuestras familias.",
+    "On Sunday we slept in, had breakfast on the terrace and bought souvenirs for our families."
+   ],
+   [
+    "En el tren de vuelta ya estábamos pensando en la próxima escapada.",
+    "On the train back we were already thinking about the next getaway."
+   ],
+   [
+    "Sevilla en dos días es poco, pero es suficiente para enamorarse de la ciudad.",
+    "Two days in Seville isn't much, but it's enough to fall in love with the city."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Cómo viajaron a Sevilla?",
+   "options": [
+    "En tren.",
+    "En avión.",
+    "En coche."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Dónde estaba el hotel?",
+   "options": [
+    "En el casco antiguo.",
+    "Junto a la playa.",
+    "En el aeropuerto."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué compraron por el calor?",
+   "options": [
+    "Un abanico y gafas de sol.",
+    "Un bañador.",
+    "Una toalla."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué vieron desde el puente?",
+   "options": [
+    "El atardecer.",
+    "Un partido.",
+    "Un concierto."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué hicieron el domingo?",
+   "options": [
+    "Durmieron hasta tarde y compraron recuerdos.",
+    "Fueron a la playa.",
+    "Visitaron la catedral."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "cogimos": [
+   "coger",
+   "we took"
+  ],
+  "sevilla": [
+   "Sevilla",
+   "Seville"
+  ],
+  "llevábamos": [
+   "llevar",
+   "we had, carried"
+  ],
+  "equipaje": [
+   "el equipaje",
+   "luggage (de mano = hand)"
+  ],
+  "neceser": [
+   "el neceser",
+   "wash bag"
+  ],
+  "crema": [
+   "la crema",
+   "cream"
+  ],
+  "solar": [
+   "solar",
+   "sun (crema solar = sunscreen)"
+  ],
+  "alojamos": [
+   "alojarse",
+   "(nos alojamos) we stayed"
+  ],
+  "terraza": [
+   "la terraza",
+   "terrace"
+  ],
+  "tejado": [
+   "el tejado",
+   "roof"
+  ],
+  "visita": [
+   "la visita",
+   "visit, tour"
+  ],
+  "guiada": [
+   "guiado",
+   "guided"
+  ],
+  "catedral": [
+   "la catedral",
+   "cathedral"
+  ],
+  "subimos": [
+   "subir",
+   "we climbed, went up"
+  ],
+  "giralda": [
+   "la Giralda",
+   "the Giralda (cathedral bell tower)"
+  ],
+  "paseamos": [
+   "pasear",
+   "we walked"
+  ],
+  "jardines": [
+   "el jardín",
+   "gardens"
+  ],
+  "alcázar": [
+   "el Alcázar",
+   "the Alcázar (royal palace)"
+  ],
+  "preciosos": [
+   "precioso",
+   "beautiful"
+  ],
+  "compramos": [
+   "comprar",
+   "we bought"
+  ],
+  "abanico": [
+   "el abanico",
+   "hand fan"
+  ],
+  "gafas": [
+   "las gafas",
+   "glasses (de sol = sunglasses)"
+  ],
+  "sol": [
+   "el sol",
+   "sun"
+  ],
+  "perdimos": [
+   "perderse",
+   "(nos perdimos) we got lost"
+  ],
+  "santa": [
+   "santo",
+   "holy, saint"
+  ],
+  "cruz": [
+   "la cruz",
+   "cross"
+  ],
+  "usamos": [
+   "usar",
+   "we used"
+  ],
+  "entramos": [
+   "entrar",
+   "we went in"
+  ],
+  "tomamos": [
+   "tomar",
+   "we had (a drink)"
+  ],
+  "naranjos": [
+   "el naranjo",
+   "orange trees"
+  ],
+  "cruzamos": [
+   "cruzar",
+   "we crossed"
+  ],
+  "triana": [
+   "Triana",
+   "Triana (a Seville district)"
+  ],
+  "ponía": [
+   "ponerse",
+   "(se ponía) turned, became"
+  ],
+  "naranja": [
+   "naranja",
+   "orange"
+  ],
+  "espectáculo": [
+   "el espectáculo",
+   "show"
+  ],
+  "flamenco": [
+   "el flamenco",
+   "flamenco"
+  ],
+  "bailaora": [
+   "la bailaora",
+   "flamenco dancer"
+  ],
+  "llevaba": [
+   "llevar",
+   "wore"
+  ],
+  "enormes": [
+   "enorme",
+   "huge"
+  ],
+  "bailó": [
+   "bailar",
+   "danced"
+  ],
+  "tanta": [
+   "tanto",
+   "so much, such"
+  ],
+  "fuerza": [
+   "la fuerza",
+   "force, strength"
+  ],
+  "levantó": [
+   "levantarse",
+   "(se levantó) stood up"
+  ],
+  "aplaudir": [
+   "aplaudir",
+   "to applaud"
+  ],
+  "cenamos": [
+   "cenar",
+   "we had dinner"
+  ],
+  "tapas": [
+   "la tapa",
+   "tapas"
+  ],
+  "salmorejo": [
+   "el salmorejo",
+   "salmorejo (cold tomato cream)"
+  ],
+  "tortilla": [
+   "la tortilla",
+   "Spanish omelette"
+  ],
+  "frito": [
+   "frito",
+   "fried"
+  ],
+  "dormimos": [
+   "dormir",
+   "we slept (hasta tarde = in)"
+  ],
+  "desayunamos": [
+   "desayunar",
+   "we had breakfast"
+  ],
+  "vuelta": [
+   "la vuelta",
+   "return (de vuelta = back)"
+  ],
+  "estábamos": [
+   "estar",
+   "we were"
+  ],
+  "pensando": [
+   "pensar",
+   "thinking"
+  ],
+  "enamorarse": [
+   "enamorarse",
+   "to fall in love"
+  ]
+ }
+}

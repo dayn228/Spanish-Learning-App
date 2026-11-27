@@ -129,7 +129,7 @@ function cloudCard() {
       try {
         const r = await testConnection(url.value, token.value);
         saveSettings({ backend: { url: url.value.trim(), token: token.value.trim() } });
-        state.sync.user = r.user || 'owner';
+        state.sync.user = r.user || 'owner'; state.sync.name = r.name || '';
         msg.textContent = r.ai ? 'Connected. AI content is on.' : 'Connected. Add GEMINI_API_KEY in Script Properties to turn on AI content.';
         await syncNow({ forceBackup: true });
         import('../main.js').then((m) => m.render());
@@ -161,7 +161,7 @@ function cloudCard() {
 
   card.append(
     h('div', { class: 'status-list' },
-      h('div', {}, h('span', { class: 'muted' }, 'Signed in as'), h('span', {}, s.user && s.user !== 'owner' ? s.user : 'owner')),
+      h('div', {}, h('span', { class: 'muted' }, 'Signed in as'), h('span', {}, s.name || s.user || 'owner')),
       h('div', {}, h('span', { class: 'muted' }, 'Backup to Drive'), h('span', {}, when(s.lastBackup))),
       h('div', {}, h('span', { class: 'muted' }, 'Last sync'), h('span', {}, when(s.lastSync))),
       h('div', {}, h('span', { class: 'muted' }, 'AI-made items'), h('span', {}, String(aiCount))),
@@ -172,7 +172,7 @@ function cloudCard() {
       h('button', { class: 'btn btn-secondary', onclick: busy('Making content…', async () => { msg.textContent = 'This takes a few minutes. You can keep studying.'; const r = await getContentNow(); msg.textContent = `Done: ${r.made || 0} new items made.`; }) }, 'Get new content now')),
     h('div', { class: 'row', style: { marginTop: '8px', flexWrap: 'wrap' } },
       h('button', { class: 'btn btn-ghost', onclick: busy('Restoring…', async () => { const at = await restoreFromDrive(); toast(`Restored the backup from ${new Date(at).toLocaleString()}`); import('../main.js').then((m) => m.render()); }) }, 'Restore from Drive'),
-      h('button', { class: 'btn btn-ghost', onclick: () => { saveSettings({ backend: null }); state.sync.user = null; import('../main.js').then((m) => m.render()); } }, 'Disconnect')),
+      h('button', { class: 'btn btn-ghost', onclick: () => { saveSettings({ backend: null }); state.sync.user = null; state.sync.name = null; import('../main.js').then((m) => m.render()); } }, 'Disconnect')),
     h('p', { class: 'tiny muted', style: { marginTop: '10px' } }, 'On the free Gemini tier, Google may use what is sent to improve its products. Only learning content is sent, never your progress.'));
   return card;
 }
@@ -185,7 +185,12 @@ function appearance() {
     h('h2', { class: 'section-title' }, 'Appearance'),
     h('div', { class: 'themes', role: 'group', 'aria-label': 'Theme' }, THEMES.map((t) => h('button', {
       class: 'theme-opt', 'aria-pressed': String(current === t.id),
-      onclick: () => { saveSettings({ theme: t.id }); applyTheme(t.id); import('../main.js').then((m) => m.render()); },
+      onclick: (e) => {
+        saveSettings({ theme: t.id });
+        applyTheme(t.id, { animate: true });
+        // Update the picker in place: a full re-render would skip the fade.
+        e.currentTarget.parentNode.querySelectorAll('.theme-opt').forEach((b) => b.setAttribute('aria-pressed', String(b === e.currentTarget)));
+      },
     },
       h('span', { class: 'sw', 'aria-hidden': 'true' }, t.swatch.map((c) => h('i', { style: { background: c } }))),
       h('b', {}, t.name),

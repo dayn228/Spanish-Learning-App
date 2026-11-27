@@ -1648,6 +1648,90 @@
   "solas": [
    "solo",
    "alone"
+  ],
+  "fin": [
+   "el fin",
+   "end (fin de semana = weekend; por fin = at last)"
+  ],
+  "hicimos": [
+   "hacer",
+   "we did, made"
+  ],
+  "fuimos": [
+   "ir / ser",
+   "we went"
+  ],
+  "vimos": [
+   "ver",
+   "we saw"
+  ],
+  "salió": [
+   "salir",
+   "came out, went out"
+  ],
+  "rojo": [
+   "rojo",
+   "red"
+  ],
+  "rosa": [
+   "rosa",
+   "pink / rose"
+  ],
+  "muchísimo": [
+   "mucho",
+   "very much, loads"
+  ],
+  "música": [
+   "la música",
+   "music"
+  ],
+  "cara": [
+   "la cara",
+   "face"
+  ],
+  "hacía": [
+   "hacer",
+   "(hacía calor) it was (hot)"
+  ],
+  "calor": [
+   "el calor",
+   "heat"
+  ],
+  "antiguo": [
+   "antiguo",
+   "old"
+  ],
+  "antigua": [
+   "antiguo",
+   "old"
+  ],
+  "nuestras": [
+   "nuestro",
+   "our"
+  ],
+  "próxima": [
+   "próximo",
+   "next"
+  ],
+  "fuerte": [
+   "fuerte",
+   "strong, loud"
+  ],
+  "siguiente": [
+   "siguiente",
+   "next, following"
+  ],
+  "puente": [
+   "el puente",
+   "bridge"
+  ],
+  "río": [
+   "el río",
+   "river"
+  ],
+  "cielo": [
+   "el cielo",
+   "sky"
   ]
  }
 }

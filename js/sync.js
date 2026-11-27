@@ -56,7 +56,7 @@ export async function syncNow({ forceBackup = false } = {}) {
     const report = { sent: 0, added: 0, backedUp: false };
     try {
       // 0. Who am I on the backend (you, or someone added with addUser)?
-      if (!s.user) s.user = (await call('ping')).user || 'owner';
+      if (!s.user || !s.name) { const r = await call('ping'); s.user = r.user || 'owner'; s.name = r.name || ''; }
 
       // 1. Requests and reports.
       const { content } = state;
@@ -118,6 +118,9 @@ export function mergeBatch(batch) {
   const extra = state.extra;
   if ((extra.seqs || []).includes(batch.seq)) return 0;
   let added = 0;
+  // Exercises and texts were made for one learner's interests: skip the other learner's.
+  const forOther = batch.meta && batch.meta.user && batch.meta.user !== 'inbox' && state.sync.user && batch.meta.user !== state.sync.user;
+  if (forOther && (batch.kind === 'exercises' || batch.kind === 'texts')) { (extra.seqs || (extra.seqs = [])).push(batch.seq); return 0; }
   if (batch.kind === 'exercises') {
     const unitId = batch.meta && batch.meta.unitId;
     if (!state.content.units.some((u) => u.id === unitId)) return 0;

@@ -21,10 +21,25 @@ const DAY = 864e5;
 const WAIT_DAYS = 3;
 const NEWS_TOPICS = ['finance', 'economics', 'politics', 'news'];
 
+/* Focus topics that get AI practice texts, and what those texts are about. */
+const TEXT_ABOUT = {
+  construction: 'everyday work at a window and glazing installation company in Spain: site visits, measuring, quotes, deliveries, clients, problems on site',
+  music: 'pop music fan life: a stadium concert, getting tickets, friendship bracelets, a new album release, singing along with friends (no real artists, no lyrics)',
+  fashion: 'clothes and style in Spain: shopping in the sales, choosing an outfit for a wedding or a night out, second-hand fashion',
+  beauty: 'make-up, skincare and hair: a morning routine, getting ready for a concert with glitter, a visit to the hairdresser',
+  sport: 'staying active: a first 10k race, gym and pilates classes, padel with friends, watching a match',
+  selfcare: 'self-care and wellbeing: a slow Sunday, sleep, journaling, a spa weekend, setting boundaries at work',
+  trips: 'holidays and short trips in Spain and Europe: flights, hotels, beaches, old towns, sunsets, getting lost',
+  books: 'reading: a book club, a romance or fantasy novel, a cosy bookshop, a sequel and its adaptation',
+};
+
 export function computeRequests({ units = [], grammar = { units: {} }, words = [], topics = [], cards = {}, focus = [], texts = [], reading = {}, pending = {}, level = 'A1', now = Date.now() }) {
   const out = [];
   const waiting = (key) => pending[key] && now - pending[key] < WAIT_DAYS * DAY;
   const add = (req) => { if (!waiting(req.key)) out.push(req); };
+
+  // What the learner cares about: the AI sets its example sentences there.
+  const interests = focus.map((id) => (topics.find((t) => t.id === id) || {}).name).filter(Boolean);
 
   // Grammar: units you have started and not mastered, plus the next one.
   const nextUnit = units.find((u) => !(grammar.units[u.id] && grammar.units[u.id].mastered));
@@ -40,7 +55,7 @@ export function computeRequests({ units = [], grammar = { units: {} }, words = [
     add({
       key: `exercises:${u.id}`, kind: 'exercises', unitId: u.id, unitTitle: u.title, level: u.level, n: 20,
       tags: [...new Set(u.exercises.flatMap((e) => e.tags || []))], weakTags,
-      summary: u.summary, vocabulary: learning,
+      summary: u.summary, vocabulary: learning, interests,
       avoid: u.exercises.slice(-40).map((e) => e.q || e.a || '').filter(Boolean),
       samples: u.exercises.filter((e) => e.type !== 'table').slice(0, 4),
     });
@@ -60,11 +75,12 @@ export function computeRequests({ units = [], grammar = { units: {} }, words = [
   const unread = texts.filter((t) => !(reading[t.id] && reading[t.id].done)).length;
   if (unread < 3) {
     const newsTopics = focus.filter((f) => NEWS_TOPICS.includes(f));
-    add({ key: 'news', kind: 'news', topics: newsTopics.length ? newsTopics : ['economics'], level, n: 2 });
+    const ownTexts = focus.some((id) => TEXT_ABOUT[id]);
+    if (newsTopics.length || !ownTexts) add({ key: 'news', kind: 'news', topics: newsTopics.length ? newsTopics : ['economics'], level, n: 2 });
   }
-  if (focus.includes('construction')) {
-    add({ key: 'text:construction', kind: 'text', topic: 'construction', level, about: 'everyday work at a window and glazing installation company in Spain: site visits, measuring, quotes, deliveries, clients, problems on site' });
-  }
+  // One practice text per sync about a focus topic (each topic waits its turn).
+  const textTopic = focus.find((id) => TEXT_ABOUT[id] && !waiting(`text:${id}`));
+  if (textTopic) add({ key: `text:${textTopic}`, kind: 'text', topic: textTopic, level, about: TEXT_ABOUT[textTopic] });
   return out;
 }
 

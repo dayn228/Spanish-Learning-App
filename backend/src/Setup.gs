@@ -76,3 +76,12 @@ function removeUser(name) {
   props.setProperty('USERS', JSON.stringify(users));
   console.log('Removed ' + name + '.');
 }
+
+/** Change what the app calls a learner, e.g. setName('partner', 'Wifey'). */
+function setName(user, name) {
+  var props = PropertiesService.getScriptProperties();
+  var names = JSON.parse(props.getProperty('NAMES') || '{}');
+  names[user] = String(name).slice(0, 30);
+  props.setProperty('NAMES', JSON.stringify(names));
+  console.log(user + ' is now called "' + names[user] + '".');
+}

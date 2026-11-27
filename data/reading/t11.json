@@ -1,0 +1,329 @@
+{
+ "id": "t11",
+ "title": "Mi primer concierto en un estadio",
+ "en": "My first stadium concert",
+ "level": "A2",
+ "topic": "music",
+ "note": "Practice text written for the app.",
+ "paragraphs": [
+  [
+   [
+    "Hace un año conseguí dos entradas para el concierto de mi cantante favorita en Madrid.",
+    "A year ago I got two tickets for my favourite singer's concert in Madrid."
+   ],
+   [
+    "Estuve casi tres horas en la cola virtual y, cuando por fin pude comprarlas, grité tanto que mi vecina llamó a la puerta.",
+    "I was in the online queue for almost three hours and, when I finally managed to buy them, I screamed so much that my neighbour knocked on the door."
+   ],
+   [
+    "Las entradas se agotaron en veinte minutos.",
+    "The tickets sold out in twenty minutes."
+   ]
+  ],
+  [
+   [
+    "Durante meses preparamos todo con mi mejor amiga.",
+    "For months my best friend and I got everything ready."
+   ],
+   [
+    "Hicimos más de cien pulseras de la amistad para intercambiar con otras fans, y escuchamos todos sus discos en orden, del primero al último.",
+    "We made over a hundred friendship bracelets to swap with other fans, and we listened to all her albums in order, from the first to the last."
+   ],
+   [
+    "También elegimos los conjuntos: yo llevé un vestido de lentejuelas plateado y unas botas altas; ella, una falda rosa y una chaqueta brillante.",
+    "We also chose our outfits: I wore a silver sequinned dress and tall boots; she wore a pink skirt and a sparkly jacket."
+   ]
+  ],
+  [
+   [
+    "El día del concierto nos maquillamos juntas en mi casa.",
+    "On the day of the concert we did our make-up together at my place."
+   ],
+   [
+    "Nos pusimos purpurina en la cara y un pintalabios rojo, y salimos hacia el estadio cinco horas antes.",
+    "We put glitter on our faces and red lipstick, and set off for the stadium five hours early."
+   ],
+   [
+    "Había miles de personas en la calle, todas cantando y cambiando pulseras.",
+    "There were thousands of people in the street, all singing and swapping bracelets."
+   ]
+  ],
+  [
+   [
+    "Cuando se apagaron las luces y ella salió al escenario, el público gritó tan fuerte que no se oía la música.",
+    "When the lights went out and she came on stage, the audience screamed so loudly that you couldn't hear the music."
+   ],
+   [
+    "El concierto duró más de tres horas y cantamos todas las canciones, aunque al final ya no teníamos voz.",
+    "The concert lasted more than three hours and we sang every song, although by the end we had no voice left."
+   ],
+   [
+    "En la parte acústica tocó dos canciones sorpresa con la guitarra y el piano, y me emocioné muchísimo.",
+    "In the acoustic part she played two surprise songs on guitar and piano, and I got really emotional."
+   ]
+  ],
+  [
+   [
+    "Volvimos a casa a las dos de la mañana, cansadas pero felices.",
+    "We got home at two in the morning, tired but happy."
+   ],
+   [
+    "Al día siguiente tenía agujetas en las piernas de tanto saltar, pero no me importaba.",
+    "The next day my legs ached from all the jumping, but I didn't care."
+   ],
+   [
+    "Todavía llevo en la muñeca la pulsera que me regaló una chica de Valencia.",
+    "I still wear on my wrist the bracelet a girl from Valencia gave me."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Cuánto tiempo estuvo en la cola virtual?",
+   "options": [
+    "Casi tres horas.",
+    "Veinte minutos.",
+    "Cinco horas."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué hicieron para intercambiar con otras fans?",
+   "options": [
+    "Pulseras de la amistad.",
+    "Camisetas.",
+    "Fotos."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué llevó ella al concierto?",
+   "options": [
+    "Un vestido de lentejuelas y botas altas.",
+    "Unos vaqueros y zapatillas.",
+    "Una falda rosa y una chaqueta."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué pasó en la parte acústica?",
+   "options": [
+    "Tocó dos canciones sorpresa.",
+    "Se apagaron las luces.",
+    "El público se fue."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué tenía agujetas al día siguiente?",
+   "options": [
+    "Por saltar mucho.",
+    "Por ir al gimnasio.",
+    "Por andar hasta casa."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "conseguí": [
+   "conseguir",
+   "I got, managed to get"
+  ],
+  "favorita": [
+   "favorito",
+   "favourite"
+  ],
+  "estuve": [
+   "estar",
+   "I was"
+  ],
+  "cola": [
+   "la cola",
+   "queue"
+  ],
+  "virtual": [
+   "virtual",
+   "online, virtual"
+  ],
+  "pude": [
+   "poder",
+   "I managed to"
+  ],
+  "comprarlas": [
+   "comprar",
+   "to buy them"
+  ],
+  "grité": [
+   "gritar",
+   "I screamed"
+  ],
+  "gritó": [
+   "gritar",
+   "screamed"
+  ],
+  "vecina": [
+   "la vecina",
+   "neighbour"
+  ],
+  "llamó": [
+   "llamar",
+   "knocked, called"
+  ],
+  "agotaron": [
+   "agotarse",
+   "(se agotaron) sold out"
+  ],
+  "preparamos": [
+   "preparar",
+   "we got ready"
+  ],
+  "pulseras": [
+   "la pulsera",
+   "bracelets"
+  ],
+  "pulsera": [
+   "la pulsera",
+   "bracelet"
+  ],
+  "amistad": [
+   "la amistad",
+   "friendship"
+  ],
+  "intercambiar": [
+   "intercambiar",
+   "to swap"
+  ],
+  "escuchamos": [
+   "escuchar",
+   "we listened"
+  ],
+  "orden": [
+   "el orden",
+   "order"
+  ],
+  "elegimos": [
+   "elegir",
+   "we chose"
+  ],
+  "llevé": [
+   "llevar",
+   "I wore"
+  ],
+  "plateado": [
+   "plateado",
+   "silver"
+  ],
+  "brillante": [
+   "brillante",
+   "sparkly, shiny"
+  ],
+  "maquillamos": [
+   "maquillarse",
+   "(nos maquillamos) we did our make-up"
+  ],
+  "pusimos": [
+   "poner",
+   "(nos pusimos) we put on"
+  ],
+  "salimos": [
+   "salir",
+   "we set off, went out"
+  ],
+  "cantando": [
+   "cantar",
+   "singing"
+  ],
+  "cambiando": [
+   "cambiar",
+   "swapping"
+  ],
+  "apagaron": [
+   "apagarse",
+   "(se apagaron) went out"
+  ],
+  "luces": [
+   "la luz",
+   "lights"
+  ],
+  "oía": [
+   "oír",
+   "(no se oía) couldn’t be heard"
+  ],
+  "duró": [
+   "durar",
+   "lasted"
+  ],
+  "cantamos": [
+   "cantar",
+   "we sang"
+  ],
+  "canciones": [
+   "la canción",
+   "songs"
+  ],
+  "teníamos": [
+   "tener",
+   "we had"
+  ],
+  "voz": [
+   "la voz",
+   "voice"
+  ],
+  "acústica": [
+   "acústico",
+   "acoustic"
+  ],
+  "tocó": [
+   "tocar",
+   "played"
+  ],
+  "piano": [
+   "el piano",
+   "piano"
+  ],
+  "emocioné": [
+   "emocionarse",
+   "(me emocioné) I got emotional"
+  ],
+  "volvimos": [
+   "volver",
+   "we came back"
+  ],
+  "cansadas": [
+   "cansado",
+   "tired"
+  ],
+  "felices": [
+   "feliz",
+   "happy"
+  ],
+  "saltar": [
+   "saltar",
+   "to jump"
+  ],
+  "importaba": [
+   "importar",
+   "(no me importaba) I didn’t care"
+  ],
+  "llevo": [
+   "llevar",
+   "I wear"
+  ],
+  "muñeca": [
+   "la muñeca",
+   "wrist"
+  ],
+  "regaló": [
+   "regalar",
+   "gave (as a present)"
+  ],
+  "chica": [
+   "la chica",
+   "girl"
+  ],
+  "valencia": [
+   "Valencia",
+   "Valencia"
+  ]
+ }
+}

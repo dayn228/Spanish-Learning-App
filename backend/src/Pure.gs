@@ -94,7 +94,9 @@ function exercisePrompt(req) {
     req.weakTags && req.weakTags.length ? 'The learner keeps making mistakes with these forms (tags): ' + req.weakTags.join(', ') + '. About half the exercises should practise them.' : '',
     'Allowed tags (use 1–2 per exercise, only from this list): ' + (req.tags || []).join(', ') + '.',
     req.vocabulary && req.vocabulary.length ? 'Where natural, use words the learner is learning: ' + req.vocabulary.join(', ') + '.' : '',
-    'Prefer sentences about work in construction and window installation, finance, economics, politics and daily life in Spain.',
+    req.interests && req.interests.length
+      ? 'Set the sentences in the learner\'s interests: ' + req.interests.join(', ') + ', and daily life in Spain. Never quote song lyrics or name real celebrities.'
+      : 'Prefer sentences about work in construction and window installation, finance, economics, politics and daily life in Spain.',
     'Mix these types: gap, choice, transform, error, translate, reorder, match. Formats (follow exactly):',
     '{"type":"gap","q":"Sentence with exactly one ___","hint":"infinitive or short hint","a":"answer","en":"English translation","tags":["…"]}',
     '{"type":"choice","q":"Sentence with ___","options":["…","…"],"a":0,"why":"short reason","tags":["…"]}  (a = index of the right option)',

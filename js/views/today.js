@@ -28,9 +28,9 @@ const MINUTES = [5, 15, 30, 60];
 
 function greeting() {
   const hr = new Date().getHours();
-  if (hr < 13) return 'Buenos días';
-  if (hr < 21) return 'Buenas tardes';
-  return 'Buenas noches';
+  const hi = hr < 13 ? 'Buenos días' : hr < 21 ? 'Buenas tardes' : 'Buenas noches';
+  const name = state.sync && state.sync.name;
+  return name ? `${hi}, ${name}` : hi;
 }
 
 export function todayView() {

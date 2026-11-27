@@ -27,7 +27,7 @@
  *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 5;
+var VERSION = 6;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {
@@ -71,7 +71,7 @@ function userForToken(token) {
 
 function route(body, user) {
   switch (body.action) {
-    case 'ping': return { ok: true, version: VERSION, user: user, ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
+    case 'ping': return { ok: true, version: VERSION, user: user, name: displayName(user), ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
     case 'backup.save': return { ok: true, savedAt: saveBackup(body.data, user) };
     case 'backup.load': return Object.assign({ ok: true }, loadBackup(user));
     case 'backup.list': return { ok: true, backups: listBackups(user) };
@@ -82,4 +82,12 @@ function route(body, user) {
     case 'nightly.run': return Object.assign({ ok: true }, nightly());
     default: return { ok: false, error: 'Unknown action: ' + body.action };
   }
+}
+
+/* What the app calls each learner. Internal ids (owner, partner) stay the same so
+   backup folders keep working; change a name with setName('partner', 'Wifey'). */
+var DEFAULT_NAMES = { owner: 'Big Daddy', partner: 'Wifey' };
+function displayName(user) {
+  var names = JSON.parse(PropertiesService.getScriptProperties().getProperty('NAMES') || '{}');
+  return names[user] || DEFAULT_NAMES[user] || user;
 }

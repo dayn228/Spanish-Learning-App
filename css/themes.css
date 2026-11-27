@@ -45,7 +45,16 @@
   --dot-new: #66728F; --scrim: rgba(0, 0, 0, 0.5);
 }
 
-/* Swiftie: lavender night, pink accent, a little sparkle. */
+/* Blush: soft pink light theme with a rose accent. */
+[data-theme="blush"] {
+  --ivory: #FBF1F2; --white: #FFFAFB; --panel: #F5E3E6; --active: #EFD5DA; --oat: #E8C9CF;
+  --slate: #2A1A22; --ink-2: #4A2F3B; --muted: #7A5A66; --faint: #D9B9C1;
+  --clay: #C2416B;
+  --line: rgba(42, 26, 34, 0.12); --line-strong: rgba(42, 26, 34, 0.26);
+  --dot-new: #C4A1AB;
+}
+
+/* Sparkle (id "swiftie"): lavender night, pink accent and slowly twinkling glitter. */
 [data-theme="swiftie"] {
   --ivory: #1B1530; --white: #261E40; --panel: #30264F; --active: #3B2F5E; --oat: #4A3C70;
   --slate: #F7F0FF; --ink-2: #E5D9F7; --muted: #BBA9DB; --faint: #5E4F86;
@@ -55,19 +64,39 @@
   --line: rgba(247, 240, 255, 0.13); --line-strong: rgba(247, 240, 255, 0.28);
   --dot-new: #7A6AA3; --scrim: rgba(10, 5, 25, 0.5);
 }
-[data-theme="swiftie"] body {
-  background-color: var(--ivory);
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 225, 245, 0.55), transparent 60%),
-    radial-gradient(1px 1px at 72% 9%, rgba(255, 255, 255, 0.5), transparent 60%),
-    radial-gradient(1.5px 1.5px at 88% 42%, rgba(242, 156, 203, 0.5), transparent 60%),
-    radial-gradient(1px 1px at 33% 64%, rgba(255, 255, 255, 0.4), transparent 60%),
-    radial-gradient(1.5px 1.5px at 58% 86%, rgba(255, 214, 150, 0.45), transparent 60%),
-    radial-gradient(1px 1px at 6% 92%, rgba(255, 255, 255, 0.35), transparent 60%);
-  background-size: 260px 260px;
-  background-attachment: fixed;
-}
 [data-theme="swiftie"] .nav { background: rgba(27, 21, 48, 0.92); backdrop-filter: blur(8px); }
+[data-theme="swiftie"] .btn-primary, [data-theme="swiftie"] .next-btn {
+  background-image: linear-gradient(120deg, rgba(242, 156, 203, 0.0) 30%, rgba(242, 156, 203, 0.35) 50%, rgba(242, 156, 203, 0.0) 70%);
+  background-size: 250% 100%;
+}
+
+#app { position: relative; z-index: 1; }
+
+/* The glitter lives on its own fixed layer so it can fade in and out with the theme. */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: 0; transition: opacity 1.2s ease;
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 18%, rgba(255, 225, 245, 0.8), transparent 60%),
+    radial-gradient(1.1px 1.1px at 72% 9%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(2px 2px at 88% 42%, rgba(242, 156, 203, 0.75), transparent 60%),
+    radial-gradient(1.1px 1.1px at 33% 64%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.8px 1.8px at 58% 86%, rgba(255, 214, 150, 0.7), transparent 60%),
+    radial-gradient(1.1px 1.1px at 6% 92%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1.4px 1.4px at 44% 33%, rgba(200, 180, 255, 0.7), transparent 60%);
+  background-size: 230px 230px;
+}
+[data-theme="swiftie"] body::before { opacity: 1; animation: twinkle 6s ease-in-out infinite alternate; }
+@keyframes twinkle { from { opacity: 0.55; } to { opacity: 1; } }
+
+/* Switching themes: colours glide instead of snapping (js/theme.js adds the class). */
+html.theme-fade, html.theme-fade body, html.theme-fade body * {
+  transition: background-color 0.9s ease, color 0.9s ease, border-color 0.9s ease, fill 0.9s ease, stroke 0.9s ease, box-shadow 0.9s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="swiftie"] body::before { animation: none; }
+  body::before { transition: none; }
+}
 
 /* Dark themes: a little softer shadows and switch knobs. */
 [data-theme="charcoal"] .switch::after, [data-theme="midnight"] .switch::after, [data-theme="swiftie"] .switch::after { background: var(--slate); }
