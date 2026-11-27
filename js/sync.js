@@ -25,15 +25,34 @@ export const isConnected = () => !!(state.settings.backend && state.settings.bac
 export function onSyncChange(fn) { listeners.push(fn); }
 const notify = () => listeners.forEach((fn) => { try { fn(); } catch { /* screen gone */ } });
 
+/* Most calls answer in seconds; the nightly job can take minutes. */
+const TIMEOUT_MS = { 'nightly.run': 6 * 60 * 1000, default: 30 * 1000 };
+
 export async function call(action, payload = {}, backend = state.settings.backend) {
-  const res = await fetch(backend.url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // "simple" request: no CORS preflight
-    body: JSON.stringify({ token: backend.token, action, ...payload }),
-    redirect: 'follow',
-  });
-  if (!res.ok) throw new Error(`The backend answered ${res.status}.`);
-  const data = await res.json();
+  const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = ctrl && setTimeout(() => ctrl.abort(), TIMEOUT_MS[action] || TIMEOUT_MS.default);
+  let res;
+  try {
+    res = await fetch(backend.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // "simple" request: no CORS preflight
+      body: JSON.stringify({ token: backend.token, action, ...payload }),
+      redirect: 'follow',
+      signal: ctrl ? ctrl.signal : undefined,
+    });
+  } catch (e) {
+    throw new Error(e && e.name === 'AbortError'
+      ? 'The backend took too long to answer. It will try again later.'
+      : 'Could not reach the backend (offline or blocked). It will try again later.');
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+  if (!res.ok) throw new Error(`The backend answered with an error (${res.status}). Check the URL ends in /exec.`);
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch {
+    throw new Error('The backend answered with a web page instead of data. Check the deployment is set to "Anyone" and the URL ends in /exec.');
+  }
   if (!data.ok) throw new Error(data.error || 'The backend refused the request.');
   return data;
 }
@@ -54,56 +73,65 @@ export async function syncNow({ forceBackup = false, overwrite = false } = {}) {
   running = (async () => {
     const s = state.sync;
     const report = { sent: 0, added: 0, backedUp: false };
+    const errors = [];
+    const step = async (fn) => { try { await fn(); } catch (e) { errors.push(String(e.message || e)); } };
     try {
       // 0. Who am I on the backend (you, or someone added with addUser)?
       if (!s.user || !s.name) { const r = await call('ping'); s.user = r.user || 'owner'; s.name = r.name || ''; }
 
-      // 1. Requests and reports.
-      const { content } = state;
-      const level = estimateLevel(content.units, state.grammar);
-      const requests = computeRequests({
-        units: content.units, grammar: state.grammar, words: content.words, topics: content.topics, cards: state.cards,
-        focus: state.settings.focus, texts: content.texts, reading: state.reading, pending: s.pending, level,
-      });
-      if (requests.length) {
-        await call('queue.add', { requests });
-        const now = Date.now();
-        requests.forEach((r) => { s.pending[r.key] = now; });
-        report.sent = requests.length;
-      }
-      while (s.reports.length) {
-        await call('report', s.reports[0]);
-        s.reports.shift();
-      }
-
-      // 2. New content.
-      for (let page = 0; page < 5; page++) {
-        const r = await call('content.since', { after: s.lastSeq });
-        for (const batch of r.batches) {
-          // One broken batch must not block every later sync (and the backup below): skip it.
-          try { report.added += mergeBatch(batch); } catch (e) { console.warn('Skipped a broken content batch', batch && batch.seq, e); }
-          s.lastSeq = Math.max(s.lastSeq, Number(batch && batch.seq) || 0);
+      // 1. Backup first: nothing else (a broken batch, a slow job) may stand in its way.
+      await step(async () => {
+        const studiedSince = Object.values(state.log).reduce((a, b) => a + b, 0) !== s.answersAtBackup;
+        if (forceBackup || !s.lastBackup || (studiedSince && Date.now() - s.lastBackup > 60 * 1000) || Date.now() - s.lastBackup > BACKUP_EVERY_MS) {
+          const r = await call('backup.save', { data: JSON.parse(exportBackup()), force: overwrite });
+          if (r.held) {
+            // Drive has much more progress than this phone: don't overwrite it, ask instead (You screen).
+            s.held = { driveSavedAt: r.driveSavedAt, driveProgress: r.driveProgress, phoneProgress: r.phoneProgress };
+          } else {
+            s.held = null;
+            s.lastBackup = Date.now();
+            s.answersAtBackup = Object.values(state.log).reduce((a, b) => a + b, 0);
+            report.backedUp = true;
+          }
         }
-        if (!r.batches.length || s.lastSeq >= r.last) break;
-      }
+      });
+
+      // 2. Requests and reports.
+      await step(async () => {
+        const { content } = state;
+        const level = estimateLevel(content.units, state.grammar);
+        const requests = computeRequests({
+          units: content.units, grammar: state.grammar, words: content.words, topics: content.topics, cards: state.cards,
+          focus: state.settings.focus, texts: content.texts, reading: state.reading, pending: s.pending, level,
+        });
+        if (requests.length) {
+          await call('queue.add', { requests });
+          const now = Date.now();
+          requests.forEach((r) => { s.pending[r.key] = now; });
+          report.sent = requests.length;
+        }
+        while (s.reports.length) {
+          await call('report', s.reports[0]);
+          s.reports.shift();
+        }
+      });
+
+      // 3. New content, page by page until we have caught up (a restored phone may need many).
+      await step(async () => {
+        for (let page = 0; page < 20; page++) {
+          const r = await call('content.since', { after: s.lastSeq });
+          for (const batch of r.batches) {
+            // One broken batch must not block every later sync: skip it.
+            try { report.added += mergeBatch(batch); } catch (e) { console.warn('Skipped a broken content batch', batch && batch.seq, e); }
+            s.lastSeq = Math.max(s.lastSeq, Number(batch && batch.seq) || 0);
+          }
+          if (!r.batches.length || s.lastSeq >= r.last) break;
+        }
+      });
       if (report.added) { saveExtra(); refreshContent(); }
 
-      // 3. Backup.
-      const studiedSince = Object.values(state.log).reduce((a, b) => a + b, 0) !== s.answersAtBackup;
-      if (forceBackup || !s.lastBackup || (studiedSince && Date.now() - s.lastBackup > 60 * 1000) || Date.now() - s.lastBackup > BACKUP_EVERY_MS) {
-        const r = await call('backup.save', { data: JSON.parse(exportBackup()), force: overwrite });
-        if (r.held) {
-          // Drive has much more progress than this phone: don't overwrite it, ask instead (You screen).
-          s.held = { driveSavedAt: r.driveSavedAt, driveProgress: r.driveProgress, phoneProgress: r.phoneProgress };
-        } else {
-          s.held = null;
-          s.lastBackup = Date.now();
-          s.answersAtBackup = Object.values(state.log).reduce((a, b) => a + b, 0);
-          report.backedUp = true;
-        }
-      }
       s.lastSync = Date.now();
-      s.lastError = null;
+      s.lastError = errors.length ? errors[0] : null;
       s.lastAdded = report.added || s.lastAdded || 0;
     } catch (e) {
       s.lastError = String(e.message || e);

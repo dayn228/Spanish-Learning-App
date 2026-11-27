@@ -82,7 +82,7 @@ function route(body, user) {
     case 'backup.load': return Object.assign({ ok: true }, loadBackup(user, body.name));
     case 'backup.list': return { ok: true, backups: listBackups(user) };
     case 'queue.add': return { ok: true, queued: addToQueue(body.requests || [], user) };
-    case 'content.since': return Object.assign({ ok: true }, batchesSince(Number(body.after) || 0, 10));
+    case 'content.since': return Object.assign({ ok: true }, batchesSince(Number(body.after) || 0, 30));
     case 'report': addReport(body.item, body.reason); return { ok: true };
     case 'status': return Object.assign({ ok: true }, readJson(rootFolder(), 'status.json', {}), { queue: readJson(rootFolder(), 'queue.json', []).length });
     case 'nightly.run': return Object.assign({ ok: true }, nightly());

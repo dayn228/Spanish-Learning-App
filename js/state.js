@@ -106,6 +106,23 @@ export function saveReading(textId, result) {
 
 /* ---------- Backup ---------- */
 
+/**
+  A different learner signs in on this phone: forget the previous learner's sync position and
+  AI content (they come from that learner's queue). Progress is handled by the caller.
+*/
+export function resetForNewLearner() {
+  state.extra = emptyExtra();
+  state.sync = { lastSeq: 0, pending: {}, reports: [], user: state.sync.user, name: state.sync.name, lastUser: state.sync.user };
+  db.set('extra', state.extra);
+  db.set('sync', state.sync);
+  refreshContent();
+}
+
+/** Start with no progress (keeps settings such as theme and the backend connection). */
+export async function clearProgress() {
+  await importBackup(JSON.stringify({ app: 'mi-espanol', cards: {}, log: {}, grammar: {}, custom: [], reading: {} }));
+}
+
 export function exportBackup() {
   return JSON.stringify({
     app: 'mi-espanol',

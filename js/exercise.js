@@ -24,6 +24,7 @@
 import { h, icon, ICONS } from './ui.js';
 import { gradeAnswer, matchFits, reorderRight, wordDiff } from './check.js';
 import { conjugate, PERSONS, VERBS } from './verbs.js';
+import { checkExercise } from './validate.js';
 import { speak, hasSpanishVoice } from './speech.js';
 
 const INSTR = {
@@ -87,6 +88,14 @@ function feedback(points, kind, correct, extra) {
  * @returns element
  */
 export function exerciseView(ex, { onResult, onNext }) {
+  // Defence in depth: content is checked when it arrives, but never let one bad item blank the screen.
+  const problems = ex && ['conj', 'hear', 'dictation'].includes(ex.type) ? [] : checkExercise(ex || {});
+  if (problems.length) {
+    return h('div', { class: 'exercise' },
+      h('p', { class: 'lead' }, 'This exercise is broken, so it is skipped.'),
+      h('p', { class: 'tiny muted' }, problems[0]),
+      h('div', { class: 'study-actions' }, h('button', { class: 'btn btn-primary btn-block next-btn', onclick: () => onNext && onNext() }, 'Next')));
+  }
   const root = h('div', { class: 'exercise' });
   const result = h('div', {});
   const actions = h('div', { class: 'study-actions' });

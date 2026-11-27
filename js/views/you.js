@@ -1,6 +1,6 @@
 // You: progress, streak history, focus topics, backup and install help.
 
-import { state, saveSettings, exportBackup, importBackup } from '../state.js';
+import { state, saveSettings, exportBackup, importBackup, resetForNewLearner, clearProgress } from '../state.js';
 import { h, toast, plural } from '../ui.js';
 import { stage } from '../srs.js';
 import { displayStreak } from '../streak.js';
@@ -181,12 +181,21 @@ function cloudCard() {
       try {
         const r = await testConnection(url.value, token.value);
         saveSettings({ backend: { url: url.value.trim(), token: token.value.trim() } });
+        const previous = state.sync.lastUser;
         state.sync.user = r.user || 'owner'; state.sync.name = r.name || '';
+        const switched = previous && previous !== state.sync.user;
+        if (switched) resetForNewLearner();
+        state.sync.lastUser = state.sync.user;
         msg.textContent = r.ai ? 'Connected. AI content is on.' : 'Connected. Add GEMINI_API_KEY in Script Properties to turn on AI content.';
         // A fresh or reset phone: bring the progress back from Drive before anything is uploaded.
         const mine = progressOf(JSON.parse(exportBackup()));
         const drive = await call('backup.load').catch(() => ({}));
-        if (drive.data && progressOf(drive.data) > mine && mine < 20) {
+        const who = state.sync.name || state.sync.user;
+        if (switched && mine > 0) {
+          // This phone holds the other learner's progress: never mix it into this learner's backups.
+          if (drive.data) { await restoreFromDrive(); toast(`Loaded ${who}'s progress from Drive`); }
+          else if (window.confirm(`This phone has another learner's progress. Start ${who} with no progress? (Cancel keeps it for ${who}.)`)) { await clearProgress(); toast(`Started fresh for ${who}`); }
+        } else if (drive.data && progressOf(drive.data) > mine && mine < 20) {
           await restoreFromDrive();
           toast('Your progress was restored from Drive');
         }

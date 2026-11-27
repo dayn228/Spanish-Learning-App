@@ -30,7 +30,7 @@ test('R1: one broken content batch does not block sync and backups for ever', as
     actions.push(body.action);
     const reply = body.action === 'content.since' ? { ok: true, batches: batches.filter((b) => b.seq > body.after), last: 2 }
       : body.action === 'backup.save' ? { ok: true, savedAt: 'now' } : { ok: true };
-    return { ok: true, json: async () => reply };
+    return { ok: true, json: async () => reply, text: async () => JSON.stringify(reply) };
   };
   const r = await syncNow({ forceBackup: true });
   assert.equal(state.sync.lastError, null);

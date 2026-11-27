@@ -11,7 +11,7 @@ import { syncSoon, onSyncChange } from './sync.js';
 import { applyTheme, watchSystemTheme } from './theme.js';
 import { applyPhoto } from './backdrop.js';
 import { loadContent } from './content.js';
-import { requestPersistence } from './db.js';
+import { requestPersistence, storageProblem } from './db.js';
 import { h, icon, ICONS } from './ui.js';
 import { todayView } from './views/today.js';
 import { topicsView } from './views/topics.js';
@@ -53,10 +53,22 @@ export function render() {
     default: view = todayView(); tab = 'today';
   }
   app.classList.toggle('no-nav', fullScreen);
-  app.replaceChildren(view);
+  const warn = storageProblem();
+  app.replaceChildren(...[warn ? h('div', { class: 'notice', role: 'alert' }, h('b', {}, 'Progress is not being saved'), h('p', { class: 'small' }, warn)) : null, view].filter(Boolean));
   renderNav(tab, fullScreen);
   window.scrollTo(0, 0);
+  // Screen readers: on a new screen, move focus to its heading (the page itself is not a live region).
+  if (location.hash !== lastHash) {
+    lastHash = location.hash;
+    const heading = app.querySelector('h1, h2');
+    if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
+  }
 }
+let lastHash = null;
+
+/* A new app version is installed and waiting for the learner to finish a session. */
+let updateWaiting = false;
+const inSession = () => ['study', 'drill'].includes((location.hash.slice(1) || 'today').split('/')[0]);
 
 export function go(hash) {
   if (location.hash === hash) render();
@@ -79,7 +91,8 @@ async function start() {
       h('p', { class: 'tiny muted', style: { marginTop: '12px' } }, String(e))));
     return;
   }
-  window.addEventListener('hashchange', render);
+  window.addEventListener('hashchange', () => { if (updateWaiting && !inSession()) { location.reload(); return; } render(); });
+  window.addEventListener('storage-problem', render);
   render();
   requestPersistence();
   // Sync with the backend: now, after each session, and whenever the phone is back online.
@@ -95,10 +108,12 @@ async function start() {
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
     }).catch(() => { /* offline support unavailable */ });
     // A new version has taken over: reload once so its code is used right away (not on the next launch).
+    // Never in the middle of a session or drill: then wait until the learner leaves it.
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (!hadController || sessionStorage.getItem('mi-espanol-reloaded')) return;
       sessionStorage.setItem('mi-espanol-reloaded', '1');
-      location.reload();
+      if (inSession()) updateWaiting = true;
+      else location.reload();
     });
     window.addEventListener('pageshow', () => setTimeout(() => sessionStorage.removeItem('mi-espanol-reloaded'), 5000));
   }
