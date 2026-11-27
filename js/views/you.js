@@ -7,7 +7,7 @@ import { displayStreak } from '../streak.js';
 import { dayKey, addDays } from '../dates.js';
 import { THEMES, applyTheme } from '../theme.js';
 import { loadPhoto, savePhoto, photoFromFile } from '../backdrop.js';
-import { isConnected, testConnection, syncNow, restoreFromDrive, getContentNow } from '../sync.js';
+import { isConnected, testConnection, syncNow, restoreFromDrive, getContentNow, listDriveBackups, progressOf, keepPhoneProgress, call } from '../sync.js';
 
 export function youView() {
   const { words, topics } = state.content;
@@ -58,6 +58,10 @@ export function youView() {
       h('h3', {}, 'Install on your iPhone'),
       h('p', { class: 'small', style: { marginTop: '6px' } }, 'In Safari, tap Share, then "Add to Home Screen". The app then opens full screen and works offline.')),
   );
+}
+
+function confirmKeep() {
+  return window.confirm('Replace the Drive backup with this phone\'s progress? The daily copies in Drive stay, so you can still go back to an older day.');
 }
 
 function stat(n, label) {
@@ -132,6 +136,13 @@ function cloudCard() {
         saveSettings({ backend: { url: url.value.trim(), token: token.value.trim() } });
         state.sync.user = r.user || 'owner'; state.sync.name = r.name || '';
         msg.textContent = r.ai ? 'Connected. AI content is on.' : 'Connected. Add GEMINI_API_KEY in Script Properties to turn on AI content.';
+        // A fresh or reset phone: bring the progress back from Drive before anything is uploaded.
+        const mine = progressOf(JSON.parse(exportBackup()));
+        const drive = await call('backup.load').catch(() => ({}));
+        if (drive.data && progressOf(drive.data) > mine && mine < 20) {
+          await restoreFromDrive();
+          toast('Your progress was restored from Drive');
+        }
         await syncNow({ forceBackup: true });
         import('../main.js').then((m) => m.render());
       } catch (e) {
@@ -160,7 +171,30 @@ function cloudCard() {
     finally { b.disabled = false; b.textContent = old; }
   };
 
+  const rerender = () => import('../main.js').then((m) => m.render());
+  const held = s.held ? h('div', { class: 'notice' },
+    h('b', {}, 'Drive has more progress than this phone'),
+    h('p', { class: 'small' }, `The backup in Drive (${when(Date.parse(s.held.driveSavedAt))}) has ${s.held.driveProgress} answers and cards; this phone has ${s.held.phoneProgress}. Backups are paused so nothing is lost.`),
+    h('div', { class: 'row-gap' },
+      h('button', { class: 'btn btn-primary', onclick: busy('Restoring…', async () => { await restoreFromDrive(); toast('Progress restored from Drive'); rerender(); }) }, 'Restore from Drive'),
+      h('button', { class: 'btn btn-ghost', onclick: busy('Saving…', async () => { if (confirmKeep()) { await keepPhoneProgress(); rerender(); } }) }, 'Keep this phone'))) : null;
+  const picker = h('div', { class: 'backup-list' });
+  const showBackups = busy('Loading…', async () => {
+    const list = await listDriveBackups();
+    if (!list.length) { msg.textContent = 'There is no backup in Drive yet.'; return; }
+    picker.replaceChildren(
+      h('p', { class: 'small muted' }, 'Pick a backup to restore. One copy is kept per day for two weeks.'),
+      ...list.map((b) => h('button', {
+        class: 'btn btn-ghost backup-opt',
+        onclick: busy('Restoring…', async () => {
+          await restoreFromDrive(b.name === 'latest.json' ? null : b.name);
+          toast(`Restored: ${b.label}`); rerender();
+        }),
+      }, b.label)));
+  });
+
   card.append(
+    held,
     h('div', { class: 'status-list' },
       h('div', {}, h('span', { class: 'muted' }, 'Signed in as'), h('span', {}, s.name || s.user || 'owner')),
       h('div', {}, h('span', { class: 'muted' }, 'Backup to Drive'), h('span', {}, when(s.lastBackup))),
@@ -172,8 +206,9 @@ function cloudCard() {
       h('button', { class: 'btn btn-primary', onclick: busy('Syncing…', async () => { const r = await syncNow({ forceBackup: true }); msg.textContent = r ? `Synced. ${r.added} new items.` : 'Offline: try again when online.'; }) }, 'Sync now'),
       h('button', { class: 'btn btn-secondary', onclick: busy('Making content…', async () => { msg.textContent = 'This takes a few minutes. You can keep studying.'; const r = await getContentNow(); msg.textContent = `Done: ${r.made || 0} new items made.`; }) }, 'Get new content now')),
     h('div', { class: 'row', style: { marginTop: '8px', flexWrap: 'wrap' } },
-      h('button', { class: 'btn btn-ghost', onclick: busy('Restoring…', async () => { const at = await restoreFromDrive(); toast(`Restored the backup from ${new Date(at).toLocaleString()}`); import('../main.js').then((m) => m.render()); }) }, 'Restore from Drive'),
+      h('button', { class: 'btn btn-ghost', onclick: showBackups }, 'Restore from Drive…'),
       h('button', { class: 'btn btn-ghost', onclick: () => { saveSettings({ backend: null }); state.sync.user = null; state.sync.name = null; import('../main.js').then((m) => m.render()); } }, 'Disconnect')),
+    picker,
     h('p', { class: 'tiny muted', style: { marginTop: '10px' } }, 'On the free Gemini tier, Google may use what is sent to improve its products. Only learning content is sent, never your progress.'));
   return card;
 }

@@ -27,7 +27,7 @@
  *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 6;
+var VERSION = 7;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {
@@ -72,8 +72,8 @@ function userForToken(token) {
 function route(body, user) {
   switch (body.action) {
     case 'ping': return { ok: true, version: VERSION, user: user, name: displayName(user), ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
-    case 'backup.save': return { ok: true, savedAt: saveBackup(body.data, user) };
-    case 'backup.load': return Object.assign({ ok: true }, loadBackup(user));
+    case 'backup.save': return Object.assign({ ok: true }, saveBackup(body.data, user, !!body.force));
+    case 'backup.load': return Object.assign({ ok: true }, loadBackup(user, body.name));
     case 'backup.list': return { ok: true, backups: listBackups(user) };
     case 'queue.add': return { ok: true, queued: addToQueue(body.requests || [], user) };
     case 'content.since': return Object.assign({ ok: true }, batchesSince(Number(body.after) || 0, 10));

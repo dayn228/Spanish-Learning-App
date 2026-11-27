@@ -48,7 +48,7 @@ export function syncSoon(delay = 4000) {
   syncSoon.t = setTimeout(() => syncNow().catch(() => {}), delay);
 }
 
-export async function syncNow({ forceBackup = false } = {}) {
+export async function syncNow({ forceBackup = false, overwrite = false } = {}) {
   if (!isConnected() || (typeof navigator !== 'undefined' && navigator.onLine === false)) return null;
   if (running) return running;
   running = (async () => {
@@ -90,10 +90,16 @@ export async function syncNow({ forceBackup = false } = {}) {
       // 3. Backup.
       const studiedSince = Object.values(state.log).reduce((a, b) => a + b, 0) !== s.answersAtBackup;
       if (forceBackup || !s.lastBackup || (studiedSince && Date.now() - s.lastBackup > 60 * 1000) || Date.now() - s.lastBackup > BACKUP_EVERY_MS) {
-        await call('backup.save', { data: JSON.parse(exportBackup()) });
-        s.lastBackup = Date.now();
-        s.answersAtBackup = Object.values(state.log).reduce((a, b) => a + b, 0);
-        report.backedUp = true;
+        const r = await call('backup.save', { data: JSON.parse(exportBackup()), force: overwrite });
+        if (r.held) {
+          // Drive has much more progress than this phone: don't overwrite it, ask instead (You screen).
+          s.held = { driveSavedAt: r.driveSavedAt, driveProgress: r.driveProgress, phoneProgress: r.phoneProgress };
+        } else {
+          s.held = null;
+          s.lastBackup = Date.now();
+          s.answersAtBackup = Object.values(state.log).reduce((a, b) => a + b, 0);
+          report.backedUp = true;
+        }
       }
       s.lastSync = Date.now();
       s.lastError = null;
@@ -176,11 +182,33 @@ export function reportItem(kind, item, reason, unitId) {
 
 /* ---------- Restore and on-demand content ---------- */
 
-export async function restoreFromDrive() {
-  const r = await call('backup.load');
+/** Restore the newest Drive backup, or a daily copy by file name (backup-2026-11-26.json). */
+export async function restoreFromDrive(name) {
+  const r = await call('backup.load', name ? { name } : {});
   if (!r.data) throw new Error('There is no backup in Drive yet.');
   await importBackup(JSON.stringify(r.data));
+  state.sync.held = null;
+  saveSync();
   return r.savedAt;
+}
+
+/** The backups in Drive, newest first: [{ name, savedAt, label }]. */
+export async function listDriveBackups() {
+  const r = await call('backup.list');
+  return (r.backups || [])
+    .filter((b) => b.name === 'latest.json' || /^backup-\d{4}-\d{2}-\d{2}\.json$/.test(b.name))
+    .map((b) => ({ ...b, label: b.name === 'latest.json' ? 'Newest' : new Date(b.name.slice(7, 17) + 'T12:00').toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' }) }));
+}
+
+/** Same measure as the backend: cards seen plus answers logged. */
+export function progressOf(data) {
+  if (!data) return 0;
+  return Object.keys(data.cards || {}).length + Object.values(data.log || {}).reduce((a, b) => a + (Number(b) || 0), 0);
+}
+
+/** Overwrite Drive with this phone's progress (after the learner confirmed it). */
+export async function keepPhoneProgress() {
+  await syncNow({ forceBackup: true, overwrite: true });
 }
 
 /** Ask the backend to run the nightly job now, then download the result. */

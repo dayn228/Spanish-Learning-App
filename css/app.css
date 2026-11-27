@@ -301,3 +301,10 @@ p { margin: 0; }
 .row-gap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 .card label.small { display: flex; flex-direction: column; gap: 6px; color: var(--muted); }
 input[type="range"] { width: 100%; accent-color: var(--clay); }
+
+/* Backup warnings and the list of Drive backups */
+.notice { border-radius: 16px; background: var(--bad-bg, #FBEAE7); color: var(--slate); padding: 14px 16px; margin-bottom: 14px; }
+.notice b { display: block; margin-bottom: 4px; }
+.backup-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.backup-list p { width: 100%; margin: 0; }
+.backup-opt { border: 0.5px solid var(--line-strong); }

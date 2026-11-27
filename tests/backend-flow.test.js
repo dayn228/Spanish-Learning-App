@@ -71,6 +71,20 @@ test('backup round trip', () => {
   assert.deepEqual(l.data.cards, { a: 1 });
 });
 
+test('a reset phone cannot overwrite a bigger Drive backup by accident', () => {
+  const b = makeBackend([]);
+  const cards = Object.fromEntries(Array.from({ length: 40 }, (_, i) => ['w' + i, { i }]));
+  assert.ok(b.post({ token: 'secret', action: 'backup.save', data: { app: 'mi-espanol', cards, log: { '2026-11-26': 30 } } }).savedAt);
+  const held = b.post({ token: 'secret', action: 'backup.save', data: { app: 'mi-espanol', cards: {}, log: {} } });
+  assert.equal(held.held, true);
+  assert.equal(held.driveProgress, 70);
+  assert.equal(Object.keys(b.post({ token: 'secret', action: 'backup.load' }).data.cards).length, 40);
+  const forced = b.post({ token: 'secret', action: 'backup.save', force: true, data: { app: 'mi-espanol', cards: {}, log: {} } });
+  assert.ok(forced.savedAt);
+  const name = b.post({ token: 'secret', action: 'backup.list' }).backups.find((x) => x.name.startsWith('backup-')).name;
+  assert.ok(b.post({ token: 'secret', action: 'backup.load', name }).data);
+});
+
 test('queue → nightly → content.since', () => {
   const exercises = { exercises: [
     { type: 'gap', q: 'Yo ___ en casa.', a: 'estoy', tags: ['estar-forms'] },

@@ -43,9 +43,26 @@ function backupFolder(user) {
   return subFolder(!user || user === 'owner' ? 'backups' : 'backups-' + user);
 }
 
-function saveBackup(data, user) {
+/* How much study a backup holds: cards seen plus answers logged. */
+function progressOf(data) {
+  if (!data) return 0;
+  var n = Object.keys(data.cards || {}).length;
+  Object.keys(data.log || {}).forEach(function (d) { n += Number(data.log[d]) || 0; });
+  return n;
+}
+
+/*
+  A phone that was reset (or a new phone) has almost nothing in it. Its backup must not
+  replace a much bigger one in Drive by accident, so it is held back unless the app says force.
+*/
+function saveBackup(data, user, force) {
   if (!data || data.app !== 'mi-espanol') throw new Error('Not a Mi Español backup.');
   var folder = backupFolder(user);
+  var existing = readJson(folder, 'latest.json', null);
+  if (!force && existing) {
+    var had = progressOf(existing.data), now = progressOf(data);
+    if (had >= 20 && now < had * 0.5) return { held: true, driveSavedAt: existing.savedAt, driveProgress: had, phoneProgress: now };
+  }
   var savedAt = new Date().toISOString();
   var payload = { savedAt: savedAt, data: data };
   writeJson(folder, 'latest.json', payload);
@@ -55,11 +72,12 @@ function saveBackup(data, user) {
   while (it.hasNext()) { var f = it.next(); if (/^backup-\d{4}-\d{2}-\d{2}\.json$/.test(f.getName())) dated.push(f); }
   dated.sort(function (a, b) { return a.getName() < b.getName() ? 1 : -1; });
   dated.slice(14).forEach(function (f) { f.setTrashed(true); });
-  return savedAt;
+  return { savedAt: savedAt };
 }
 
-function loadBackup(user) {
-  var b = readJson(backupFolder(user), 'latest.json', null);
+function loadBackup(user, name) {
+  var file = /^backup-\d{4}-\d{2}-\d{2}\.json$/.test(name || '') ? name : 'latest.json';
+  var b = readJson(backupFolder(user), file, null);
   return b ? { data: b.data, savedAt: b.savedAt } : { data: null, savedAt: null };
 }
 
