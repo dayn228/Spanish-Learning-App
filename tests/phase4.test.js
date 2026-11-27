@@ -74,3 +74,14 @@ test('backups never contain the backend token, and restoring keeps this phone\'s
   await importBackup(JSON.stringify(evil));
   assert.equal(state.settings.backend.url, 'https://x/exec');
 });
+
+test('background photo: accent picks the most colourful hue', async () => {
+  const { pickAccent } = await import('../js/backdrop.js');
+  const px = (r, g, b, n) => Array.from({ length: n }, () => [r, g, b, 255]).flat();
+  const data = Uint8ClampedArray.from([...px(230, 90, 150, 300), ...px(40, 40, 40, 900), ...px(240, 240, 240, 500)]);
+  const hex = pickAccent(data);
+  assert.match(hex, /^#[0-9a-f]{6}$/);
+  const r = parseInt(hex.slice(1, 3), 16), b = parseInt(hex.slice(5, 7), 16), g = parseInt(hex.slice(3, 5), 16);
+  assert.ok(r > g && b > g, 'pink stays pink');
+  assert.equal(pickAccent(Uint8ClampedArray.from(px(128, 128, 128, 500))), null);
+});

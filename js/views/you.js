@@ -6,6 +6,7 @@ import { stage } from '../srs.js';
 import { displayStreak } from '../streak.js';
 import { dayKey, addDays } from '../dates.js';
 import { THEMES, applyTheme } from '../theme.js';
+import { loadPhoto, savePhoto, photoFromFile } from '../backdrop.js';
 import { isConnected, testConnection, syncNow, restoreFromDrive, getContentNow } from '../sync.js';
 
 export function youView() {
@@ -194,5 +195,41 @@ function appearance() {
     },
       h('span', { class: 'sw', 'aria-hidden': 'true' }, t.swatch.map((c) => h('i', { style: { background: c } }))),
       h('b', {}, t.name),
-      h('small', {}, t.note)))));
+      h('small', {}, t.note)))),
+    photoCard());
+}
+
+function photoCard() {
+  const photo = loadPhoto();
+  const msg = h('p', { class: 'small muted', role: 'status' });
+  const file = h('input', { type: 'file', accept: 'image/*', style: { display: 'none' } });
+  const rerender = () => import('../main.js').then((m) => m.render());
+  file.addEventListener('change', async () => {
+    if (!file.files[0]) return;
+    msg.textContent = 'Preparing the photo…';
+    try { savePhoto(await photoFromFile(file.files[0])); rerender(); }
+    catch (e) { msg.textContent = e.message; }
+  });
+  const body = [
+    h('h3', {}, 'Background photo'),
+    h('p', { class: 'small muted' }, 'Pick any picture from your phone. It stays on this phone only: it is not uploaded or backed up.'),
+    file,
+  ];
+  if (!photo) {
+    body.push(h('button', { class: 'btn btn-ghost', onclick: () => file.click() }, 'Choose a photo'));
+  } else {
+    const veil = h('input', { type: 'range', min: '0.35', max: '0.9', step: '0.05', value: String(photo.veil ?? 0.72), 'aria-label': 'How much the photo shows' });
+    veil.addEventListener('input', () => savePhoto({ ...loadPhoto(), veil: Number(veil.value) }));
+    const match = h('input', { type: 'checkbox', class: 'switch', checked: photo.matchAccent !== false, disabled: !photo.accent });
+    match.addEventListener('change', () => savePhoto({ ...loadPhoto(), matchAccent: match.checked }));
+    body.push(
+      h('div', { class: 'photo-preview', style: { backgroundImage: `url("${photo.src}")` } }),
+      h('label', { class: 'small' }, 'Photo shows more ↔ text stands out more', veil),
+      h('label', { class: 'row-between' }, h('span', {}, photo.accent ? 'Accent colour from the photo' : 'No clear colour in this photo'), match),
+      h('div', { class: 'row-gap' },
+        h('button', { class: 'btn btn-ghost', onclick: () => file.click() }, 'Change photo'),
+        h('button', { class: 'btn btn-ghost', onclick: () => { savePhoto(null); rerender(); } }, 'Remove')));
+  }
+  body.push(msg);
+  return h('div', { class: 'card', style: { marginTop: '14px' } }, ...body);
 }

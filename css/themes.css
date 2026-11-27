@@ -101,3 +101,16 @@ html.theme-fade, html.theme-fade body, html.theme-fade body * {
 /* Dark themes: a little softer shadows and switch knobs. */
 [data-theme="charcoal"] .switch::after, [data-theme="midnight"] .switch::after, [data-theme="swiftie"] .switch::after { background: var(--slate); }
 [data-theme="charcoal"] .switch:checked::after, [data-theme="midnight"] .switch:checked::after, [data-theme="swiftie"] .switch:checked::after { background: var(--ivory); }
+
+/* Your own background photo (js/backdrop.js): the picture, with a veil in the page colour on top. */
+#backdrop {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-size: cover; background-position: center;
+}
+#backdrop::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--ivory); opacity: var(--veil, 0.72);
+  transition: background-color 0.9s ease;
+}
+html.has-photo body::before { display: none; }
+html.has-photo .nav { backdrop-filter: blur(10px); }

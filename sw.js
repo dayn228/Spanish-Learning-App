@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = '19a5d35eef';
+const VERSION = 'e9ba0b1144';
 const FILES = [
   "./",
   "./css/app.css",
@@ -73,6 +73,7 @@ const FILES = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./index.html",
+  "./js/backdrop.js",
   "./js/check.js",
   "./js/content.js",
   "./js/dates.js",
