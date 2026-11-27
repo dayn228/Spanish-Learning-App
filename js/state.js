@@ -130,7 +130,9 @@ function withoutSecrets(settings) {
 /** Replaces all progress with the backup. Throws a readable error if the file is wrong. */
 export async function importBackup(text) {
   let data;
-  try { data = JSON.parse(text); } catch { throw new Error('This file is not a Mi Español backup.'); }
+  try { data = JSON.parse(String(text).replace(/^\uFEFF/, '')); } catch { throw new Error('This file is not a Mi Español backup.'); }
+  // Drive backups wrap the progress: { savedAt, data: { app: 'mi-espanol', … } }.
+  if (data && data.app !== 'mi-espanol' && data.data && data.data.app === 'mi-espanol') data = data.data;
   if (data.app !== 'mi-espanol' || typeof data.cards !== 'object') throw new Error('This file is not a Mi Español backup.');
   state.cards = data.cards || {};
   state.streak = data.streak || newStreak();

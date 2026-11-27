@@ -85,3 +85,8 @@ test('background photo: accent picks the most colourful hue', async () => {
   assert.ok(r > g && b > g, 'pink stays pink');
   assert.equal(pickAccent(Uint8ClampedArray.from(px(128, 128, 128, 500))), null);
 });
+
+test('a backup file downloaded from Drive (wrapped in savedAt/data) can be restored', async () => {
+  const src = (await import('node:fs')).readFileSync(new URL('../js/state.js', import.meta.url), 'utf8');
+  assert.match(src, /data\.data && data\.data\.app === 'mi-espanol'/);
+});

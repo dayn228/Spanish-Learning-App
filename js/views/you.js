@@ -70,7 +70,7 @@ function stat(n, label) {
 
 function backupCard() {
   const fileInput = h('input', {
-    type: 'file', accept: 'application/json,.json', style: { display: 'none' },
+    type: 'file', accept: '.json,application/json,text/plain', style: { display: 'none' },
     onchange: async (e) => {
       const file = e.target.files[0];
       if (!file) return;
