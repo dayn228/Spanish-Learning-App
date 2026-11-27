@@ -23,6 +23,7 @@ backs progress up to Drive and makes new content overnight with Gemini.
 | Deploy, manage users, backups, fix problems | [docs/OPERATIONS.md](docs/OPERATIONS.md) |
 | Set up the backend from scratch | [docs/SETUP-BACKEND.md](docs/SETUP-BACKEND.md) |
 | See what was built and what is next | [docs/ROADMAP.md](docs/ROADMAP.md) |
+| Make content with ChatGPT / run a review | [docs/prompts/](docs/prompts/) |
 
 ## Rules (keep these)
 

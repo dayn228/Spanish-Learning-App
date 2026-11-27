@@ -7,6 +7,7 @@ import { displayStreak } from '../streak.js';
 import { dayKey, addDays } from '../dates.js';
 import { THEMES, applyTheme } from '../theme.js';
 import { loadPhoto, savePhoto, photoFromFile } from '../backdrop.js';
+import { parsePasted, checkPack } from '../importpack.js';
 import { isConnected, testConnection, syncNow, restoreFromDrive, getContentNow, listDriveBackups, progressOf, keepPhoneProgress, call } from '../sync.js';
 
 export function youView() {
@@ -52,6 +53,7 @@ export function youView() {
 
     appearance(),
     cloudCard(),
+    isConnected() ? importCard() : null,
     backupCard(),
 
     isStandalone ? null : h('div', { class: 'panel', style: { marginTop: '12px' } },
@@ -66,6 +68,45 @@ function confirmKeep() {
 
 function stat(n, label) {
   return h('div', {}, h('b', {}, String(n)), h('span', { class: 'small muted' }, label));
+}
+
+/* Paste exercises, words or texts made in ChatGPT (prompt: docs/prompts/chatgpt-content.md). */
+function importCard() {
+  const box = h('textarea', { class: 'paste-box', rows: '5', placeholder: 'Paste ChatGPT\'s answer here (the JSON)', 'aria-label': 'Content pack' });
+  const everyone = h('input', { type: 'checkbox', class: 'switch', id: 'imp-all' });
+  const out = h('div', { role: 'status' });
+  let checked = null;
+  const check = () => {
+    checked = null;
+    try {
+      const r = checkPack(parsePasted(box.value), state.content.units);
+      const total = r.counts.exercises + r.counts.words + r.counts.texts;
+      out.replaceChildren(
+        h('p', { class: 'small' }, `Ready: ${r.counts.exercises} exercises, ${r.counts.words} words, ${r.counts.texts} texts.`),
+        r.problems.length ? h('details', { class: 'small muted' }, h('summary', {}, `${r.problems.length} left out`), h('ul', {}, r.problems.slice(0, 30).map((x) => h('li', {}, x)))) : null,
+        total ? h('button', { class: 'btn btn-primary', onclick: add }, 'Add to the app') : null);
+      checked = total ? r.pack : null;
+    } catch (e) { out.replaceChildren(h('p', { class: 'small' }, e.message)); }
+  };
+  const add = async (e) => {
+    if (!checked) return;
+    const btn = e.currentTarget; btn.disabled = true; btn.textContent = 'Adding…';
+    try {
+      const r = await call('content.add', { pack: checked, forEveryone: everyone.checked });
+      const note = `Added ${r.added.exercises} exercises, ${r.added.words} words, ${r.added.texts} texts`;
+      box.value = ''; checked = null;
+      out.replaceChildren(h('p', { class: 'small' }, `${note}. They are in Practice, Topics and Read now.`));
+      toast(note);            // the sync below redraws this screen
+      await syncNow();
+    } catch (err) { btn.disabled = false; btn.textContent = 'Add to the app'; out.append(h('p', { class: 'small' }, err.message)); }
+  };
+  return h('div', { class: 'card', style: { marginTop: '14px' } },
+    h('h3', {}, 'Add content from ChatGPT'),
+    h('p', { class: 'small muted' }, 'Paste a content pack made with the prompt in the app\'s docs. Everything is checked first; anything broken is left out.'),
+    box,
+    h('label', { class: 'row-between', for: 'imp-all' }, h('span', {}, 'Also for the other learner'), everyone),
+    h('button', { class: 'btn btn-ghost', onclick: check }, 'Check'),
+    out);
 }
 
 function backupCard() {

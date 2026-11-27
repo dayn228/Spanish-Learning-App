@@ -1732,6 +1732,410 @@
   "cielo": [
    "el cielo",
    "sky"
+  ],
+  "estadounidense": [
+   "estadounidense",
+   "American (US)"
+  ],
+  "emitió": [
+   "emitir",
+   "aired, broadcast"
+  ],
+  "emitida": [
+   "emitir",
+   "broadcast"
+  ],
+  "cadena": [
+   "la cadena",
+   "network, chain"
+  ],
+  "canal": [
+   "el canal",
+   "channel"
+  ],
+  "temporadas": [
+   "la temporada",
+   "seasons"
+  ],
+  "transcurre": [
+   "transcurrir",
+   "takes place"
+  ],
+  "historia": [
+   "la historia",
+   "history, story"
+  ],
+  "televisión": [
+   "la televisión",
+   "television"
+  ],
+  "protagonista": [
+   "el / la protagonista",
+   "main character"
+  ],
+  "creada": [
+   "crear",
+   "created"
+  ],
+  "trabaja": [
+   "trabajar",
+   "works"
+  ],
+  "sabe": [
+   "saber",
+   "knows"
+  ],
+  "propio": [
+   "propio",
+   "own / himself"
+  ],
+  "policía": [
+   "la policía",
+   "police / police officer"
+  ],
+  "crimen": [
+   "el crimen",
+   "crime, murder"
+  ],
+  "asesino": [
+   "el asesino",
+   "killer"
+  ],
+  "agente": [
+   "el / la agente",
+   "agent, officer"
+  ],
+  "chico": [
+   "el chico",
+   "boy, young man"
+  ],
+  "relación": [
+   "la relación",
+   "relationship"
+  ],
+  "reglas": [
+   "la regla",
+   "rules"
+  ],
+  "gusta": [
+   "gustar",
+   "likes, pleases"
+  ],
+  "idea": [
+   "la idea",
+   "idea"
+  ],
+  "miedo": [
+   "el miedo",
+   "fear"
+  ],
+  "usar": [
+   "usar",
+   "to use"
+  ],
+  "convertir": [
+   "convertir",
+   "to turn into"
+  ],
+  "convierte": [
+   "convertirse",
+   "(se convierte) becomes"
+  ],
+  "empezó": [
+   "empezar",
+   "started"
+  ],
+  "empieza": [
+   "empezar",
+   "starts"
+  ],
+  "mató": [
+   "matar",
+   "killed"
+  ],
+  "matar": [
+   "matar",
+   "to kill"
+  ],
+  "sangre": [
+   "la sangre",
+   "blood"
+  ],
+  "vida": [
+   "la vida",
+   "life"
+  ],
+  "diaria": [
+   "diario",
+   "daily"
+  ],
+  "voz": [
+   "la voz",
+   "voice"
+  ],
+  "lado": [
+   "el lado",
+   "side (a su lado = beside him)"
+  ],
+  "secreto": [
+   "el secreto / secreto",
+   "secret"
+  ],
+  "secreta": [
+   "secreto",
+   "secret"
+  ],
+  "enorme": [
+   "enorme",
+   "huge"
+  ],
+  "interesante": [
+   "interesante",
+   "interesting"
+  ],
+  "criminal": [
+   "criminal",
+   "criminal"
+  ],
+  "criminales": [
+   "el criminal",
+   "criminals"
+  ],
+  "aprender": [
+   "aprender",
+   "to learn"
+  ],
+  "buena": [
+   "bueno",
+   "good"
+  ],
+  "camino": [
+   "el camino",
+   "way, path"
+  ],
+  "mucha": [
+   "mucho",
+   "a lot of, much"
+  ],
+  "atención": [
+   "la atención",
+   "attention"
+  ],
+  "famoso": [
+   "famoso",
+   "famous"
+  ],
+  "llamado": [
+   "llamado",
+   "called"
+  ],
+  "agentes": [
+   "el agente",
+   "agents"
+  ],
+  "últimas": [
+   "último",
+   "last"
+  ],
+  "unidos": [
+   "unido",
+   "united (Estados Unidos = US)"
+  ],
+  "méxico": [
+   "México",
+   "Mexico (Nuevo México = New Mexico)"
+  ],
+  "humor": [
+   "el humor",
+   "humour"
+  ],
+  "popular": [
+   "popular",
+   "popular"
+  ],
+  "detalles": [
+   "el detalle",
+   "details"
+  ],
+  "vista": [
+   "visto",
+   "watched, seen"
+  ],
+  "visto": [
+   "ver",
+   "seen"
+  ],
+  "has": [
+   "haber",
+   "you have (+ participle)"
+  ],
+  "ven": [
+   "ver",
+   "see"
+  ],
+  "oye": [
+   "oír",
+   "is heard (se oye)"
+  ],
+  "podemos": [
+   "poder",
+   "we can"
+  ],
+  "sentir": [
+   "sentir",
+   "to feel"
+  ],
+  "siente": [
+   "sentir",
+   "feels"
+  ],
+  "trae": [
+   "traer",
+   "brings"
+  ],
+  "demás": [
+   "los demás",
+   "other people"
+  ],
+  "existen": [
+   "existir",
+   "exist"
+  ],
+  "pasan": [
+   "pasar",
+   "move on, pass"
+  ],
+  "dio": [
+   "dar",
+   "gave (dio lugar a = led to)"
+  ],
+  "ganó": [
+   "ganar",
+   "won"
+  ],
+  "película": [
+   "la película",
+   "film"
+  ],
+  "abogado": [
+   "el abogado",
+   "lawyer"
+  ],
+  "dueño": [
+   "el dueño",
+   "owner"
+  ],
+  "restaurantes": [
+   "el restaurante",
+   "restaurants"
+  ],
+  "negocio": [
+   "el negocio",
+   "business"
+  ],
+  "cáncer": [
+   "el cáncer",
+   "cancer"
+  ],
+  "pulmón": [
+   "el pulmón",
+   "lung"
+  ],
+  "embarazada": [
+   "embarazada",
+   "pregnant"
+  ],
+  "decisión": [
+   "la decisión",
+   "decision"
+  ],
+  "toma": [
+   "tomar",
+   "takes, makes (a decision)"
+  ],
+  "droga": [
+   "la droga",
+   "drugs"
+  ],
+  "química": [
+   "la química",
+   "chemistry"
+  ],
+  "profesor": [
+   "el profesor",
+   "teacher"
+  ],
+  "instituto": [
+   "el instituto",
+   "secondary school"
+  ],
+  "tranquilo": [
+   "tranquilo",
+   "quiet, calm"
+  ],
+  "alumno": [
+   "el alumno",
+   "student"
+  ],
+  "cuñado": [
+   "el cuñado",
+   "brother-in-law"
+  ],
+  "sospechosos": [
+   "el sospechoso",
+   "suspects"
+  ],
+  "pruebas": [
+   "la prueba",
+   "evidence"
+  ],
+  "víctima": [
+   "la víctima",
+   "victim"
+  ],
+  "escena": [
+   "la escena",
+   "scene"
+  ],
+  "manchas": [
+   "la mancha",
+   "stains"
+  ],
+  "forense": [
+   "forense",
+   "forensic"
+  ],
+  "analista": [
+   "el / la analista",
+   "analyst"
+  ],
+  "código": [
+   "el código",
+   "code"
+  ],
+  "justicia": [
+   "la justicia",
+   "justice"
+  ],
+  "vidente": [
+   "el / la vidente",
+   "psychic"
+  ],
+  "fraude": [
+   "el fraude",
+   "fraud"
+  ],
+  "trucos": [
+   "el truco",
+   "tricks"
+  ],
+  "episodios": [
+   "el episodio",
+   "episodes"
+  ],
+  "capítulo": [
+   "el capítulo",
+   "episode, chapter"
   ]
  }
 }

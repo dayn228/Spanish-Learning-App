@@ -26,7 +26,7 @@ const problems = [];
 // ---- 1. Check word lists ----
 const order = ['basics', 'verbs', 'connectors', 'people', 'time', 'food', 'home', 'travel', 'work', 'describing', 'shopping', 'health',
   'construction', 'finance', 'economics', 'politics', 'news',
-  'music', 'fashion', 'beauty', 'sport', 'selfcare', 'trips', 'books'];
+  'music', 'fashion', 'beauty', 'sport', 'selfcare', 'trips', 'books', 'series'];
 const topicFiles = [...readdirSync(join(root, 'data/core')).map((f) => 'core/' + f), ...readdirSync(join(root, 'data/packs')).map((f) => 'packs/' + f)]
   .filter((f) => f.endsWith('.json'));
 

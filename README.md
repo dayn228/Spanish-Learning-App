@@ -21,12 +21,12 @@ JavaScript; no framework.
 
 ## What is in it
 
-- **Words:** 24 topics, 921 words (everyday A1; construction, finance, economics, politics,
-  news; music, fashion, beauty, sport, self-care, trips, books). Sessions of 5–60 minutes,
+- **Words:** 25 topics, 961 words (everyday A1; construction, finance, economics, politics,
+  news; music, fashion, beauty, sport, self-care, trips, books; TV series). Sessions of 5–60 minutes,
   reviews first, 70% from focus topics. Forgiving streak with freezes.
 - **Grammar:** 14 units (A1–B1), 393 exercises, mastery proportional to accuracy, mistakes
   practised more. Verb trainer: present, preterite, imperfect.
-- **Listening and reading:** dictation, which-word, sound pairs; 12 texts A1–B2 with word,
+- **Listening and reading:** dictation, which-word, sound pairs; 15 texts A1–B2 with word,
   sentence and full translations and questions.
 - **Backend (optional):** Drive backups per learner, AI exercises, words and texts set in
   each learner's interests, real news, the owner's own articles via a Drive inbox.

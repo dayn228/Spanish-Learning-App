@@ -1,0 +1,398 @@
+{
+ "id": "t15",
+ "title": "El mentalista: observar en lugar de adivinar",
+ "en": "The Mentalist: observing instead of guessing",
+ "level": "B1",
+ "topic": "series",
+ "note": "Written for the app, without spoilers of the ending. Facts from Wikipedia.",
+ "source": {
+  "name": "Wikipedia (El mentalista)",
+  "url": "https://es.wikipedia.org/wiki/The_Mentalist"
+ },
+ "paragraphs": [
+  [
+   [
+    "El mentalista es una serie policíaca estadounidense creada por Bruno Heller y emitida por la cadena CBS desde 2008 hasta 2015, a lo largo de siete temporadas.",
+    "The Mentalist is an American police series created by Bruno Heller and broadcast by the CBS network from 2008 to 2015, over seven seasons."
+   ],
+   [
+    "En España se hizo muy popular por su mezcla de crímenes, humor y un protagonista con mucho encanto.",
+    "In Spain it became very popular for its mix of crimes, humour and a very charming main character."
+   ]
+  ],
+  [
+   [
+    "Patrick Jane, el protagonista, era antes un famoso «vidente» de la televisión.",
+    "Patrick Jane, the main character, used to be a famous television «psychic»."
+   ],
+   [
+    "Decía que podía hablar con los muertos, pero en realidad era un fraude: solo observaba a la gente con mucha atención y usaba trucos psicológicos.",
+    "He said he could talk to the dead, but in reality he was a fraud: he just watched people very closely and used psychological tricks."
+   ],
+   [
+    "Un día se burló en un programa de un asesino en serie llamado John el Rojo.",
+    "One day, on a show, he mocked a serial killer called Red John."
+   ],
+   [
+    "El asesino se vengó de la forma más cruel: mató a su mujer y a su hija.",
+    "The killer took revenge in the cruellest way: he killed his wife and his daughter."
+   ]
+  ],
+  [
+   [
+    "Después de aquella tragedia, Jane abandonó su carrera y empezó a trabajar como asesor para el CBI, la oficina de investigación de California, en Sacramento.",
+    "After that tragedy, Jane gave up his career and started working as a consultant for the CBI, the California Bureau of Investigation, in Sacramento."
+   ],
+   [
+    "Allí utiliza sus habilidades para resolver crímenes: se fija en los detalles, provoca a los sospechosos y a veces los hipnotiza.",
+    "There he uses his skills to solve crimes: he notices details, provokes the suspects and sometimes hypnotises them."
+   ],
+   [
+    "Su verdadero objetivo, sin embargo, es encontrar a John el Rojo, cuyo símbolo es una cara sonriente pintada con sangre.",
+    "His real goal, however, is to find Red John, whose symbol is a smiley face painted in blood."
+   ]
+  ],
+  [
+   [
+    "La jefa del equipo es la agente Teresa Lisbon, una mujer seria que intenta respetar siempre las normas.",
+    "The head of the team is agent Teresa Lisbon, a serious woman who always tries to follow the rules."
+   ],
+   [
+    "Jane, en cambio, se salta las reglas cuando le conviene, y eso provoca discusiones divertidas y muchos problemas.",
+    "Jane, on the other hand, breaks the rules when it suits him, which causes funny arguments and lots of trouble."
+   ],
+   [
+    "Con el tiempo, la relación entre los dos se convierte en el corazón de la serie.",
+    "Over time, the relationship between the two becomes the heart of the series."
+   ],
+   [
+    "Completan el equipo los agentes Cho, Rigsby y Van Pelt, cada uno con su propio estilo.",
+    "Agents Cho, Rigsby and Van Pelt complete the team, each with their own style."
+   ]
+  ],
+  [
+   [
+    "En las últimas temporadas, Jane y Lisbon pasan a trabajar con el FBI.",
+    "In the last seasons, Jane and Lisbon move on to work with the FBI."
+   ],
+   [
+    "La gran lección de la serie es que no existen los poderes mágicos: lo que parece adivinación es casi siempre observación, paciencia y conocimiento de las personas.",
+    "The big lesson of the series is that magic powers don't exist: what looks like mind-reading is almost always observation, patience and knowledge of people."
+   ],
+   [
+    "Quizá por eso, después de verla, mucha gente empieza a fijarse más en cómo se comportan los demás.",
+    "Maybe that's why, after watching it, many people start paying more attention to how others behave."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿A qué se dedicaba Patrick Jane antes de trabajar con la policía?",
+   "options": [
+    "Era un falso vidente de la televisión.",
+    "Era médico.",
+    "Era profesor."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué busca Jane a John el Rojo?",
+   "options": [
+    "Porque mató a su mujer y a su hija.",
+    "Porque le robó dinero.",
+    "Porque se lo pide el FBI."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Qué es el CBI?",
+   "options": [
+    "La oficina de investigación de California.",
+    "Un canal de televisión.",
+    "Un hospital."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cómo es Teresa Lisbon?",
+   "options": [
+    "Seria y respeta las normas.",
+    "Divertida y desordenada.",
+    "Una vidente."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cuál es el símbolo de John el Rojo?",
+   "options": [
+    "Una cara sonriente pintada con sangre.",
+    "Una estrella roja.",
+    "Una carta."
+   ],
+   "a": 0
+  },
+  {
+   "q": "Según el texto, ¿cuál es la gran lección de la serie?",
+   "options": [
+    "Lo que parece adivinación es observación.",
+    "Los poderes mágicos existen.",
+    "La policía siempre tiene razón."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "bruno": [
+   "Bruno Heller",
+   "(creator)"
+  ],
+  "heller": [
+   "Bruno Heller",
+   "(creator)"
+  ],
+  "cbs": [
+   "CBS",
+   "(US TV network)"
+  ],
+  "patrick": [
+   "Patrick Jane",
+   "(main character)"
+  ],
+  "jane": [
+   "Patrick Jane",
+   "(main character)"
+  ],
+  "john": [
+   "John el Rojo",
+   "Red John (the killer)"
+  ],
+  "cbi": [
+   "el CBI",
+   "California Bureau of Investigation"
+  ],
+  "california": [
+   "California",
+   "California"
+  ],
+  "sacramento": [
+   "Sacramento",
+   "(capital of California)"
+  ],
+  "teresa": [
+   "Teresa Lisbon",
+   "(team leader)"
+  ],
+  "lisbon": [
+   "Teresa Lisbon",
+   "(team leader)"
+  ],
+  "cho": [
+   "Cho",
+   "(agent)"
+  ],
+  "rigsby": [
+   "Rigsby",
+   "(agent)"
+  ],
+  "pelt": [
+   "Van Pelt",
+   "(agent)"
+  ],
+  "fbi": [
+   "el FBI",
+   "FBI"
+  ],
+  "mentalista": [
+   "el mentalista",
+   "mentalist"
+  ],
+  "policíaca": [
+   "policíaco",
+   "police, crime (adj.)"
+  ],
+  "mezcla": [
+   "la mezcla",
+   "mix"
+  ],
+  "crímenes": [
+   "el crimen",
+   "crimes"
+  ],
+  "encanto": [
+   "el encanto",
+   "charm"
+  ],
+  "decía": [
+   "decir",
+   "said, used to say"
+  ],
+  "muertos": [
+   "el muerto",
+   "the dead"
+  ],
+  "observaba": [
+   "observar",
+   "watched, observed"
+  ],
+  "usaba": [
+   "usar",
+   "used"
+  ],
+  "psicológicos": [
+   "psicológico",
+   "psychological"
+  ],
+  "burló": [
+   "burlarse",
+   "(se burló de) mocked"
+  ],
+  "programa": [
+   "el programa",
+   "show, programme"
+  ],
+  "vengó": [
+   "vengarse",
+   "(se vengó) took revenge"
+  ],
+  "cruel": [
+   "cruel",
+   "cruel"
+  ],
+  "tragedia": [
+   "la tragedia",
+   "tragedy"
+  ],
+  "abandonó": [
+   "abandonar",
+   "gave up"
+  ],
+  "asesor": [
+   "el asesor",
+   "consultant"
+  ],
+  "utiliza": [
+   "utilizar",
+   "uses"
+  ],
+  "habilidades": [
+   "la habilidad",
+   "skills"
+  ],
+  "resolver": [
+   "resolver",
+   "to solve"
+  ],
+  "fija": [
+   "fijarse",
+   "(se fija en) notices"
+  ],
+  "provoca": [
+   "provocar",
+   "provokes, causes"
+  ],
+  "hipnotiza": [
+   "hipnotizar",
+   "hypnotises"
+  ],
+  "verdadero": [
+   "verdadero",
+   "real, true"
+  ],
+  "objetivo": [
+   "el objetivo",
+   "goal"
+  ],
+  "símbolo": [
+   "el símbolo",
+   "symbol"
+  ],
+  "sonriente": [
+   "sonriente",
+   "smiling (cara sonriente = smiley face)"
+  ],
+  "pintada": [
+   "pintar",
+   "painted"
+  ],
+  "jefa": [
+   "la jefa",
+   "boss, head"
+  ],
+  "seria": [
+   "serio",
+   "serious"
+  ],
+  "intenta": [
+   "intentar",
+   "tries"
+  ],
+  "respetar": [
+   "respetar",
+   "to respect, follow"
+  ],
+  "salta": [
+   "saltarse",
+   "(se salta) breaks, skips"
+  ],
+  "conviene": [
+   "convenir",
+   "suits"
+  ],
+  "discusiones": [
+   "la discusión",
+   "arguments"
+  ],
+  "divertidas": [
+   "divertido",
+   "funny, fun"
+  ],
+  "corazón": [
+   "el corazón",
+   "heart"
+  ],
+  "completan": [
+   "completar",
+   "complete"
+  ],
+  "estilo": [
+   "el estilo",
+   "style"
+  ],
+  "lección": [
+   "la lección",
+   "lesson"
+  ],
+  "mágicos": [
+   "mágico",
+   "magic"
+  ],
+  "adivinación": [
+   "la adivinación",
+   "mind-reading, guessing"
+  ],
+  "observación": [
+   "la observación",
+   "observation"
+  ],
+  "paciencia": [
+   "la paciencia",
+   "patience"
+  ],
+  "conocimiento": [
+   "el conocimiento",
+   "knowledge"
+  ],
+  "verla": [
+   "ver",
+   "to watch it"
+  ],
+  "fijarse": [
+   "fijarse",
+   "to pay attention"
+  ],
+  "comportan": [
+   "comportarse",
+   "behave"
+  ]
+ }
+}

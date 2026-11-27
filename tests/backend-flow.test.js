@@ -71,6 +71,25 @@ test('backup round trip', () => {
   assert.deepEqual(l.data.cards, { a: 1 });
 });
 
+test('content.add turns a pasted pack into batches for one learner or everyone', () => {
+  const b = makeBackend([]);
+  const pack = { format: 'mi-espanol-content-1',
+    exercises: [{ unit: 'u10', type: 'gap', q: 'Ayer ___.', a: 'llegué', tags: ['x'] }, { unit: 'u11', type: 'gap', q: 'Él ___.', a: 'tuvo', tags: ['x'] }],
+    words: [{ topic: 'Series', name: 'TV series', words: [['la trama', 'plot']] }],
+    texts: [{ title: 'Hola', level: 'A2', paragraphs: [[['Hola.', 'Hello.']]] }] };
+  const r = b.post({ token: 'secret', action: 'content.add', pack });
+  assert.equal(r.batches, 4);
+  assert.deepEqual(JSON.parse(JSON.stringify(r.added)), { exercises: 2, words: 1, texts: 1 });
+  const got = b.post({ token: 'secret', action: 'content.since', after: 0 }).batches;
+  assert.equal(got.find((x) => x.kind === 'words').meta.topicId, 'series');
+  assert.equal(got[0].meta.user, 'owner');
+  const all = b.post({ token: 'secret', action: 'content.add', forEveryone: true, pack: { format: 'mi-espanol-content-1', texts: pack.texts } });
+  assert.equal(all.batches, 1);
+  const bad = b.post({ token: 'secret', action: 'content.add', pack: { hello: 1 } });
+  assert.equal(bad.ok, false);
+  assert.match(bad.error, /format/);
+});
+
 test('a reset phone cannot overwrite a bigger Drive backup by accident', () => {
   const b = makeBackend([]);
   const cards = Object.fromEntries(Array.from({ length: 40 }, (_, i) => ['w' + i, { i }]));

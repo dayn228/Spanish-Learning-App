@@ -6,7 +6,7 @@
   the app opens online, and uses it from the launch after that.
 */
 
-const VERSION = 'db5b8d79bf';
+const VERSION = '3186c549a4';
 const FILES = [
   "./",
   "./css/app.css",
@@ -50,6 +50,7 @@ const FILES = [
   "./data/packs/news.json",
   "./data/packs/politics.json",
   "./data/packs/selfcare.json",
+  "./data/packs/series.json",
   "./data/packs/sport.json",
   "./data/packs/trips.json",
   "./data/reading/common.json",
@@ -66,6 +67,9 @@ const FILES = [
   "./data/reading/t10.json",
   "./data/reading/t11.json",
   "./data/reading/t12.json",
+  "./data/reading/t13.json",
+  "./data/reading/t14.json",
+  "./data/reading/t15.json",
   "./fonts/newsreader-latin-400-italic.woff2",
   "./fonts/newsreader-latin-400-normal.woff2",
   "./fonts/newsreader-latin-500-normal.woff2",
@@ -80,6 +84,7 @@ const FILES = [
   "./js/db.js",
   "./js/exercise.js",
   "./js/grammar.js",
+  "./js/importpack.js",
   "./js/listening.js",
   "./js/main.js",
   "./js/reading.js",

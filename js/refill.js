@@ -30,6 +30,7 @@ const TEXT_ABOUT = {
   sport: 'staying active: a first 10k race, gym and pilates classes, padel with friends, watching a match',
   selfcare: 'self-care and wellbeing: a slow Sunday, sleep, journaling, a spa weekend, setting boundaries at work',
   trips: 'holidays and short trips in Spain and Europe: flights, hotels, beaches, old towns, sunsets, getting lost',
+  series: 'TV series: talking about crime and drama series, watching in the original with subtitles, plots, characters and cliffhangers (describe only facts that are certain; no spoilers of endings, no quotes from scripts)',
   books: 'reading: a book club, a romance or fantasy novel, a cosy bookshop, a sequel and its adaptation',
 };
 

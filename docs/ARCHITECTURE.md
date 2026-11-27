@@ -68,6 +68,7 @@ Plain ES modules loaded by `index.html`. No framework: views build DOM with the 
 | `refill.js` | decides what to ask the backend for, and the learner's level estimate |
 | `sync.js` | backend calls: ping, requests, reports, new content, backups, restore |
 | `validate.js` | shared checks for words, exercises and texts (build and app) |
+| `importpack.js` | reads and checks content packs pasted from ChatGPT |
 | `theme.js` | theme list, apply with a fade |
 | `backdrop.js` | background photo kept on the phone, accent colour from the photo |
 | `speech.js` | Spanish text-to-speech (prefers an es-ES voice) |
@@ -142,6 +143,7 @@ Access is by token, not Google sign-in, because a home-screen app cannot send Go
 | `queue.add` | `requests[]` | `{ queued }` |
 | `content.since` | `after` (seq) | `{ batches, last }` (10 at a time) |
 | `report` | `item`, `reason` | `{ ok }` |
+| `content.add` | `pack`, `forEveryone?` | `{ batches, added: { exercises, words, texts } }` |
 | `status` | – | queue and last-run info |
 | `nightly.run` | – | runs the nightly job now (the "Get new content now" button) |
 

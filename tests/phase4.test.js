@@ -90,3 +90,21 @@ test('a backup file downloaded from Drive (wrapped in savedAt/data) can be resto
   const src = (await import('node:fs')).readFileSync(new URL('../js/state.js', import.meta.url), 'utf8');
   assert.match(src, /data\.data && data\.data\.app === 'mi-espanol'/);
 });
+
+test('content packs from ChatGPT: fences stripped, bad items dropped with reasons', async () => {
+  const { parsePasted, checkPack } = await import('../js/importpack.js');
+  const pasted = 'Here you go!\n```json\n' + JSON.stringify({
+    format: 'mi-espanol-content-1',
+    exercises: [
+      { unit: 'u10', type: 'gap', q: 'Ayer ___ tarde.', a: 'llegué', tags: ['spelling'] },
+      { unit: 'u99', type: 'gap', q: 'x ___', a: 'y', tags: ['t'] },
+      { unit: 'u10', type: 'choice', q: '¿?', options: ['a'], a: 3, tags: ['t'] },
+    ],
+    words: [{ topic: 'series', name: 'TV series', words: [['la trama', 'plot', 'La trama es buena.', 'The plot is good.', 'n'], ['', '']] }],
+    texts: [{ title: 'Hola', level: 'A2', paragraphs: [[['Hola.', 'Hello.']]], questions: [] }],
+  }) + '\n```\nEnjoy!';
+  const r = checkPack(parsePasted(pasted), [{ id: 'u10' }]);
+  assert.deepEqual(r.counts, { exercises: 1, words: 1, texts: 1 });
+  assert.equal(r.problems.length, 3);
+  assert.throws(() => parsePasted('no json here'), /No JSON/);
+});

@@ -217,3 +217,34 @@ function textToParagraphs(text) {
   return String(text || '').replace(/\r/g, '').split(/\n\s*\n|\n(?=[A-ZÁÉÍÓÚÑ«"¿¡—])/).map(function (p) { return p.replace(/\s+/g, ' ').trim(); })
     .filter(function (p) { return p.length >= 60 && !/cookies|suscr[ií]b|newsletter|todos los derechos|©/i.test(p); });
 }
+
+/*
+  Content made elsewhere (e.g. ChatGPT, see docs/prompts/chatgpt-content.md), pasted in the app.
+  Splits one pack into the same batches the nightly jobs make. The app has already checked
+  every item; this only shapes and caps it.
+    pack = { format: 'mi-espanol-content-1', exercises: [{ unit, ...exercise }],
+             words: [{ topic, name?, words: [[es, en, ex, exEn, pos]] }], texts: [text] }
+  forUser: a user id (only that learner gets it) or undefined (everyone).
+*/
+function splitPack(pack, forUser) {
+  if (!pack || !/^mi-espanol-content/.test(String(pack.format || ''))) throw new Error('Not a Mi Español content pack (format is missing).');
+  var out = [];
+  var meta = function (extra) { var m = { source: 'import' }; if (forUser) m.user = forUser; for (var k in extra) m[k] = extra[k]; return m; };
+  var byUnit = {};
+  (pack.exercises || []).slice(0, 400).forEach(function (ex) {
+    if (!ex || !/^u\d{2}$/.test(String(ex.unit || ''))) return;
+    var copy = {}; for (var k in ex) if (k !== 'unit') copy[k] = ex[k];
+    (byUnit[ex.unit] = byUnit[ex.unit] || []).push(copy);
+  });
+  Object.keys(byUnit).forEach(function (u) { out.push({ kind: 'exercises', meta: meta({ unitId: u }), items: byUnit[u] }); });
+  (pack.words || []).slice(0, 30).forEach(function (g) {
+    var id = String((g && g.topic) || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 30);
+    if (!id || !Array.isArray(g.words) || !g.words.length) return;
+    out.push({ kind: 'words', meta: meta({ topicId: id, topicName: String(g.name || id).slice(0, 60) }), items: g.words.slice(0, 200) });
+  });
+  (pack.texts || []).slice(0, 20).forEach(function (t) {
+    if (!t || !Array.isArray(t.paragraphs)) return;
+    out.push({ kind: 'texts', meta: meta({ topic: t.topic || 'news' }), items: [t] });
+  });
+  return out;
+}

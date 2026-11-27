@@ -27,7 +27,7 @@
  *   USERS                 set by addUser(): {"token": "name"}
  */
 
-var VERSION = 7;
+var VERSION = 8;
 var DEFAULT_MODEL = 'gemini-3.6-flash';
 
 function prop(name, fallback) {
@@ -73,6 +73,12 @@ function route(body, user) {
   switch (body.action) {
     case 'ping': return { ok: true, version: VERSION, user: user, name: displayName(user), ai: !!prop('GEMINI_API_KEY', null), model: prop('GEMINI_MODEL', DEFAULT_MODEL) };
     case 'backup.save': return Object.assign({ ok: true }, saveBackup(body.data, user, !!body.force));
+    case 'content.add': {
+      var parts = splitPack(body.pack, body.forEveryone ? undefined : user);
+      var counts = { exercises: 0, words: 0, texts: 0 };
+      parts.forEach(function (p) { saveBatch(p.kind, p.meta, p.items); counts[p.kind] += p.items.length; });
+      return { ok: true, batches: parts.length, added: counts };
+    }
     case 'backup.load': return Object.assign({ ok: true }, loadBackup(user, body.name));
     case 'backup.list': return { ok: true, backups: listBackups(user) };
     case 'queue.add': return { ok: true, queued: addToQueue(body.requests || [], user) };

@@ -10,11 +10,11 @@ the repo; write originals. The owner's downloaded articles go into the Drive inb
 
 ## Current inventory (November 2026)
 
-- 24 topics, 921 words: 12 core (A1), 5 work and news packs (construction, finance,
+- 25 topics, 961 words: 12 core (A1), 5 work and news packs (construction, finance,
   economics, politics, news; A2–B1), 7 lifestyle packs (music, fashion, beauty, sport,
-  self-care, trips, books; A2).
+  self-care, trips, books; A2), TV series and crime (A2–B1).
 - 14 grammar units, 393 exercises: u01–u08 A1, u09–u12 A2, u13–u14 B1.
-- 12 texts: t01–t06 A1–A2, t07–t09 B1, t10 B2, t11–t12 A2.
+- 15 texts: t01–t06 A1–A2, t07–t09 B1, t10 B2, t11–t12 A2, t13–t15 B1 (Breaking Bad, Dexter, El mentalista; facts from Wikipedia, cited).
 
 ## Topics and words (`data/core/*.json`, `data/packs/*.json`)
 
@@ -124,6 +124,16 @@ automatically. Add tests in `tests/verbs.test.js` for any new irregular.
 - Lengths that work: A1 120–200 words, A2 250–350, B1 450–650, B2 600–800.
 - Optional: `source: { name, url }` shows "Read the original"; `practice: true` shows
   "Written for practice; not a real news report" (AI texts set this).
+
+## Content made in ChatGPT (content packs)
+
+`docs/prompts/chatgpt-content.md` holds a prompt (regenerate with `node tools/make-prompt.mjs`
+after adding units or topics). ChatGPT answers with one JSON object:
+`{ "format": "mi-espanol-content-1", "exercises": [{ "unit": "u10", …exercise }], "words": [{ "topic", "name", "words": [[…]] }], "texts": [ …text ] }`.
+In the app: You → Add content from ChatGPT → paste → Check → Add. `js/importpack.js` keeps the
+items that pass `validate.js`; the backend (`content.add`, `splitPack` in `Pure.gs`) stores them
+as normal content batches for this learner (or both), so they sync and survive resets.
+New topic ids create new topics on the phone, like AI word batches.
 
 ## AI-made content (overnight)
 

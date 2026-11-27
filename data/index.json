@@ -23,6 +23,7 @@
     "packs/sport.json",
     "packs/selfcare.json",
     "packs/trips.json",
-    "packs/books.json"
+    "packs/books.json",
+    "packs/series.json"
   ]
 }

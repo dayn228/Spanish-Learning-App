@@ -1,0 +1,388 @@
+{
+ "id": "t13",
+ "title": "Breaking Bad: el profesor que se convirtió en criminal",
+ "en": "Breaking Bad: the teacher who became a criminal",
+ "level": "B1",
+ "topic": "series",
+ "note": "Written for the app, without spoilers of the ending. Facts from Wikipedia.",
+ "source": {
+  "name": "Wikipedia (Breaking Bad)",
+  "url": "https://es.wikipedia.org/wiki/Breaking_Bad"
+ },
+ "paragraphs": [
+  [
+   [
+    "Breaking Bad es una serie estadounidense creada por Vince Gilligan que se emitió en la cadena AMC entre 2008 y 2013.",
+    "Breaking Bad is an American series created by Vince Gilligan that aired on the AMC network between 2008 and 2013."
+   ],
+   [
+    "Tiene cinco temporadas y transcurre en Albuquerque, una ciudad del desierto de Nuevo México.",
+    "It has five seasons and is set in Albuquerque, a desert city in New Mexico."
+   ],
+   [
+    "Muchos críticos la consideran una de las mejores series de la historia de la televisión.",
+    "Many critics consider it one of the best series in the history of television."
+   ]
+  ],
+  [
+   [
+    "El protagonista, Walter White, es un profesor de química de instituto: un hombre tranquilo, mal pagado y un poco frustrado.",
+    "The main character, Walter White, is a high-school chemistry teacher: a quiet, badly paid and somewhat frustrated man."
+   ],
+   [
+    "Por las tardes trabaja también en un lavado de coches para llegar a fin de mes.",
+    "In the afternoons he also works at a car wash to make ends meet."
+   ],
+   [
+    "Todo cambia el día en que le diagnostican un cáncer de pulmón que no se puede operar.",
+    "Everything changes on the day he is diagnosed with lung cancer that can't be operated on."
+   ]
+  ],
+  [
+   [
+    "Walter tiene miedo de dejar a su familia sin dinero: su mujer, Skyler, está embarazada y su hijo necesita ayuda.",
+    "Walter is afraid of leaving his family without money: his wife, Skyler, is pregnant and his son needs help."
+   ],
+   [
+    "Entonces toma una decisión sorprendente: usar sus conocimientos de química para fabricar droga.",
+    "Then he makes a surprising decision: to use his knowledge of chemistry to make drugs."
+   ],
+   [
+    "Para venderla, se asocia con un antiguo alumno, Jesse Pinkman, un chico inmaduro que ya conoce ese mundo.",
+    "To sell them, he teams up with a former student, Jesse Pinkman, an immature young man who already knows that world."
+   ]
+  ],
+  [
+   [
+    "Lo más interesante de la serie no es el crimen, sino la transformación del personaje.",
+    "The most interesting thing about the series isn't the crime, but the character's transformation."
+   ],
+   [
+    "Al principio Walter dice que lo hace por su familia, pero poco a poco descubrimos que le gusta el poder y el respeto que nunca tuvo.",
+    "At first Walter says he does it for his family, but little by little we discover that he likes the power and respect he never had."
+   ],
+   [
+    "El propio Gilligan resumió la idea así: convertir a un profesor en un gánster.",
+    "Gilligan himself summed up the idea like this: turning a teacher into a gangster."
+   ]
+  ],
+  [
+   [
+    "La tensión aumenta porque el cuñado de Walter, Hank Schrader, es agente de la DEA, la agencia antidroga de Estados Unidos.",
+    "The tension grows because Walter's brother-in-law, Hank Schrader, is an agent of the DEA, the US anti-drug agency."
+   ],
+   [
+    "Mientras Hank investiga a un fabricante misterioso, no sabe que lo tiene sentado a su mesa en las comidas familiares.",
+    "While Hank investigates a mysterious manufacturer, he doesn't know he has him sitting at his table at family meals."
+   ],
+   [
+    "Otros personajes inolvidables son Saul Goodman, un abogado sin escrúpulos, y Gus Fring, el dueño de una cadena de restaurantes de pollo que esconde un negocio criminal.",
+    "Other unforgettable characters are Saul Goodman, an unscrupulous lawyer, and Gus Fring, the owner of a chain of chicken restaurants that hides a criminal business."
+   ]
+  ],
+  [
+   [
+    "La serie ganó dieciséis premios Emmy, entre ellos dos a la mejor serie dramática.",
+    "The series won sixteen Emmy awards, including two for best drama series."
+   ],
+   [
+    "Su éxito dio lugar a una serie derivada, Better Call Saul, centrada en el abogado, y a una película, El Camino, que cuenta qué pasó después con Jesse.",
+    "Its success led to a spin-off series, Better Call Saul, centred on the lawyer, and a film, El Camino, which tells what happened to Jesse afterwards."
+   ],
+   [
+    "Si todavía no la has visto, prepárate: es difícil ver solo un capítulo.",
+    "If you haven't seen it yet, get ready: it's hard to watch just one episode."
+   ]
+  ]
+ ],
+ "questions": [
+  {
+   "q": "¿Dónde transcurre la serie?",
+   "options": [
+    "En Albuquerque, Nuevo México.",
+    "En Miami.",
+    "En Sacramento."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Cuál era el trabajo de Walter White al principio?",
+   "options": [
+    "Profesor de química.",
+    "Agente de la DEA.",
+    "Abogado."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Por qué decide Walter fabricar droga?",
+   "options": [
+    "Tiene miedo de dejar a su familia sin dinero.",
+    "Quiere ser famoso.",
+    "Se lo pide su cuñado."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿Quién es Hank Schrader?",
+   "options": [
+    "El cuñado de Walter y agente de la DEA.",
+    "Un antiguo alumno.",
+    "El dueño de un restaurante."
+   ],
+   "a": 0
+  },
+  {
+   "q": "Según el texto, ¿qué es lo más interesante de la serie?",
+   "options": [
+    "La transformación del protagonista.",
+    "Los paisajes del desierto.",
+    "Las escenas de acción."
+   ],
+   "a": 0
+  },
+  {
+   "q": "¿De qué trata Better Call Saul?",
+   "options": [
+    "Del abogado Saul Goodman.",
+    "De Jesse después de la serie.",
+    "De la familia de Walter."
+   ],
+   "a": 0
+  }
+ ],
+ "glossary": {
+  "breaking": [
+   "Breaking Bad",
+   "(series title)"
+  ],
+  "bad": [
+   "Breaking Bad",
+   "(series title)"
+  ],
+  "vince": [
+   "Vince Gilligan",
+   "(creator of the series)"
+  ],
+  "gilligan": [
+   "Vince Gilligan",
+   "(creator of the series)"
+  ],
+  "amc": [
+   "AMC",
+   "(US TV network)"
+  ],
+  "albuquerque": [
+   "Albuquerque",
+   "(city in New Mexico)"
+  ],
+  "walter": [
+   "Walter White",
+   "(main character)"
+  ],
+  "white": [
+   "Walter White",
+   "(main character)"
+  ],
+  "skyler": [
+   "Skyler",
+   "(Walter’s wife)"
+  ],
+  "jesse": [
+   "Jesse Pinkman",
+   "(Walter’s partner)"
+  ],
+  "pinkman": [
+   "Jesse Pinkman",
+   "(Walter’s partner)"
+  ],
+  "hank": [
+   "Hank Schrader",
+   "(DEA agent)"
+  ],
+  "schrader": [
+   "Hank Schrader",
+   "(DEA agent)"
+  ],
+  "dea": [
+   "la DEA",
+   "US Drug Enforcement Administration"
+  ],
+  "saul": [
+   "Saul Goodman",
+   "(the lawyer)"
+  ],
+  "goodman": [
+   "Saul Goodman",
+   "(the lawyer)"
+  ],
+  "gus": [
+   "Gus Fring",
+   "(restaurant owner)"
+  ],
+  "fring": [
+   "Gus Fring",
+   "(restaurant owner)"
+  ],
+  "emmy": [
+   "los Emmy",
+   "Emmy awards"
+  ],
+  "better": [
+   "Better Call Saul",
+   "(spin-off title)"
+  ],
+  "call": [
+   "Better Call Saul",
+   "(spin-off title)"
+  ],
+  "desierto": [
+   "el desierto",
+   "desert"
+  ],
+  "críticos": [
+   "el crítico",
+   "critics"
+  ],
+  "consideran": [
+   "considerar",
+   "consider"
+  ],
+  "pagado": [
+   "pagado",
+   "paid (mal pagado = badly paid)"
+  ],
+  "frustrado": [
+   "frustrado",
+   "frustrated"
+  ],
+  "lavado": [
+   "el lavado",
+   "wash (de coches = car wash)"
+  ],
+  "cambia": [
+   "cambiar",
+   "changes"
+  ],
+  "diagnostican": [
+   "diagnosticar",
+   "(le diagnostican) he is diagnosed with"
+  ],
+  "operar": [
+   "operar",
+   "to operate"
+  ],
+  "sorprendente": [
+   "sorprendente",
+   "surprising"
+  ],
+  "conocimientos": [
+   "el conocimiento",
+   "knowledge"
+  ],
+  "fabricar": [
+   "fabricar",
+   "to make, manufacture"
+  ],
+  "venderla": [
+   "vender",
+   "to sell it"
+  ],
+  "asocia": [
+   "asociarse",
+   "(se asocia) teams up"
+  ],
+  "inmaduro": [
+   "inmaduro",
+   "immature"
+  ],
+  "transformación": [
+   "la transformación",
+   "transformation"
+  ],
+  "descubrimos": [
+   "descubrir",
+   "we discover"
+  ],
+  "respeto": [
+   "el respeto",
+   "respect"
+  ],
+  "resumió": [
+   "resumir",
+   "summed up"
+  ],
+  "gánster": [
+   "el gánster",
+   "gangster"
+  ],
+  "tensión": [
+   "la tensión",
+   "tension"
+  ],
+  "aumenta": [
+   "aumentar",
+   "grows, increases"
+  ],
+  "agencia": [
+   "la agencia",
+   "agency"
+  ],
+  "antidroga": [
+   "antidroga",
+   "anti-drug"
+  ],
+  "investiga": [
+   "investigar",
+   "investigates"
+  ],
+  "misterioso": [
+   "misterioso",
+   "mysterious"
+  ],
+  "sentado": [
+   "sentado",
+   "sitting"
+  ],
+  "familiares": [
+   "familiar",
+   "family (adj.)"
+  ],
+  "inolvidables": [
+   "inolvidable",
+   "unforgettable"
+  ],
+  "escrúpulos": [
+   "el escrúpulo",
+   "scruples"
+  ],
+  "esconde": [
+   "esconder",
+   "hides"
+  ],
+  "dieciséis": [
+   "dieciséis",
+   "sixteen"
+  ],
+  "dramática": [
+   "dramático",
+   "drama (adj.)"
+  ],
+  "derivada": [
+   "derivado",
+   "spin-off (serie derivada)"
+  ],
+  "centrada": [
+   "centrado",
+   "centred"
+  ],
+  "prepárate": [
+   "prepararse",
+   "get ready"
+  ],
+  "fin": [
+   "el fin",
+   "end (llegar a fin de mes = make ends meet)"
+  ]
+ }
+}

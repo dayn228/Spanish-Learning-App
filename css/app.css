@@ -308,3 +308,5 @@ input[type="range"] { width: 100%; accent-color: var(--clay); }
 .backup-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .backup-list p { width: 100%; margin: 0; }
 .backup-opt { border: 0.5px solid var(--line-strong); }
+.paste-box { width: 100%; box-sizing: border-box; border-radius: 14px; border: 0.5px solid var(--line-strong); background: var(--ivory); color: var(--slate); padding: 12px; font: 14px/1.4 ui-monospace, Menlo, monospace; margin: 8px 0; resize: vertical; }
+.card details { margin: 8px 0; } .card details ul { padding-left: 18px; }
